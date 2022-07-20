@@ -9,11 +9,11 @@
 <h4 align="center">The best way to connect with your local pet owners and animal friends!</h4>
 
 <p align="center">
-  <a href="#key-features">Idea Pitch</a> •
-  <a href="#how-to-use">Team Effort Breakdown</a> •
-  <a href="#download">Download</a> •
-  <a href="#credits">MVVM Diagram</a> •
-  <a href="#related">APK Download</a> •
+  <a href="#Idea Pitch">Idea Pitch</a> •
+  <a href="#Team Effort Breakdown">Team Effort Breakdown</a> •
+  <a href="#MVVM Diagram">MVVM Diagram</a> •
+  <a href="#APK Download">APK Download</a> •
+  <a href="#License">License</a> •
 </p>
 
 ![screenshot](https://raw.githubusercontent.com/amitmerchant1990/electron-markdownify/master/app/img/markdownify.gif)
