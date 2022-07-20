@@ -9,7 +9,7 @@
 <h4 align="center">The best way to connect with your local pet owners and animal friends!</h4>
 
 <p align="center">
-  <a href="#Idea Pitch">Idea Pitch</a> •
+  <a href="## Idea Pitch">Idea Pitch</a> •
   <a href="#Team Effort Breakdown">Team Effort Breakdown</a> •
   <a href="#MVVM Diagram">MVVM Diagram</a> •
   <a href="#APK Download">APK Download</a> •
