@@ -25,7 +25,6 @@
 
 > **Note**
 > Click the Above Image to Watch our Idea Pitch!
----
 
 * LivePreview - Make changes, See changes
   - Instantly see what your Markdown documents look like in HTML as you create them.
