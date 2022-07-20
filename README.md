@@ -67,23 +67,11 @@
 
 ## Show and Tell 2 Expectation
 
-* LivePreview - Make changes, See changes
-  - Instantly see what your Markdown documents look like in HTML as you create them.
-* Sync Scrolling
-  - While you type, LivePreview will automatically scroll to the current location you're editing.
-* GitHub Flavored Markdown  
-* Syntax highlighting
-* [KaTeX](https://khan.github.io/KaTeX/) Support
-* Dark/Light mode
-* Toolbar for basic Markdown formatting
-* Supports multiple cursors
-* Save the Markdown preview as PDF
-* Emoji support in preview :tada:
-* App will keep alive in tray for quick usage
-* Full screen mode
-  - Write distraction free.
-* Cross platform
-  - Windows, macOS and Linux ready.
+* All major UI will be implemented.
+* User will be able to send friend request to other user.
+* User will be able to create a group and join a group.
+* User will be able to see the close by users' activity though Google Map.
+* User will be able to post text and images.
 
 ## APK Download
 
