@@ -12,7 +12,7 @@
   <a href="#idea-pitch">Idea Pitch</a> •
   <a href="#team-effort-breakdown">Team Effort Breakdown</a> •
   <a href="#MVVM-Diagram">MVVM Diagram</a> •
-  <a href="#What-will-be-shown-at-the-Show_and_Tell_2?">What will be shown at the Show_and_Tell_2?</a> •
+  <a href="#Show-and-Tell-2-Expectation?">Show and Tell 2 Expectation</a> •
   <a href="#APK-Download">APK Download</a> •
   <a href="#license">License</a> •
 </p>
@@ -64,7 +64,7 @@
 
 ![screenshot](https://i.imgur.com/XhjIcda.png)
 
-## What will be shown at the Show_and_Tell_2?
+## Show and Tell 2 Expectation
 
 ![screenshot](https://i.imgur.com/XhjIcda.png)
 
