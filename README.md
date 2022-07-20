@@ -10,9 +10,9 @@
 
 <p align="center">
   <a href="#idea-pitch">Idea Pitch</a> •
-  <a href="#Team Effort Breakdown">Team Effort Breakdown</a> •
-  <a href="#MVVM Diagram">MVVM Diagram</a> •
-  <a href="#APK Download">APK Download</a> •
+  <a href="#team-effort-breakdown">Team Effort Breakdown</a> •
+  <a href="#MVVM-Diagram">MVVM Diagram</a> •
+  <a href="#APK-Download">APK Download</a> •
   <a href="#license">License</a> •
 </p>
 
