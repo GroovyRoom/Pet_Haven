@@ -12,6 +12,7 @@
   <a href="#idea-pitch">Idea Pitch</a> •
   <a href="#team-effort-breakdown">Team Effort Breakdown</a> •
   <a href="#MVVM-Diagram">MVVM Diagram</a> •
+  <a href="#Show-and-Tell-1">Show and Tell 1</a> •
   <a href="#Show-and-Tell-2-Expectation">Show and Tell 2 Expectation</a> •
   <a href="#APK-Download">APK Download</a> •
   <a href="#license">License</a> •
@@ -56,6 +57,13 @@
 ## MVVM Diagram
 
 ![screenshot](https://i.imgur.com/XhjIcda.png)
+
+## Show and Tell 1
+
+[<img src="https://i.imgur.com/Z0yApEs.png" width="100%">](https://www.youtube.com/watch?v=1KPYmbtO4n4)
+
+> **Note**
+> Click the Above Image to Watch our Show and Tell 1 video!
 
 ## Show and Tell 2 Expectation
 
