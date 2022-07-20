@@ -6,7 +6,7 @@
   <br>
 </h1>
 
-<h4 align="center">The best way to connect with your local pet owners and animal friends!</h4>
+<h4 align="center">The Best Way to Connect with Your Local Pet Owners and Animal Friends!</h4>
 
 <p align="center">
   <a href="#Idea Pitch">Idea Pitch</a> •
@@ -21,7 +21,7 @@
 ## Idea Pitch
 
 [<img src="https://i.imgur.com/Qm1szsd.png" width="100%">](https://www.youtube.com/watch?v=0giwWqG9lPE)
-
+Click the Above Image to Watch our Idea Pitch!
 * LivePreview - Make changes, See changes
   - Instantly see what your Markdown documents look like in HTML as you create them.
 * Sync Scrolling
