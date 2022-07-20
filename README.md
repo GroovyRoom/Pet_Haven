@@ -6,7 +6,7 @@
   <br>
 </h1>
 
-<h2 align="center">The Best Way to Connect with Your Local Pet Owners and Animal Friends!</h2>
+<h3 align="center">The Best Way to Connect with Your Local Pet Owners and Animal Friends!</h3>
 
 <p align="center">
   <a href="#idea-pitch">Idea Pitch</a> •
