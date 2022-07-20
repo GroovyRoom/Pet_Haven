@@ -26,23 +26,14 @@
 > **Note**
 > Click the Above Image to Watch our Idea Pitch!
 
-* LivePreview - Make changes, See changes
-  - Instantly see what your Markdown documents look like in HTML as you create them.
-* Sync Scrolling
-  - While you type, LivePreview will automatically scroll to the current location you're editing.
-* GitHub Flavored Markdown  
-* Syntax highlighting
-* [KaTeX](https://khan.github.io/KaTeX/) Support
+* Google Single-Sign-On for login and registering
+* Show your local pet onwers and pet and let user to send friend request
+* Help User to find the group of pet owners who share same animal
+* Getting user's current location and load the weather information when the user is going for dog walk.
 * Dark/Light mode
-* Toolbar for basic Markdown formatting
-* Supports multiple cursors
-* Save the Markdown preview as PDF
-* Emoji support in preview :tada:
-* App will keep alive in tray for quick usage
-* Full screen mode
-  - Write distraction free.
-* Cross platform
-  - Windows, macOS and Linux ready.
+* Posting text and images
+* Organizing meeting with other users
+* Searching local vets
 
 ## Team Effort Breakdown
 
