@@ -26,6 +26,7 @@
 > **Note**
 > Click the Above Image to Watch our Idea Pitch!
 
+**Features**
 * Google Single-Sign-On for login and registering
 * Show your local pet onwers and pet and let user to send friend request
 * Help User to find the group of pet owners who share same animal
