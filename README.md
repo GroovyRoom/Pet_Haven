@@ -66,8 +66,6 @@
 
 ## Show and Tell 2 Expectation
 
-![screenshot](https://i.imgur.com/XhjIcda.png)
-
 ## APK Download
 
 You can downlaod the latest APK for Android [here]().
