@@ -73,12 +73,12 @@ SFU Team Potato
 
 ---
 
-Team Potato:
-
-Chang Suk Lee
-Larry Yao
-George Andreas
-Surat Perkash
-Xingjian Li
+Team Potato:/n
+/n
+Chang Suk Lee/n
+Larry Yao/n
+George Andreas/n
+Surat Perkash/n
+Xingjian Li/n
 
 
