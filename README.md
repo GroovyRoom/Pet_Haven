@@ -77,7 +77,7 @@ You can [download](https://github.com/amitmerchant1990/electron-markdownify/rele
 
 ---
 
-**Team Potato:**
+###Team Potato:
 
 
 Chang Suk Lee
