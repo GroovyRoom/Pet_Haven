@@ -72,6 +72,7 @@
 * User will be able to create a group and join a group.
 * User will be able to see the close by users' activity though Google Map.
 * User will be able to post text and images.
+* User will be able to find local Vet through Google Map.
 
 ## APK Download
 
