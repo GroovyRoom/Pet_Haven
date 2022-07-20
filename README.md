@@ -77,11 +77,21 @@ You can [download](https://github.com/amitmerchant1990/electron-markdownify/rele
 
 ---
 
-<p>Team Potato:
+**Team Potato:**
+
+
 Chang Suk Lee
+
+
 Larry Yao
+
+
 George Andreas
+
+
 Surat Perkash
-Xingjian Li</p>
+
+
+Xingjian Li
 
 
