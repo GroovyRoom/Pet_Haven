@@ -20,6 +20,8 @@
 
 ## Idea Pitch
 
+<video src='[your URL here](https://www.youtube.com/watch?v=0giwWqG9lPE)' width=800/>
+
 * LivePreview - Make changes, See changes
   - Instantly see what your Markdown documents look like in HTML as you create them.
 * Sync Scrolling
