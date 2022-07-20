@@ -58,7 +58,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/et_login_email"
+            android:id="@+id/et_register_email"
             android:inputType="textEmailAddress"
             tools:text="abc@gmail.com"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -70,7 +70,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd = "16dp"
-        android:hint = "Email Id"
+        android:hint = "Password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/til_login_email">
@@ -78,7 +78,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/et_login_password"
+            android:id="@+id/et_register_password"
             android:inputType="textPassword"
             tools:text="123456"/>
     </com.google.android.material.textfield.TextInputLayout>
