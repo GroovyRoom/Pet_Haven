@@ -1,8 +1,11 @@
 # Pet Haven
-Emphasis, aka italics, with *asterisks* or _underscores_.
 
-Strong emphasis, aka bold, with **asterisks** or __underscores__.
 
-Combined emphasis with **asterisks and _underscores_**.
+Team Member:
 
-Strikethrough uses two tildes. ~~Scratch this.~~
+Chang Suk Lee
+Larry Yao
+George Andreas
+Surat Perkash
+Xingjian Li
+
