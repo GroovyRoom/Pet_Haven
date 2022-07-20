@@ -69,11 +69,11 @@ You can [download](https://github.com/amitmerchant1990/electron-markdownify/rele
 
 ## License
 
-SFU Team Potato
+**SFU Team Potato**
 
 ---
 
-<p>Team Potato:</p>
+<p>**Team Potato:**</p>
 Chang Suk Lee/n
 Larry Yao/n
 George Andreas/n
