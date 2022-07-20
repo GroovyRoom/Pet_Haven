@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.LoginActivity">
+    tools:context=".activity.RegisterActivity">
 
     <FrameLayout
         android:id="@+id/fl_header_image"
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/tv_title"
         android:layout_marginTop="35dp"
-        android:text = "LOGIN SCREEN"
+        android:text = "REGISTER SCREEN"
         android:textColor = "#222934"
         android:textSize = "18sp"
         android:textStyle="bold"
@@ -86,13 +86,13 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_login"
+        android:id="@+id/btn_register"
         android:layout_gravity="center"
         android:layout_marginStart="16dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd = "16dp"
         android:gravity = "center"
-        android:text = "login"
+        android:text = "Register"
         android:textColor = "@android:color/white"
         android:textSize = "18sp"
         android:textStyle= "bold"
@@ -100,7 +100,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/til_login_password"
         />
-    
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -109,7 +109,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_login">
+        app:layout_constraintTop_toBottomOf="@id/btn_register">
 
         <TextView
             android:layout_width="wrap_content"
@@ -118,16 +118,16 @@
             android:layout_marginTop="16dp"
             android:foreground="?attr/selectableItemBackground"
             android:padding='10dp'
-            android:text="Don\'t have an account?"/>
-        
+            android:text="Already have an account?"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tv_register"
+            android:id="@+id/tv_login"
             android:layout_marginTop="16dp"
             android:foreground="?attr/selectableItemBackground"
             android:padding='10dp'
-            android:text="Register"
+            android:text="Login"
             android:textStyle="bold"/>
     </LinearLayout>
 
