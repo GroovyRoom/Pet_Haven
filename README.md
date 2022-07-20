@@ -69,7 +69,7 @@ $ npm start
 
 ## APK Download
 
-You can downlaod the latest APK for Android [here]().
+You can downlaod the latest APK for Android [here].
 
 ## License
 
