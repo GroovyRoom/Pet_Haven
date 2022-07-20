@@ -10,23 +10,24 @@
         android:id="@+id/fl_header_image"
         android:layout_width="wrap_content"
         android:layout_height="300dp"
-        app:layout_constraintEnd_toEndof="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
     </FrameLayout>
 
-    <ImageView
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_gravity="center"
-        android:contentDescription="@string/app_name"
-        android:scaleType="fitCenter"
-        android:src="@drawable/icon_logo"
-        app:tint="@android:color/white"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="55dp"
-        tools:layout_editor_absoluteY="16dp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp">
+
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/icon_logo"
+            tools:ignore="MissingConstraints"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
 
     <TextView
         android:layout_width="wrap_content"
@@ -115,7 +116,7 @@
             android:id="@+id/tv_register"
             android:layout_marginTop="16dp"
             android:foreground="?attr/selectableItemBackground"
-            android:padding='5dp'
+            android:padding='10dp'
             android:text="Register"
             android:textStyle="bold"/>
     </LinearLayout>
