@@ -22,7 +22,7 @@
 
 [<img src="https://i.imgur.com/Qm1szsd.png" width="100%">](https://www.youtube.com/watch?v=0giwWqG9lPE)
 ***
-**Click the Above Image to Watch our Idea Pitch!**
+####Click the Above Image to Watch our Idea Pitch!
 ***
 * LivePreview - Make changes, See changes
   - Instantly see what your Markdown documents look like in HTML as you create them.
@@ -77,7 +77,7 @@ You can [download](https://github.com/amitmerchant1990/electron-markdownify/rele
 
 ---
 
-###Team Potato:
+**Team Potato**
 
 
 Chang Suk Lee
