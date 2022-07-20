@@ -64,11 +64,11 @@
 
 ![screenshot](https://i.imgur.com/XhjIcda.png)
 
-## MVVM Diagram
+## What will be shown at the Show_and_Tell_2?
 
 ![screenshot](https://i.imgur.com/XhjIcda.png)
 
-## What will be shown at the Show_and_Tell_2?
+## APK Download
 
 You can downlaod the latest APK for Android [here]().
 
