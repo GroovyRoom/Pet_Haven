@@ -1,8 +1,8 @@
 <h1 align="center">
   <br>
-  <a href="http://www.amitmerchant.com/electron-markdownify"><img src="[https://i.imgur.com/bNBwXTR.png]" alt="Markdownify" width="200"></a>
+  <a href="http://www.amitmerchant.com/electron-markdownify"><img src="https://i.imgur.com/bNBwXTR.png" alt="Markdownify" width="200"></a>
   <br>
-  Markdownify
+  Pet Haven
   <br>
 </h1>
 
