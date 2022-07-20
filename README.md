@@ -9,17 +9,16 @@
 <h4 align="center">The best way to connect with your local pet owners and animal friends!</h4>
 
 <p align="center">
-  <a href="#key-features">Key Features</a> •
-  <a href="#how-to-use">How To Use</a> •
+  <a href="#key-features">Idea Pitch</a> •
+  <a href="#how-to-use">Team Effort Breakdown</a> •
   <a href="#download">Download</a> •
-  <a href="#credits">Credits</a> •
-  <a href="#related">Related</a> •
-  <a href="#license">License</a>
+  <a href="#credits">MVVM Diagram</a> •
+  <a href="#related">APK Download</a> •
 </p>
 
 ![screenshot](https://raw.githubusercontent.com/amitmerchant1990/electron-markdownify/master/app/img/markdownify.gif)
 
-## Key Features
+## Idea Pitch
 
 * LivePreview - Make changes, See changes
   - Instantly see what your Markdown documents look like in HTML as you create them.
@@ -39,7 +38,7 @@
 * Cross platform
   - Windows, macOS and Linux ready.
 
-## How To Use
+## Team Effort Breakdown
 
 To clone and run this application, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
 
@@ -57,11 +56,11 @@ $ npm install
 $ npm start
 ```
 
-> **Note**
+> **MVVM Diagram**
 > If you're using Linux Bash for Windows, [see this guide](https://www.howtogeek.com/261575/how-to-run-graphical-linux-desktop-applications-from-windows-10s-bash-shell/) or use `node` from the command prompt.
 
 
-## Download
+## APK Download
 
 You can [download](https://github.com/amitmerchant1990/electron-markdownify/releases/tag/v1.2.0) the latest installable version of Markdownify for Windows, macOS and Linux.
 
