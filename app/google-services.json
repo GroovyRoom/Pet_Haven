@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "768665866140",
+    "project_id": "pet-haven-79c1d",
+    "storage_bucket": "pet-haven-79c1d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:768665866140:android:492feaf4d168b117248259",
+        "android_client_info": {
+          "package_name": "com.example.pethaven"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "768665866140-obil44r555vrn936gnleqoegamr5rn2v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pethaven",
+            "certificate_hash": "132d914cfc5cc43fac607906bd7e717bd14a212e"
+          }
+        },
+        {
+          "client_id": "768665866140-ouon2mja2lv7gmve83tt5q9mkdv6gp68.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLLSt_Y5X2-gHqxqvEaBYkYDvTg20LRxU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "768665866140-ouon2mja2lv7gmve83tt5q9mkdv6gp68.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
