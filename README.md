@@ -20,7 +20,7 @@
 
 ## Idea Pitch
 
-[<img src="https://img.youtube.com/vi/<VIDEO ID>/maxresdefault.jpg" width="50%">]([https://www.youtube.com/watch?v=0giwWqG9lPE])
+[<img src="https://img.youtube.com/vi/<VIDEO ID>/maxresdefault.jpg" width="50%">](https://www.youtube.com/watch?v=0giwWqG9lPE)
 
 * LivePreview - Make changes, See changes
   - Instantly see what your Markdown documents look like in HTML as you create them.
