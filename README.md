@@ -73,8 +73,7 @@ SFU Team Potato
 
 ---
 
-Team Potato:/n
-/n
+<p>Team Potato:</p>
 Chang Suk Lee/n
 Larry Yao/n
 George Andreas/n
