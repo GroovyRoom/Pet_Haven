@@ -47,10 +47,10 @@
 ## Team Effort Breakdown
 
 > **Chang Suk Lee**
-> Worked on developing webpage for the project and user authenticiation feature.
+> Worked on developing webpage for the project and implementing user authenticiation feature.
 
 > **Larry Yao**
-> Worked on MVVM diagram and designing database structure.
+> Worked on MVVM diagram, designing Firebase database structure and implementing local database for the application.
 
 > **George Andreas**
 > Worked on Google Map tracking feature.
