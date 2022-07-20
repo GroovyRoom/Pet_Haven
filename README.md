@@ -9,11 +9,11 @@
 <h4 align="center">The Best Way to Connect with Your Local Pet Owners and Animal Friends!</h4>
 
 <p align="center">
-  <a href="#Idea Pitch">Idea Pitch</a> •
+  <a href="#idea-pitch">Idea Pitch</a> •
   <a href="#Team Effort Breakdown">Team Effort Breakdown</a> •
   <a href="#MVVM Diagram">MVVM Diagram</a> •
   <a href="#APK Download">APK Download</a> •
-  <a href="#License">License</a> •
+  <a href="#license">License</a> •
 </p>
 
 ![screenshot](https://i.imgur.com/lEpWqoX.jpg)
