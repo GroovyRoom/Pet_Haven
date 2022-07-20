@@ -65,7 +65,7 @@ $ npm start
 
 ## MVVM Diagram
 
-[markdownify-web](https://github.com/amitmerchant1990/markdownify-web) - Web version of Markdownify
+![screenshot](https://i.imgur.com/XhjIcda.png)
 
 ## APK Download
 
