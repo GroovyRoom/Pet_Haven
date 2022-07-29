@@ -24,7 +24,7 @@
             android:layout_width="300dp"
             android:layout_height="300dp"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/icon_logo"
+            android:src="@drawable/logo"
             tools:ignore="MissingConstraints"
             android:layout_centerInParent="true"/>
 
