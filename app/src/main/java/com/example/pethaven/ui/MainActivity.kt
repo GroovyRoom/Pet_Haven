@@ -47,8 +47,13 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
     }
 
-    override fun onBackPressed() {
-        finish()
-    }
+    /*
+        Uncomment this line if you want the activity to directly finish() when back button
+        is pressed, rather than going to the home fragment
+     */
+
+//    override fun onBackPressed() {
+//        finish()
+//    }
 
 }
