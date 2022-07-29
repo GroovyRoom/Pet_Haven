@@ -14,11 +14,11 @@
         android:theme="@style/Theme.PetHaven"
         tools:targetApi="31">
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="false" />
-        <activity android:name=".activity.RegisterActivity"/>
+        <activity android:name=".ui.RegisterActivity"/>
         <activity
-            android:name=".activity.LoginActivity"
+            android:name=".ui.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
