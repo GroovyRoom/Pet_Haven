@@ -6,8 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.pethaven.domain.Reptile
 import com.example.pethaven.domain.ReptileRepository
-import com.example.pethaven.util.AndroidExtensions.makeToast
-import com.google.firebase.storage.FirebaseStorage
 
 class AddEditReptileViewModel(private val repository: ReptileRepository): ViewModel() {
     var reptileImg = MutableLiveData<Bitmap>()
@@ -30,5 +28,10 @@ class AddEditReptileViewModel(private val repository: ReptileRepository): ViewMo
             repository.addReptile(reptile)
         }
     }
+
+    fun insertToDatabase2(reptile: Reptile) = repository.addReptile(reptile)
+
+    fun uploadImage(uri: Uri) = repository.uploadImage(uri)
+
 
 }
