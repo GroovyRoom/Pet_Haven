@@ -23,10 +23,10 @@
         <ImageView
             android:layout_width="300dp"
             android:layout_height="300dp"
+            android:layout_centerInParent="true"
             android:contentDescription="@string/app_name"
             android:src="@drawable/logo"
-            tools:ignore="MissingConstraints"
-            android:layout_centerInParent="true"/>
+            tools:ignore="MissingConstraints" />
 
     </RelativeLayout>
 
@@ -51,9 +51,12 @@
         android:layout_marginTop="35dp"
         android:layout_marginEnd = "16dp"
         android:hint = "Email Id"
+        app:startIconDrawable="@drawable/ic_email"
+        app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title">
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        style = "@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <EditText
             android:layout_width="match_parent"
@@ -70,10 +73,13 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd = "16dp"
+        app:startIconDrawable="@drawable/ic_lock"
+        app:endIconMode="password_toggle"
         android:hint = "Password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/til_login_email">
+        app:layout_constraintTop_toBottomOf="@id/til_login_email"
+        style = "@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <EditText
             android:layout_width="match_parent"
