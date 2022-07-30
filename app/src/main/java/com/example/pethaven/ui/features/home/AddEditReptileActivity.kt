@@ -114,7 +114,6 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
 
         if (storageTask != null && storageTask!!.isInProgress) {
             makeToast("Data is currently being uploaded")
-
         }
 
         val reptile = Reptile(
@@ -126,8 +125,14 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
 //        addEditViewModel.insertToDatabase(reptile)
         addEditViewModel.reptileImgUri.value?.let {
             storageTask = addEditViewModel.uploadImage(addEditViewModel.reptileImgUri.value!!).
-                            addOnSuccessListener {
-                                addToDatabaseAndFinish(reptile)
+                            addOnSuccessListener { taskSnapShop ->
+                                taskSnapShop.metadata?.reference?.let {
+                                    val result = taskSnapShop.storage.downloadUrl
+                                    result.addOnSuccessListener { uri ->
+                                        reptile.imgUri = uri.toString()
+                                        addToDatabaseAndFinish(reptile)
+                                    }
+                                }
                             }.
                             addOnFailureListener {
                                 makeToast(it.message ?: "Unknown Exception Occurred")
@@ -174,7 +179,7 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
                 TextUtils.isEmpty(editName.text.toString()) ||
                 TextUtils.isEmpty(editSpecies.text.toString()) ||
                 !isAgeValid() ||
-                !isDescriptionValid()
+                !isDescriptionValid() || addEditViewModel.reptileImgUri.value == null
                 )
 
     }
