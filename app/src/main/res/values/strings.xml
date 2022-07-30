@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">Reptile Haven</string>
+
+    <!-- General Buttons -->
+    <string name="save">Save</string>
+    <string name="change">Change</string>
+    <string name="cancel">Cancel</string>
+    <string name="start">Start</string>
+    <string name="delete">DELETE</string>
+
+    <!-- Picture Dialog -->
+    <string name="open_camera">Open Camera</string>
+    <string name="select_gallery">Select from Gallery</string>
+
+    <!-- Reptile Information -->
+    <string name="name">Name</string>
+    <string name="species">Species</string>
+    <string name="age">Age</string>
+    <string name="description">Description</string>
 </resources>
