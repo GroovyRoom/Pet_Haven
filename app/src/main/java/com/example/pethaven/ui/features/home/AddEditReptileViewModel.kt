@@ -16,7 +16,7 @@ class AddEditReptileViewModel(private val repository: ReptileRepository): ViewMo
             repository.uploadImage(reptileImgUri.value!!).addOnSuccessListener { taskSnapShop ->
                 taskSnapShop.metadata?.reference?.let {
                     val result = taskSnapShop.storage.downloadUrl
-                    result.addOnSuccessListener { uri ->
+                    result.addOnSuccessListener { uri: Uri ->
                         val imgUriString = uri.toString()
                         reptile.imgUri = imgUriString
                         repository.addReptile(reptile)
