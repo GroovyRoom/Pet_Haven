@@ -36,7 +36,7 @@ class PictureDialog : DialogFragment() {
     private var onImageResultListener: OnImageResultListener? = null
 
     interface OnImageResultListener {
-        fun onResult(view : PictureDialog, which : Int, bitmap: Bitmap?)
+        fun onResult(view : PictureDialog, which : Int, bitmap: Bitmap?, uri: Uri)
     }
 
     companion object {
@@ -56,7 +56,7 @@ class PictureDialog : DialogFragment() {
         //Create dialog builder
         val builder = AlertDialog.Builder(requireActivity())
         builder.setView(view)
-        builder.setTitle("Pick Picture Profile")
+        builder.setTitle("Select method for uploading your reptile photo")
         dialog = builder.create()
 
         return dialog
@@ -95,7 +95,7 @@ class PictureDialog : DialogFragment() {
         imageLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == Activity.RESULT_OK) {
                 val bitmap = Permissions.getBitmap(requireContext(), tempImgUri)
-                onImageResultListener?.onResult(this, CAMERA_BUTTON, bitmap)
+                onImageResultListener?.onResult(this, CAMERA_BUTTON, bitmap, tempImgUri)
                 dismiss()
             }
         }
@@ -103,7 +103,7 @@ class PictureDialog : DialogFragment() {
             if (it.resultCode == Activity.RESULT_OK) {
                 val dataUri = it.data?.data
                 val bitmap = dataUri?.let { uri -> Permissions.getBitmap(requireContext(), uri) }
-                onImageResultListener?.onResult(this, GALLERY_BUTTON, bitmap)
+                onImageResultListener?.onResult(this, GALLERY_BUTTON, bitmap, tempImgUri)
 
                 dismiss()
             }

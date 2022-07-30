@@ -19,6 +19,7 @@
         tools:targetApi="31">
         <activity
             android:name=".ui.features.home.AddEditReptileActivity"
+            android:label="Reptile Profile"
             android:windowSoftInputMode="adjustPan"
             android:exported="false" />
         <activity
