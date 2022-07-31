@@ -6,7 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.example.pethaven.R
-import com.example.pethaven.ui.RegisterActivity
+import com.example.pethaven.ui.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
 
 class ChatListActivity  : AppCompatActivity() {
@@ -22,7 +22,7 @@ class ChatListActivity  : AppCompatActivity() {
         val uid = FirebaseAuth.getInstance().uid
         // user is not logged-in then send user to login page.
         if (uid == null) {
-            val intent = Intent(this, RegisterActivity::class.java)
+            val intent = Intent(this, LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         }
@@ -36,7 +36,7 @@ class ChatListActivity  : AppCompatActivity() {
             }
             R.id.menu_sign_out -> {
                 FirebaseAuth.getInstance().signOut()
-                val intent = Intent(this, RegisterActivity::class.java)
+                val intent = Intent(this, LoginActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
             }

@@ -10,6 +10,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.pethaven.R
+import com.example.pethaven.ui.features.chat.User
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
@@ -159,6 +160,4 @@ class RegisterActivity : AppCompatActivity() {
                 Log.d(TAG, "Failed to set value to database: ${it.message}")
             }
     }
-
-    class User(val uid: String, val username: String, val profileImageUrl: String)
 }
