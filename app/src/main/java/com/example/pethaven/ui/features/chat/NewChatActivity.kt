@@ -4,11 +4,17 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.pethaven.R
+import com.example.pethaven.ui.RegisterActivity
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.Item
+import com.xwray.groupie.ViewHolder
+import kotlinx.android.synthetic.main.activity_new_chat.*
+import kotlinx.android.synthetic.main.user_chat_row.view.*
 
 class NewChatActivity : AppCompatActivity() {
 
@@ -30,7 +36,7 @@ class NewChatActivity : AppCompatActivity() {
 
                 p0.children.forEach {
                     Log.d("NewMessage", it.toString())
-                    val user = it.getValue(User::class.java)
+                    val user = it.getValue(RegisterActivity.User::class.java)
                     if (user != null) {
                         adapter.add(UserItem(user))
                     }
@@ -46,7 +52,7 @@ class NewChatActivity : AppCompatActivity() {
     }
 }
 
-class UserItem(val user: User): Item<ViewHolder>() {
+class UserItem(val user: RegisterActivity.User): Item<ViewHolder>() {
     override fun bind(viewHolder: ViewHolder, position: Int) {
         viewHolder.itemView.username_textview_new_message.text = user.username
 
@@ -54,6 +60,6 @@ class UserItem(val user: User): Item<ViewHolder>() {
     }
 
     override fun getLayout(): Int {
-        return R.layout.user_row_new_message
+        return R.layout.user_chat_row
     }
 }
