@@ -82,9 +82,6 @@ class RegisterActivity : AppCompatActivity() {
                                         Intent(this@RegisterActivity, MainActivity::class.java)
                                     intent.flags =
                                         Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-
-                                    intent.putExtra("user_id", firebaseUser.uid)
-                                    intent.putExtra("email_id", email)
                                     startActivity(intent)
                                     finish()
                                 } else {

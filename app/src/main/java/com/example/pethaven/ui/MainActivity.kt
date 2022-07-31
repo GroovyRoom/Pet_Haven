@@ -16,19 +16,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setUpNavView()
-
-/*        val userId = intent.getStringArrayExtra("user_id")
-        val emailId = intent.getStringExtra("email_id")
-
-        tv_user_id.text = "User ID :: $userId"
-        tv_email_id.text = "Email ID :: $emailId"
-
-        btn_logout.setOnClickListener {
-            FirebaseAuth.getInstance().signOut()
-
-            startActivity(Intent(this@MainActivity, LoginActivity::class.java))
-            finish()
-        }*/
     }
 
     private fun setUpNavView() {
