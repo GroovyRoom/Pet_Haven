@@ -1,5 +1,6 @@
 package com.example.reptilehaven.ui.features.chat
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -39,6 +40,11 @@ class NewChatActivity : AppCompatActivity() {
                     if (user != null) {
                         adapter.add(UserItem(user))
                     }
+                }
+
+                adapter.setOnItemClickListener { item, view ->
+                    val intent = Intent(view.context, ChatLogActivity::class.java)
+                    startActivity(intent)
                 }
 
                 recyclerview_newmessage.adapter = adapter
