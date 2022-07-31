@@ -19,7 +19,7 @@ class ChatListActivity  : AppCompatActivity() {
     }
 
     private fun checkUserLoggedIn() {
-        val uid = FirebaseAuth.getInstance().uid
+        val uid = FirebaseAuth.getInstance().currentUser?.uid
         // user is not logged-in then send user to login page.
         if (uid == null) {
             val intent = Intent(this, LoginActivity::class.java)
