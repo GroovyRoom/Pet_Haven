@@ -17,21 +17,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PetHaven"
         tools:targetApi="31">
-
-        <activity android:name="com.example.reptilehaven.ui.features.chat.ChatListActivity"/>
+        <activity
+            android:name=".ui.features.chat.ChatLogActivity"
+            android:exported="false" />
+        <activity android:name=".ui.features.chat.ChatListActivity" />
         <activity
             android:name="com.example.reptilehaven.ui.features.home.AddEditReptileActivity"
+            android:exported="false"
             android:label="Reptile Profile"
-            android:windowSoftInputMode="adjustPan"
-            android:exported="false" />
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name="com.example.reptilehaven.ui.RegisterActivity" />
-
-        <activity android:name="com.example.reptilehaven.ui.features.chat.NewChatActivity"/>
+        <activity android:name=".ui.features.chat.NewChatActivity" />
         <activity
             android:name="com.example.reptilehaven.ui.LoginActivity"
-            android:exported="true">
-        </activity>
-        <activity android:name="com.example.reptilehaven.ui.MainActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name="com.example.reptilehaven.ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
