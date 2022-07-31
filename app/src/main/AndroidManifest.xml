@@ -17,17 +17,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PetHaven"
         tools:targetApi="31">
+
+        <activity android:name=".ui.features.chat.ChatListActivity"/>
         <activity
             android:name=".ui.features.home.AddEditReptileActivity"
             android:label="Reptile Profile"
             android:windowSoftInputMode="adjustPan"
             android:exported="false" />
-        <activity
-            android:name=".ui.MainActivity"
-            android:exported="false" />
         <activity android:name=".ui.RegisterActivity" />
+
+        <activity android:name=".ui.features.chat.NewChatActivity"/>
         <activity
             android:name=".ui.LoginActivity"
+            android:exported="true">
+        </activity>
+        <activity android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
