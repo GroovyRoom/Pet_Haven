@@ -13,23 +13,44 @@ class ChatLogActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_log)
 
-        supportActionBar?.title = "Chat Log"
+//    val username = intent.getStringExtra(NewMessageActivity.USER_KEY)
+        val user = intent.getParcelableExtra<User>(NewChatActivity.USER_KEY)
+
+        if (user != null) {
+            supportActionBar?.title = user.username
+        }
 
         val adapter = GroupAdapter<ViewHolder>()
 
-        adapter.add(???)
+        adapter.add(ChatFromItem())
+        adapter.add(ChatToItem())
+        adapter.add(ChatFromItem())
+        adapter.add(ChatToItem())
+        adapter.add(ChatFromItem())
+        adapter.add(ChatToItem())
+        adapter.add(ChatFromItem())
+        adapter.add(ChatToItem())
 
         recyclerview_chat_log.adapter = adapter
     }
 }
 
-class ChatItem: Item<ViewHolder>() {
+class ChatFromItem: Item<ViewHolder>() {
     override fun bind(viewHolder: ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+
     }
 
     override fun getLayout(): Int {
-        TODO("Not yet implemented")
+        return R.layout.chat_receiving
+    }
+}
+
+class ChatToItem: Item<ViewHolder>() {
+    override fun bind(viewHolder: ViewHolder, position: Int) {
+
     }
 
+    override fun getLayout(): Int {
+        return R.layout.chat_sending
+    }
 }
