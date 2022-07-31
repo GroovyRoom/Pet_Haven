@@ -124,6 +124,7 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
         )
 //        addEditViewModel.insertToDatabase(reptile)
         addEditViewModel.reptileImgUri.value?.let {
+            progressBar.isIndeterminate = true
             storageTask = addEditViewModel.uploadImage(addEditViewModel.reptileImgUri.value!!).
                             addOnSuccessListener { taskSnapShop ->
                                 taskSnapShop.metadata?.reference?.let {

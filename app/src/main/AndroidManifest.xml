@@ -18,10 +18,13 @@
         android:theme="@style/Theme.PetHaven"
         tools:targetApi="31">
         <activity
-            android:name=".ui.features.home.AddEditReptileActivity"
-            android:label="Reptile Profile"
-            android:windowSoftInputMode="adjustPan"
+            android:name=".ui.features.home.ReptileProfileActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.features.home.AddEditReptileActivity"
+            android:exported="false"
+            android:label="Reptile Profile"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.MainActivity"
             android:exported="false" />

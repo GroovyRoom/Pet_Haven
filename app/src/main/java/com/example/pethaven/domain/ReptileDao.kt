@@ -15,4 +15,10 @@ class ReptileDao {
     fun addReptile(reptile: Reptile) =
         databaseReference.child(Reptile::class.java.simpleName).push().setValue(reptile)
 
+    fun getReptileFromCurrentUser(key: String) =
+        databaseReference.child(Reptile::class.java.simpleName).child(key)
+
+    fun getAllUserReptiles() =
+        databaseReference.child(Reptile::class.java.simpleName)
+
 }
