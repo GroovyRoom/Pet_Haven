@@ -4,33 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_green_light"
     tools:context=".ui.RegisterActivity">
 
     <FrameLayout
         android:id="@+id/fl_header_image"
         android:layout_width="wrap_content"
-        android:layout_height="300dp"
+        android:layout_height="200dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
     </FrameLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        tools:ignore="MissingConstraints">
-
-        <ImageView
-            android:layout_width="300dp"
-            android:layout_height="300dp"
-            android:layout_marginTop="60dp"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/logo"
-            tools:ignore="MissingConstraints"
-            android:layout_centerInParent="true"/>
-
-    </RelativeLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -85,6 +68,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd = "16dp"
+        app:startIconDrawable="@drawable/ic_person"
+        app:endIconMode="clear_text"
         android:hint = "User Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -146,5 +131,32 @@
             android:text="Login"
             android:textStyle="bold"/>
     </LinearLayout>
+
+    <Button
+        android:id="@+id/selectphoto_button_register"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/rounded_select_photo_button"
+        android:text="Select Photo"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/selectphoto_imageview_register"
+        app:civ_border_width="4dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:layout_constraintBottom_toBottomOf="@+id/selectphoto_button_register"
+        app:layout_constraintEnd_toEndOf="@+id/selectphoto_button_register"
+        app:layout_constraintStart_toStartOf="@+id/selectphoto_button_register"
+        app:layout_constraintTop_toTopOf="@+id/selectphoto_button_register" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

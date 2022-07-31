@@ -57,4 +57,7 @@ dependencies {
     //Firebase
     implementation 'com.google.firebase:firebase-database:20.0.5'
     implementation 'com.google.firebase:firebase-database-ktx:20.0.5'
+
+    // Circle Profile pic
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
 }
