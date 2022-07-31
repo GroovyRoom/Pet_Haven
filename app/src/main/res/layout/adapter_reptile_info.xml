@@ -103,7 +103,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     tools:text="Description"
-                    android:textSize="23sp" />
+                    android:textSize="23sp"
+                    android:maxLines="1"/>
             </LinearLayout>
         </LinearLayout>
 

@@ -4,9 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.pethaven.R
@@ -15,8 +13,37 @@ import com.example.pethaven.domain.Reptile
 class ReptileInfoAdapter(private var context: Context,
                          private var reptileList: ArrayList<Reptile>,
                          private var clickListener: OnReptileItemCLickedListener)
-    : RecyclerView.Adapter<ReptileInfoAdapter.ViewHolder>() {
+    : RecyclerView.Adapter<ReptileInfoAdapter.ViewHolder>(), Filterable{
 
+    var reptileListAll = ArrayList<Reptile>(reptileList)
+    private var reptileFilter = object : Filter(){
+        // Run in Background Thread
+        override fun performFiltering(constraint: CharSequence): FilterResults {
+            var filteredList = ArrayList<Reptile>()
+            if (constraint.toString().isEmpty()) {
+                println("debug: adding all reptileListAll with size = ${reptileListAll.size}")
+                filteredList.addAll(reptileListAll)
+            } else {
+                for (reptile in reptileListAll) {
+                    if (reptile.name.lowercase().contains(constraint.toString().lowercase())) {
+                        filteredList.add(reptile)
+                    }
+                }
+            }
+            val result = FilterResults().apply {
+                values = filteredList
+            }
+            return result
+        }
+
+        // Run in UI Thread
+        override fun publishResults(constraint: CharSequence, result: FilterResults) {
+            reptileList.clear()
+            reptileList.addAll(result.values as ArrayList<Reptile>)
+            notifyDataSetChanged()
+        }
+
+    }
     interface OnReptileItemCLickedListener {
         fun onReptileClicked(position: Int)
     }
@@ -53,6 +80,9 @@ class ReptileInfoAdapter(private var context: Context,
     fun setReptileList(list: ArrayList<Reptile>) {
         reptileList.clear()
         reptileList.addAll(list)
+
+        reptileListAll.clear()
+        reptileListAll.addAll(list)
         this.notifyDataSetChanged()
     }
 
@@ -71,6 +101,10 @@ class ReptileInfoAdapter(private var context: Context,
         override fun onClick(view: View?) {
             listener.onReptileClicked(adapterPosition)
         }
+    }
+
+    override fun getFilter(): Filter {
+        return reptileFilter
     }
 
 }

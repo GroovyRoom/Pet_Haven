@@ -7,5 +7,7 @@ import com.example.pethaven.domain.ReptileRepository
 
 class HomeTestViewModel(private val repository: ReptileRepository): ViewModel() {
     var isFabChecked = MutableLiveData(false)
+    var reptileList = getAllUserReptile()
+
     fun getAllUserReptile() = repository.getAllUserReptile()
 }

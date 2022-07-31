@@ -2,12 +2,11 @@ package com.example.pethaven.ui.features.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.SearchView
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,6 +26,7 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
     private lateinit var optionsFab: FloatingActionButton
 
     private lateinit var addFabTextView: TextView
+    private lateinit var searchView: androidx.appcompat.widget.SearchView
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var reptileAdapter: ReptileInfoAdapter
@@ -53,10 +53,9 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
         setUpRecyclerView(view)
         setUpFloatingActionButton(view)
 
+        receiveAllReptiles(view)
+        setUpSearchView(view)
         setFabVisibility(testViewModel.isFabChecked.value!!)
-
-
-        receiveAllReptiles()
 
         return view
     }
@@ -78,11 +77,72 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
         testViewModel = ViewModelProvider(this, factory).get(HomeTestViewModel::class.java)
     }
 
-    private fun receiveAllReptiles() {
-        val reptileListReference = testViewModel.getAllUserReptile()
+    private fun setUpFloatingActionButton(view: View) {
+        optionsFab = view.findViewById(R.id.fabOptions)
+        optionsFab.setOnClickListener {
+            testViewModel.isFabChecked.value = !testViewModel.isFabChecked.value!!
+            handleFabClicked(testViewModel.isFabChecked.value!!)
+        }
+        addFab = view.findViewById(R.id.fabAddReptile)
+        addFabTextView = view.findViewById(R.id.addFabTextView)
+        addFab.setOnClickListener{
+            val intent = Intent(requireActivity(), AddEditReptileActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun setUpSearchView(view: View) {
+        searchView = view.findViewById(R.id.reptileSearchView)
+        searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String): Boolean {
+                println("debug: OnQueryTextSubmit called")
+                reptileAdapter.filter.filter(query)
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                println("debug: OnQueryTextChanged")
+                reptileAdapter.filter.filter(newText)
+                return true
+            }
+        })
+    }
+
+
+    private fun receiveAllReptiles(view:View) {
+        testViewModel.reptileList.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (!snapshot.exists()) {
+                    return
+                }
+
+                val list = ArrayList<Reptile>()
+                for (postSnapShot in snapshot.children) {
+                    val reptile = postSnapShot.getValue(Reptile::class.java)
+                    reptile?.let {
+                        it.key = postSnapShot.key
+                        list.add(it)
+                    }
+                }
+                reptileAdapter.setReptileList(list)
+
+                reptileAdapter.filter.filter(searchView.query)
+                // searchView.setQuery(searchView.query, true) George;Alt Method
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                makeToast(error.message)
+            }
+        })
+
+/*        val reptileListReference = testViewModel.getAllUserReptile()
         reptileListReference.addValueEventListener (object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                //if (snapshot.exists()) {}
+                if (!snapshot.exists()) {
+                    return
+                }
+                println("debug: OnDataChange")
+
                 val list = ArrayList<Reptile>()
                 for (postSnapShot in snapshot.children) {
                     val reptile = postSnapShot.getValue(Reptile::class.java)
@@ -97,24 +157,9 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
             override fun onCancelled(error: DatabaseError) {
                 makeToast(error.message)
             }
-        })
+        })*/
     }
 
-    private fun setUpFloatingActionButton(view: View) {
-        optionsFab = view.findViewById(R.id.fabOptions)
-        optionsFab.setOnClickListener {
-            testViewModel.isFabChecked.value = !testViewModel.isFabChecked.value!!
-            handleFabClicked(testViewModel.isFabChecked.value!!)
-        }
-        addFab = view.findViewById(R.id.fabAddReptile)
-        addFabTextView = view.findViewById(R.id.addFabTextView)
-        addFab.setOnClickListener{
-            val intent = Intent(requireActivity(), AddEditReptileActivity::class.java)
-            startActivity(intent)
-        }
-
-//        handleFabClicked(testViewModel.isFabChecked.value!!)
-    }
 
     private fun handleFabClicked(isPressed: Boolean) {
         if (isPressed) {

@@ -21,6 +21,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.storage.StorageTask
 import com.google.firebase.storage.UploadTask
+import kotlinx.android.synthetic.main.activity_add_edit_reptile.*
 
 class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultListener {
     private lateinit var addEditViewModel: AddEditReptileViewModel
@@ -40,6 +41,7 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
 
     companion object {
         private const val PICTURE_OPTION_DIALOG_TAG = "Picture Option Dialog Tag"
+        private const val IS_EDIT_MODE = "Edit Reptile Mode"
     }
 
     // Views
@@ -79,7 +81,7 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
             editAgeLayout.helperText =  if (TextUtils.isEmpty(text)) "*Required" else ""
             editAgeLayout.error = if (!TextUtils.isDigitsOnly(text)) {
                 "Only digits allowed"
-            } else if (!TextUtils.isEmpty(text) && text.toString().toInt() !in 1001 downTo -1) {
+            } else if (!TextUtils.isEmpty(text) && text.toString().toInt() !in 1000 downTo -1) {
                 "Please enter a valid age"
             } else {
                 null
@@ -114,6 +116,11 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
 
         if (storageTask != null && storageTask!!.isInProgress) {
             makeToast("Data is currently being uploaded")
+            return
+        }
+
+        if (storageTask != null && storageTask!!.isComplete) {
+            return
         }
 
         val reptile = Reptile(
@@ -187,7 +194,7 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
     private fun isAgeValid(): Boolean {
         return !TextUtils.isEmpty(editAge.text.toString())&&
                 TextUtils.isDigitsOnly(editAge.text.toString()) &&
-                editAge.text.toString().toInt() in 1001 downTo -1
+                editAge.text.toString().toInt() in 1000 downTo -1
 
     }
 
