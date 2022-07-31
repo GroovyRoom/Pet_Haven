@@ -3,6 +3,7 @@ package com.example.pethaven.ui.features.chat
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pethaven.R
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
