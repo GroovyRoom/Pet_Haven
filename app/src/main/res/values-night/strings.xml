@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="add_trade_title_string">Title</string>
+    <string name="add_trade_price_string">Price</string>
+    <string name="add_trade_description_string">Description</string>
+</resources>
