@@ -20,10 +20,15 @@
         <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/drawable/ic_person.xml" value="0.1955" />
         <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/drawable/ic_shopping_cart.xml" value="0.1955" />
         <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/drawable/ic_text_a.xml" value="0.1955" />
+        <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/drawable/rounded_button.xml" value="0.1955" />
+        <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/drawable/rounded_edittext_register_login.xml" value="0.191" />
         <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/activity_chat_list.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/activity_chat_log.xml" value="0.1875" />
         <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/activity_login.xml" value="0.358695652173913" />
         <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/activity_new_chat.xml" value="0.2876068376068376" />
         <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/activity_register.xml" value="0.25" />
+        <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/chat_receiving.xml" value="0.2" />
+        <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/chat_sending.xml" value="0.1828125" />
         <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/fragment_chat.xml" value="0.1875" />
         <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/fragment_home.xml" value="0.1875" />
         <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/fragment_profile.xml" value="0.1875" />

@@ -18,6 +18,10 @@ import kotlinx.android.synthetic.main.user_chat_row.view.*
 
 class NewChatActivity : AppCompatActivity() {
 
+    companion object {
+        val USER_KEY = "USER_KEY"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_chat)
@@ -43,8 +47,14 @@ class NewChatActivity : AppCompatActivity() {
                 }
 
                 adapter.setOnItemClickListener { item, view ->
+
+                    val userItem = item as UserItem
+
                     val intent = Intent(view.context, ChatLogActivity::class.java)
+                    intent.putExtra(USER_KEY, item.user.username)
                     startActivity(intent)
+
+                    finish()
                 }
 
                 recyclerview_newmessage.adapter = adapter
