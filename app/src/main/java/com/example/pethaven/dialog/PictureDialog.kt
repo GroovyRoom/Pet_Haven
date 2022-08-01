@@ -16,6 +16,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import androidx.fragment.app.DialogFragment
 import com.example.pethaven.R
+import com.example.pethaven.util.BitmapUtil
 import com.example.pethaven.util.Permissions
 import java.io.File
 
@@ -94,7 +95,7 @@ class PictureDialog : DialogFragment() {
     private fun setUpLauncher() {
         imageLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == Activity.RESULT_OK) {
-                val bitmap = Permissions.getBitmap(requireContext(), tempImgUri)
+                val bitmap = BitmapUtil.getBitmap(requireContext(), tempImgUri)
                 onImageResultListener?.onResult(this, CAMERA_BUTTON, bitmap, tempImgUri)
                 dismiss()
             }
@@ -102,7 +103,7 @@ class PictureDialog : DialogFragment() {
         galleryLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == Activity.RESULT_OK) {
                 val dataUri = it.data?.data
-                val bitmap = dataUri?.let { uri -> Permissions.getBitmap(requireContext(), uri) }
+                val bitmap = dataUri?.let { uri -> BitmapUtil.getBitmap(requireContext(), uri) }
                 onImageResultListener?.onResult(this, GALLERY_BUTTON, bitmap, tempImgUri)
 
                 dismiss()

@@ -65,6 +65,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:20.0.5'
     implementation 'com.google.firebase:firebase-database-ktx:20.0.5'
 
+    //Glide for Images
+    implementation 'com.github.bumptech.glide:glide:4.13.2'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.2'
+
     // Circle Profile pic
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     //noinspection GradleCompatible

@@ -7,6 +7,7 @@
     <string name="cancel">Cancel</string>
     <string name="start">Start</string>
     <string name="delete">DELETE</string>
+    <string name="search">Search</string>
 
     <!-- Picture Dialog -->
     <string name="open_camera">Open Camera</string>
@@ -27,4 +28,5 @@
     <string name="trade_post_date_string">Date</string>
     <string name="trade_post_show_less_string">Show Less</string>
     <string name="trade_post_contact_seller_string">Contact Seller</string>
+    <string name="edit">Edit</string>
 </resources>

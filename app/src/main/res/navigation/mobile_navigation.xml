@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
@@ -14,9 +13,9 @@
 
     <fragment
         android:id="@+id/navigation_shop"
-        android:name="com.example.pethaven.ui.features.shop.TradeListFragment"
+        android:name="com.example.pethaven.ui.features.shop.ShopFragment"
         android:label="Shop"
-        tools:layout="@layout/fragment_trade_list" />
+        tools:layout="@layout/fragment_shop" />
 
     <fragment
         android:id="@+id/navigation_chat"

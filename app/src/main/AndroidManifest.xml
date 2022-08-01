@@ -17,36 +17,29 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PetHaven"
         tools:targetApi="31">
+        <activity android:name=".ui.features.chat.NewChatActivity"></activity>
+        <activity android:name=".ui.features.chat.ChatListActivity"></activity>
+        <activity android:name=".ui.features.chat.ChatLogActivity"></activity>
         <activity
-            android:name="com.example.pethaven.ui.features.chat.ChatLogActivity"
+            android:name=".ui.features.home.ReptileProfileActivity"
             android:exported="false" />
-        <activity android:name="com.example.pethaven.ui.features.chat.ChatListActivity"
-            android:exported="true">
-<!--        <intent-filter>-->
-<!--            <action android:name="android.intent.action.MAIN" />-->
-
-<!--            <category android:name="android.intent.category.LAUNCHER" />-->
-<!--        </intent-filter>-->
-        </activity>
         <activity
-            android:name="com.example.pethaven.ui.features.home.AddEditReptileActivity"
+            android:name=".ui.features.home.AddEditReptileActivity"
             android:exported="false"
             android:label="Reptile Profile"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name="com.example.pethaven.ui.RegisterActivity" />
-        <activity android:name="com.example.pethaven.ui.features.chat.NewChatActivity" />
         <activity
-            android:name="com.example.pethaven.ui.LoginActivity"
-            android:exported="true"></activity>
-        <activity
-            android:name="com.example.pethaven.ui.MainActivity"
-            android:exported="true">
+            android:name=".ui.MainActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.LoginActivity"/>
+        <activity android:name=".ui.RegisterActivity" />
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.example.pethaven"

@@ -15,11 +15,11 @@
         android:maxWidth="240dp"
         android:background="@drawable/rounded_edittext_register_login"
         android:padding="16dp"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/imageView" />
+        app:layout_constraintStart_toEndOf="@+id/imageView_receiving"
+        app:layout_constraintTop_toTopOf="@+id/imageView_receiving" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageView_receiving"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginLeft="8dp"
