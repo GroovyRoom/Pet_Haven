@@ -76,10 +76,10 @@ class ChatLogActivity : AppCompatActivity() {
                 if (chatMessage != null) {
                     Log.d(TAG, chatMessage.text)
 
-                    if (chatMessage.toId.compareTo(FirebaseAuth.getInstance().currentUser!!.uid) == 0) {
-                        adapter.add(ChatFromItem(chatMessage.text))
-                    } else {
+                    if (chatMessage.fromId.compareTo(FirebaseAuth.getInstance().uid.toString()) == 0) {
                         adapter.add(ChatToItem(chatMessage.text))
+                    } else {
+                        adapter.add(ChatFromItem(chatMessage.text))
                     }
                 }
 
