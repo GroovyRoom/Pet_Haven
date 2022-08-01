@@ -24,6 +24,7 @@ class ChatLogActivity : AppCompatActivity() {
         val TAG = "ChatLog"
     }
 
+    var toUser : User? = null
     val adapter = GroupAdapter<ViewHolder>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,11 +33,9 @@ class ChatLogActivity : AppCompatActivity() {
 
         recyclerview_chat_log.adapter = adapter
 
-        val user = intent.getParcelableExtra<User>(NewChatActivity.USER_KEY)
+        toUser = intent.getParcelableExtra<User>(NewChatActivity.USER_KEY)
 
-        if (user != null) {
-            supportActionBar?.title = user.username
-        }
+        supportActionBar?.title = toUser?.username
 
         listenForMessages()
 
@@ -79,8 +78,7 @@ class ChatLogActivity : AppCompatActivity() {
                     Log.d(TAG, chatMessage.text)
 
                     if (chatMessage.fromId.compareTo(FirebaseAuth.getInstance().uid.toString()) == 0) {
-                        val user = intent.getParcelableExtra<User>(NewChatActivity.USER_KEY)
-                        adapter.add(ChatToItem(chatMessage.text, user!!))
+                        adapter.add(ChatToItem(chatMessage.text, toUser!!))
                     } else {
                         adapter.add(ChatFromItem(chatMessage.text))
                     }
