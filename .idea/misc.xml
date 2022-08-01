@@ -44,15 +44,24 @@
         <entry key="..\:/Users/georg/AndroidStudioProjects/Pet_Haven/app/src/main/res/drawable-v24/ic_notifications_black_24dp.xml" value="0.1" />
         <entry key="..\:/Users/georg/AndroidStudioProjects/Pet_Haven/app/src/main/res/drawable-v24/ic_person.xml" value="0.1" />
         <entry key="..\:/Users/georg/AndroidStudioProjects/Pet_Haven/app/src/main/res/drawable-v24/ic_shopping_cart.xml" value="0.1" />
+        <entry key="..\:/Users/georg/AndroidStudioProjects/Pet_Haven/app/src/main/res/drawable/fab_text_hint_bg.xml" value="0.1" />
+        <entry key="..\:/Users/georg/AndroidStudioProjects/Pet_Haven/app/src/main/res/drawable/ic_edit.xml" value="0.166" />
+        <entry key="..\:/Users/georg/AndroidStudioProjects/Pet_Haven/app/src/main/res/drawable/ic_pen_write.xml" value="0.166" />
         <entry key="..\:/Users/georg/AndroidStudioProjects/Pet_Haven/app/src/main/res/layout/activity_add_edit_reptile.xml" value="0.268" />
         <entry key="..\:/Users/georg/AndroidStudioProjects/Pet_Haven/app/src/main/res/layout/activity_login.xml" value="0.11614583333333334" />
         <entry key="..\:/Users/georg/AndroidStudioProjects/Pet_Haven/app/src/main/res/layout/activity_main.xml" value="0.259375" />
+        <entry key="..\:/Users/georg/AndroidStudioProjects/Pet_Haven/app/src/main/res/layout/activity_reptile_profile.xml" value="0.20052083333333334" />
+        <entry key="..\:/Users/georg/AndroidStudioProjects/Pet_Haven/app/src/main/res/layout/adapter_reptile_info.xml" value="0.268" />
         <entry key="..\:/Users/georg/AndroidStudioProjects/Pet_Haven/app/src/main/res/layout/dialog_picture.xml" value="0.2203125" />
         <entry key="..\:/Users/georg/AndroidStudioProjects/Pet_Haven/app/src/main/res/layout/fragment_chat.xml" value="0.259375" />
         <entry key="..\:/Users/georg/AndroidStudioProjects/Pet_Haven/app/src/main/res/layout/fragment_home.xml" value="0.259375" />
+        <entry key="..\:/Users/georg/AndroidStudioProjects/Pet_Haven/app/src/main/res/layout/fragment_home_test.xml" value="0.1828125" />
         <entry key="..\:/Users/georg/AndroidStudioProjects/Pet_Haven/app/src/main/res/layout/fragment_profile.xml" value="0.259375" />
         <entry key="..\:/Users/georg/AndroidStudioProjects/Pet_Haven/app/src/main/res/layout/fragment_shop.xml" value="0.259375" />
         <entry key="..\:/Users/georg/AndroidStudioProjects/Pet_Haven/app/src/main/res/menu/bottom_nav_menu.xml" value="0.259375" />
+        <entry key="..\:/Users/georg/AndroidStudioProjects/Pet_Haven/app/src/main/res/menu/menu_edit_reptile.xml" value="0.11354166666666667" />
+        <entry key="..\:/Users/georg/AndroidStudioProjects/Pet_Haven/app/src/main/res/menu/menu_reptile_info.xml" value="0.1828125" />
+        <entry key="..\:/Users/georg/AndroidStudioProjects/Pet_Haven/app/src/main/res/menu/menu_search.xml" value="0.20052083333333334" />
       </map>
     </option>
   </component>

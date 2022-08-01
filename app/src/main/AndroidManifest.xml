@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.reptilehaven">
+    package="com.example.pethaven">
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -18,28 +18,20 @@
         android:theme="@style/Theme.PetHaven"
         tools:targetApi="31">
         <activity
-            android:name=".ui.features.chat.ChatLogActivity"
+            android:name=".ui.features.home.ReptileProfileActivity"
             android:exported="false" />
-        <activity android:name=".ui.features.chat.ChatListActivity"
-            android:exported="true">
-            <!--        <intent-filter>-->
-            <!--            <action android:name="android.intent.action.MAIN" />-->
-
-            <!--            <category android:name="android.intent.category.LAUNCHER" />-->
-            <!--        </intent-filter>-->
-        </activity>
         <activity
-            android:name="com.example.reptilehaven.ui.features.home.AddEditReptileActivity"
+            android:name=".ui.features.home.AddEditReptileActivity"
             android:exported="false"
             android:label="Reptile Profile"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name="com.example.reptilehaven.ui.RegisterActivity" />
-        <activity android:name=".ui.features.chat.NewChatActivity" />
         <activity
-            android:name="com.example.reptilehaven.ui.LoginActivity"
-            android:exported="true"></activity>
+            android:name=".ui.MainActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".ui.RegisterActivity" />
         <activity
-            android:name="com.example.reptilehaven.ui.MainActivity"
+            android:name=".ui.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -47,9 +39,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.example.reptilehaven"
+            android:authorities="com.example.pethaven"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
