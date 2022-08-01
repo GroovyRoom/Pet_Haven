@@ -6,6 +6,7 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.LinearLayout
 import android.widget.SearchView
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
@@ -38,6 +39,8 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
     private lateinit var traverseFromBottomFabAnimation: Animation
     private lateinit var traverseBottomFabAnimation: Animation
 
+    private lateinit var fabLayout: LinearLayout
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         /*
             George/Dense: Change the R.layout.fragment_home_test. I only used this to test the
@@ -48,6 +51,7 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
         closeFabAnimation = AnimationUtils.loadAnimation(requireActivity(), R.anim.anim_fab_close)
         traverseBottomFabAnimation = AnimationUtils.loadAnimation(requireActivity(), R.anim.anim_fab_traverse_bottom)
         traverseFromBottomFabAnimation = AnimationUtils.loadAnimation(requireActivity(), R.anim.anim_fab_traverse_from_bottom)
+        fabLayout = view.findViewById(R.id.addFabLayout)
 
         setUpTestViewModel()
         setUpRecyclerView(view)
@@ -127,37 +131,13 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
                 reptileAdapter.setReptileList(list)
 
                 reptileAdapter.filter.filter(searchView.query)
-                // searchView.setQuery(searchView.query, true) George;Alt Method
+                // searchView.setQuery(searchView.query, true)
             }
 
             override fun onCancelled(error: DatabaseError) {
                 makeToast(error.message)
             }
         })
-
-/*        val reptileListReference = testViewModel.getAllUserReptile()
-        reptileListReference.addValueEventListener (object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (!snapshot.exists()) {
-                    return
-                }
-                println("debug: OnDataChange")
-
-                val list = ArrayList<Reptile>()
-                for (postSnapShot in snapshot.children) {
-                    val reptile = postSnapShot.getValue(Reptile::class.java)
-                    reptile?.let {
-                        it.key = postSnapShot.key
-                        list.add(it)
-                    }
-                }
-                reptileAdapter.setReptileList(list)
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                makeToast(error.message)
-            }
-        })*/
     }
 
 
@@ -165,16 +145,16 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
         if (isPressed) {
             addFab.visibility = View.VISIBLE
             addFabTextView.visibility = View.VISIBLE
+            fabLayout.visibility = View.VISIBLE
+
             optionsFab.startAnimation(openFabAnimation)
-            addFab.startAnimation(traverseFromBottomFabAnimation)
-            addFabTextView.startAnimation(traverseFromBottomFabAnimation)
+            fabLayout.startAnimation(traverseFromBottomFabAnimation)
+
             addFab.isClickable = true
         } else {
             optionsFab.startAnimation(closeFabAnimation)
-            addFab.startAnimation(traverseBottomFabAnimation)
-            addFabTextView.startAnimation(traverseBottomFabAnimation)
-            addFab.visibility = View.GONE
-            addFabTextView.visibility = View.GONE
+            fabLayout.startAnimation(traverseBottomFabAnimation)
+            fabLayout.visibility = View.GONE
             addFab.isClickable = false
         }
     }
@@ -195,7 +175,6 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
         val reptileKey = reptileAdapter.getReptile(position).key
 
         if (reptileKey != null) {
-            makeToast("$reptileKey")
             val intent = ReptileProfileActivity.makeIntent(requireActivity(), reptileKey)
             startActivity(intent)
         } else {
