@@ -79,9 +79,8 @@
                 style="?attr/borderlessButtonStyle" />
         </LinearLayout>
 
-
         <LinearLayout
-            android:id="@+id/trade_post_show_more"
+            android:id="@+id/trade_post_expandable"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"

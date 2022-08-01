@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.pethaven.R
 
-class ShopFragment : Fragment() {
+class TradePostListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
