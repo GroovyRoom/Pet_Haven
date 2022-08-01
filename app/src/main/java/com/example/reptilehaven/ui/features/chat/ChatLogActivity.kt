@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.example.reptilehaven.R
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
@@ -41,23 +42,29 @@ class ChatLogActivity : AppCompatActivity() {
         recyclerview_chat_log.adapter = adapter
     }
 
-    class ChatMessage(val text: String)
-
     private fun performSendMessage() {
+        // how do we actually send a message to firebase...
         val text = edittext_chat_log.text.toString()
+
+        val fromId = FirebaseAuth.getInstance().uid
+        val user = intent.getParcelableExtra<User>(NewChatActivity.USER_KEY)
+        val toId = user?.uid
+
+        if (fromId == null) return
+
         val reference = FirebaseDatabase.getInstance().getReference("/messages").push()
 
-        val chatMessage = ChatMessage(text)
-        reference.setValue(chatMessage).addOnSuccessListener {
-            Log.d(TAG, "Saved our chat message: ${reference.key}")
-        }
-        reference.setValue("TEXT")
+        val chatMessage = ChatMessage(reference.key!!, text, fromId, toId.toString(), System.currentTimeMillis() / 1000)
+        reference.setValue(chatMessage)
+            .addOnSuccessListener {
+                Log.d(TAG, "Saved our chat message: ${reference.key}")
+            }
     }
 }
 
 class ChatFromItem(val text: String): Item<ViewHolder>() {
     override fun bind(viewHolder: ViewHolder, position: Int) {
-        viewHolder.itemView.textView_receiving.text = "From Mesage..."
+        viewHolder.itemView.textView_receiving.text = "From Message..."
 
     }
 
