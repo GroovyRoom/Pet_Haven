@@ -3,6 +3,7 @@ package com.example.pethaven.ui.features.home
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,6 +17,8 @@ import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import com.example.pethaven.R
 import com.example.pethaven.dialog.PictureDialog
 import com.example.pethaven.domain.Reptile
@@ -53,6 +56,12 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
     private var reptileKeyToEdit: String? = null
     private var reptileToEdit: Reptile ?= null
 
+    /*
+        Check if data has already been received to prevent editText from being updated again during
+        orientation change
+     */
+    private var hasReceived: Boolean = false
+
     companion object {
         private const val PICTURE_OPTION_DIALOG_TAG = "Picture Option Dialog Tag"
         private const val IS_EDIT_MODE = "Edit Reptile Mode"
@@ -76,6 +85,7 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
 
         Permissions.checkImagePermissions(this)
 
+        hasReceived = savedInstanceState?.getBoolean("test") ?: false
         isEditMode = intent.getBooleanExtra(IS_EDIT_MODE, false)
         if (isEditMode) {
             reptileKeyToEdit = intent.getStringExtra(EDIT_REPTILE_KEY_TAG)
@@ -85,6 +95,11 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
             }
             getReptileFromDatabase()
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putBoolean("test", hasReceived)
+        super.onSaveInstanceState(outState)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -153,15 +168,21 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
 
     ///-------------------------- Updating Views  -------------------------///
     fun updateView(reptile: Reptile) {
-        editName.setText(reptile.name)
-        editSpecies.setText(reptile.species)
-        editAge.setText(reptile.age.toString())
-        editDescription.setText(reptile.description)
+        if (!hasReceived) {
+            editName.setText(reptile.name)
+            editSpecies.setText(reptile.species)
+            editAge.setText(reptile.age.toString())
+            editDescription.setText(reptile.description)
+        }
 
-        Glide.with(this)
-            .load(reptile.imgUri)
-            .fitCenter()
-            .into(reptileImgView)
+        if(addEditViewModel.reptileImg.value == null) {
+            Glide.with(this)
+                .load(reptile.imgUri)
+                .fitCenter()
+                .into(reptileImgView)
+        }
+
+        hasReceived = true
     }
     ///-------------------------- On Click Listeners ------------------------///
 
@@ -254,31 +275,30 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
     }
 
     private fun deleteReptileInDatabase(key: String) {
-//        addEditViewModel.deleteImage(reptileToEdit!!.imgUri!!).addOnSuccessListener {
-//                addEditViewModel.deleteReptile(key).addOnSuccessListener {
-//                    makeToast("Delete Successful")
-//                    finish()
-//                }
-//            }.addOnFailureListener {
-//                makeToast(it.message ?: "")
-//            }
 
         addEditViewModel.deleteImage(reptileToEdit!!.imgUri!!)
-        addEditViewModel.deleteReptile(key).addOnSuccessListener {
-            makeToast("Delete Successful")
-            val intent = Intent(this, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
-        }
+            .addOnSuccessListener {
+                addEditViewModel.deleteReptile(key).addOnSuccessListener {
+                    makeToast("Delete Successful")
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                }
+            }
+            .addOnFailureListener {
+                makeToast(it.message ?: "Unknown Exception Occurred")
+            }
     }
 
     private fun getReptileFromDatabase() {
         val reptileReference = addEditViewModel.getReptileFromCurrentUser(reptileKeyToEdit!!)
         reptileReference.addListenerForSingleValueEvent(object: ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
+                println("debug: ondatachanged called")
                 if(!snapshot.exists()) {
                     return
                 }
+
                 reptileToEdit = snapshot.getValue(Reptile::class.java)
                 reptileToEdit?.let {
                     updateView(it)

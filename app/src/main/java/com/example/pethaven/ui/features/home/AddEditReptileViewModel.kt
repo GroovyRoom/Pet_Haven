@@ -11,6 +11,8 @@ class AddEditReptileViewModel(private val repository: ReptileRepository): ViewMo
     var reptileImg = MutableLiveData<Bitmap>()
     var reptileImgUri = MutableLiveData<Uri>()
 
+    var reptileEditImgUriString = MutableLiveData<String>()
+
     fun insertToDatabase(reptile: Reptile) {
         if (reptileImgUri.value!= null) {
             repository.uploadImage(reptileImgUri.value!!).addOnSuccessListener { taskSnapShop ->

@@ -15,34 +15,15 @@ import com.google.firebase.database.ValueEventListener
 
 class ChatListActivity  : AppCompatActivity() {
 
-    companion object {
-        var currentUser: User? = null
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_list)
 
-        fetchCurrentUser()
-
         checkUserLoggedIn()
     }
 
-    private fun fetchCurrentUser() {
-        val uid = FirebaseAuth.getInstance().currentUser?.uid
-        val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
-        println("Debug Yolo: " + uid)
-        ref.addListenerForSingleValueEvent(object: ValueEventListener {
-            override fun onDataChange(p0: DataSnapshot) {
-                currentUser = p0.getValue(User::class.java)
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-            }
-
-        })
-    }
-
+    // Please work
     private fun checkUserLoggedIn() {
         val uid = FirebaseAuth.getInstance().currentUser?.uid
         // user is not logged-in then send user to login page.

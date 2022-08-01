@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.pethaven.R
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -42,7 +43,10 @@ class NewChatActivity : AppCompatActivity() {
                     Log.d("NewMessage", it.toString())
                     val user = it.getValue(User::class.java)
                     if (user != null) {
-                        adapter.add(UserItem(user))
+                        val currentUid = FirebaseAuth.getInstance().currentUser?.uid
+                        if (user.uid.compareTo(currentUid.toString()) != 0) {
+                            adapter.add(UserItem(user))
+                        }
                     }
                 }
 

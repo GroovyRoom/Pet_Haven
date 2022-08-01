@@ -16,6 +16,7 @@ import com.example.pethaven.util.AndroidExtensions.makeToast
 import com.example.pethaven.util.FactoryUtil
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 
 class ReptileProfileActivity : AppCompatActivity() {
@@ -38,6 +39,9 @@ class ReptileProfileActivity : AppCompatActivity() {
     private lateinit var descTextView: TextView
     private lateinit var reptileImgView: ImageView
 
+    private lateinit var databaseReference: DatabaseReference
+    private var valueEventListener: ValueEventListener? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reptile_profile)
@@ -45,8 +49,8 @@ class ReptileProfileActivity : AppCompatActivity() {
         setUpViewModel()
 
         reptileKey = intent.getStringExtra(REPTILE_INFO_KEY_TAG) ?: ""
-        val reptileTask = reptileProfileViewModel.getReptileFromCurrentUser(reptileKey)
-        reptileTask.addValueEventListener(object: ValueEventListener{
+        databaseReference = reptileProfileViewModel.getReptileFromCurrentUser(reptileKey)
+        valueEventListener = databaseReference.addValueEventListener(object: ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (!snapshot.exists()) {
                     return
@@ -88,6 +92,11 @@ class ReptileProfileActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onDestroy() {
+        valueEventListener?.let { databaseReference.removeEventListener(it) }
+        super.onDestroy()
     }
 
     private fun setUpViewModel() {
