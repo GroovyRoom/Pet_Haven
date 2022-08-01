@@ -7,6 +7,7 @@
     <string name="cancel">Cancel</string>
     <string name="start">Start</string>
     <string name="delete">DELETE</string>
+    <string name="search">Search</string>
 
     <!-- Picture Dialog -->
     <string name="open_camera">Open Camera</string>
@@ -17,4 +18,5 @@
     <string name="species">Species</string>
     <string name="age">Age</string>
     <string name="description">Description</string>
+    <string name="edit">Edit</string>
 </resources>
