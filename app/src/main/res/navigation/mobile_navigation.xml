@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/navigation_shop"
-        android:name="com.example.pethaven.ui.features.shop.ShopFragment"
+        android:name="com.example.pethaven.ui.features.shop.TradeListFragment"
         android:label="Shop"
         tools:layout="@layout/fragment_shop" />
 
