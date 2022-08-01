@@ -2,41 +2,62 @@ package com.example.reptilehaven.ui.features.chat
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.example.reptilehaven.R
+import com.google.firebase.database.FirebaseDatabase
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_chat_log.*
+import kotlinx.android.synthetic.main.chat_receiving.view.*
+import kotlinx.android.synthetic.main.chat_sending.view.*
 
 class ChatLogActivity : AppCompatActivity() {
+
+    companion object {
+        val TAG = "ChatLog"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_log)
 
-//    val username = intent.getStringExtra(NewMessageActivity.USER_KEY)
         val user = intent.getParcelableExtra<User>(NewChatActivity.USER_KEY)
 
         if (user != null) {
             supportActionBar?.title = user.username
         }
 
+        send_button_chat_log.setOnClickListener {
+            Log.d(TAG, "Debug Chat Log: ")
+            performSendMessage()
+        }
+
         val adapter = GroupAdapter<ViewHolder>()
 
-        adapter.add(ChatFromItem())
-        adapter.add(ChatToItem())
-        adapter.add(ChatFromItem())
-        adapter.add(ChatToItem())
-        adapter.add(ChatFromItem())
-        adapter.add(ChatToItem())
-        adapter.add(ChatFromItem())
-        adapter.add(ChatToItem())
+        adapter.add(ChatFromItem("From Message"))
+        adapter.add(ChatToItem("To Message"))
 
         recyclerview_chat_log.adapter = adapter
     }
+
+    class ChatMessage(val text: String)
+
+    private fun performSendMessage() {
+        val text = edittext_chat_log.text.toString()
+        val reference = FirebaseDatabase.getInstance().getReference("/messages").push()
+
+        val chatMessage = ChatMessage(text)
+        reference.setValue(chatMessage).addOnSuccessListener {
+            Log.d(TAG, "Saved our chat message: ${reference.key}")
+        }
+        reference.setValue("TEXT")
+    }
 }
 
-class ChatFromItem: Item<ViewHolder>() {
+class ChatFromItem(val text: String): Item<ViewHolder>() {
     override fun bind(viewHolder: ViewHolder, position: Int) {
+        viewHolder.itemView.textView_receiving.text = "From Mesage..."
 
     }
 
@@ -45,9 +66,9 @@ class ChatFromItem: Item<ViewHolder>() {
     }
 }
 
-class ChatToItem: Item<ViewHolder>() {
+class ChatToItem(val text: String): Item<ViewHolder>() {
     override fun bind(viewHolder: ViewHolder, position: Int) {
-
+        viewHolder.itemView.textView_sending.text = "Longer Message ..."
     }
 
     override fun getLayout(): Int {
