@@ -9,8 +9,9 @@ dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
     repositories {
         google()
+        jcenter()
         mavenCentral()
     }
 }
-rootProject.name = "Pet Haven"
+rootProject.name = "Reptile Haven"
 include ':app'

@@ -1,34 +1,37 @@
 package com.example.reptilehaven.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.reptilehaven.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navView: BottomNavigationView
     private lateinit var appBarConfiguration: AppBarConfiguration
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        checkUserLoggedIn()
         setContentView(R.layout.activity_main)
         setUpNavView()
+    }
 
-/*        val userId = intent.getStringArrayExtra("user_id")
-        val emailId = intent.getStringExtra("email_id")
-
-        tv_user_id.text = "User ID :: $userId"
-        tv_email_id.text = "Email ID :: $emailId"
-
-        btn_logout.setOnClickListener {
-            FirebaseAuth.getInstance().signOut()
-
-            startActivity(Intent(this@MainActivity, LoginActivity::class.java))
-            finish()
-        }*/
+    private fun checkUserLoggedIn() {
+        val uid = FirebaseAuth.getInstance().currentUser?.uid
+        // user is not logged-in then send user to login page.
+        if (uid == null) {
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        }
     }
 
     private fun setUpNavView() {
@@ -45,6 +48,24 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item?.itemId) {
+            R.id.menu_sign_out -> {
+                FirebaseAuth.getInstance().signOut()
+                val intent = Intent(this, LoginActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.home_menu, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 
     /*

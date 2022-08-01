@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/navigation_shop"
-        android:name="com.example.reptilehaven.ui.features.shop.TradeListFragment"
+        android:name="com.example.reptilehaven.ui.features.shop.ShopFragment"
         android:label="Shop"
         tools:layout="@layout/fragment_shop" />
 

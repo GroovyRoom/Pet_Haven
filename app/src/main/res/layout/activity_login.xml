@@ -23,6 +23,7 @@
         <ImageView
             android:layout_width="300dp"
             android:layout_height="300dp"
+            android:layout_marginTop="60dp"
             android:layout_centerInParent="true"
             android:contentDescription="@string/app_name"
             android:src="@drawable/logo"
@@ -30,32 +31,19 @@
 
     </RelativeLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_title"
-        android:layout_marginTop="35dp"
-        android:text = "LOGIN SCREEN"
-        android:textColor = "#222934"
-        android:textSize = "18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fl_header_image"/>
-
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/til_login_email"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="0dp"
         android:layout_marginEnd = "16dp"
         android:hint = "Email Id"
         app:startIconDrawable="@drawable/ic_email"
         app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        app:layout_constraintTop_toBottomOf="@+id/fl_header_image"
         style = "@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <EditText
