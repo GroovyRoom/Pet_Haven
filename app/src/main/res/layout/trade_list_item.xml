@@ -5,7 +5,8 @@
     android:id="@+id/trade_list_item_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp">
+    android:layout_margin="8dp"
+    android:elevation="@dimen/cardview_default_elevation">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,6 +32,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:startIconDrawable="@drawable/ic_reptile"
+                android:enabled="false"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -45,7 +47,8 @@
                 android:id="@+id/trade_post_price_text_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:startIconDrawable="@drawable/ic_baseline_attach_money_24"
+                app:startIconDrawable="@drawable/ic_money"
+                android:enabled="false"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -59,6 +62,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/show_less_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -92,14 +96,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:startIconDrawable="@drawable/ic_person"
+                android:enabled="false"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/trade_post_owner_name_edit_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/trade_post_owner_name_string"
-                    android:inputType="none"/>
+                    android:hint="@string/trade_post_owner_name_string" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -107,6 +111,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:startIconDrawable="@drawable/ic_calendar"
+                android:enabled="false"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
