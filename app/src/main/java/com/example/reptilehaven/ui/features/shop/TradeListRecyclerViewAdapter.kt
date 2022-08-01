@@ -9,8 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.reptilehaven.databinding.TradeListItemBinding
 import com.example.reptilehaven.domain.Post
 import com.example.reptilehaven.domain.PostRepository
-import kotlinx.android.synthetic.main.activity_main.view.*
-import kotlinx.android.synthetic.main.fragment_trade_list.view.*
 
 class TradeListRecyclerViewAdapter: RecyclerView.Adapter<TradeListRecyclerViewAdapter.ViewHolder>() {
 
