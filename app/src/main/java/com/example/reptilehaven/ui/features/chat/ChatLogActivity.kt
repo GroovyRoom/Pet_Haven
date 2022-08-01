@@ -61,6 +61,8 @@ class ChatLogActivity : AppCompatActivity() {
             .addOnSuccessListener {
                 Log.d(TAG, "Saved our chat message: ${reference.key}")
             }
+
+        edittext_chat_log.setText("")
     }
 
     private fun listenForMessages() {
@@ -74,7 +76,7 @@ class ChatLogActivity : AppCompatActivity() {
                 if (chatMessage != null) {
                     Log.d(TAG, chatMessage.text)
 
-                    if (chatMessage.fromId == FirebaseAuth.getInstance().uid) {
+                    if (chatMessage.toId.compareTo(FirebaseAuth.getInstance().currentUser!!.uid) == 0) {
                         adapter.add(ChatFromItem(chatMessage.text))
                     } else {
                         adapter.add(ChatToItem(chatMessage.text))
