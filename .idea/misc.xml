@@ -6,38 +6,6 @@
         <entry key="..\:/Users/Chang/AndroidStudioProjects/PetHaven/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/Users/Chang/AndroidStudioProjects/PetHaven/app/src/main/res/layout/activity_main.xml" value="0.1828125" />
         <entry key="..\:/Users/Chang/AndroidStudioProjects/PetHaven/app/src/main/res/layout/activity_register.xml" value="0.1875" />
-        <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/drawable-v24/rounded_select_photo_button.xml" value="0.1955" />
-        <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/drawable/ic_add.xml" value="0.1955" />
-        <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/drawable/ic_add_picture.xml" value="0.1955" />
-        <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/drawable/ic_chat.xml" value="0.1955" />
-        <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/drawable/ic_description.xml" value="0.1955" />
-        <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/drawable/ic_email.xml" value="0.1955" />
-        <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/drawable/ic_error.xml" value="0.1955" />
-        <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/drawable/ic_hashtag.xml" value="0.1955" />
-        <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1955" />
-        <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/drawable/ic_lock.xml" value="0.1955" />
-        <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/drawable/ic_pen_write.xml" value="0.1955" />
-        <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/drawable/ic_person.xml" value="0.1955" />
-        <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/drawable/ic_shopping_cart.xml" value="0.1955" />
-        <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/drawable/ic_text_a.xml" value="0.1955" />
-        <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/drawable/rounded_button.xml" value="0.1955" />
-        <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/drawable/rounded_edittext_register_login.xml" value="0.191" />
-        <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/activity_chat_list.xml" value="0.36614583333333334" />
-        <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/activity_chat_log.xml" value="0.1875" />
-        <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/activity_login.xml" value="0.358695652173913" />
-        <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/activity_new_chat.xml" value="0.2876068376068376" />
-        <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/activity_register.xml" value="0.2" />
-        <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/chat_receiving.xml" value="0.2" />
-        <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/chat_sending.xml" value="0.1828125" />
-        <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/fragment_chat.xml" value="0.1875" />
-        <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/fragment_home.xml" value="0.1875" />
-        <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/fragment_profile.xml" value="0.1875" />
-        <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/fragment_shop.xml" value="0.36614583333333334" />
-        <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/user_chat_row.xml" value="0.1875" />
-        <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/user_row_new_message.xml" value="0.36614583333333334" />
-        <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/menu/bottom_nav_menu.xml" value="0.17291666666666666" />
-        <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/menu/home_menu.xml" value="0.1875" />
-        <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/menu/nav_menu.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/georg/AndroidStudioProjects/Pet_Haven/app/src/main/res/drawable-v24/ic_chat.xml" value="0.1" />
         <entry key="..\:/Users/georg/AndroidStudioProjects/Pet_Haven/app/src/main/res/drawable-v24/ic_dashboard_black_24dp.xml" value="0.1" />
         <entry key="..\:/Users/georg/AndroidStudioProjects/Pet_Haven/app/src/main/res/drawable-v24/ic_home_black_24dp.xml" value="0.1" />
@@ -62,6 +30,13 @@
         <entry key="..\:/Users/georg/AndroidStudioProjects/Pet_Haven/app/src/main/res/menu/menu_edit_reptile.xml" value="0.11354166666666667" />
         <entry key="..\:/Users/georg/AndroidStudioProjects/Pet_Haven/app/src/main/res/menu/menu_reptile_info.xml" value="0.1828125" />
         <entry key="..\:/Users/georg/AndroidStudioProjects/Pet_Haven/app/src/main/res/menu/menu_search.xml" value="0.20052083333333334" />
+        <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/drawable/ic_add_picture.xml" value="0.127" />
+        <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/drawable/ic_description.xml" value="0.127" />
+        <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/drawable/ic_edit.xml" value="0.127" />
+        <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/activity_add_edit_reptile.xml" value="0.11614583333333334" />
+        <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/activity_reptile_profile.xml" value="0.11614583333333334" />
+        <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/adapter_reptile_info.xml" value="0.11614583333333334" />
+        <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/fragment_home_test.xml" value="0.24010416666666667" />
       </map>
     </option>
   </component>
