@@ -9,12 +9,14 @@ import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_chat_log.*
 import kotlinx.android.synthetic.main.chat_receiving.view.*
 import kotlinx.android.synthetic.main.chat_sending.view.*
+import kotlinx.android.synthetic.main.user_chat_row.view.*
 
 class ChatLogActivity : AppCompatActivity() {
 
@@ -77,7 +79,8 @@ class ChatLogActivity : AppCompatActivity() {
                     Log.d(TAG, chatMessage.text)
 
                     if (chatMessage.fromId.compareTo(FirebaseAuth.getInstance().uid.toString()) == 0) {
-                        adapter.add(ChatToItem(chatMessage.text))
+                        val user = intent.getParcelableExtra<User>(NewChatActivity.USER_KEY)
+                        adapter.add(ChatToItem(chatMessage.text, user!!))
                     } else {
                         adapter.add(ChatFromItem(chatMessage.text))
                     }
@@ -116,9 +119,13 @@ class ChatFromItem(val text: String): Item<ViewHolder>() {
     }
 }
 
-class ChatToItem(val text: String): Item<ViewHolder>() {
+class ChatToItem(val text: String, val user : User): Item<ViewHolder>() {
     override fun bind(viewHolder: ViewHolder, position: Int) {
         viewHolder.itemView.textView_sending.text = text
+
+        val uri = user.profileImageUrl
+        val targetImgageView = viewHolder.itemView.imageView_sending
+        Picasso.get().load(uri).into(targetImgageView)
     }
 
     override fun getLayout(): Int {
