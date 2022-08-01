@@ -8,4 +8,6 @@ class Reptile (
     var age: Int = -1,
     var description: String = "",
     var imgUri: String? = null,
-    )
+    var price: Double = 0.0,
+    var title: String = ""
+)
