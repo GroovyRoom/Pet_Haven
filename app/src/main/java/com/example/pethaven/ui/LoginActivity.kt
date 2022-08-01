@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Toast
 import com.example.pethaven.R
+import com.example.pethaven.ui.features.chat.ChatListActivity
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
@@ -55,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
                                     ).show()
 
                                     val intent =
-                                        Intent(this@LoginActivity, MainActivity::class.java)
+                                        Intent(this@LoginActivity, ChatListActivity::class.java)
                                     intent.flags =
                                         Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 
