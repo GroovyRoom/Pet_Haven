@@ -7,25 +7,25 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.pethaven.ui.features.home.HomeFragment"
+        android:name="com.example.reptilehaven.ui.features.home.HomeFragment"
         android:label="Home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_shop"
-        android:name="com.example.pethaven.ui.features.shop.ShopFragment"
+        android:name="com.example.reptilehaven.ui.features.shop.ShopFragment"
         android:label="Shop"
         tools:layout="@layout/fragment_shop" />
 
     <fragment
         android:id="@+id/navigation_chat"
-        android:name="com.example.pethaven.ui.features.chat.ChatFragment"
+        android:name="com.example.reptilehaven.ui.features.chat.ChatFragment"
         android:label="Chat"
         tools:layout="@layout/fragment_chat" />
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.example.pethaven.ui.features.profile.ProfileFragment"
+        android:name="com.example.reptilehaven.ui.features.profile.ProfileFragment"
         android:label="Setting"
         tools:layout="@layout/fragment_profile" />
 </navigation>
