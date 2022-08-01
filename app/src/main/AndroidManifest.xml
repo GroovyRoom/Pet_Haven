@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.pethaven">
+    package="com.example.reptilehaven">
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -18,16 +18,16 @@
         android:theme="@style/Theme.PetHaven"
         tools:targetApi="31">
         <activity
-            android:name=".ui.features.home.AddEditReptileActivity"
+            android:name="com.example.reptilehaven.ui.features.home.AddEditReptileActivity"
             android:label="Reptile Profile"
             android:windowSoftInputMode="adjustPan"
             android:exported="false" />
         <activity
-            android:name=".ui.MainActivity"
+            android:name="com.example.reptilehaven.ui.MainActivity"
             android:exported="false" />
-        <activity android:name=".ui.RegisterActivity" />
+        <activity android:name="com.example.reptilehaven.ui.RegisterActivity" />
         <activity
-            android:name=".ui.LoginActivity"
+            android:name="com.example.reptilehaven.ui.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,7 +38,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.example.pethaven"
+            android:authorities="com.example.reptilehaven"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
