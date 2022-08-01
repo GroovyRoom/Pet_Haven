@@ -46,7 +46,7 @@ class ReptileProfileActivity : AppCompatActivity() {
 
         reptileKey = intent.getStringExtra(REPTILE_INFO_KEY_TAG) ?: ""
         val reptileTask = reptileProfileViewModel.getReptileFromCurrentUser(reptileKey)
-        reptileTask.addListenerForSingleValueEvent(object: ValueEventListener{
+        reptileTask.addValueEventListener(object: ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (!snapshot.exists()) {
                     return
