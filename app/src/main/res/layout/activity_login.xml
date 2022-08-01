@@ -50,6 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/et_login_email"
+            android:text="leelisooke@gmail.com"
             android:inputType="textEmailAddress"
             tools:text="abc@gmail.com"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -74,6 +75,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/et_login_password"
             android:inputType="textPassword"
+            android:text="123456"
             tools:text="123456"/>
     </com.google.android.material.textfield.TextInputLayout>
 
