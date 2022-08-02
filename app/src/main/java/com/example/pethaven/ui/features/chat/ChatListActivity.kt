@@ -106,7 +106,7 @@ class ChatListActivity  : AppCompatActivity() {
             val ref = FirebaseDatabase.getInstance().getReference("/users/$chatPartnerId")
             ref.addListenerForSingleValueEvent(object: ValueEventListener {
                 override fun onDataChange(p0: DataSnapshot) {
-                    val chatPartnerUser = p0.getValue(User::class.java)
+                    chatPartnerUser = p0.getValue(User::class.java)
                     viewHolder.itemView.username_textview_latest_message.text = chatPartnerUser?.username
 
                     val targetImageView = viewHolder.itemView.imageview_latest_message
