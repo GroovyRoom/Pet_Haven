@@ -15,8 +15,8 @@
 
         <ImageView
             android:id="@+id/editReptileImg"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
             android:layout_gravity="center"
             android:scaleType="fitXY"
             android:src="@drawable/ic_add_picture" />
@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="4dp">
+            android:layout_marginTop="4dp">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/trade_post_reptile_name_text_input"
@@ -88,7 +88,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="4dp"
             android:visibility="gone">
 
             <com.google.android.material.textfield.TextInputLayout
@@ -119,6 +118,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/trade_post_date_string"
+                    android:inputType="none"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/trade_post_description_text_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:startIconDrawable="@drawable/ic_description"
+                android:enabled="false"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/trade_post_description_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/description"
                     android:inputType="none"/>
             </com.google.android.material.textfield.TextInputLayout>
 

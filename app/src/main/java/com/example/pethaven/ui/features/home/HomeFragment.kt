@@ -76,7 +76,6 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
     }
 
     // --------------------- Functions for Testing ---------------- //
-
     private fun setUpRecyclerView(view: View) {
         recyclerView = view.findViewById(R.id.reptileInfoRecyclerView)
         recyclerView.setHasFixedSize(true)
