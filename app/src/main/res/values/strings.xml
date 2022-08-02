@@ -8,6 +8,8 @@
     <string name="start">Start</string>
     <string name="delete">DELETE</string>
     <string name="search">Search</string>
+    <string name="edit">Edit</string>
+    <string name="sign_out">Sign Out</string>
 
     <!-- Picture Dialog -->
     <string name="open_camera">Open Camera</string>
@@ -18,6 +20,8 @@
     <string name="species">Species</string>
     <string name="age">Age</string>
     <string name="description">Description</string>
+
+    <!-- Trading Post -->
     <string name="add_trade_title_string">Title</string>
     <string name="add_trade_price_string">Price</string>
     <string name="add_trade_description_string">Description</string>
@@ -28,5 +32,4 @@
     <string name="trade_post_date_string">Date</string>
     <string name="trade_post_show_less_string">Show Less</string>
     <string name="trade_post_contact_seller_string">Contact Seller</string>
-    <string name="edit">Edit</string>
 </resources>
