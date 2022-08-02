@@ -284,9 +284,9 @@ class ProfileFragment : Fragment() {
             mUploading?.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL) // 设置水平进度条
             mUploading?.setCancelable(true) // 设置是否可以通过点击Back键取消
             mUploading?.setCanceledOnTouchOutside(false) // 设置在点击Dialog外是否取消Dialog进度条
-            mUploading?.setTitle("Toast")
+            mUploading?.setTitle("Updating Profile Image")
             mUploading?.max = 100
-            mUploading?.setMessage("Uploading")
+            mUploading?.setMessage("Uploading Image...")
             mUploading?.show()
         } else {
             val progress = (curSize.toDouble() / allSize * 100).toInt()
