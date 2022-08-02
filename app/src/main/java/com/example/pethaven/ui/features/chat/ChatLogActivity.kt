@@ -90,7 +90,7 @@ class ChatLogActivity : AppCompatActivity() {
                     Log.d(TAG, chatMessage.text)
 
                     if (chatMessage.fromId.compareTo(FirebaseAuth.getInstance().uid.toString()) == 0) {
-                        val currentUser = ChatListActivity.currentUser
+                        val currentUser = ChatFragment.currentUser
                         adapter.add(ChatToItem(chatMessage.text, currentUser!!))
                     } else {
                         adapter.add(ChatFromItem(chatMessage.text, toUser!!))
