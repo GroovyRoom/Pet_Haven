@@ -26,7 +26,7 @@
     <!-- Trading Post -->
     <string name="add_trade_title_string">Title</string>
     <string name="add_trade_price_string">Price</string>
-    <string name="add_trade_description_string">Description</string>
+    <string name="add_trade_description_string">Useful Information for the buyer.</string>
     <string name="add_trade_post_button_string">Post</string>
     <string name="trade_post_reptile_name_string">Reptile Name</string>
     <string name="trade_post_show_more_string">Show More</string>
