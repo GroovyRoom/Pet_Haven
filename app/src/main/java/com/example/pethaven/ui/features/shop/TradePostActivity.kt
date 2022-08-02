@@ -36,21 +36,26 @@ class TradePostActivity : AppCompatActivity() {
         setContentView(view)
 
         setUpViewModel()
+        setUpFloatingActionButton()
         reptileKey = intent.getStringExtra(TRADE_REPTILE_KEY_TAG) ?: ""
-        makeToast(reptileKey)
+    }
 
+    ///-------------------------- Setting Up Activity -------------------------///
+
+    private fun setUpFloatingActionButton() {
         binding.addTradePostButton.setOnClickListener {
             val title = binding.addTradeTitleEditText.text.toString()
             val price = binding.addTradePriceEditText.text.toString().toDoubleOrNull() ?: 0.0
             val description = binding.addTradeDescriptionEditText.text.toString()
 
-            val post = Post(
-                rid = reptileKey,
-                title = title,
-                price = price,
-                description = description
+            addTradePost(
+                Post(
+                    rid = reptileKey,
+                    title = title,
+                    price = price,
+                    description = description
+                )
             )
-            tradePostViewModel.addPost(post)
         }
     }
 
@@ -58,6 +63,8 @@ class TradePostActivity : AppCompatActivity() {
         val factory = FactoryUtil.generateReptileViewModelFactory(this)
         tradePostViewModel = ViewModelProvider(this, factory).get(TradePostViewModel::class.java)
     }
+
+    ///-------------------------- Database Operations -------------------------///
 
     private fun addTradePost(post: Post){
         binding.tradePostProgressBar.isIndeterminate = true
