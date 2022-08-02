@@ -55,19 +55,31 @@ class ChatLogActivity : AppCompatActivity() {
 
         if (fromId == null) return
 
-        val reference = FirebaseDatabase.getInstance().getReference("/messages").push()
+        //val reference = FirebaseDatabase.getInstance().getReference("/messages").push()
+        val reference = FirebaseDatabase.getInstance().getReference("/user-messages/$fromId/$toId").push()
+        val toReference = FirebaseDatabase.getInstance().getReference("/user-messages/$toId/$fromId").push()
 
         val chatMessage = ChatMessage(reference.key!!, text, fromId, toId.toString(), System.currentTimeMillis() / 1000)
         reference.setValue(chatMessage)
             .addOnSuccessListener {
                 Log.d(TAG, "Saved our chat message: ${reference.key}")
+                edittext_chat_log.text.clear()
+                recyclerview_chat_log.scrollToPosition(adapter.itemCount-1)
             }
 
-        edittext_chat_log.setText("")
+        toReference.setValue(chatMessage)
+
+        val latestMessageRef = FirebaseDatabase.getInstance().getReference("/latest-messages/$fromId/$toId")
+        latestMessageRef.setValue(chatMessage)
+
+        val latestMessageToRef = FirebaseDatabase.getInstance().getReference("/latest-messages/$toId/$fromId")
+        latestMessageToRef.setValue(chatMessage)
     }
 
     private fun listenForMessages() {
-        val ref = FirebaseDatabase.getInstance().getReference("/messages")
+        val fromId = FirebaseAuth.getInstance().currentUser?.uid
+        val toId = toUser?.uid
+        val ref = FirebaseDatabase.getInstance().getReference("/user-messages/$fromId/$toId")
 
         ref.addChildEventListener(object: ChildEventListener {
 
@@ -78,9 +90,10 @@ class ChatLogActivity : AppCompatActivity() {
                     Log.d(TAG, chatMessage.text)
 
                     if (chatMessage.fromId.compareTo(FirebaseAuth.getInstance().uid.toString()) == 0) {
-                        adapter.add(ChatToItem(chatMessage.text, toUser!!))
+                        val currentUser = ChatFragment.currentUser
+                        adapter.add(ChatToItem(chatMessage.text, currentUser!!))
                     } else {
-                        adapter.add(ChatFromItem(chatMessage.text))
+                        adapter.add(ChatFromItem(chatMessage.text, toUser!!))
                     }
                 }
 
@@ -107,27 +120,31 @@ class ChatLogActivity : AppCompatActivity() {
     }
 }
 
-class ChatFromItem(val text: String): Item<ViewHolder>() {
-    override fun bind(viewHolder: ViewHolder, position: Int) {
-        viewHolder.itemView.textView_receiving.text = text
-
-    }
-
-    override fun getLayout(): Int {
-        return R.layout.chat_receiving
-    }
-}
-
-class ChatToItem(val text: String, val user : User): Item<ViewHolder>() {
+class ChatToItem(val text: String, val user: User): Item<ViewHolder>() {
     override fun bind(viewHolder: ViewHolder, position: Int) {
         viewHolder.itemView.textView_sending.text = text
 
         val uri = user.profileImageUrl
-        val targetImgageView = viewHolder.itemView.imageView_sending
-        Picasso.get().load(uri).into(targetImgageView)
+        val targetImageView = viewHolder.itemView.imageView_sending
+        Picasso.get().load(uri).into(targetImageView)
+
     }
 
     override fun getLayout(): Int {
         return R.layout.chat_sending
+    }
+}
+
+class ChatFromItem(val text: String, val user: User): Item<ViewHolder>() {
+    override fun bind(viewHolder: ViewHolder, position: Int) {
+        viewHolder.itemView.textView_receiving.text = text
+
+        val uri = user.profileImageUrl
+        val targetImageView = viewHolder.itemView.imageView_receiving
+        Picasso.get().load(uri).into(targetImageView)
+    }
+
+    override fun getLayout(): Int {
+        return R.layout.chat_receiving
     }
 }
