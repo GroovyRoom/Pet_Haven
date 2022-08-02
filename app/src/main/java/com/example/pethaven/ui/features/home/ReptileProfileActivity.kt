@@ -116,7 +116,7 @@ class ReptileProfileActivity : AppCompatActivity() {
 
     private fun setUpViewModel() {
         val factory = FactoryUtil.generateReptileViewModelFactory(this)
-        reptileProfileViewModel = ViewModelProvider(this, factory).get(ReptileProfileViewModel::class.java)
+        reptileProfileViewModel = ViewModelProvider(this, factory)[ReptileProfileViewModel::class.java]
     }
 
     private fun setUpTextView() {

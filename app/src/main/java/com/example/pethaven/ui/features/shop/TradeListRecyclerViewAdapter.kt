@@ -11,14 +11,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pethaven.R
 import com.example.pethaven.databinding.TradeListItemBinding
 import com.example.pethaven.domain.Post
-import com.example.pethaven.domain.PostRepository
 import com.google.android.material.card.MaterialCardView
 
 class TradeListRecyclerViewAdapter: RecyclerView.Adapter<TradeListRecyclerViewAdapter.ViewHolder>() {
 
     private lateinit var binding: TradeListItemBinding
     private lateinit var listener: Listener
-    private lateinit var repository: PostRepository
     private lateinit var testPostArrayList: ArrayList<Post>
     private lateinit var examplePost: Post
 
