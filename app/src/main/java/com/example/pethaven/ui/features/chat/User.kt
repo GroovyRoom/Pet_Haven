@@ -10,5 +10,5 @@ class User(val uid: String, var username: String, var profileImageUrl: String, v
 
     override fun toString(): String {
         return "User(uid='$uid', username='$username', profileImageUrl='$profileImageUrl', phoneNumber='$phoneNumber', address='$address', isOpen=$isOpen)"
-    }
+    }//hh
 }
