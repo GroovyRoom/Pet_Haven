@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.pethaven.R
 import com.example.pethaven.domain.Reptile
-import com.example.pethaven.ui.features.shop.TradePostFragment
 import com.example.pethaven.util.AndroidExtensions.makeToast
 import com.example.pethaven.util.FactoryUtil
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -87,6 +86,7 @@ class ReptileProfileActivity : AppCompatActivity() {
         postFab = findViewById(R.id.addPostFab)
         postFab.setOnClickListener{
             println("debug: pressed")
+
         }
     }
 
