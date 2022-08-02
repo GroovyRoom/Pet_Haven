@@ -38,10 +38,10 @@
         android:layout_height="wrap_content"
         android:paddingTop="65dp"
         android:text="Sender"
+        android:textAlignment="center"
         android:textColor="@android:color/black"
         android:textStyle="bold"
-        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
