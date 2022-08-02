@@ -22,7 +22,7 @@
         <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/drawable/ic_text_a.xml" value="0.1955" />
         <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/drawable/rounded_button.xml" value="0.1955" />
         <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/drawable/rounded_edittext_register_login.xml" value="0.191" />
-        <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/activity_chat_list.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/activity_chat_list.xml" value="0.25" />
         <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/activity_chat_log.xml" value="0.1875" />
         <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/activity_login.xml" value="0.358695652173913" />
         <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/activity_new_chat.xml" value="0.2876068376068376" />
@@ -33,6 +33,7 @@
         <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/fragment_home.xml" value="0.1875" />
         <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/fragment_profile.xml" value="0.1875" />
         <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/fragment_shop.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/latest_message_row.xml" value="0.1890625" />
         <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/user_chat_row.xml" value="0.1875" />
         <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/user_row_new_message.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/Chang/AndroidStudioProjects/Reptile_Haven/app/src/main/res/menu/bottom_nav_menu.xml" value="0.17291666666666666" />
