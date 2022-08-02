@@ -18,7 +18,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.view.setPadding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
-import com.example.pethaven.ui.features.chat.User
+import com.example.pethaven.domain.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage

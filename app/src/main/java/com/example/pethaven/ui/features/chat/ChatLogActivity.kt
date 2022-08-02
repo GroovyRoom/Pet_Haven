@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.example.pethaven.R
+import com.example.pethaven.domain.ChatMessage
+import com.example.pethaven.domain.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
@@ -16,7 +18,6 @@ import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_chat_log.*
 import kotlinx.android.synthetic.main.chat_receiving.view.*
 import kotlinx.android.synthetic.main.chat_sending.view.*
-import kotlinx.android.synthetic.main.user_chat_row.view.*
 
 class ChatLogActivity : AppCompatActivity() {
 

@@ -104,7 +104,7 @@ class PictureDialog : DialogFragment() {
             if (it.resultCode == Activity.RESULT_OK) {
                 val dataUri = it.data?.data
                 val bitmap = dataUri?.let { uri -> BitmapUtil.getBitmap(requireContext(), uri) }
-                onImageResultListener?.onResult(this, GALLERY_BUTTON, bitmap, tempImgUri)
+                onImageResultListener?.onResult(this, GALLERY_BUTTON, bitmap,dataUri!!)
 
                 dismiss()
             }

@@ -2,11 +2,12 @@ package com.example.pethaven.ui.features.chat
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.pethaven.R
+import com.example.pethaven.domain.ChatMessage
+import com.example.pethaven.domain.User
 import com.example.pethaven.ui.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -14,7 +15,6 @@ import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
-import kotlinx.android.synthetic.main.fragment_chat.*
 import kotlinx.android.synthetic.main.fragment_chat.view.*
 import kotlinx.android.synthetic.main.latest_message_row.view.*
 
