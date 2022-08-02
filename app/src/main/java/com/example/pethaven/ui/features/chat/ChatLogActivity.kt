@@ -49,6 +49,9 @@ class ChatLogActivity : AppCompatActivity() {
     private fun performSendMessage() {
         // how do we actually send a message to firebase...
         val text = edittext_chat_log.text.toString()
+        if (text.compareTo("") == 0) {
+            return
+        }
 
         val fromId = FirebaseAuth.getInstance().uid
         val user = intent.getParcelableExtra<User>(NewChatActivity.USER_KEY)
