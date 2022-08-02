@@ -11,8 +11,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.Toast
+import android.widget.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
@@ -27,7 +26,6 @@ import com.google.firebase.database.*
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.fragment_profile.*
 import java.util.*
 
 typealias onInputBack = (String) -> Unit
@@ -39,19 +37,43 @@ class ProfileFragment : Fragment() {
     private lateinit var uid: String
     private lateinit var ref: DatabaseReference
     private lateinit var imageLauncher: ActivityResultLauncher<Intent>
-
+    lateinit var iv_head:ImageView
+    lateinit var tv_name:TextView
+    lateinit var tv_address:TextView
+    lateinit var tv_phone:TextView
+    lateinit var tv_email:TextView
+    lateinit var tv_privacy:TextView
+    lateinit var btn_save:Button
+    lateinit var rl_address:RelativeLayout
+    lateinit var rl_privacy:RelativeLayout
+    lateinit var rl_number:RelativeLayout
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
+
         return view
     }
 
+    private fun initView(view: View){
+        iv_head=view.findViewById(R.id.iv_head)
+        tv_name=view.findViewById(R.id.tv_name)
+        tv_address=view.findViewById(R.id.tv_address)
+        tv_phone=view.findViewById(R.id.tv_phone)
+        tv_privacy=view.findViewById(R.id.tv_privacy)
+        tv_email=view.findViewById(R.id.tv_email)
+        btn_save=view.findViewById(R.id.btn_save)
+        rl_address=view.findViewById(R.id.rl_address)
+        rl_privacy=view.findViewById(R.id.rl_privacy)
+        rl_number=view.findViewById(R.id.rl_number)
+    }
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        initView(view)
         imageLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 if (it.resultCode == Activity.RESULT_OK) {
@@ -169,7 +191,7 @@ class ProfileFragment : Fragment() {
         val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
         ref.putFile(uri)
             .addOnProgressListener {snapshot->
-               showUploading(snapshot.bytesTransferred, snapshot.totalByteCount)
+                showUploading(snapshot.bytesTransferred, snapshot.totalByteCount)
             }
             .addOnSuccessListener {
                 Log.d(RegisterActivity.TAG, "Successfully uploaded image: ${it.metadata?.path}")
@@ -241,8 +263,10 @@ class ProfileFragment : Fragment() {
     }
 
 
+
     override fun onResume() {
         super.onResume()
+        initView(requireView())
         isEdit.observe(this) {
             if (it) {
                 btn_save.visibility = View.VISIBLE
