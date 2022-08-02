@@ -1,5 +1,6 @@
 package com.example.pethaven.ui.features.shop
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,11 +17,7 @@ class TradeListFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: TradeListRecyclerViewAdapter
 
-    override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentTradeListBinding.inflate(inflater, container, false)
         val view = binding.root
 

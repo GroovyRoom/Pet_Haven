@@ -40,6 +40,7 @@
         </activity>
         <activity android:name=".ui.LoginActivity"/>
         <activity android:name=".ui.RegisterActivity" />
+        <activity android:name=".ui.features.shop.TradePostActivity" />
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.example.pethaven"

@@ -18,7 +18,9 @@ class ReptileDao {
 
 
     ///-------------------------- Operations for Post Objects -------------------------///
-    fun addPost(post: Post)= postReference.push().setValue(post)
+    fun addPost(post: Post) = postReference.push().setValue(
+        post.apply { post.uid = firebaseAuth.currentUser!!.uid}
+    )
 
     fun getAllPost() = postReference
 

@@ -3,18 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/SFU/14. Summer 2022/CMPT 362/Project/Reptile_Haven/app/src/main/res/drawable/ic_baseline_attach_money_24.xml" value="0.171" />
-        <entry key="..\:/SFU/14. Summer 2022/CMPT 362/Project/Reptile_Haven/app/src/main/res/drawable/ic_noun_snake_1260862.xml" value="0.171" />
-        <entry key="..\:/SFU/14. Summer 2022/CMPT 362/Project/Reptile_Haven/app/src/main/res/layout/activity_add_edit_reptile.xml" value="0.2359375" />
-        <entry key="..\:/SFU/14. Summer 2022/CMPT 362/Project/Reptile_Haven/app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="..\:/SFU/14. Summer 2022/CMPT 362/Project/Reptile_Haven/app/src/main/res/layout/activity_reptile_profile.xml" value="0.2222222222222222" />
-        <entry key="..\:/SFU/14. Summer 2022/CMPT 362/Project/Reptile_Haven/app/src/main/res/layout/fragment_add_trade.xml" value="0.264" />
-        <entry key="..\:/SFU/14. Summer 2022/CMPT 362/Project/Reptile_Haven/app/src/main/res/layout/fragment_chat.xml" value="0.25" />
-        <entry key="..\:/SFU/14. Summer 2022/CMPT 362/Project/Reptile_Haven/app/src/main/res/layout/fragment_post_trade.xml" value="0.264" />
-        <entry key="..\:/SFU/14. Summer 2022/CMPT 362/Project/Reptile_Haven/app/src/main/res/layout/fragment_trade_list.xml" value="0.264" />
-        <entry key="..\:/SFU/14. Summer 2022/CMPT 362/Project/Reptile_Haven/app/src/main/res/layout/fragment_trade_post.xml" value="0.2222222222222222" />
-        <entry key="..\:/SFU/14. Summer 2022/CMPT 362/Project/Reptile_Haven/app/src/main/res/layout/fragment_trade_post_list.xml" value="0.2212962962962963" />
-        <entry key="..\:/SFU/14. Summer 2022/CMPT 362/Project/Reptile_Haven/app/src/main/res/layout/trade_list_item.xml" value="0.264" />
         <entry key="..\:/Users/Chang/AndroidStudioProjects/PetHaven/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/Users/Chang/AndroidStudioProjects/PetHaven/app/src/main/res/layout/activity_main.xml" value="0.1828125" />
         <entry key="..\:/Users/Chang/AndroidStudioProjects/PetHaven/app/src/main/res/layout/activity_register.xml" value="0.1875" />
@@ -45,10 +33,16 @@
         <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/drawable/ic_add_picture.xml" value="0.127" />
         <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/drawable/ic_description.xml" value="0.127" />
         <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/drawable/ic_edit.xml" value="0.127" />
+        <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/drawable/ic_hashtag.xml" value="0.1" />
+        <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/drawable/ic_money.xml" value="0.1" />
         <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/activity_add_edit_reptile.xml" value="0.11614583333333334" />
-        <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/activity_reptile_profile.xml" value="0.11614583333333334" />
+        <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/activity_login.xml" value="0.11614583333333334" />
+        <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/activity_reptile_profile.xml" value="0.268" />
+        <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/activity_trade_post.xml" value="0.3" />
         <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/adapter_reptile_info.xml" value="0.11614583333333334" />
+        <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/fragment_home.xml" value="0.17864583333333334" />
         <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/fragment_home_test.xml" value="0.24010416666666667" />
+        <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/fragment_trade_post.xml" value="0.17864583333333334" />
       </map>
     </option>
   </component>
