@@ -2,6 +2,7 @@ package com.example.pethaven.ui.features.chat
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -15,12 +16,33 @@ import com.google.firebase.database.ValueEventListener
 
 class ChatListActivity  : AppCompatActivity() {
 
+    companion object {
+        var currentUser: User? = null
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_list)
 
+        fetchCurrentUser()
+
         checkUserLoggedIn()
+    }
+
+    private fun fetchCurrentUser() {
+        val uid = FirebaseAuth.getInstance().currentUser?.uid
+        val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
+        ref.addListenerForSingleValueEvent(object: ValueEventListener {
+            override fun onDataChange(p0: DataSnapshot) {
+                currentUser = p0.getValue(User::class.java)
+                Log.d("ChatListActicity: ", "Current user ${currentUser?.username}")
+            }
+
+            override fun onCancelled(p0: DatabaseError) {
+            }
+
+        })
     }
 
     // Please work

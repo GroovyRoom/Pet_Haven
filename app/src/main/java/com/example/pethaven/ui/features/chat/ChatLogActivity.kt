@@ -78,9 +78,10 @@ class ChatLogActivity : AppCompatActivity() {
                     Log.d(TAG, chatMessage.text)
 
                     if (chatMessage.fromId.compareTo(FirebaseAuth.getInstance().uid.toString()) == 0) {
-                        adapter.add(ChatToItem(chatMessage.text, toUser!!))
+                        val currentUser = ChatListActivity.currentUser
+                        adapter.add(ChatToItem(chatMessage.text, currentUser!!))
                     } else {
-                        adapter.add(ChatFromItem(chatMessage.text))
+                        adapter.add(ChatFromItem(chatMessage.text, toUser!!))
                     }
                 }
 
@@ -107,20 +108,24 @@ class ChatLogActivity : AppCompatActivity() {
     }
 }
 
-class ChatFromItem(val text: String): Item<ViewHolder>() {
+class ChatToItem(val text: String, val user: User): Item<ViewHolder>() {
     override fun bind(viewHolder: ViewHolder, position: Int) {
-        viewHolder.itemView.textView_receiving.text = text
+        viewHolder.itemView.textView_sending.text = text
+
+        val uri = user.profileImageUrl
+        val targetImageView = viewHolder.itemView.imageView_sending
+        Picasso.get().load(uri).into(targetImageView)
 
     }
 
     override fun getLayout(): Int {
-        return R.layout.chat_receiving
+        return R.layout.chat_sending
     }
 }
 
-class ChatToItem(val text: String, val user: User): Item<ViewHolder>() {
+class ChatFromItem(val text: String, val user: User): Item<ViewHolder>() {
     override fun bind(viewHolder: ViewHolder, position: Int) {
-        viewHolder.itemView.textView_sending.text = text
+        viewHolder.itemView.textView_receiving.text = text
 
         val uri = user.profileImageUrl
         val targetImageView = viewHolder.itemView.imageView_receiving
@@ -128,6 +133,6 @@ class ChatToItem(val text: String, val user: User): Item<ViewHolder>() {
     }
 
     override fun getLayout(): Int {
-        return R.layout.chat_sending
+        return R.layout.chat_receiving
     }
 }
