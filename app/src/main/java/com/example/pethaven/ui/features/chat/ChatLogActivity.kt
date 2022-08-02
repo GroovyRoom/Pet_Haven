@@ -123,6 +123,7 @@ class ChatLogActivity : AppCompatActivity() {
 class ChatToItem(val text: String, val user: User): Item<ViewHolder>() {
     override fun bind(viewHolder: ViewHolder, position: Int) {
         viewHolder.itemView.textView_sending.text = text
+        viewHolder.itemView.textView_sender.text = user.username
 
         val uri = user.profileImageUrl
         val targetImageView = viewHolder.itemView.imageView_sending
@@ -138,6 +139,7 @@ class ChatToItem(val text: String, val user: User): Item<ViewHolder>() {
 class ChatFromItem(val text: String, val user: User): Item<ViewHolder>() {
     override fun bind(viewHolder: ViewHolder, position: Int) {
         viewHolder.itemView.textView_receiving.text = text
+        viewHolder.itemView.textView_receiver.text = user.username
 
         val uri = user.profileImageUrl
         val targetImageView = viewHolder.itemView.imageView_receiving
