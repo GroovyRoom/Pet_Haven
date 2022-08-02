@@ -46,6 +46,7 @@ class TradeListRecyclerViewAdapter: RecyclerView.Adapter<TradeListRecyclerViewAd
             binding.tradePostReptileNameEditText.setText(post.reptileName)
             binding.tradePostPriceEditText.setText(post.price.toString())
             binding.tradePostDateEditText.setText(post.date)
+            binding.tradePostDescriptionEditText.setText(post.description)
             post.let {
                 if (it.imgUri != null) {
                     Glide.with(context)
