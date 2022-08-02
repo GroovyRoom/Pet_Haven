@@ -10,6 +10,8 @@
     <string name="search">Search</string>
     <string name="edit">Edit</string>
     <string name="sign_out">Sign Out</string>
+    <string name="send">Send</string>
+
 
     <!-- Picture Dialog -->
     <string name="open_camera">Open Camera</string>
@@ -32,4 +34,13 @@
     <string name="trade_post_date_string">Date</string>
     <string name="trade_post_show_less_string">Show Less</string>
     <string name="trade_post_contact_seller_string">Contact Seller</string>
+
+    <!-- Profile Fragment -->
+    <string name="address">Address</string>
+    <string name="address_hint">Insert Address here</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="phone_number_hint">Insert Phone Number here</string>
+    <string name="privacy_setting">Privacy Setting</string>
+    <string name="privacy_hint">Allow sharing of phone number \nand address</string>
+    <string name="profile_name_hint">Insert Name here</string>
 </resources>

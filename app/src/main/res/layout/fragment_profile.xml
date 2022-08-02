@@ -45,7 +45,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="20dp"
-                    android:text="please insert your name"
+                    android:text="@string/profile_name_hint"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -55,14 +55,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tv_name"
+                    android:layout_centerHorizontal="true"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="10dp"
                     android:text=""
                     android:textColor="#ACABAB"
                     android:textSize="14sp"
                     android:textStyle="bold"
-                    android:layout_centerHorizontal="true"
-                    tools:text="User Email ID  here"/>
+                    tools:text="User Email ID here" />
 
             </RelativeLayout>
 
@@ -84,7 +84,7 @@
                         android:id="@+id/tv_phone_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Phone Number"
+                        android:text="@string/phone_number"
                         android:textColor="@color/black"
                         android:textSize="17sp"
                         android:textStyle="bold" />
@@ -95,7 +95,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/tv_phone_title"
                         android:layout_marginTop="10dp"
-                        android:text="please insert your phone"
+                        android:text="@string/phone_number_hint"
                         android:textColor="#ACABAB"
                         android:textSize="14sp"
                         android:textStyle="bold" />
@@ -122,7 +122,7 @@
                         android:id="@+id/tv_address_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Addresse"
+                        android:text="@string/address"
                         android:textColor="@color/black"
                         android:textSize="17sp"
                         android:textStyle="bold" />
@@ -133,7 +133,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/tv_address_title"
                         android:layout_marginTop="10dp"
-                        android:text="please insert your address"
+                        android:text="@string/address_hint"
                         android:textColor="#ACABAB"
                         android:textSize="14sp"
                         android:textStyle="bold" />
@@ -160,7 +160,7 @@
                         android:id="@+id/tv_privacy_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Privacy Setting"
+                        android:text="@string/privacy_setting"
                         android:textColor="@color/black"
                         android:textSize="17sp"
                         android:textStyle="bold" />
@@ -171,7 +171,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/tv_privacy_title"
                         android:layout_marginTop="10dp"
-                        android:text="Would you like to show your \nphone number or address to user"
+                        android:text="@string/privacy_hint"
                         android:textColor="#ACABAB"
                         android:textSize="14sp"
                         android:textStyle="bold" />
