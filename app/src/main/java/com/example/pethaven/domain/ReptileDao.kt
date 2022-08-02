@@ -1,35 +1,54 @@
 package com.example.pethaven.domain
 
+import android.net.Uri
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 
 class ReptileDao {
     private val firebaseAuth = FirebaseAuth.getInstance()
-    private var databaseReference: DatabaseReference = FirebaseDatabase
+    private var userReference: DatabaseReference = FirebaseDatabase
         .getInstance()
         .getReference(firebaseAuth.currentUser!!.uid)
-    private var firebaseStorageReference = FirebaseStorage.getInstance()
+    private var postReference: DatabaseReference = FirebaseDatabase
+        .getInstance()
+        .getReference(Post::class.java.simpleName)
+    private var firebaseStorage = FirebaseStorage.getInstance()
 
 
+    ///-------------------------- Operations for Post Objects -------------------------///
+    fun addPost(post: Post) = postReference.push().setValue(
+        post.apply { post.uid = firebaseAuth.currentUser!!.uid}
+    )
+
+    fun getAllPost() = postReference
+
+    ///-------------------------- Operations for Reptile Objects-------------------------///
     fun addReptile(reptile: Reptile) =
-        databaseReference.child(Reptile::class.java.simpleName).push().setValue(reptile)
-
-    fun deleteReptile(key: String) =
-        databaseReference.child(Reptile::class.java.simpleName).child(key).removeValue()
-
-    fun deleteImageFromStorage(imgUri: String) =
-        firebaseStorageReference.getReferenceFromUrl(imgUri)
+        userReference.child(Reptile::class.java.simpleName).push().setValue(reptile)
 
     fun updateReptile(key: String, reptile: Reptile) =
-        databaseReference.child(Reptile::class.java.simpleName).child(key).setValue(reptile)
+        userReference.child(Reptile::class.java.simpleName).child(key).setValue(reptile)
+
+    fun deleteReptile(key: String) =
+        userReference.child(Reptile::class.java.simpleName).child(key).removeValue()
+
+    fun deleteImageFromStorage(imgUri: String) =
+        firebaseStorage.getReferenceFromUrl(imgUri).delete()
 
     fun getReptileFromCurrentUser(key: String) =
-        databaseReference.child(Reptile::class.java.simpleName).child(key)
+        userReference.child(Reptile::class.java.simpleName).child(key)
 
     fun getAllUserReptiles() =
-        databaseReference.child(Reptile::class.java.simpleName)
+        userReference.child(Reptile::class.java.simpleName)
+
+    ///-------------------------- Operations for Uploading to Storage  -------------------------///
+    fun uploadImage(uri: Uri) =
+        uri.let {
+            val fileReference = firebaseStorage.reference
+                .child("images/" + System.currentTimeMillis())
+            fileReference.putFile(it)
+        }
 
 }

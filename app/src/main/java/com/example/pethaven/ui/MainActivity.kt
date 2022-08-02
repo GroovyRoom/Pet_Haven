@@ -20,8 +20,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         checkUserLoggedIn()
-        setContentView(R.layout.activity_main)
-        setUpNavView()
+        //setContentView(R.layout.activity_main)
+        //setUpNavView()
     }
 
     private fun checkUserLoggedIn() {
@@ -31,6 +31,9 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
+        } else {
+            setContentView(R.layout.activity_main)
+            setUpNavView()
         }
     }
 

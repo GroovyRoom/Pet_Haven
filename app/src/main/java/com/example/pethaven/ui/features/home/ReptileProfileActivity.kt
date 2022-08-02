@@ -12,10 +12,13 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.pethaven.R
 import com.example.pethaven.domain.Reptile
+import com.example.pethaven.ui.features.shop.TradePostActivity
 import com.example.pethaven.util.AndroidExtensions.makeToast
 import com.example.pethaven.util.FactoryUtil
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 
 class ReptileProfileActivity : AppCompatActivity() {
@@ -38,15 +41,21 @@ class ReptileProfileActivity : AppCompatActivity() {
     private lateinit var descTextView: TextView
     private lateinit var reptileImgView: ImageView
 
+    private lateinit var postFab: FloatingActionButton
+
+    private lateinit var databaseReference: DatabaseReference
+    private var valueEventListener: ValueEventListener? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reptile_profile)
         setUpTextView()
         setUpViewModel()
+        setUpFloatingActionButton()
 
         reptileKey = intent.getStringExtra(REPTILE_INFO_KEY_TAG) ?: ""
-        val reptileTask = reptileProfileViewModel.getReptileFromCurrentUser(reptileKey)
-        reptileTask.addValueEventListener(object: ValueEventListener{
+        databaseReference = reptileProfileViewModel.getReptileFromCurrentUser(reptileKey)
+        valueEventListener = databaseReference.addValueEventListener(object: ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (!snapshot.exists()) {
                     return
@@ -74,6 +83,14 @@ class ReptileProfileActivity : AppCompatActivity() {
         })
     }
 
+    private fun setUpFloatingActionButton() {
+        postFab = findViewById(R.id.addPostFab)
+        postFab.setOnClickListener{
+            val intent = TradePostActivity.makeIntent(this, reptileKey)
+            startActivity(intent)
+        }
+    }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_reptile_info, menu)
         return super.onCreateOptionsMenu(menu)
@@ -90,6 +107,13 @@ class ReptileProfileActivity : AppCompatActivity() {
         }
     }
 
+    override fun onDestroy() {
+        valueEventListener?.let { databaseReference.removeEventListener(it) }
+        super.onDestroy()
+    }
+
+    ///-------------------------- Setting up Activity -------------------------///
+
     private fun setUpViewModel() {
         val factory = FactoryUtil.generateReptileViewModelFactory(this)
         reptileProfileViewModel = ViewModelProvider(this, factory).get(ReptileProfileViewModel::class.java)
@@ -102,4 +126,7 @@ class ReptileProfileActivity : AppCompatActivity() {
         descTextView = findViewById(R.id.reptileInfoDescriptionText)
         reptileImgView = findViewById(R.id.reptileInfoImage)
     }
+
+    ///-------------------------- Receiving Reptile Information -------------------------///
+
 }

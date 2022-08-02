@@ -21,7 +21,6 @@ class ReptileInfoAdapter(private var context: Context,
         override fun performFiltering(constraint: CharSequence): FilterResults {
             var filteredList = ArrayList<Reptile>()
             if (constraint.toString().isEmpty()) {
-                println("debug: adding all reptileListAll with size = ${reptileListAll.size}")
                 filteredList.addAll(reptileListAll)
             } else {
                 for (reptile in reptileListAll) {

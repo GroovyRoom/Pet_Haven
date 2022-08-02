@@ -7,8 +7,10 @@ import androidx.fragment.app.Fragment
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
+import android.widget.ProgressBar
 import android.widget.SearchView
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,8 +25,10 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 
 class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener {
-    private lateinit var addFab: FloatingActionButton
-    private lateinit var optionsFab: FloatingActionButton
+
+    private lateinit var fabLayout: LinearLayout
+
+    private lateinit var progressBar: ProgressBar
 
     private lateinit var addFabTextView: TextView
     private lateinit var searchView: androidx.appcompat.widget.SearchView
@@ -34,12 +38,13 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
 
     private lateinit var testViewModel: HomeTestViewModel
 
+    private lateinit var addFab: FloatingActionButton
+    private lateinit var optionsFab: FloatingActionButton
+
     private lateinit var openFabAnimation: Animation
     private lateinit var closeFabAnimation: Animation
     private lateinit var traverseFromBottomFabAnimation: Animation
     private lateinit var traverseBottomFabAnimation: Animation
-
-    private lateinit var fabLayout: LinearLayout
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         /*
@@ -55,6 +60,7 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
 
         setUpTestViewModel()
         setUpRecyclerView(view)
+        setUpProgressBar(view)
         setUpFloatingActionButton(view)
 
         receiveAllReptiles(view)
@@ -62,6 +68,11 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
         setFabVisibility(testViewModel.isFabChecked.value!!)
 
         return view
+    }
+
+    private fun setUpProgressBar(view: View) {
+        progressBar = view.findViewById(R.id.reptileListProgressBar)
+        progressBar.isIndeterminate = true
     }
 
     // --------------------- Functions for Testing ---------------- //
@@ -113,10 +124,11 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
     }
 
 
-    private fun receiveAllReptiles(view:View) {
+    private fun receiveAllReptiles(view: View) {
         testViewModel.reptileList.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (!snapshot.exists()) {
+                    progressBar.visibility = View.GONE
                     return
                 }
 
@@ -129,13 +141,15 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
                     }
                 }
                 reptileAdapter.setReptileList(list)
-
                 reptileAdapter.filter.filter(searchView.query)
                 // searchView.setQuery(searchView.query, true)
+
+                progressBar.visibility = View.GONE
             }
 
             override fun onCancelled(error: DatabaseError) {
                 makeToast(error.message)
+                progressBar.visibility = View.GONE
             }
         })
     }

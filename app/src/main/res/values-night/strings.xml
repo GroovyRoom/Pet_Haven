@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="add_trade_title_string">Title</string>
+    <string name="add_trade_price_string">Price</string>
+    <string name="add_trade_description_string">Description</string>
+    <string name="trade_post_reptile_name_string">Reptile Name</string>
+    <string name="trade_post_show_more_string">Show More</string>
+    <string name="trade_post_owner_name_string">Owner Name</string>
+    <string name="trade_post_date_string">Date</string>
+    <string name="trade_post_show_less_string">Show Less</string>
+    <string name="trade_post_contact_seller_string">Contact Seller</string>
+</resources>
