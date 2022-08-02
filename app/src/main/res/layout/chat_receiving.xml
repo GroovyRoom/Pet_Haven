@@ -18,7 +18,7 @@
         app:layout_constraintStart_toEndOf="@+id/imageView_receiving"
         app:layout_constraintTop_toTopOf="@+id/imageView_receiving" />
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageView_receiving"
         android:layout_width="50dp"
         android:layout_height="50dp"

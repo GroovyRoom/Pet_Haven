@@ -78,7 +78,7 @@ class ChatLogActivity : AppCompatActivity() {
                     Log.d(TAG, chatMessage.text)
 
                     if (chatMessage.fromId.compareTo(FirebaseAuth.getInstance().uid.toString()) == 0) {
-                        adapter.add(ChatToItem(chatMessage.text))
+                        adapter.add(ChatToItem(chatMessage.text, toUser!!))
                     } else {
                         adapter.add(ChatFromItem(chatMessage.text))
                     }
@@ -118,9 +118,13 @@ class ChatFromItem(val text: String): Item<ViewHolder>() {
     }
 }
 
-class ChatToItem(val text: String): Item<ViewHolder>() {
+class ChatToItem(val text: String, val user: User): Item<ViewHolder>() {
     override fun bind(viewHolder: ViewHolder, position: Int) {
         viewHolder.itemView.textView_sending.text = text
+
+        val uri = user.profileImageUrl
+        val targetImageView = viewHolder.itemView.imageView_receiving
+        Picasso.get().load(uri).into(targetImageView)
     }
 
     override fun getLayout(): Int {
