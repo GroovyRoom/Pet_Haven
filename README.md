@@ -68,7 +68,7 @@
 
 ## Thread Design Diagram
 
-![screenshot](https://i.imgur.com/TPs28o2.png)
+![screenshot](https://i.imgur.com/9yWdyVj.png)
 
 ## Show and Tell 1
 
