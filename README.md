@@ -27,7 +27,7 @@
 
 ## Idea Pitch
 
-[<img src="https://i.imgur.com/Qm1szsd.png" width="100%">](https://www.youtube.com/watch?v=0giwWqG9lPE)
+[<img src="https://i.imgur.com/w2b386l.jpg" width="100%">](https://www.youtube.com/watch?v=iXaYsT0vxoo)
 
 > **Note**
 > Click the Above Image to Watch our Idea Pitch!
