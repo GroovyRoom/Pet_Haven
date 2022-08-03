@@ -18,7 +18,7 @@
   <a href="#license">License</a> •
 </p>
 
-![screenshot](https://i.imgur.com/lEpWqoX.jpg](https://i.imgur.com/bO52MZp.png)
+![screenshot](https://i.imgur.com/bO52MZp.png)
 
 ## Idea Pitch
 
