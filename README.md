@@ -21,6 +21,8 @@
 ![screenshot](https://i.imgur.com/bO52MZp.png)
 ![screenshot](https://i.imgur.com/CfFlnnk.png)
 
+<h4 align="center">Reptile Haven help you to manage your reptils using smartphone and also help you to connect with reptile lovers!</h4>
+
 ## Idea Pitch
 
 [<img src="https://i.imgur.com/Qm1szsd.png" width="100%">](https://www.youtube.com/watch?v=0giwWqG9lPE)
