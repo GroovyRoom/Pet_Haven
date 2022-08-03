@@ -62,6 +62,7 @@ class TradeListRecyclerViewAdapter: RecyclerView.Adapter<TradeListRecyclerViewAd
             val currentUid = FirebaseAuth.getInstance().currentUser?.uid.toString()
             if (currentUid.compareTo(binding.tradePostUid.text.toString()) == 0) {
                 binding.tradePostContactSellerButton.setEnabled(false)
+                binding.tradePostContactSellerButton2.setEnabled(false)
             }
             post.let {
                 if (it.imgUri != null) {
