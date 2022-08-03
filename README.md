@@ -33,14 +33,14 @@
 > Click the Above Image to Watch our Idea Pitch!
 
 **Features**
-* Google Single-Sign-On for login and registering
-* Show your local pet onwers and pet and let user to send friend request
-* Help User to find the group of pet owners who share same animal
-* Getting user's current location and load the weather information when the user is going for dog walk.
-* Dark/Light mode
-* Posting text and images
-* Organizing meeting with other users
-* Searching local vets
+* Login and Registering using Firebase Database
+* Adding reptiles to the user’s reptile storage
+* Editing reptile profile such as, profile image, name, age, description
+* Create a trade post from reptile which other users can see
+* Editing trade post such as editing image, name, price, and description
+* Contacting other user by opening a chat session
+* Feeding time scheduler
+* Reptile’s weight growth graph
 
 ## Team Effort Breakdown
 
