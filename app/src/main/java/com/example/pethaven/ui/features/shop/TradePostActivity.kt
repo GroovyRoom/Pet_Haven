@@ -10,9 +10,12 @@ import com.bumptech.glide.Glide
 import com.example.pethaven.databinding.ActivityTradePostBinding
 import com.example.pethaven.domain.Post
 import com.example.pethaven.domain.Reptile
+import com.example.pethaven.domain.User
+import com.example.pethaven.ui.features.chat.ChatFragment
 import com.example.pethaven.ui.features.home.ReptileProfileViewModel
 import com.example.pethaven.util.AndroidExtensions.makeToast
 import com.example.pethaven.util.FactoryUtil
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import java.util.*
 
@@ -27,6 +30,7 @@ class TradePostActivity : AppCompatActivity() {
     private var valueEventListener: ValueEventListener? = null
     private lateinit var reptileProfileViewModel: ReptileProfileViewModel
     private var reptile: Reptile? = Reptile()
+    var postOwner: User? = null
 
 
     companion object {
@@ -42,6 +46,7 @@ class TradePostActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityTradePostBinding.inflate(layoutInflater)
+        fetchPostOwner()
         val view = binding.root
         setContentView(view)
         setUpViewModel()
@@ -52,6 +57,18 @@ class TradePostActivity : AppCompatActivity() {
         reptileKey = intent.getStringExtra(TRADE_REPTILE_KEY_TAG) ?: ""
         databaseReference = reptileProfileViewModel.getReptileFromCurrentUser(reptileKey)
         setupImage()
+    }
+
+    private fun fetchPostOwner() {
+        val uid = FirebaseAuth.getInstance().currentUser?.uid
+        val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
+        ref.addListenerForSingleValueEvent(object: ValueEventListener {
+            override fun onDataChange(p0: DataSnapshot) {
+                postOwner = p0.getValue(User::class.java)
+            }
+            override fun onCancelled(p0: DatabaseError) {
+            }
+        })
     }
 
 
@@ -66,6 +83,7 @@ class TradePostActivity : AppCompatActivity() {
                         rid = reptileKey,
                         reptileName = reptile!!.name,
                         imgUri = reptile!!.imgUri,
+                        ownerName = postOwner!!.username,
                         date = createDateString(),
                         title = title,
                         price = price,
