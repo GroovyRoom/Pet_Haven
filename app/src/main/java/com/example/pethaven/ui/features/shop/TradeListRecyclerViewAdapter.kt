@@ -14,6 +14,7 @@ import com.example.pethaven.domain.Post
 import com.example.pethaven.domain.User
 import com.example.pethaven.ui.features.chat.ChatFragment.Companion.USER_KEY
 import com.example.pethaven.ui.features.chat.ChatLogActivity
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -58,6 +59,10 @@ class TradeListRecyclerViewAdapter: RecyclerView.Adapter<TradeListRecyclerViewAd
             binding.tradePostOwnerNameEditText.setText(post.ownerName)
             binding.tradePostDescriptionEditText.setText(post.description)
             binding.tradePostUid.setText(post.uid)
+            val currentUid = FirebaseAuth.getInstance().currentUser?.uid.toString()
+            if (currentUid.compareTo(binding.tradePostUid.text.toString()) == 0) {
+                binding.tradePostContactSellerButton.setEnabled(false)
+            }
             post.let {
                 if (it.imgUri != null) {
                     Glide.with(context)
