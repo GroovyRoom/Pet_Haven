@@ -88,7 +88,7 @@
 
 ## Show and Tell 2
 
-[<img src="https://i.imgur.com/Ix98fsc.jpg" width="100%">](https://www.youtube.com/watch?v=sZKeqcwjy5w)
+[<img src="https://i.imgur.com/Ix98fsc.jpg" width="100%">](https://www.youtube.com/watch?v=WC0RDkU6vxI)
 
 > **Note**
 > Click the Above Image to Watch our Show and Tell 2 video!
