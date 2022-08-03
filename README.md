@@ -12,6 +12,7 @@
   <a href="#idea-pitch">Idea Pitch</a> •
   <a href="#team-effort-breakdown">Team Effort Breakdown</a> •
   <a href="#MVVM-Diagram">MVVM Diagram</a> •
+  <a href="#Thread-Design-Diagram">Thread Design Diagram</a> •
   <a href="#Show-and-Tell-1">Show and Tell 1</a> •
   <a href="#Show-and-Tell-2-Expectation">Show and Tell 2 Expectation</a> •
   <a href="#Show-and-Tell-2">Show and Tell 2</a> •
@@ -64,6 +65,10 @@
 ## MVVM Diagram
 
 ![screenshot](https://i.imgur.com/XhjIcda.png)
+
+## Thread Design Diagram
+
+![screenshot](https://i.imgur.com/BKRanzC.png)
 
 ## Show and Tell 1
 
