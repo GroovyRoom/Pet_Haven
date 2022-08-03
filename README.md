@@ -90,6 +90,9 @@
 
 [<img src="https://i.imgur.com/bCQQPMh.jpg" width="100%">](https://www.youtube.com/watch?v=lB19GH_32hc)
 
+> **Note**
+> Click the Above Image to Watch our Show and Tell 1 video!
+
 ## Final Submission Expectation
 
 * George will implement feeding time scheduler feature and search bar for trade list.
