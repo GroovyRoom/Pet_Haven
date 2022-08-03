@@ -59,6 +59,11 @@ class TradePostActivity : AppCompatActivity() {
         setupImage()
     }
 
+    override fun onDestroy() {
+        valueEventListener?.let { databaseReference.removeEventListener(it) }
+        super.onDestroy()
+    }
+
     private fun fetchPostOwner() {
         val uid = FirebaseAuth.getInstance().currentUser?.uid
         val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
