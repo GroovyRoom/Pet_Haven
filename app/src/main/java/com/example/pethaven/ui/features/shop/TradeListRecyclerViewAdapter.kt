@@ -121,7 +121,6 @@ class TradeListRecyclerViewAdapter: RecyclerView.Adapter<TradeListRecyclerViewAd
     }
 
     private fun fetchToUser(uid: kotlin.String, listener: OnGetDataListener) {
-        val uid = binding.tradePostUid.text
         val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
         ref.addListenerForSingleValueEvent(object: ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {
