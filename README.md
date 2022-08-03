@@ -6,7 +6,7 @@
   <br>
 </h1>
 
-<h4 align="center">Manage your reptiles, trade your reptiles, and connect with others!</h4>
+<h4 align="center">"Manage your reptiles, trade your reptiles, and connect with others!"</h4>
 
 <p align="center">
   <a href="#idea-pitch">Idea Pitch</a> •
@@ -24,7 +24,7 @@
 ![screenshot](https://i.imgur.com/bO52MZp.png)
 ![screenshot](https://i.imgur.com/CfFlnnk.png)
 
-<h4 align="center">Reptile Haven help you to manage your reptiles using smartphone and also help you to connect with fellow reptile lovers!</h4>
+<h4 align="center">"Reptile Haven help you to manage your reptiles using smartphone and also help you to connect with fellow reptile lovers!"</h4>
 
 ## Idea Pitch
 
