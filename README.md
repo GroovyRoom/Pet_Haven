@@ -1,12 +1,12 @@
 <h1 align="center">
   <br>
-  <a href="http://www.amitmerchant.com/electron-markdownify"><img src="https://i.imgur.com/bNBwXTR.png" alt="Markdownify" width="400"></a>
+  <a href="http://www.amitmerchant.com/electron-markdownify"><img src="https://i.imgur.com/5ozNvxD.png" alt="Markdownify" width="400"></a>
   <br>
-  Pet Haven
+  Reptile Haven
   <br>
 </h1>
 
-<h4 align="center">The Best Way to Connect with Your Local Pet Owners and Animal Friends!</h4>
+<h4 align="center">Manage your reptiles, trade your reptiles, and connect with others!</h4>
 
 <p align="center">
   <a href="#idea-pitch">Idea Pitch</a> •
