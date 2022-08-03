@@ -1,8 +1,12 @@
 package com.example.pethaven.ui.features.chat
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.speech.RecognizerIntent
 import android.util.Log
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import com.example.pethaven.R
 import com.example.pethaven.domain.ChatMessage
 import com.example.pethaven.domain.User
@@ -28,6 +32,8 @@ class ChatLogActivity : AppCompatActivity() {
     var toUser : User? = null
     val adapter = GroupAdapter<ViewHolder>()
 
+    private lateinit var speechLauncher: ActivityResultLauncher<Intent>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_log)
@@ -44,7 +50,21 @@ class ChatLogActivity : AppCompatActivity() {
             Log.d(TAG, "Attempt to send message....")
             performSendMessage()
         }
+
+/*        setUpSpeechLauncher()*/
     }
+
+/*    private fun setUpSpeechLauncher() {
+        speechLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == RESULT_OK && it.data != null) {
+                val data = it.data
+                edittext_chat_log.setText(
+                    edittext_chat_log.text.toString() +
+                    (data!!.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)?.get(0) ?: "")
+                )
+            }
+        }
+    }*/
 
     private fun performSendMessage() {
         // how do we actually send a message to firebase...
