@@ -95,7 +95,7 @@
 
 ## APK Download
 
-You can downlaod the latest APK for Android [here](https://www.dropbox.com/s/7cuh1o6ug18vihm/Pet_Haven.apk?dl=0).
+You can downlaod the latest APK for Android [here](https://www.dropbox.com/s/c1ma7xj0ykbz3mz/Reptile_Haven.apk?dl=0).
 
 ## License
 
