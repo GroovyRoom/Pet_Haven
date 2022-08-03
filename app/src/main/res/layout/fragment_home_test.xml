@@ -24,7 +24,6 @@
         app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/reptileSearchView"
-        android:visibility="gone"
         />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -34,7 +33,8 @@
         app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/reptileSearchView"
-        android:layout_marginTop="?attr/actionBarSize" />
+        android:layout_marginTop="?attr/actionBarSize"
+        android:visibility="gone"/>
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

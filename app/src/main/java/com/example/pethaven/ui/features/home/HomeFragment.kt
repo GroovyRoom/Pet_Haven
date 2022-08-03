@@ -46,13 +46,7 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
     private lateinit var traverseFromBottomFabAnimation: Animation
     private lateinit var traverseBottomFabAnimation: Animation
 
-
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        /*
-            George/Dense: Change the R.layout.fragment_home_test. I only used this to test the
-            reptileInfo activity
-         */
         val view =  inflater.inflate(R.layout.fragment_home_test, container, false)
         openFabAnimation = AnimationUtils.loadAnimation(requireActivity(), R.anim.anim_fab_open)
         closeFabAnimation = AnimationUtils.loadAnimation(requireActivity(), R.anim.anim_fab_close)
@@ -140,13 +134,11 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
         searchView = view.findViewById(R.id.reptileSearchView)
         searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String): Boolean {
-                println("debug: OnQueryTextSubmit called")
                 reptileInfoAdapter.filter.filter(query)
                 return false
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-                println("debug: OnQueryTextChanged")
                 reptileInfoAdapter.filter.filter(newText)
                 return true
             }
