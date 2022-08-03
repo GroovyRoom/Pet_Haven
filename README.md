@@ -14,6 +14,8 @@
   <a href="#MVVM-Diagram">MVVM Diagram</a> •
   <a href="#Show-and-Tell-1">Show and Tell 1</a> •
   <a href="#Show-and-Tell-2-Expectation">Show and Tell 2 Expectation</a> •
+  <a href="#Show-and-Tell-2">Show and Tell 2</a> •
+  <a href="#Final-Submission-Expectation">Final Submission Expectation</a> •
   <a href="#APK-Download">APK Download</a> •
   <a href="#license">License</a> •
 </p>
@@ -69,6 +71,19 @@
 > Click the Above Image to Watch our Show and Tell 1 video!
 
 ## Show and Tell 2 Expectation
+
+* All major UI will be implemented.
+* User will be able to send friend request to other user.
+* User will be able to create a group and join a group.
+* User will be able to see the close by users' activity though Google Map.
+* User will be able to post text and images.
+* User will be able to find local Vet through Google Map.
+
+## Show and Tell 2
+
+[<img src="https://i.imgur.com/Z0yApEs.png" width="100%">](https://www.youtube.com/watch?v=1KPYmbtO4n4)
+
+## Final Submission Expectation
 
 * All major UI will be implemented.
 * User will be able to send friend request to other user.
