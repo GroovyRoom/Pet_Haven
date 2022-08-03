@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.example.pethaven.databinding.TradeListItemBinding
 import com.example.pethaven.domain.Post
 import com.example.pethaven.domain.User
+import com.example.pethaven.ui.features.chat.ChatFragment
 import com.example.pethaven.ui.features.chat.ChatLogActivity
 import com.example.pethaven.ui.features.chat.NewChatActivity
 import com.google.android.gms.tasks.OnCompleteListener
@@ -86,6 +87,16 @@ class TradeListRecyclerViewAdapter: RecyclerView.Adapter<TradeListRecyclerViewAd
                 val uid = binding.tradePostUid.text.toString()
                 val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
                 var user: User? = null
+                ref.addListenerForSingleValueEvent(object: ValueEventListener {
+                    override fun onDataChange(p0: DataSnapshot) {
+                        if (!p0.exists()) return
+                        user = p0.getValue(User::class.java)
+                    }
+
+                    override fun onCancelled(p0: DatabaseError) {
+                    }
+
+                })
                 val intent = Intent(context, ChatLogActivity::class.java)
                 intent.putExtra(NewChatActivity.USER_KEY, user)
                 context.startActivity(intent)
