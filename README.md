@@ -83,7 +83,7 @@
 
 ## Show and Tell 2
 
-[<img src="https://i.imgur.com/Z0yApEs.png" width="100%">](https://www.youtube.com/watch?v=1KPYmbtO4n4)
+[<img src="https://i.imgur.com/Z0yApEs.png" width="100%">](https://www.youtube.com/watch?v=lB19GH_32hc)
 
 ## Final Submission Expectation
 
