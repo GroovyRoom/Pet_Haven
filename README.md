@@ -19,6 +19,7 @@
 </p>
 
 ![screenshot](https://i.imgur.com/bO52MZp.png)
+![screenshot](https://i.imgur.com/CfFlnnk.png)
 
 ## Idea Pitch
 
