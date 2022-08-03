@@ -72,7 +72,7 @@
 
 ## Show and Tell 1
 
-[<img src="https://i.imgur.com/w2b386l.jpg" width="100%">](https://www.youtube.com/watch?v=iXaYsT0vxoo)
+[<img src="https://i.imgur.com/Z0yApEs.png" width="100%">](https://www.youtube.com/watch?v=iXaYsT0vxoo)
 
 > **Note**
 > Click the Above Image to Watch our Show and Tell 1 video!
@@ -88,7 +88,7 @@
 
 ## Show and Tell 2
 
-[<img src="https://i.imgur.com/Z0yApEs.png" width="100%">](https://www.youtube.com/watch?v=sZKeqcwjy5w)
+[<img src="https://i.imgur.com/bCQQPMh.jpg" width="100%">](https://www.youtube.com/watch?v=sZKeqcwjy5w)
 
 > **Note**
 > Click the Above Image to Watch our Show and Tell 2 video!
