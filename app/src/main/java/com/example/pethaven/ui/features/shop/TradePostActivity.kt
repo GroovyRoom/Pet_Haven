@@ -131,7 +131,7 @@ class TradePostActivity : AppCompatActivity() {
         val month = calendar.getDisplayName(
                 Calendar.MONTH,
                 Calendar.SHORT_FORMAT,
-                Locale.getDefault()
+                Locale.US
         )
         val date = calendar.get(Calendar.DAY_OF_MONTH)
         val year = calendar.get(Calendar.YEAR)
