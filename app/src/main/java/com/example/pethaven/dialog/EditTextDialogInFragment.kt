@@ -17,7 +17,7 @@ import com.example.pethaven.R
 /**
  * Dialog Fragment supporting Edit Text
  */
-class EditTextDialog : DialogFragment(), DialogInterface.OnClickListener {
+class EditTextDialogInFragment : DialogFragment(), DialogInterface.OnClickListener {
     private lateinit var editText: EditText
     private var editListener: OnEditClickListener? = null
 
@@ -28,8 +28,9 @@ class EditTextDialog : DialogFragment(), DialogInterface.OnClickListener {
         private const val HINT_BUNDLE = "Hint key for Bundle"
 
         //Static method to pass arguments to this fragment
-        fun createInstance(title: String, inputType: Int, text: String? = null, hint: String? = null) : EditTextDialog {
-            val editDialog = EditTextDialog()
+        fun createInstance(title: String, inputType: Int, text: String? = null, hint: String? = null) :
+                EditTextDialogInFragment {
+            val editDialog = EditTextDialogInFragment()
             val args = Bundle()
 
             args.putString(TITLE_BUNDLE, title)
@@ -43,7 +44,7 @@ class EditTextDialog : DialogFragment(), DialogInterface.OnClickListener {
     }
 
     interface OnEditClickListener{
-        fun onEditClick(dialog: EditTextDialog, item: Int, text: String)
+        fun onEditClick(dialog: EditTextDialogInFragment, item: Int, text: String)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -75,7 +76,7 @@ class EditTextDialog : DialogFragment(), DialogInterface.OnClickListener {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        editListener = requireActivity() as? OnEditClickListener
+        editListener = targetFragment as? OnEditClickListener
         println("debug: editListener is ${if (editListener == null) "null" else "not null"}")
     }
 
