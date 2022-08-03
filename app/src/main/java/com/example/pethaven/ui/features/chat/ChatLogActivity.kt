@@ -11,10 +11,7 @@ import com.example.pethaven.R
 import com.example.pethaven.domain.ChatMessage
 import com.example.pethaven.domain.User
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.ChildEventListener
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
@@ -41,16 +38,29 @@ class ChatLogActivity : AppCompatActivity() {
 
         recyclerview_chat_log.adapter = adapter
 
-        toUser = intent.getParcelableExtra<User>(NewChatActivity.USER_KEY)
+        var uid = intent.getStringExtra("uid").toString()
 
-        supportActionBar?.title = toUser?.username
+        println("Debug UID: " + uid)
+        val ref = FirebaseDatabase.getInstance().getReference().child("users").child(uid)
+                var user: User? = null
+                ref.addListenerForSingleValueEvent(object: ValueEventListener {
+                    override fun onDataChange(p0: DataSnapshot) {
+                        toUser = p0.getValue(User::class.java)
+                        println("Debug get user uid: " + toUser.toString())
+                    }
 
-        listenForMessages()
+                    override fun onCancelled(p0: DatabaseError) {
+                    }
+
+                })
 
         send_button_chat_log.setOnClickListener {
             Log.d(TAG, "Attempt to send message....")
             performSendMessage()
         }
+
+        supportActionBar?.title = toUser?.username
+        listenForMessages()
 
         chatMicButton.setOnClickListener {
             val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {

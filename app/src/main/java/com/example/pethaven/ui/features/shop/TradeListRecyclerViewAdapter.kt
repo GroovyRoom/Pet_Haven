@@ -85,20 +85,8 @@ class TradeListRecyclerViewAdapter: RecyclerView.Adapter<TradeListRecyclerViewAd
 
             binding.tradePostContactSellerButton.setOnClickListener {
                 val uid = binding.tradePostUid.text.toString()
-                val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
-                var user: User? = null
-                ref.addListenerForSingleValueEvent(object: ValueEventListener {
-                    override fun onDataChange(p0: DataSnapshot) {
-                        if (!p0.exists()) return
-                        user = p0.getValue(User::class.java)
-                    }
-
-                    override fun onCancelled(p0: DatabaseError) {
-                    }
-
-                })
                 val intent = Intent(context, ChatLogActivity::class.java)
-                intent.putExtra(NewChatActivity.USER_KEY, user)
+                intent.putExtra("uid", uid)
                 context.startActivity(intent)
             }
         }
