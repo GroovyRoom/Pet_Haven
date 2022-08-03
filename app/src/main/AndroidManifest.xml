@@ -17,7 +17,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PetHaven"
         tools:targetApi="31">
-        <activity android:name=".ui.features.chat.NewChatActivity"></activity>
         <activity android:name=".ui.features.chat.ChatLogActivity"></activity>
         <activity
             android:name=".ui.features.home.ReptileProfileActivity"

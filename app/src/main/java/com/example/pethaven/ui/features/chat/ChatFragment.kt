@@ -21,7 +21,6 @@ import kotlinx.android.synthetic.main.latest_message_row.view.*
 class ChatFragment : Fragment() {
 
     companion object {
-        var currentUser: User? = null
         val USER_KEY = "USER_KEY"
     }
 
@@ -49,7 +48,6 @@ class ChatFragment : Fragment() {
         }
 
         checkUserLoggedIn()
-        fetchCurrentUser()
         listenForLatestMessages()
         return view
     }
@@ -131,18 +129,6 @@ class ChatFragment : Fragment() {
 
     }
 
-    private fun fetchCurrentUser() {
-        val uid = FirebaseAuth.getInstance().currentUser?.uid
-        val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
-        ref.addListenerForSingleValueEvent(object: ValueEventListener {
-            override fun onDataChange(p0: DataSnapshot) {
-                ChatFragment.currentUser = p0.getValue(User::class.java)
-            }
-            override fun onCancelled(p0: DatabaseError) {
-            }
-        })
-    }
-
     // Please work
     private fun checkUserLoggedIn() {
         val uid = FirebaseAuth.getInstance().currentUser?.uid
@@ -152,15 +138,5 @@ class ChatFragment : Fragment() {
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         }
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item?.itemId) {
-            R.id.menu_new_message -> {
-                val intent = Intent(requireActivity(), NewChatActivity::class.java)
-                startActivity(intent)
-            }
-        }
-        return super.onOptionsItemSelected(item)
     }
 }

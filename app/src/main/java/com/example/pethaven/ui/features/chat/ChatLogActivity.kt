@@ -11,10 +11,7 @@ import com.example.pethaven.R
 import com.example.pethaven.domain.ChatMessage
 import com.example.pethaven.domain.User
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.ChildEventListener
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
@@ -27,6 +24,7 @@ class ChatLogActivity : AppCompatActivity() {
 
     companion object {
         val TAG = "ChatLog"
+        var currentUser: User? = null
     }
 
     var toUser : User? = null
@@ -37,6 +35,7 @@ class ChatLogActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_log)
+        fetchCurrentUser()
         setUpSpeechLauncher()
 
         recyclerview_chat_log.adapter = adapter
@@ -60,6 +59,18 @@ class ChatLogActivity : AppCompatActivity() {
             }
             speechLauncher.launch(intent)
         }
+    }
+
+    private fun fetchCurrentUser() {
+        val uid = FirebaseAuth.getInstance().currentUser?.uid
+        val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
+        ref.addListenerForSingleValueEvent(object: ValueEventListener {
+            override fun onDataChange(p0: DataSnapshot) {
+                currentUser = p0.getValue(User::class.java)
+            }
+            override fun onCancelled(p0: DatabaseError) {
+            }
+        })
     }
 
     private fun setUpSpeechLauncher() {
@@ -122,7 +133,7 @@ class ChatLogActivity : AppCompatActivity() {
                     Log.d(TAG, chatMessage.text)
 
                     if (chatMessage.fromId.compareTo(FirebaseAuth.getInstance().uid.toString()) == 0) {
-                        val currentUser = ChatFragment.currentUser
+                        val currentUser = currentUser
                         adapter.add(ChatToItem(chatMessage.text, currentUser!!))
                     } else {
                         adapter.add(ChatFromItem(chatMessage.text, toUser!!))

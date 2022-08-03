@@ -6,17 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pethaven.databinding.FragmentTradeListBinding
 import com.example.pethaven.domain.PostViewModel
-import com.example.pethaven.ui.features.chat.ChatLogActivity
-import com.example.pethaven.ui.features.chat.NewChatActivity
-import com.example.pethaven.ui.features.chat.UserItem
-import kotlinx.android.synthetic.main.trade_list_item.*
-import kotlinx.android.synthetic.main.trade_list_item.view.*
+
 
 class TradeListFragment : Fragment() {
     private var _binding: FragmentTradeListBinding? = null
