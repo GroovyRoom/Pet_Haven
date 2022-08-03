@@ -3,6 +3,7 @@ package com.example.pethaven.ui.features.chat
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.pethaven.R
@@ -15,6 +16,7 @@ import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
+import kotlinx.android.synthetic.main.fragment_chat.*
 import kotlinx.android.synthetic.main.fragment_chat.view.*
 import kotlinx.android.synthetic.main.latest_message_row.view.*
 
@@ -25,6 +27,7 @@ class ChatFragment : Fragment() {
     }
 
     val adapter = GroupAdapter<ViewHolder>()
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,11 +35,14 @@ class ChatFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_chat, container, false)
+        setUpProgressBar(view)
+
         view.recyclerview_latest_messages.adapter = adapter
         view.recyclerview_latest_messages.addItemDecoration(
             DividerItemDecoration(requireActivity(),
                 DividerItemDecoration.VERTICAL)
         )
+
 
         adapter.setOnItemClickListener {item, view ->
             val intent = Intent(requireActivity(), ChatLogActivity::class.java)
@@ -50,6 +56,11 @@ class ChatFragment : Fragment() {
         checkUserLoggedIn()
         listenForLatestMessages()
         return view
+    }
+
+    private fun setUpProgressBar(view: View) {
+        progressBar = view.findViewById(R.id.chatListProgressBar)
+        progressBar.isIndeterminate = true
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,6 +80,17 @@ class ChatFragment : Fragment() {
     private fun listenForLatestMessages() {
         val fromId = FirebaseAuth.getInstance().uid
         val ref = FirebaseDatabase.getInstance().getReference("/latest-messages/$fromId")
+
+        ref.addValueEventListener(object: ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                progressBar.visibility = View.GONE
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                progressBar.visibility = View.GONE
+            }
+
+        })
         ref.addChildEventListener(object: ChildEventListener {
             override fun onChildAdded(p0: DataSnapshot, p1: String?) {
                 val chatMessage = p0.getValue(ChatMessage::class.java) ?: return
@@ -94,7 +116,7 @@ class ChatFragment : Fragment() {
         })
     }
 
-    class LatestMessageRow(val chatMessage: ChatMessage): Item<ViewHolder>() {
+    inner class LatestMessageRow(val chatMessage: ChatMessage): Item<ViewHolder>() {
         var chatPartnerUser: User? = null
 
         override fun bind(viewHolder: ViewHolder, position: Int) {
@@ -116,7 +138,6 @@ class ChatFragment : Fragment() {
                     Picasso.get().load(chatPartnerUser?.profileImageUrl).into(targetImageView)
                 }
                 override fun onCancelled(p0: DatabaseError) {
-
                 }
             })
 

@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,6 +22,8 @@ class TradeListFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: TradeListRecyclerViewAdapter
 
+    private lateinit var progressBar: ProgressBar
+
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -28,6 +31,7 @@ class TradeListFragment : Fragment() {
     ): View {
 
         _binding = FragmentTradeListBinding.inflate(inflater, container, false)
+        setUpProgressBar()
 
         return binding.root
     }
@@ -35,6 +39,10 @@ class TradeListFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun setUpProgressBar() {
+        binding.tradeListProgressBar.isIndeterminate = true
     }
 
     ///------------------------ Initializing Recycler View and ViewModel -----------------------///
@@ -50,6 +58,7 @@ class TradeListFragment : Fragment() {
 
         // Check if there is a new post added to the list and notify the adapter.
         tradeListViewModel.allPosts.observe(viewLifecycleOwner) {
+            binding.tradeListProgressBar.visibility = View.GONE
             adapter.updatePostList(it)
         }
     }

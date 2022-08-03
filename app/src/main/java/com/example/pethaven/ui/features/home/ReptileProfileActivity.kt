@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
@@ -41,6 +43,7 @@ class ReptileProfileActivity : AppCompatActivity() {
     private lateinit var descTextView: TextView
     private lateinit var reptileImgView: ImageView
 
+    private lateinit var progressBar: ProgressBar
     private lateinit var postFab: FloatingActionButton
 
     private lateinit var databaseReference: DatabaseReference
@@ -49,6 +52,7 @@ class ReptileProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reptile_profile)
+        setUpProgressBar()
         setUpTextView()
         setUpViewModel()
         setUpFloatingActionButton()
@@ -58,6 +62,7 @@ class ReptileProfileActivity : AppCompatActivity() {
         valueEventListener = databaseReference.addValueEventListener(object: ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (!snapshot.exists()) {
+                    progressBar.visibility = View.GONE
                     return
                 }
                 val reptile = snapshot.getValue(Reptile::class.java)
@@ -74,6 +79,7 @@ class ReptileProfileActivity : AppCompatActivity() {
                             .into(reptileImgView)
                     }
                 }
+                progressBar.visibility = View.GONE
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -81,6 +87,11 @@ class ReptileProfileActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+    private fun setUpProgressBar() {
+        progressBar = findViewById(R.id.reptileInfoProgessBar)
+        progressBar.isIndeterminate = true
     }
 
     private fun setUpFloatingActionButton() {

@@ -55,10 +55,15 @@
         <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/activity_reptile_profile.xml" value="0.268" />
         <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/activity_trade_post.xml" value="0.3" />
         <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/adapter_reptile_info.xml" value="0.11614583333333334" />
+        <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/fragment_chat.xml" value="0.1628901239846088" />
         <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/fragment_home.xml" value="0.17864583333333334" />
         <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/fragment_home_test.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/fragment_profile.xml" value="0.1628901239846088" />
+        <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/fragment_trade_list.xml" value="0.1628901239846088" />
         <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/fragment_trade_post.xml" value="0.17864583333333334" />
+        <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/list_reptile_collection.xml" value="0.13467293715262932" />
+        <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/trade_list_item.xml" value="0.13467293715262932" />
+        <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/user_chat_row.xml" value="0.13467293715262932" />
         <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/menu/home_menu.xml" value="0.146875" />
         <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/menu/menu_edit_reptile.xml" value="0.17229585292860197" />
         <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/menu/menu_reptile_info.xml" value="0.1628901239846088" />
