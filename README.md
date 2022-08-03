@@ -68,7 +68,7 @@
 
 ## Thread Design Diagram
 
-![screenshot](https://i.imgur.com/BKRanzC.png)
+![screenshot](https://i.imgur.com/TPs28o2.png)
 
 ## Show and Tell 1
 
@@ -88,7 +88,7 @@
 
 ## Show and Tell 2
 
-[<img src="https://i.imgur.com/bCQQPMh.jpg" width="100%">](https://www.youtube.com/watch?v=sZKeqcwjy5w)
+[<img src="https://i.imgur.com/Ix98fsc.jpg" width="100%">](https://www.youtube.com/watch?v=sZKeqcwjy5w)
 
 > **Note**
 > Click the Above Image to Watch our Show and Tell 2 video!
