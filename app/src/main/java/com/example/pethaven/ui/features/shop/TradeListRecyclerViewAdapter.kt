@@ -1,6 +1,7 @@
 package com.example.pethaven.ui.features.shop
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,15 @@ import androidx.transition.TransitionManager
 import com.bumptech.glide.Glide
 import com.example.pethaven.databinding.TradeListItemBinding
 import com.example.pethaven.domain.Post
+import com.example.pethaven.domain.User
+import com.example.pethaven.ui.features.chat.ChatLogActivity
+import com.example.pethaven.ui.features.chat.NewChatActivity
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.database.*
+import java.lang.String
+import kotlin.Int
+import kotlin.let
+
 
 class TradeListRecyclerViewAdapter: RecyclerView.Adapter<TradeListRecyclerViewAdapter.ViewHolder>() {
 
@@ -46,7 +56,9 @@ class TradeListRecyclerViewAdapter: RecyclerView.Adapter<TradeListRecyclerViewAd
             binding.tradePostReptileNameEditText.setText(post.reptileName)
             binding.tradePostPriceEditText.setText(post.price.toString())
             binding.tradePostDateEditText.setText(post.date)
+            binding.tradePostOwnerNameEditText.setText(post.ownerName)
             binding.tradePostDescriptionEditText.setText(post.description)
+            binding.tradePostUid.setText(post.uid)
             post.let {
                 if (it.imgUri != null) {
                     Glide.with(context)
@@ -68,7 +80,15 @@ class TradeListRecyclerViewAdapter: RecyclerView.Adapter<TradeListRecyclerViewAd
                 TransitionManager.beginDelayedTransition(binding.root, AutoTransition())
                 binding.tradePostExpandable.visibility = View.GONE
                 binding.showLessView.visibility = View.VISIBLE
+            }
 
+            binding.tradePostContactSellerButton.setOnClickListener {
+                val uid = binding.tradePostUid.text.toString()
+                val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
+                var user: User? = null
+                val intent = Intent(context, ChatLogActivity::class.java)
+                intent.putExtra(NewChatActivity.USER_KEY, user)
+                context.startActivity(intent)
             }
         }
     }

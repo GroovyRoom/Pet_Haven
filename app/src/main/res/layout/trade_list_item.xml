@@ -159,6 +159,13 @@
             </LinearLayout>
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/trade_post_uid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:text="" />
+
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>
