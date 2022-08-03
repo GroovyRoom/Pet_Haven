@@ -87,12 +87,11 @@
 
 ## Final Submission Expectation
 
-* All major UI will be implemented.
-* User will be able to send friend request to other user.
-* User will be able to create a group and join a group.
-* User will be able to see the close by users' activity though Google Map.
-* User will be able to post text and images.
-* User will be able to find local Vet through Google Map.
+* George will implement feeding time scheduler feature and search bar for trade list.
+* Jason will implement displaying time stamp for the chat messages and chat notification feature.
+* Larry will work on dynamic UI of MainActivity and improve the overall UI.
+* Xinjiang will work on implementing privacy setting for the user.
+* Surat will implement the reptile growth graph feature.
 
 ## APK Download
 
