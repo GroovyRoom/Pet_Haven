@@ -10,6 +10,10 @@ import android.widget.EditText
 import androidx.fragment.app.DialogFragment
 import com.example.pethaven.R
 
+
+/*
+    From George Andreas MyRuns
+ */
 /**
  * Dialog Fragment supporting Edit Text
  */
@@ -72,6 +76,7 @@ class EditTextDialog : DialogFragment(), DialogInterface.OnClickListener {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         editListener = requireActivity() as? OnEditClickListener
+        println("debug: editListener is ${if (editListener == null) "null" else "not null"}")
     }
 
     override fun onClick(dialog: DialogInterface?, item: Int) {

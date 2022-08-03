@@ -20,6 +20,9 @@ import com.example.pethaven.util.BitmapUtil
 import com.example.pethaven.util.Permissions
 import java.io.File
 
+/*
+    From George Andreas MyRuns
+ */
 /**
  * Dialog Fragment supporting camera capture and gallery image
  **/

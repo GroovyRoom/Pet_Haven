@@ -103,7 +103,9 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_edit_reptile, menu)
+        if (isEditMode) {
+            menuInflater.inflate(R.menu.menu_edit_reptile, menu)
+        }
         return super.onCreateOptionsMenu(menu)
     }
 
