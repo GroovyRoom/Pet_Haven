@@ -98,6 +98,19 @@ class TradeListRecyclerViewAdapter: RecyclerView.Adapter<TradeListRecyclerViewAd
                         }
                     })
             }
+
+            binding.tradePostContactSellerButton2.setOnClickListener {
+                val uid = binding.tradePostUid.text.toString()
+
+                fetchToUser(uid,
+                    object : OnGetDataListener {
+                        override fun onSuccess(dataSnapshotValue: User?) {
+                            val intent = Intent(context, ChatLogActivity::class.java)
+                            intent.putExtra(USER_KEY, dataSnapshotValue)
+                            context.startActivity(intent)
+                        }
+                    })
+            }
         }
     }
 
