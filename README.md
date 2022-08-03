@@ -6,7 +6,7 @@
   <br>
 </h1>
 
-<h4 align="center">"Manage your reptiles, trade your reptiles, and connect with others!"</h4>
+<h4 align="center">Manage your reptiles, trade your reptiles, and connect with others!</h4>
 
 <p align="center">
   <a href="#idea-pitch">Idea Pitch</a> •
