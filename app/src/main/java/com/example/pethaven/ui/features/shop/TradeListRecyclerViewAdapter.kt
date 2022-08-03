@@ -14,7 +14,6 @@ import com.example.pethaven.domain.Post
 import com.example.pethaven.domain.User
 import com.example.pethaven.ui.features.chat.ChatFragment.Companion.USER_KEY
 import com.example.pethaven.ui.features.chat.ChatLogActivity
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
