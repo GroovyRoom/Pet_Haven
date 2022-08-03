@@ -12,14 +12,13 @@ import com.bumptech.glide.Glide
 import com.example.pethaven.databinding.TradeListItemBinding
 import com.example.pethaven.domain.Post
 import com.example.pethaven.domain.User
-import com.example.pethaven.ui.features.chat.ChatFragment
+import com.example.pethaven.ui.features.chat.ChatFragment.Companion.USER_KEY
 import com.example.pethaven.ui.features.chat.ChatLogActivity
-import com.example.pethaven.ui.features.chat.NewChatActivity
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.database.*
-import java.lang.String
-import kotlin.Int
-import kotlin.let
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 
 class TradeListRecyclerViewAdapter: RecyclerView.Adapter<TradeListRecyclerViewAdapter.ViewHolder>() {
@@ -85,11 +84,35 @@ class TradeListRecyclerViewAdapter: RecyclerView.Adapter<TradeListRecyclerViewAd
 
             binding.tradePostContactSellerButton.setOnClickListener {
                 val uid = binding.tradePostUid.text.toString()
-                val intent = Intent(context, ChatLogActivity::class.java)
-                intent.putExtra("uid", uid)
-                context.startActivity(intent)
+
+                fetchToUser(uid,
+                    object : OnGetDataListener {
+                        override fun onSuccess(dataSnapshotValue: User?) {
+                            val intent = Intent(context, ChatLogActivity::class.java)
+                            intent.putExtra(USER_KEY, dataSnapshotValue)
+                            context.startActivity(intent)
+                        }
+                    })
             }
         }
+    }
+
+    interface OnGetDataListener {
+        //this is for callbacks
+        fun onSuccess(dataSnapshotValue: User?)
+    }
+
+    private fun fetchToUser(uid: kotlin.String, listener: OnGetDataListener) {
+        val uid = binding.tradePostUid.text
+        val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
+        ref.addListenerForSingleValueEvent(object: ValueEventListener {
+            override fun onDataChange(p0: DataSnapshot) {
+                listener.onSuccess(p0.getValue(User::class.java));
+            }
+            override fun onCancelled(p0: DatabaseError) {
+            }
+
+        })
     }
 
     fun updatePostList(postList: List<Post>) {

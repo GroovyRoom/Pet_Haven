@@ -11,7 +11,10 @@ import com.example.pethaven.R
 import com.example.pethaven.domain.ChatMessage
 import com.example.pethaven.domain.User
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.*
+import com.google.firebase.database.ChildEventListener
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
 import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
@@ -38,29 +41,17 @@ class ChatLogActivity : AppCompatActivity() {
 
         recyclerview_chat_log.adapter = adapter
 
-        var uid = intent.getStringExtra("uid").toString()
+        toUser = intent.getParcelableExtra<User>(ChatFragment.USER_KEY)
+        println("debug: " + toUser?.uid)
 
-        println("Debug UID: " + uid)
-        val ref = FirebaseDatabase.getInstance().getReference().child("users").child(uid)
-                var user: User? = null
-                ref.addListenerForSingleValueEvent(object: ValueEventListener {
-                    override fun onDataChange(p0: DataSnapshot) {
-                        toUser = p0.getValue(User::class.java)
-                        println("Debug get user uid: " + toUser.toString())
-                    }
+        supportActionBar?.title = toUser?.username
 
-                    override fun onCancelled(p0: DatabaseError) {
-                    }
-
-                })
+        listenForMessages()
 
         send_button_chat_log.setOnClickListener {
             Log.d(TAG, "Attempt to send message....")
             performSendMessage()
         }
-
-        supportActionBar?.title = toUser?.username
-        listenForMessages()
 
         chatMicButton.setOnClickListener {
             val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
@@ -91,7 +82,7 @@ class ChatLogActivity : AppCompatActivity() {
         }
 
         val fromId = FirebaseAuth.getInstance().uid
-        val user = intent.getParcelableExtra<User>(NewChatActivity.USER_KEY)
+        val user = intent.getParcelableExtra<User>(ChatFragment.USER_KEY)
         val toId = user?.uid
 
         if (fromId == null) return

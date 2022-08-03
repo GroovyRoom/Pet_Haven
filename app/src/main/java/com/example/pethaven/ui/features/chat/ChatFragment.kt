@@ -22,6 +22,7 @@ class ChatFragment : Fragment() {
 
     companion object {
         var currentUser: User? = null
+        val USER_KEY = "USER_KEY"
     }
 
     val adapter = GroupAdapter<ViewHolder>()
@@ -43,15 +44,13 @@ class ChatFragment : Fragment() {
 
             val row = item as ChatFragment.LatestMessageRow
             row.chatPartnerUser
-            intent.putExtra(NewChatActivity.USER_KEY, row.chatPartnerUser)
+            intent.putExtra(USER_KEY, row.chatPartnerUser)
             startActivity(intent)
         }
 
-        listenForLatestMessages()
-
-        fetchCurrentUser()
-
         checkUserLoggedIn()
+        fetchCurrentUser()
+        listenForLatestMessages()
         return view
     }
 
@@ -139,10 +138,8 @@ class ChatFragment : Fragment() {
             override fun onDataChange(p0: DataSnapshot) {
                 ChatFragment.currentUser = p0.getValue(User::class.java)
             }
-
             override fun onCancelled(p0: DatabaseError) {
             }
-
         })
     }
 
@@ -165,10 +162,5 @@ class ChatFragment : Fragment() {
             }
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.nav_menu, menu)
     }
 }
