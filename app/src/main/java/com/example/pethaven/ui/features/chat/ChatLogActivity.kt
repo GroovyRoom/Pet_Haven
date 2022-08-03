@@ -37,6 +37,7 @@ class ChatLogActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_log)
+        setUpSpeechLauncher()
 
         recyclerview_chat_log.adapter = adapter
 
@@ -51,10 +52,16 @@ class ChatLogActivity : AppCompatActivity() {
             performSendMessage()
         }
 
-/*        setUpSpeechLauncher()*/
+        chatMicButton.setOnClickListener {
+            val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+                putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+                putExtra(RecognizerIntent.EXTRA_PROMPT, "Start Speaking")
+            }
+            speechLauncher.launch(intent)
+        }
     }
 
-/*    private fun setUpSpeechLauncher() {
+    private fun setUpSpeechLauncher() {
         speechLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == RESULT_OK && it.data != null) {
                 val data = it.data
@@ -64,7 +71,7 @@ class ChatLogActivity : AppCompatActivity() {
                 )
             }
         }
-    }*/
+    }
 
     private fun performSendMessage() {
         // how do we actually send a message to firebase...

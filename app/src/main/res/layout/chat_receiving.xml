@@ -43,14 +43,4 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="30dp"
-        android:layout_height="wrap_content"
-        android:paddingTop="30dp"
-        app:srcCompat="@drawable/ic_mic"
-        app:layout_constraintStart_toEndOf="@+id/textView_receiving"
-        app:layout_constraintRight_toRightOf="@+id/textView_receiving"
-        tools:ignore="MissingConstraints" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
