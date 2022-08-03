@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/img_reptile_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerInside"
+        android:src="@drawable/empty_box" />
+    <Button
+        android:id="@+id/btn_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/img_reptile_box"
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="10dp"
+        android:visibility="invisible"
+        android:enabled="false"/>
+    <Button
+        android:id="@+id/btn_mid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignBottom="@+id/img_reptile_box"
+        android:layout_marginBottom="10dp"
+        android:visibility="invisible"
+        android:enabled="false"/>
+    <Button
+        android:id="@+id/btn_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@+id/img_reptile_box"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="10dp"
+        android:visibility="invisible"
+        android:enabled="false"/>
+
+</RelativeLayout>
