@@ -5,18 +5,19 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Filter
-import android.widget.Filterable
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.AutoTransition
 import androidx.transition.TransitionManager
 import com.bumptech.glide.Glide
+import com.example.pethaven.R
 import com.example.pethaven.databinding.TradeListItemBinding
 import com.example.pethaven.domain.Post
 import com.example.pethaven.domain.Reptile
 import com.example.pethaven.domain.User
 import com.example.pethaven.ui.features.chat.ChatFragment.Companion.USER_KEY
 import com.example.pethaven.ui.features.chat.ChatLogActivity
+import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -24,16 +25,13 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
 
-class TradeListRecyclerViewAdapter(var postList: ArrayList<Post>)
-    : RecyclerView.Adapter<TradeListRecyclerViewAdapter.ViewHolder>()
+class TradeTestAdapter(var context: Context)
+    : RecyclerView.Adapter<TradeTestAdapter.ViewHolder>()
     , Filterable {
 
-    private lateinit var binding: TradeListItemBinding
     private lateinit var listener: Listener
-//    private var postList: ArrayList<Post> = ArrayList()
+    private var postList: ArrayList<Post> = ArrayList()
     private var postListAll = ArrayList<Post>(postList)
-
-    private lateinit var context: Context
 
     interface Listener {
         fun onClickContactSeller(position: Int)
@@ -62,22 +60,13 @@ class TradeListRecyclerViewAdapter(var postList: ArrayList<Post>)
         override fun publishResults(constraint: CharSequence, result: FilterResults)  {
             postList.clear()
             postList.addAll(result.values as ArrayList<Post>)
-            for (post in postList) {
-                println("debug: post price: ${post.price}")
-                println("debug: post desc: ${post.description}")
-            }
             notifyDataSetChanged()
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        binding = TradeListItemBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-        )
-        context = parent.context
-        return ViewHolder(binding)
+        val view = LayoutInflater.from(context).inflate(R.layout.trade_list_item, parent, false)
+        return ViewHolder(view, parent)
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
@@ -89,47 +78,64 @@ class TradeListRecyclerViewAdapter(var postList: ArrayList<Post>)
         return postList.size
     }
 
-    inner class ViewHolder(binding: TradeListItemBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(private val itemView: View, private val parent: ViewGroup)
+        : RecyclerView.ViewHolder(itemView) {
+
+        var postNameView: TextInputEditText = itemView.findViewById(R.id.trade_post_reptile_name_edit_text)
+        var postPriceView: TextInputEditText = itemView.findViewById(R.id.trade_post_price_edit_text)
+        var postDateView: TextInputEditText = itemView.findViewById(R.id.trade_post_date_edit_text)
+        var postOwnerView: TextInputEditText = itemView.findViewById(R.id.trade_post_owner_name_edit_text)
+        var postDescriptionView: TextInputEditText = itemView.findViewById(R.id.trade_post_description_edit_text)
+        var postImageView: ImageView = itemView.findViewById(R.id.editReptileImg)
+
+        var showLessView: LinearLayout = itemView.findViewById(R.id.show_less_view)
+        var postExpandable: LinearLayout = itemView.findViewById(R.id.trade_post_expandable)
+
+        var showMoreButton: Button = itemView.findViewById(R.id.trade_post_show_more_button)
+        var showLessButton: Button = itemView.findViewById(R.id.trade_post_show_less_button)
+
+        var postUidView: TextView = itemView.findViewById(R.id.trade_post_uid)
+        var postSellerButton1: Button = itemView.findViewById(R.id.trade_post_contact_seller_button)
+        var postSellerButton2: Button = itemView.findViewById(R.id.trade_post_contact_seller_button_2)
+
         fun bind(post: Post) {
-            println("debug: OnBind description: ${post.description}")
-            println("debug: UID: ${post.uid}")
-            println("debug: reptileName: ${post.reptileName}")
-            binding.tradePostReptileNameEditText.setText(post.reptileName)
-            binding.tradePostPriceEditText.setText(post.price.toString())
-            binding.tradePostDateEditText.setText(post.date)
-            binding.tradePostOwnerNameEditText.setText(post.ownerName)
-            binding.tradePostDescriptionEditText.setText(post.description)
-            binding.tradePostUid.setText(post.uid)
+            postNameView.setText(post.reptileName)
+            postPriceView.setText(post.price.toString())
+            postDateView.setText(post.date)
+            postOwnerView.setText(post.ownerName)
+            postDescriptionView.setText(post.description)
+            postUidView.setText(post.uid)
+
             val currentUid = FirebaseAuth.getInstance().currentUser?.uid.toString()
-            if (currentUid.compareTo(binding.tradePostUid.text.toString()) == 0) {
-                binding.tradePostContactSellerButton.setEnabled(false)
-                binding.tradePostContactSellerButton2.setEnabled(false)
+            if (currentUid.compareTo(postUidView.text.toString()) == 0) {
+                postSellerButton1.setEnabled(false)
+                postSellerButton2.setEnabled(false)
             }
             post.let {
                 if (it.imgUri != null) {
                     Glide.with(context)
                         .load(it.imgUri)
                         .fitCenter()
-                        .into(binding.editReptileImg)
+                        .into(postImageView)
                 }
             }
         }
 
         init {
-            binding.tradePostShowMoreButton.setOnClickListener {
-                binding.showLessView.visibility = View.GONE
-                TransitionManager.beginDelayedTransition(binding.root, AutoTransition())
-                binding.tradePostExpandable.visibility = View.VISIBLE
+            showMoreButton.setOnClickListener {
+                showLessView.visibility = View.GONE
+                TransitionManager.beginDelayedTransition(parent, AutoTransition())
+                postExpandable.visibility = View.VISIBLE
             }
 
-            binding.tradePostShowLessButton.setOnClickListener {
-                TransitionManager.beginDelayedTransition(binding.root, AutoTransition())
-                binding.tradePostExpandable.visibility = View.GONE
-                binding.showLessView.visibility = View.VISIBLE
+            showLessButton.setOnClickListener {
+                TransitionManager.beginDelayedTransition(parent, AutoTransition())
+                postExpandable.visibility = View.GONE
+                showLessView.visibility = View.VISIBLE
             }
 
-            binding.tradePostContactSellerButton.setOnClickListener {
-                val uid = binding.tradePostUid.text.toString()
+            postSellerButton1.setOnClickListener {
+                val uid = postUidView.text.toString()
 
                 fetchToUser(uid,
                     object : OnGetDataListener {
@@ -141,8 +147,8 @@ class TradeListRecyclerViewAdapter(var postList: ArrayList<Post>)
                     })
             }
 
-            binding.tradePostContactSellerButton2.setOnClickListener {
-                val uid = binding.tradePostUid.text.toString()
+            postSellerButton2.setOnClickListener {
+                val uid = postUidView.text.toString()
 
                 fetchToUser(uid,
                     object : OnGetDataListener {
@@ -179,7 +185,6 @@ class TradeListRecyclerViewAdapter(var postList: ArrayList<Post>)
 
         this.postListAll.clear()
         this.postListAll.addAll(postList)
-        println("debug: Updating postList - size: ${postList.size}")
         notifyDataSetChanged()
     }
 

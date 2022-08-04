@@ -91,6 +91,7 @@
         style="?android:attr/progressBarStyle"
         android:layout_width="92dp"
         android:layout_height="79dp"
+        android:indeterminate="true"
         app:layout_constraintBottom_toBottomOf="@+id/reptileInfoRecyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
