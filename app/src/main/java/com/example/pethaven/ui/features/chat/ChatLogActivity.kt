@@ -137,6 +137,7 @@ class ChatLogActivity : AppCompatActivity() {
                         adapter.add(ChatToItem(chatMessage.text, currentUser!!))
                     } else {
                         adapter.add(ChatFromItem(chatMessage.text, toUser!!))
+                        recyclerview_chat_log.scrollToPosition(adapter.itemCount-1)
                     }
                 }
 
