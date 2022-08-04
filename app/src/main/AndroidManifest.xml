@@ -37,6 +37,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.features.profile.ProfileEditActivity"
+            android:exported="true"
+            android:configChanges="orientation|keyboardHidden|navigation|screenSize"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
         <activity android:name=".ui.LoginActivity"/>
         <activity android:name=".ui.RegisterActivity" />
         <activity android:name=".ui.features.shop.TradePostActivity" />

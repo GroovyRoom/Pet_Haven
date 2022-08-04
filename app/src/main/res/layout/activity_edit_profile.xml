@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
     android:orientation="vertical"
-    tools:context=".ui.features.profile.ProfileFragment">
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,9 +14,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:orientation="vertical"
             android:layout_marginTop="20dp"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -31,21 +30,21 @@
                     android:id="@+id/iv_head"
                     android:layout_width="128dp"
                     android:layout_height="128dp"
-                    android:layout_centerHorizontal="true"
                     android:padding="10dp"
+                    android:layout_centerHorizontal="true"
                     app:civ_border_color="@color/black"
                     app:civ_border_width="2dp"
                     app:srcCompat="@drawable/ic_baseline_add_a_photo_24"
-                    tools:src="@drawable/ic_add_picture" />
+                    tools:src="@drawable/ic_add_picture"/>
 
-                <TextView
-                    android:id="@+id/tv_name"
+                <EditText
+                    android:id="@+id/ed_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/iv_head"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
                     android:text="@string/profile_name_hint"
                     android:textColor="@color/black"
                     android:textSize="20sp"
@@ -55,7 +54,7 @@
                     android:id="@+id/tv_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_name"
+                    android:layout_below="@id/ed_name"
                     android:layout_centerHorizontal="true"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="10dp"
@@ -90,9 +89,9 @@
                         android:textSize="17sp"
                         android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/tv_phone"
-                        android:layout_width="wrap_content"
+                    <EditText
+                        android:id="@+id/ed_phone"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/tv_phone_title"
                         android:layout_marginTop="10dp"
@@ -100,7 +99,6 @@
                         android:textColor="#ACABAB"
                         android:textSize="14sp"
                         android:textStyle="bold" />
-
 
                 </RelativeLayout>
 
@@ -121,9 +119,9 @@
                         android:textSize="17sp"
                         android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/tv_address"
-                        android:layout_width="wrap_content"
+                    <EditText
+                        android:id="@+id/ed_address"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/tv_address_title"
                         android:layout_marginTop="10dp"
@@ -163,24 +161,25 @@
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/tv_isOpen"
+                    <Spinner
+                        android:id="@+id/sp_privacy"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:entries="@array/privacys"
                         android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="15dp" />
+                        android:layout_alignBottom="@id/tv_privacy"/>
+
                 </RelativeLayout>
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_edit"
+                    android:id="@+id/btn_save"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="30dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginBottom="30dp"
-                    android:text="@string/edit" />
+                    android:text="@string/save" />
 
             </LinearLayout>
 
