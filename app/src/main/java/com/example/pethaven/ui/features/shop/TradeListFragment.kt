@@ -11,7 +11,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pethaven.databinding.FragmentTradeListBinding
+import com.example.pethaven.domain.Post
 import com.example.pethaven.domain.PostViewModel
+import com.example.pethaven.domain.Reptile
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 
 class TradeListFragment : Fragment() {
@@ -20,9 +27,8 @@ class TradeListFragment : Fragment() {
 
     private lateinit var tradeListViewModel: PostViewModel
     private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: TradeListRecyclerViewAdapter
-
-    private lateinit var progressBar: ProgressBar
+//    private lateinit var adapter: TradeListRecyclerViewAdapter
+    private lateinit var adapter: TradeTestAdapter
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -31,9 +37,23 @@ class TradeListFragment : Fragment() {
     ): View {
 
         _binding = FragmentTradeListBinding.inflate(inflater, container, false)
-        setUpProgressBar()
-
+        setUpSearchView()
         return binding.root
+    }
+
+    private fun setUpSearchView() {
+        binding.tradeListSearchView.setOnQueryTextListener(object: androidx.appcompat.widget.SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                adapter.filter.filter(query)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                adapter.filter.filter(newText)
+                return true
+            }
+
+        })
     }
 
     override fun onDestroyView() {
@@ -41,15 +61,15 @@ class TradeListFragment : Fragment() {
         _binding = null
     }
 
-    private fun setUpProgressBar() {
-        binding.tradeListProgressBar.isIndeterminate = true
-    }
-
     ///------------------------ Initializing Recycler View and ViewModel -----------------------///
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = TradeListRecyclerViewAdapter()
+        /*
+            Dense: Switch the adapter here
+         */
+        //adapter = TradeListRecyclerViewAdapter(ArrayList())
+        adapter = TradeTestAdapter(requireActivity())
         recyclerView = binding.tradeListRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = adapter
@@ -60,6 +80,7 @@ class TradeListFragment : Fragment() {
         tradeListViewModel.allPosts.observe(viewLifecycleOwner) {
             binding.tradeListProgressBar.visibility = View.GONE
             adapter.updatePostList(it)
+            adapter.filter.filter(binding.tradeListSearchView.query)
         }
     }
 }
