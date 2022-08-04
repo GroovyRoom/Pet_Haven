@@ -11,14 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pethaven.databinding.FragmentTradeListBinding
-import com.example.pethaven.domain.Post
 import com.example.pethaven.domain.PostViewModel
-import com.example.pethaven.domain.Reptile
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 
 
 class TradeListFragment : Fragment() {

@@ -11,9 +11,7 @@ import androidx.transition.AutoTransition
 import androidx.transition.TransitionManager
 import com.bumptech.glide.Glide
 import com.example.pethaven.R
-import com.example.pethaven.databinding.TradeListItemBinding
 import com.example.pethaven.domain.Post
-import com.example.pethaven.domain.Reptile
 import com.example.pethaven.domain.User
 import com.example.pethaven.ui.features.chat.ChatFragment.Companion.USER_KEY
 import com.example.pethaven.ui.features.chat.ChatLogActivity
@@ -95,8 +93,8 @@ class TradeTestAdapter(var context: Context)
         var showLessButton: Button = itemView.findViewById(R.id.trade_post_show_less_button)
 
         var postUidView: TextView = itemView.findViewById(R.id.trade_post_uid)
-        var postSellerButton1: Button = itemView.findViewById(R.id.trade_post_contact_seller_button)
-        var postSellerButton2: Button = itemView.findViewById(R.id.trade_post_contact_seller_button_2)
+        var contactSellerButton1: Button = itemView.findViewById(R.id.trade_post_contact_seller_button)
+        var contactSellerButton2: Button = itemView.findViewById(R.id.trade_post_contact_seller_button_2)
 
         fun bind(post: Post) {
             postNameView.setText(post.reptileName)
@@ -106,11 +104,17 @@ class TradeTestAdapter(var context: Context)
             postDescriptionView.setText(post.description)
             postUidView.setText(post.uid)
 
+            println("debug: trading UId = ${postUidView.text}")
             val currentUid = FirebaseAuth.getInstance().currentUser?.uid.toString()
-            if (currentUid.compareTo(postUidView.text.toString()) == 0) {
-                postSellerButton1.setEnabled(false)
-                postSellerButton2.setEnabled(false)
+            println("debug: Current UId = ${currentUid}")
+            if (currentUid == post.uid) {
+                contactSellerButton1.isEnabled = false
+                contactSellerButton2.isEnabled = false
+            } else { // Don't Delete this, this part is needed
+                contactSellerButton1.isEnabled = true
+                contactSellerButton2.isEnabled = true
             }
+
             post.let {
                 if (it.imgUri != null) {
                     Glide.with(context)
@@ -134,7 +138,7 @@ class TradeTestAdapter(var context: Context)
                 showLessView.visibility = View.VISIBLE
             }
 
-            postSellerButton1.setOnClickListener {
+            contactSellerButton1.setOnClickListener {
                 val uid = postUidView.text.toString()
 
                 fetchToUser(uid,
@@ -147,7 +151,7 @@ class TradeTestAdapter(var context: Context)
                     })
             }
 
-            postSellerButton2.setOnClickListener {
+            contactSellerButton2.setOnClickListener {
                 val uid = postUidView.text.toString()
 
                 fetchToUser(uid,
