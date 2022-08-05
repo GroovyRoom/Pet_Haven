@@ -8,14 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.core.view.setPadding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.pethaven.domain.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import com.squareup.picasso.Picasso
 import com.example.pethaven.R
 import com.example.pethaven.util.AndroidExtensions.makeToast
 import com.example.pethaven.util.FactoryUtil
@@ -24,39 +22,47 @@ import com.google.firebase.database.ktx.getValue
 class ProfileFragment : Fragment() {
     val TAG = "jcy-Profile"
     private var mUser: User? = null
-    private lateinit var uid: String
-    private lateinit var ref: DatabaseReference
 
-    private lateinit var iv_head:ImageView
+    private lateinit var userImageView:ImageView
 
-    private lateinit var tv_name:TextView
-    private lateinit var tv_address:TextView
-    private lateinit var tv_phone:TextView
-    private lateinit var tv_email:TextView
-    private lateinit var tv_privacy:TextView
-    private lateinit var tv_isOpen:TextView
+    private lateinit var nameTextView:TextView
+    private lateinit var addressTextView:TextView
+    private lateinit var phoneTextView:TextView
+    private lateinit var emailTextView:TextView
+    private lateinit var privacyTextView:TextView
+    private lateinit var isOpenTextView:TextView
 
-    private lateinit var btn_edit:Button
+    private lateinit var editBtn:Button
     private lateinit var progressBar: ProgressBar
 
     private lateinit var profileViewModel: ProfileViewModel
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
-        initView(view)
-        setUpViewModel()
+        setUpUserInfoView(view)
         setUpButton(view)
+        setUpProgressBar(view)
+
+        setUpViewModel()
 
         return view
     }
 
+    private fun setUpUserInfoView(view: View) {
+        userImageView=view.findViewById(R.id.iv_head)
+
+        nameTextView=view.findViewById(R.id.tv_name)
+        emailTextView=view.findViewById(R.id.tv_email)
+        addressTextView=view.findViewById(R.id.tv_address)
+        phoneTextView=view.findViewById(R.id.tv_phone)
+        privacyTextView=view.findViewById(R.id.tv_privacy)
+        isOpenTextView=view.findViewById(R.id.tv_isOpen)
+    }
+
     private fun setUpButton(view: View) {
-        btn_edit=view.findViewById(R.id.btn_edit)
-        btn_edit.setOnClickListener {
+        editBtn=view.findViewById(R.id.btn_edit)
+        editBtn.setOnClickListener {
             if(mUser==null) return@setOnClickListener
             startActivity(Intent(requireActivity(),ProfileEditActivity::class.java))
         }
@@ -67,26 +73,15 @@ class ProfileFragment : Fragment() {
         profileViewModel = ViewModelProvider(this, factory)[ProfileViewModel::class.java]
     }
 
-    private fun initView(view: View){
-        iv_head=view.findViewById(R.id.iv_head)
-
-        tv_name=view.findViewById(R.id.tv_name)
-        tv_email=view.findViewById(R.id.tv_email)
-        tv_address=view.findViewById(R.id.tv_address)
-        tv_phone=view.findViewById(R.id.tv_phone)
-        tv_privacy=view.findViewById(R.id.tv_privacy)
-        tv_isOpen=view.findViewById(R.id.tv_isOpen)
-
+    private fun setUpProgressBar(view: View){
         progressBar = view.findViewById(R.id.userProfileProgressBar)
         progressBar.isIndeterminate = true
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var user = FirebaseAuth.getInstance().currentUser
-//        uid = FirebaseAuth.getInstance().uid ?: ""
-//        ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
-//        ref.addValueEventListener(postListener)
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        emailTextView.text = currentUser?.email ?: ""
 
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -95,7 +90,7 @@ class ProfileFragment : Fragment() {
                 Log.w(TAG, "user $user")
 
                 mUser = user
-                user?.let {  updateView(user)}
+                user?.let {  updateView(user) }
                 progressBar.visibility = View.GONE
             }
 
@@ -107,7 +102,6 @@ class ProfileFragment : Fragment() {
             }
         }
         profileViewModel.getCurrentUserObject().addValueEventListener(postListener)
-        tv_email.text = user?.email ?: ""
     }
 
 
@@ -117,14 +111,14 @@ class ProfileFragment : Fragment() {
             Glide.with(this)
                 .load(user.profileImageUrl)
                 .fitCenter()
-                .into(iv_head)
+                .into(userImageView)
         }
 
-        tv_name.text = user.username
-        tv_phone.text = user.phoneNumber
-        tv_address.text = user.address
+        nameTextView.text = user.username
+        phoneTextView.text = user.phoneNumber
+        addressTextView.text = user.address
 
-        if(user.isOpen) tv_isOpen.text = "YES" else tv_isOpen.text = "NO"
+        if(user.isOpen) isOpenTextView.text = "YES" else isOpenTextView.text = "NO"
     }
 
 }
