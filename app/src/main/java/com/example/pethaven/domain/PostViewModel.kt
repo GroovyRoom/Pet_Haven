@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class PostViewModel: ViewModel() {
+    val currentFilterButtonID = MutableLiveData(1)
 
     private val reptileDao: ReptileDao = ReptileDao()
     private val repository: ReptileRepository = ReptileRepository(reptileDao).getInstance()

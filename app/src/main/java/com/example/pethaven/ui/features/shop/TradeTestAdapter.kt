@@ -228,15 +228,18 @@ class TradeTestAdapter(var context: Context)
             override fun performFiltering(constraint: CharSequence): FilterResults {
                 val filteredList = ArrayList<Post>()
                 if (constraint.toString().isEmpty()) {
-                    filteredList.addAll(postListAll)
+                    filteredList.addAll(postListAll.filter { it.uid != uid })
                 } else {
-                    for (post in postListAll) {
-                        if (post.description.lowercase().contains(constraint.toString().lowercase())
-                            && post.uid != uid ) {
-                            filteredList.add(post)
+                    filteredList.addAll(
+                        postListAll.filter {
+                            it.description.lowercase().contains(constraint.toString().lowercase())
+                                    && it.uid != uid
                         }
-                    }
+                    )
+
+                    println("debug: filtered list size - $filteredList")
                 }
+
                 val result = FilterResults().apply {
                     values = filteredList
                 }
