@@ -60,6 +60,7 @@ class ProfileEditActivity : AppCompatActivity(), PictureDialog.OnImageResultList
 
     companion object {
         private const val PROFILE_PICTURE_DIALOG_TAG = "Profile Picture Dialog Tag"
+        private const val USER_HAS_RECEIVED_TAG = "User Has Received Tag"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,7 +69,7 @@ class ProfileEditActivity : AppCompatActivity(), PictureDialog.OnImageResultList
         setUpView()
         setUpViewModel()
 
-        hasReceived = savedInstanceState?.getBoolean("test") ?: false
+        hasReceived = savedInstanceState?.getBoolean(USER_HAS_RECEIVED_TAG) ?: false
 
         receiverCurrentUserInfo()
     }
@@ -90,7 +91,7 @@ class ProfileEditActivity : AppCompatActivity(), PictureDialog.OnImageResultList
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.putBoolean("test", hasReceived)
+        outState.putBoolean(USER_HAS_RECEIVED_TAG, hasReceived)
         super.onSaveInstanceState(outState)
     }
 
@@ -173,14 +174,18 @@ class ProfileEditActivity : AppCompatActivity(), PictureDialog.OnImageResultList
         if(mUser==null) mUser = User(uid)
         mUser!!.apply {
             username = ed_name.text.toString()
-            address = ed_phone.text.toString()
-            phoneNumber = ed_address.text.toString()
+            address = ed_address.text.toString()
+            phoneNumber = ed_phone.text.toString()
             isOpen = sp_privacy.selectedItemPosition == 0
         }
 
 
         progressBar.isIndeterminate = true
         updateUserInDatabase(mUser!!)
+    }
+
+    fun onProfileCancelClicked(view: View) {
+        finish()
     }
 
     ///-------------------------- DataBase Operations------------------------///
@@ -234,7 +239,7 @@ class ProfileEditActivity : AppCompatActivity(), PictureDialog.OnImageResultList
                 finish()
             }
             .addOnFailureListener {
-                makeToast(it.message ?: "Unknown Exception Occured")
+                makeToast(it.message ?: "Unknown Exception Occurred")
             }
     }
 
@@ -259,5 +264,6 @@ class ProfileEditActivity : AppCompatActivity(), PictureDialog.OnImageResultList
         profileEditViewModel.profileImg.value = bitmap
         profileEditViewModel.profileImgUri.value = uri
     }
+
 
 }
