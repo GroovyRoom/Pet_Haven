@@ -16,7 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/filterButtonLayout"
+        app:layout_constraintTop_toBottomOf="@+id/filterToggleButtonGroup"
         app:layout_constraintVertical_bias="1.0"
         tools:listitem="@layout/trade_list_item" />
 
@@ -42,13 +42,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/filterButtonLayout"
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/filterToggleButtonGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin= "8dp"
-        app:layout_constrainedHeight="true"
+        android:layout_margin= "4dp"
+        app:singleSelection="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/trade_list_recycler_view"
         app:layout_constraintTop_toBottomOf="@+id/tradeListSearchView">
 
         <Button
@@ -76,5 +78,5 @@
             android:layout_weight="1"
             android:layout_marginStart="10dp"
             android:text="Others"/>
-    </LinearLayout>
+    </com.google.android.material.button.MaterialButtonToggleGroup>
 </androidx.constraintlayout.widget.ConstraintLayout>

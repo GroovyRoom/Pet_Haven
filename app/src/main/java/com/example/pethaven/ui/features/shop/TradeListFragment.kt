@@ -7,15 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ProgressBar
-import android.widget.SearchView
+import android.widget.ToggleButton
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pethaven.R
-import com.example.pethaven.databinding.FragmentTradeListBinding
 import com.example.pethaven.domain.PostViewModel
+import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.fragment_trade_list.*
 
 
 class TradeListFragment : Fragment() {
@@ -33,6 +33,7 @@ class TradeListFragment : Fragment() {
     private lateinit var filterAllButton: Button
     private lateinit var filterUserButton: Button
     private lateinit var filterOtherButton: Button
+    private lateinit var filterToggleButtonGroup: MaterialButtonToggleGroup
 
     private lateinit var tradeListProgressBar: ProgressBar
     private lateinit var adapter: TradeTestAdapter
@@ -89,14 +90,30 @@ class TradeListFragment : Fragment() {
         binding.filterUserButton.setOnClickListener { switchFilterType(FILTER_USER_BUTTON_ID) }
         binding.filterOtherButton.setOnClickListener { switchFilterType(FILTER_OTHER_BUTTON_ID) }*/
 
+        filterToggleButtonGroup = view.findViewById(R.id.filterToggleButtonGroup)
         filterAllButton = view.findViewById(R.id.filterAllButton)
         filterUserButton = view.findViewById(R.id.filterUserButton)
         filterOtherButton = view.findViewById(R.id.filterOtherButton)
 
-        filterAllButton.setOnClickListener { switchFilterType(FILTER_ALL_BUTTON_ID) }
-        filterUserButton.setOnClickListener { switchFilterType(FILTER_USER_BUTTON_ID) }
-        filterOtherButton.setOnClickListener { switchFilterType(FILTER_OTHER_BUTTON_ID) }
-
+        filterToggleButtonGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
+            when (checkedId) {
+                R.id.filterAllButton -> {
+                    if (isChecked) {
+                        switchFilterType(FILTER_ALL_BUTTON_ID)
+                    }
+                }
+                R.id.filterUserButton -> {
+                    if (isChecked) {
+                        switchFilterType(FILTER_USER_BUTTON_ID)
+                    }
+                }
+                R.id.filterOtherButton -> {
+                    if (isChecked) {
+                        switchFilterType(FILTER_OTHER_BUTTON_ID)
+                    }
+                }
+            }
+        }
     }
 
     private fun switchFilterType(filterButtonID: Int) {

@@ -27,13 +27,8 @@ class TradeTestAdapter(var context: Context)
     : RecyclerView.Adapter<TradeTestAdapter.ViewHolder>()
     , Filterable {
 
-    private lateinit var listener: Listener
     private var postList: ArrayList<Post> = ArrayList()
     private var postListAll = ArrayList<Post>(postList)
-
-    interface Listener {
-        fun onClickContactSeller(position: Int)
-    }
 
     private var tradeFilter = object : Filter() {
         // Run in Background Thread
