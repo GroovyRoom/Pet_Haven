@@ -104,9 +104,7 @@ class TradeTestAdapter(var context: Context)
             postDescriptionView.setText(post.description)
             postUidView.setText(post.uid)
 
-            println("debug: trading UId = ${postUidView.text}")
             val currentUid = FirebaseAuth.getInstance().currentUser?.uid.toString()
-            println("debug: Current UId = ${currentUid}")
             if (currentUid == post.uid) {
                 contactSellerButton1.isEnabled = false
                 contactSellerButton2.isEnabled = false
