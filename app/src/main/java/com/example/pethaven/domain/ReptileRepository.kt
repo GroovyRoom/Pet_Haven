@@ -19,6 +19,10 @@ class ReptileRepository(private val reptileDao: ReptileDao) {
             instance
         }
     }
+
+    ///-------------------------- Operations for Users-------------------------///
+    fun getCurrentUserObject() = reptileDao.getCurrentUserObject()
+    fun updateUser(user: User) = reptileDao.updateUser(user)
     ///-------------------------- Operations for Post Objects-------------------------///
     fun addPost(post: Post) = reptileDao.addPost(post)
     fun getAllPost() = reptileDao.getAllPost()

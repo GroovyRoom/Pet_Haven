@@ -16,6 +16,20 @@ class ReptileDao {
         .getReference(Post::class.java.simpleName)
     private var firebaseStorage = FirebaseStorage.getInstance()
 
+    ///-------------------------- Operations for User Objects -------------------------///
+    fun getCurrentUserObject() = FirebaseDatabase.getInstance()
+        .reference
+        .child("users")
+        .child(firebaseAuth.currentUser!!.uid)
+
+
+    fun updateUser(user: User) =
+        FirebaseDatabase
+            .getInstance()
+            .reference
+            .child("users")
+            .child(firebaseAuth.currentUser!!.uid)
+            .setValue(user)
 
     ///-------------------------- Operations for Post Objects -------------------------///
     fun addPost(post: Post) = postReference.push().setValue (

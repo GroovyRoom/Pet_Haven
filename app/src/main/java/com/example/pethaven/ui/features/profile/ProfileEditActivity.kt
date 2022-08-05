@@ -1,27 +1,28 @@
 package com.example.pethaven.ui.features.profile
 
-import android.app.Activity
-import android.app.ProgressDialog
-import android.content.Intent
+
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
+import android.view.View
 import android.widget.*
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.setPadding
+import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.example.pethaven.R
+import com.example.pethaven.dialog.PictureDialog
 import com.example.pethaven.domain.User
-import com.example.pethaven.ui.RegisterActivity
+import com.example.pethaven.util.AndroidExtensions.makeToast
+import com.example.pethaven.util.FactoryUtil
+import com.example.pethaven.util.Permissions
+import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.getValue
-import com.google.firebase.storage.FirebaseStorage
-import com.squareup.picasso.Picasso
-import java.util.*
+import com.google.firebase.storage.StorageTask
+import com.google.firebase.storage.UploadTask
 
 /**
  *
@@ -30,197 +31,233 @@ import java.util.*
  * @comment:
  *
  */
-class ProfileEditActivity:AppCompatActivity() {
+class ProfileEditActivity : AppCompatActivity(), PictureDialog.OnImageResultListener {
     private var mUser: User? = null
     private lateinit var uid: String
-    private lateinit var ref: DatabaseReference
-    private lateinit var imageLauncher: ActivityResultLauncher<Intent>
-    lateinit var iv_head: ImageView
-    lateinit var ed_name: EditText
-    lateinit var ed_address: EditText
-    lateinit var ed_phone: EditText
-    lateinit var tv_email:TextView
-    lateinit var sp_privacy: Spinner
-    lateinit var btn_save: Button
+    private lateinit var userReference: DatabaseReference
+
+    private lateinit var iv_head: ImageView
+    private lateinit var ed_name: EditText
+    private lateinit var ed_address: EditText
+    private lateinit var ed_phone: EditText
+    private lateinit var tv_email:TextView
+    private lateinit var sp_privacy: Spinner
+    private lateinit var btn_save: Button
+
+    private lateinit var progressBar: ProgressBar
+    private lateinit var profileEditViewModel: ProfileEditViewModel
+
+    private var storageTask: StorageTask<UploadTask.TaskSnapshot>? = null
+
     private val TAG = "jcy-ProfileEdit"
+
+    /*
+        Check if data has already been received to prevent editText from being updated again during
+        orientation change
+    */
+    private var hasReceived: Boolean = false
+
+
+    companion object {
+        private const val PROFILE_PICTURE_DIALOG_TAG = "Profile Picture Dialog Tag"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_profile)
+        setUpView()
+        setUpViewModel()
+
+        hasReceived = savedInstanceState?.getBoolean("test") ?: false
+
+        receiverCurrentUserInfo()
+    }
+
+    private fun setUpView() {
         iv_head=findViewById(R.id.iv_head)
+
         ed_name=findViewById(R.id.ed_name)
         ed_address=findViewById(R.id.ed_address)
         ed_phone=findViewById(R.id.ed_phone)
+
         tv_email=findViewById(R.id.tv_email)
         sp_privacy=findViewById(R.id.sp_privacy)
-        btn_save=findViewById(R.id.btn_save)
         sp_privacy=findViewById(R.id.sp_privacy)
-        imageLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-                if (it.resultCode == Activity.RESULT_OK) {
-                    it.data?.data?.let {
-                        uploadImageToFirebaseStorage(it)
-                    }
-                }
-            }
-        var user = FirebaseAuth.getInstance().currentUser
-        uid = FirebaseAuth.getInstance().uid ?: ""
-        ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
+
+        progressBar = findViewById(R.id.progressBar)
+
+        btn_save=findViewById(R.id.btn_save)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putBoolean("test", hasReceived)
+        super.onSaveInstanceState(outState)
+    }
+
+    ///-------------------------- Setting Up Activity -------------------------///
+
+    private fun setUpViewModel() {
+        val factory = FactoryUtil.generateReptileViewModelFactory(this)
+        profileEditViewModel = ViewModelProvider(this, factory)[ProfileEditViewModel::class.java]
+        profileEditViewModel.profileImg.observe(this) {
+            iv_head.setImageBitmap(it)
+        }
+    }
+
+    ///-------------------------- Updating Views ------------------------///
+    fun updateView(user: User) {
+        if (!hasReceived) {
+            ed_name.setText(user.username)
+            ed_phone.setText(user.phoneNumber)
+            ed_address.setText(user.address)
+            if(user.isOpen) sp_privacy.setSelection(0) else sp_privacy.setSelection(1)
+        }
+
+        if(profileEditViewModel.profileImgUri.value == null) {
+            Glide.with(this)
+                .load(user.profileImageUrl)
+                .fitCenter()
+                .into(iv_head)
+        }
+
+
+    }
+
+    ///-------------------------- Check Validation ------------------------///
+    private fun isFieldInputValid(): Boolean {
+        val editName = ed_name.text.toString()
+        val editPhone = ed_phone.text.toString()
+        val editAddress = ed_address.text.toString()
+
+        if(TextUtils.isEmpty(editName)){
+            makeToast("Please Insert Name")
+            return false
+        }
+        if(TextUtils.isEmpty(editPhone)){
+            makeToast("Please Insert Phone Number")
+            return false
+        }
+        if(TextUtils.isEmpty(editAddress)){
+            makeToast("Please Insert Address")
+            return false
+        }
+        if(TextUtils.isEmpty(mUser?.profileImageUrl) || mUser?.profileImageUrl == ""){
+            makeToast("Please Insert Photo")
+            return false
+        }
+
+        return true
+    }
+
+    ///-------------------------- On Click Listeners ------------------------///
+    fun onProfileImageClicked(view: View) {
+        if (!Permissions.hasImagePermissions(this)) {
+            Permissions.requestImagePermissions(this)
+            makeToast("Please enable camera and storage permissions")
+            return
+        }
+        val pictureDialog = PictureDialog()
+        pictureDialog.show(supportFragmentManager, PROFILE_PICTURE_DIALOG_TAG)
+    }
+
+    fun onProfileSaveClicked(view: View) {
+        if (storageTask != null && storageTask!!.isInProgress) {
+            makeToast("Data is being Uploaded")
+            return
+        }
+
+        if (!isFieldInputValid()) {
+            return
+        }
+
+        if(mUser==null) mUser = User(uid)
+        mUser!!.apply {
+            username = ed_name.text.toString()
+            address = ed_phone.text.toString()
+            phoneNumber = ed_address.text.toString()
+            isOpen = sp_privacy.selectedItemPosition == 0
+        }
+
+
+        progressBar.isIndeterminate = true
+        updateUserInDatabase(mUser!!)
+    }
+
+    ///-------------------------- DataBase Operations------------------------///
+
+    private fun receiverCurrentUserInfo() {
+        val user = FirebaseAuth.getInstance().currentUser
+        tv_email.text = user?.email ?: ""
+
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // Get Post object and use the values to update the UI
                 val user = dataSnapshot.getValue<User>()
-                mUser = user
                 Log.w(TAG, "user $user")
-                mUser?.let { user ->
-                    Log.d(TAG, "updateUserInfo : $user");
-                    if (!TextUtils.isEmpty(user.profileImageUrl)) {
-                        iv_head.setPadding(0)
-                        Picasso.get().load(user.profileImageUrl).into(iv_head)
-                    }
-                    if (!TextUtils.isEmpty(user.username)) {
-                        ed_name.setText(user.username)
-                    }
-                    if (!TextUtils.isEmpty(user.phoneNumber)) {
-                        ed_phone.setText(user.phoneNumber)
-                    }
-                    if (!TextUtils.isEmpty(user.address)) {
-                        ed_address.setText(user.address)
-                    }
-                    if(user.isOpen==true){
-                        sp_privacy.setSelection(0)
-                    }else{
-                        sp_privacy.setSelection(1)
-                    }
+
+                mUser = user
+                mUser?.let {
+                    Log.d(TAG, "updateUserInfo : $it")
+                    updateView(it)
                 }
+
+                hasReceived = true
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
                 // Getting Post failed, log a message
+                makeToast(databaseError.message)
                 Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
             }
         }
-        ref.addValueEventListener(postListener)
-        tv_email.setText(user?.email ?: "")
-        iv_head.setOnClickListener {
-            val intent = Intent(Intent.ACTION_PICK)
-            intent.type = "image/*"
-            imageLauncher.launch(intent)
-        }
 
-        btn_save.setOnClickListener {
-            var name = ed_name.text.toString();
-            var phone = ed_phone.text.toString();
-            var address = ed_address.text.toString();
-            if(TextUtils.isEmpty(name)){
-                Toast.makeText(this,"Please Input Name",Toast.LENGTH_LONG).show()
-                return@setOnClickListener
+        profileEditViewModel.getCurrentUserObject().addListenerForSingleValueEvent(postListener)
+    }
+    private fun updateUserInDatabase(user: User) {
+        progressBar.isIndeterminate = true
+        if (profileEditViewModel.profileImgUri.value != null) {
+            uploadImageToDatabase(profileEditViewModel.profileImgUri.value!!){
+                user.profileImageUrl = it.toString()
+                updateReptileInDatabaseAux(user)
             }
-            if(TextUtils.isEmpty(phone)){
-                Toast.makeText(this,"Please Input Phone Number",Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
-            if(TextUtils.isEmpty(address)){
-                Toast.makeText(this,"Please Input Address",Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
-            if(TextUtils.isEmpty(mUser?.profileImageUrl)){
-                Toast.makeText(this,"Please Select Photo",Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
-            if(mUser==null){
-                mUser = User(uid)
-            }
-            mUser?.username = name
-            mUser?.address = address
-            mUser?.phoneNumber = phone
-            mUser?.isOpen = sp_privacy.selectedItemPosition==0
-            var dialog = AlertDialog.Builder(this)
-                .setTitle("Toast")
-                .setMessage("Is Save Profile?")
-                .setPositiveButton("Save") { dialog, switch ->
-                    saving()
-                    ref.setValue(mUser)
-                        .addOnSuccessListener {
-                            hideUploading()
-                            Toast.makeText(this,"Save Success",Toast.LENGTH_LONG).show()
-                            Log.d(TAG, "Finally we saved the user to Firebase Database")
-                            finish()
-                        }
-                        .addOnFailureListener {
-                            hideUploading()
-                            Toast.makeText(this,"Save Failure ${it}",Toast.LENGTH_LONG).show()
-                            Log.d(TAG, "Failed to set value to database: ${it.message}")
-                        }
-                }
-                .setNegativeButton("CANCEL", null)
-                .create()
-            dialog.show()
+        } else {
+            user.profileImageUrl = mUser!!.profileImageUrl
+            updateReptileInDatabaseAux(user)
         }
     }
-    private fun uploadImageToFirebaseStorage(uri: Uri) {
 
-        val filename = UUID.randomUUID().toString()
-        val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
-        ref.putFile(uri)
-            .addOnProgressListener {snapshot->
-                showUploading(snapshot.bytesTransferred, snapshot.totalByteCount)
-            }
+    private fun updateReptileInDatabaseAux(user: User) {
+        profileEditViewModel.updateUser(user)
             .addOnSuccessListener {
-                Log.d(TAG, "Successfully uploaded image: ${it.metadata?.path}")
-
-                ref.downloadUrl.addOnSuccessListener {
-                    Log.d(TAG, "File Location: $it")
-                    if (mUser == null) {
-                        mUser = User(uid)
-                    }
-                    mUser?.profileImageUrl = it.toString();
-                    if (!TextUtils.isEmpty(mUser!!.profileImageUrl)) {
-                        iv_head.setPadding(0)
-                        Picasso.get().load(mUser!!.profileImageUrl).into(iv_head)
-                    }
-                    hideUploading()
-                }.addOnFailureListener {
-                    hideUploading()
-                }
+                progressBar.visibility = View.GONE
+                makeToast("Save Successful")
+                finish()
             }
             .addOnFailureListener {
-                hideUploading()
-                Log.d(TAG, "Failed to upload image to storage: ${it.message}")
+                makeToast(it.message ?: "Unknown Exception Occured")
             }
     }
 
-    var mUploading: ProgressDialog? = null
-
-    private fun showUploading(curSize: Long, allSize: Long) {
-        if (mUploading == null) {
-            mUploading = ProgressDialog(this)
-            mUploading?.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL) // 设置水平进度条
-            mUploading?.setCancelable(true) // 设置是否可以通过点击Back键取消
-            mUploading?.setCanceledOnTouchOutside(false) // 设置在点击Dialog外是否取消Dialog进度条
-            mUploading?.setTitle("Updating Profile Image")
-            mUploading?.max = 100
-            mUploading?.setMessage("Uploading Image...")
-            mUploading?.show()
-        } else {
-            val progress = (curSize.toDouble() / allSize * 100).toInt()
-            mUploading!!.incrementProgressBy(progress)
-        }
-    }
-    private fun saving() {
-        if (mUploading == null) {
-            mUploading = ProgressDialog(this)
-            mUploading?.setCancelable(true) // 设置是否可以通过点击Back键取消
-            mUploading?.setCanceledOnTouchOutside(false) // 设置在点击Dialog外是否取消Dialog进度条
-            mUploading?.setTitle("Toast")
-            mUploading?.setMessage("Saving")
-            mUploading?.show()
-        }
+    private fun uploadImageToDatabase(imgUri: Uri, uriSuccessListener: OnSuccessListener<Uri>) {
+        storageTask = profileEditViewModel.uploadImage(imgUri)
+            .addOnSuccessListener { taskSnapShop ->
+                taskSnapShop.metadata?.reference?.let {
+                    val result = taskSnapShop.storage.downloadUrl
+                    result.addOnSuccessListener(uriSuccessListener)
+                }
+            }.addOnFailureListener {
+                progressBar.progress = 0
+                makeToast(it.message ?: "Unknown Exception Occurred")
+            }.addOnProgressListener {
+                val progress = (100.0 * it.bytesTransferred / it.totalByteCount)
+                progressBar.progress = progress.toInt()
+            }
     }
 
-    private fun hideUploading() {
-        if (mUploading != null) {
-            mUploading!!.dismiss()
-            mUploading = null
-        }
+    ///-------------------------- Picture Dialog Listener -------------------------///
+    override fun onResult(view: PictureDialog, which: Int, bitmap: Bitmap?, uri: Uri) {
+        profileEditViewModel.profileImg.value = bitmap
+        profileEditViewModel.profileImgUri.value = uri
     }
+
 }

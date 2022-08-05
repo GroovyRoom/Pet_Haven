@@ -320,6 +320,7 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
                     result.addOnSuccessListener(uriSuccessListener)
                 }
             }.addOnFailureListener {
+                progressBar.progress = 0
                 makeToast(it.message ?: "Unknown Exception Occurred")
             }.addOnProgressListener {
                 val progress = (100.0 * it.bytesTransferred / it.totalByteCount)

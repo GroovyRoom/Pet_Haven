@@ -84,27 +84,17 @@ class ProfileFragment : Fragment() {
             }
         }
         ref.addValueEventListener(postListener)
-        tv_email.setText(user?.email ?: "")
+        tv_email.text = user?.email ?: ""
 
         btn_edit.setOnClickListener {
             if(mUser==null){
                 return@setOnClickListener
             }
-            var dialog = AlertDialog.Builder(requireContext())
-                .setTitle("Toast")
-                .setMessage("Is Edit Profile?")
-                .setPositiveButton("Edit") { dialog, switch ->
-                  startActivity(Intent(requireContext(),ProfileEditActivity::class.java))
-                }
-                .setNegativeButton("CANCEL", null)
-                .create()
-            dialog.show()
+
+            startActivity(Intent(requireContext(),ProfileEditActivity::class.java))
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
 
     private fun updateUserInfo() {
         mUser?.let { user ->
@@ -114,18 +104,18 @@ class ProfileFragment : Fragment() {
                 Picasso.get().load(user.profileImageUrl).into(iv_head)
             }
             if (!TextUtils.isEmpty(user.username)) {
-                tv_name.setText(user.username)
+                tv_name.text = user.username
             }
             if (!TextUtils.isEmpty(user.phoneNumber)) {
-                tv_phone.setText(user.phoneNumber)
+                tv_phone.text = user.phoneNumber
             }
             if (!TextUtils.isEmpty(user.address)) {
-                tv_address.setText(user.address)
+                tv_address.text = user.address
             }
             if(user.isOpen){
-                tv_isOpen.setText("YES")
+                tv_isOpen.text = "YES"
             }else{
-                tv_isOpen.setText("NO")
+                tv_isOpen.text = "NO"
             }
         }
     }
