@@ -68,6 +68,12 @@ class TradeListFragment : Fragment() {
                     FILTER_OTHER_BUTTON_ID -> adapter.getOtherFilter(uid).filter(newText)
                     else -> adapter.filter.filter(newText)
                 }
+
+                /*
+                   Dense: Remove This line if you don't want the recycler view to scroll to the top position
+                   whenever a new Text is pressed
+                */
+                recyclerView.smoothScrollToPosition(0)
                 return true
             }
         })
@@ -101,6 +107,12 @@ class TradeListFragment : Fragment() {
                 FILTER_OTHER_BUTTON_ID -> adapter.getOtherFilter(uid).filter(binding.tradeListSearchView.query)
                 else -> adapter.filter.filter(binding.tradeListSearchView.query)
             }
+
+            /*
+                Dense: Remove This line if you don't want the recycler view to scroll to the top position
+                whenever one of the buttons is pressed
+             */
+            recyclerView.smoothScrollToPosition(0)
         }
     }
 }
