@@ -1,17 +1,16 @@
 package com.example.pethaven.ui.features.shop
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pethaven.databinding.FragmentTradeListBinding
 import com.example.pethaven.domain.PostViewModel
+import com.google.firebase.auth.FirebaseAuth
 
 
 class TradeListFragment : Fragment() {
@@ -23,15 +22,26 @@ class TradeListFragment : Fragment() {
 //    private lateinit var adapter: TradeListRecyclerViewAdapter
     private lateinit var adapter: TradeTestAdapter
 
-    override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View {
+    private var isUserButtonChecked: Boolean = false
+    private var isOtherButtonChecked: Boolean = false
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentTradeListBinding.inflate(inflater, container, false)
         setUpSearchView()
+        setUpFilterButtons()
         return binding.root
+    }
+
+    private fun setUpFilterButtons() {
+        binding.filterUserButton.setOnClickListener {
+            val uid = FirebaseAuth.getInstance().currentUser!!.uid
+            isUserButtonChecked = true
+            adapter.getUserFilter(uid).filter(binding.tradeListSearchView.query)
+        }
+
+        binding.filterOtherButton.setOnClickListener {
+            isOtherButtonChecked = true
+        }
     }
 
     private fun setUpSearchView() {

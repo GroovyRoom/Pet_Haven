@@ -195,5 +195,62 @@ class TradeTestAdapter(var context: Context)
     override fun getFilter(): Filter {
         return tradeFilter
     }
+
+    fun getUserFilter(uid: String): Filter {
+        return object : Filter() {
+            override fun performFiltering(constraint: CharSequence): FilterResults {
+                val filteredList = ArrayList<Post>()
+                if (constraint.toString().isEmpty()) {
+                    filteredList.addAll(postListAll.filter { it.uid == uid })
+                } else {
+                    filteredList.addAll(
+                        postListAll.filter {
+                            it.description.lowercase().contains(constraint.toString().lowercase())
+                                    && it.uid == uid
+                        }
+                    )
+                }
+                val result = FilterResults().apply {
+                    values = filteredList
+                }
+                return result
+            }
+
+            override fun publishResults(constraint: CharSequence, result: FilterResults) {
+                postList.clear()
+                postList.addAll(result.values as ArrayList<Post>)
+                notifyDataSetChanged()
+            }
+        }
+
+    }
+
+    fun getOtherFilter(uid: String): Filter {
+        return object : Filter() {
+            override fun performFiltering(constraint: CharSequence): FilterResults {
+                val filteredList = ArrayList<Post>()
+                if (constraint.toString().isEmpty()) {
+                    filteredList.addAll(postListAll)
+                } else {
+                    for (post in postListAll) {
+                        if (post.description.lowercase().contains(constraint.toString().lowercase())
+                            && post.uid != uid ) {
+                            filteredList.add(post)
+                        }
+                    }
+                }
+                val result = FilterResults().apply {
+                    values = filteredList
+                }
+                return result
+            }
+
+            override fun publishResults(constraint: CharSequence, result: FilterResults) {
+                postList.clear()
+                postList.addAll(result.values as ArrayList<Post>)
+                notifyDataSetChanged()
+            }
+        }
+    }
 }
 
