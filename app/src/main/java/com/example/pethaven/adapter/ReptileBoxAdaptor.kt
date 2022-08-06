@@ -135,6 +135,7 @@ class ReptileBoxAdaptor(): RecyclerView.Adapter<RecyclerView.ViewHolder>()
     {
         this.reptileBoxes = reptileBoxes
         this.btnSwitches = btnSwitches
+        notifyDataSetChanged()
     }
 
     interface OnItemClickListener{
