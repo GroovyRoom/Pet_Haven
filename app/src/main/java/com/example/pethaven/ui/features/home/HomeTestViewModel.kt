@@ -4,56 +4,50 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.pethaven.domain.Reptile
 import com.example.pethaven.domain.ReptileRepository
+import com.example.pethaven.util.LiveDataExtensions.notifyObserver
 
 class HomeTestViewModel(private val repository: ReptileRepository): ViewModel() {
-    var isFabChecked = MutableLiveData(false)
+    val isSearchOn = MutableLiveData(false)
     var reptileTask = getAllUserReptile()
     private val reptileList = ArrayList<Reptile>();
 
     val reptilesBoxes = MutableLiveData<ArrayList<ArrayList<Reptile>>>(ArrayList()).apply {
-//        val arr:ArrayList<ArrayList<Reptile>> = ArrayList()
-//        arr.add(ArrayList<Reptile>(3))
-        value = ArrayList()
+        value = arrayListOf(ArrayList<Reptile>(3), ArrayList<Reptile>(3), ArrayList<Reptile>(3))
     }
 
     val btnSwitches = MutableLiveData<ArrayList<Boolean>>(ArrayList()).apply {
-//        val arr:ArrayList<Boolean> = ArrayList()
-//        arr.add(false)
-        value = ArrayList()
+        value = arrayListOf(false, false, false)
     }
 
     fun addReptile(reptile: Reptile)
     {
-        if(reptilesBoxes.value!!.isEmpty() || reptilesBoxes.value!!.last().size == 3)
+        if(reptilesBoxes.value!!.isEmpty())
         {
-            val arr = ArrayList<Reptile>(3)
-            arr.add(reptile)
-            reptilesBoxes.value!!.add(arr)
+            reptilesBoxes.value!!.add(ArrayList<Reptile>(3))
+            reptilesBoxes.value!!.add(ArrayList<Reptile>(3))
+            reptilesBoxes.value!!.add(ArrayList<Reptile>(3))
+        }
+        if(btnSwitches.value!!.isEmpty())
+        {
+            btnSwitches.value!!.add(false)
+            btnSwitches.value!!.add(false)
             btnSwitches.value!!.add(false)
         }
-        else
+        for(arr:ArrayList<Reptile> in reptilesBoxes.value!!)
         {
-            reptilesBoxes.value!!.last().add(reptile)
-            if(reptilesBoxes.value!!.last().size == 3)
+            if(arr.size < 3)
             {
-                reptilesBoxes.value!!.add(ArrayList(3))
-                btnSwitches.value!!.add(false)
+                arr.add(reptile)
+                break
             }
         }
+        reptilesBoxes.notifyObserver()
     }
 
     fun toggleBtnSwitch(position: Int)
     {
         btnSwitches.value!![position] = !btnSwitches.value!![position]
-    }
-
-    fun parseData()
-    {
-        for(i: Reptile in reptileList)
-        {
-            addReptile(i)
-            println(i.name)
-        }
+        btnSwitches.notifyObserver()
     }
 
     fun getAllUserReptile() = repository.getAllUserReptile()

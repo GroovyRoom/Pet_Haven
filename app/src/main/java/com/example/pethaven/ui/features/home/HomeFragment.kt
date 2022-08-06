@@ -19,20 +19,20 @@ import com.example.pethaven.domain.Reptile
 import com.example.pethaven.ui.features.shop.TradePostActivity
 import com.example.pethaven.util.AndroidExtensions.makeToast
 import com.example.pethaven.util.FactoryUtil
+import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.fragment_home_test.*
 
 class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener {
 
-    private lateinit var fabLayout: LinearLayout
-
     private lateinit var progressBar: ProgressBar
 
-    private lateinit var addFabTextView: TextView
     private lateinit var searchView: androidx.appcompat.widget.SearchView
 
+    private lateinit var searchLayout: LinearLayout
     private lateinit var recyclerSearchView: RecyclerView
     private lateinit var reptileInfoAdapter: ReptileInfoAdapter
     private lateinit var reptileBoxRecyclerview: RecyclerView
@@ -40,31 +40,21 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
 
     private lateinit var testViewModel: HomeTestViewModel
 
+    private lateinit var botAppBar: BottomAppBar
     private lateinit var addFab: FloatingActionButton
-    private lateinit var optionsFab: FloatingActionButton
 
-    private lateinit var openFabAnimation: Animation
-    private lateinit var closeFabAnimation: Animation
-    private lateinit var traverseFromBottomFabAnimation: Animation
-    private lateinit var traverseBottomFabAnimation: Animation
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view =  inflater.inflate(R.layout.fragment_home_test, container, false)
-        openFabAnimation = AnimationUtils.loadAnimation(requireActivity(), R.anim.anim_fab_open)
-        closeFabAnimation = AnimationUtils.loadAnimation(requireActivity(), R.anim.anim_fab_close)
-        traverseBottomFabAnimation = AnimationUtils.loadAnimation(requireActivity(), R.anim.anim_fab_traverse_bottom)
-        traverseFromBottomFabAnimation = AnimationUtils.loadAnimation(requireActivity(), R.anim.anim_fab_traverse_from_bottom)
-        fabLayout = view.findViewById(R.id.addFabLayout)
 
         setUpTestViewModel()
-        setUpRecyclerView(view)
+        setUpSearchLayout(view)
         setUpProgressBar(view)
-        setUpFloatingActionButton(view)
+        setUpBotAppBar(view)
 
-        receiveAllReptiles(view)
+        receiveAllReptiles()
         setUpReptileBoxRecyclerView(view)
         setUpSearchView(view)
-        setFabVisibility(testViewModel.isFabChecked.value!!)
 
         return view
     }
@@ -98,7 +88,8 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
         progressBar.isIndeterminate = true
     }
 
-    private fun setUpRecyclerView(view: View) {
+    private fun setUpSearchLayout(view: View) {
+        searchLayout = view.findViewById(R.id.reptileInfoLayout)
         recyclerSearchView = view.findViewById(R.id.reptileInfoRecyclerView)
         recyclerSearchView.setHasFixedSize(true)
         recyclerSearchView.layoutManager = LinearLayoutManager(requireActivity())
@@ -115,29 +106,52 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
         reptileBoxRecyclerview = view.findViewById(R.id.reptileBoxRecyclerView)
         reptileBoxRecyclerview.apply {
             layoutManager = LinearLayoutManager(requireContext())
-            reptileBoxAdaptor = ReptileBoxAdaptor()
+            reptileBoxAdaptor = ReptileBoxAdaptor(requireActivity())
             adapter = reptileBoxAdaptor
             reptileBoxAdaptor.setOnItemClickListener(object : ReptileBoxAdaptor.OnItemClickListener
             {
                 override fun onItemClick(position: Int) {
                     testViewModel.toggleBtnSwitch(position)
-                    refreshList()
                 }
             })
         }
     }
 
-    private fun setUpFloatingActionButton(view: View) {
-        optionsFab = view.findViewById(R.id.fabOptions)
-        optionsFab.setOnClickListener {
-            testViewModel.isFabChecked.value = !testViewModel.isFabChecked.value!!
-            handleFabClicked(testViewModel.isFabChecked.value!!)
-        }
+    private fun setUpBotAppBar(view: View) {
+        botAppBar = view.findViewById(R.id.botAppBar)
         addFab = view.findViewById(R.id.fabAddReptile)
-        addFabTextView = view.findViewById(R.id.addFabTextView)
         addFab.setOnClickListener{
             val intent = Intent(requireActivity(), AddEditReptileActivity::class.java)
             startActivity(intent)
+        }
+        botAppBar.setOnMenuItemClickListener{
+            when(it.itemId)
+            {
+                R.id.menuBtnSearch -> {
+                    testViewModel.isSearchOn.value = !testViewModel.isSearchOn.value!!
+                    if(!testViewModel.isSearchOn.value!!)
+                    {
+                        it.icon = requireContext().getDrawable(R.drawable.ic_search_off)
+                        searchLayout.visibility = View.VISIBLE
+                        reptileBoxRecyclerview.visibility = View.GONE
+                    }
+                    else
+                    {
+                        it.icon = requireContext().getDrawable(R.drawable.ic_search_white)
+                        searchLayout.visibility = View.GONE
+                        reptileBoxRecyclerview.visibility = View.VISIBLE
+                    }
+                    true
+                }
+                R.id.menuBtnTop -> {
+                    reptileInfoRecyclerView.adapter = null
+                    reptileInfoRecyclerView.adapter = reptileInfoAdapter
+                    true
+                }
+                else -> {
+                    false
+                }
+            }
         }
     }
 
@@ -175,48 +189,9 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
         }
     }
 
-    // --------------------- Updating Views  ---------------- //
-    private fun handleFabClicked(isPressed: Boolean) {
-        if (isPressed) {
-            addFab.visibility = View.VISIBLE
-            addFabTextView.visibility = View.VISIBLE
-            fabLayout.visibility = View.VISIBLE
-
-            optionsFab.startAnimation(openFabAnimation)
-            fabLayout.startAnimation(traverseFromBottomFabAnimation)
-
-            addFab.isClickable = true
-        } else {
-            optionsFab.startAnimation(closeFabAnimation)
-            fabLayout.startAnimation(traverseBottomFabAnimation)
-            fabLayout.visibility = View.GONE
-            addFab.isClickable = false
-        }
-    }
-
-    private fun setFabVisibility(isPressed: Boolean) {
-        if (isPressed) {
-            addFab.visibility = View.VISIBLE
-            addFabTextView.visibility = View.VISIBLE
-            addFab.isClickable = true
-        } else {
-            addFab.visibility = View.GONE
-            addFabTextView.visibility = View.GONE
-            addFab.isClickable = false
-        }
-    }
-
-    private fun refreshList()
-    {
-        reptileBoxAdaptor.notifyDataSetChanged()
-        reptileBoxRecyclerview.apply {
-            //adapter = null
-            //adapter = reptileAdaptor
-        }
-    }
 
     // --------------------- Database Operations  ---------------- //
-    private fun receiveAllReptiles(view: View) {
+    private fun receiveAllReptiles() {
         testViewModel.reptileTask.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (!snapshot.exists()) {
@@ -229,6 +204,7 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
                 for (postSnapShot in snapshot.children) {
                     val reptile = postSnapShot.getValue(Reptile::class.java)
                     reptile?.let {
+                        //println(it.isFav)
                         it.key = postSnapShot.key
                         list.add(it)
                         testViewModel.addReptile(it)

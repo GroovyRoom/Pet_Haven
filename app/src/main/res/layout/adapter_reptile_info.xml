@@ -15,101 +15,53 @@
 
         <ImageView
             android:id = "@+id/reptileImageAdapter"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY"
-            tools:srcCompat="@tools:sample/avatars"/>
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:scaleType="centerInside"
+            tools:srcCompat="@tools:sample/avatars"
+            android:layout_weight="0.25"/>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="top"
             android:layout_marginStart="8dp"
-            android:layout_gravity="center"
+            android:layout_weight="0.55"
             android:orientation="vertical">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/reptileNameAdapter"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:textSize="23sp"
+                tools:text="name" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Name:"
-                    android:textSize="23sp"/>
-
-                <TextView
-                    android:id="@+id/reptileNameAdapter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    tools:text="name"
-                    android:textSize="23sp"
-                    android:maxLines="1"/>
-            </LinearLayout>
-
-            <LinearLayout
+            <TextView
+                android:id="@+id/reptileSpeciesAdapter"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:textSize="17sp"
+                tools:text="Species" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Species:"
-                    android:textSize="23sp"/>
-
-                <TextView
-                    android:id="@+id/reptileSpeciesAdapter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    tools:text="Species"
-                    android:textSize="23sp"
-                    android:maxLines="1"/>
-            </LinearLayout>
-
-            <LinearLayout
+            <TextView
+                android:id="@+id/reptileDescriptionAdapter"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:textSize="15sp"
+                tools:text="Description" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Age:"
-                    android:textSize="23sp"/>
-
-                <TextView
-                    android:id="@+id/reptileAgeAdapter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    tools:text="Age"
-                    android:textSize="23sp"
-                    android:maxLines="1"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Description:"
-                    android:textSize="23sp"/>
-
-                <TextView
-                    android:id="@+id/reptileDescriptionAdapter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    tools:text="Description"
-                    android:textSize="23sp"
-                    android:maxLines="1"/>
-            </LinearLayout>
         </LinearLayout>
 
-
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:scaleType="centerInside"
+            android:layout_weight="0.2"
+            android:src="@drawable/ic_unfav" />
     </LinearLayout>
-
-
 </androidx.cardview.widget.CardView>
