@@ -19,10 +19,12 @@ import com.example.pethaven.domain.Reptile
 import com.example.pethaven.ui.features.shop.TradePostActivity
 import com.example.pethaven.util.AndroidExtensions.makeToast
 import com.example.pethaven.util.FactoryUtil
+import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.fragment_home_test.*
 
 class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener {
 
@@ -30,6 +32,7 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
 
     private lateinit var searchView: androidx.appcompat.widget.SearchView
 
+    private lateinit var searchLayout: LinearLayout
     private lateinit var recyclerSearchView: RecyclerView
     private lateinit var reptileInfoAdapter: ReptileInfoAdapter
     private lateinit var reptileBoxRecyclerview: RecyclerView
@@ -37,6 +40,7 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
 
     private lateinit var testViewModel: HomeTestViewModel
 
+    private lateinit var botAppBar: BottomAppBar
     private lateinit var addFab: FloatingActionButton
 
 
@@ -44,11 +48,11 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
         val view =  inflater.inflate(R.layout.fragment_home_test, container, false)
 
         setUpTestViewModel()
-        setUpRecyclerView(view)
+        setUpSearchLayout(view)
         setUpProgressBar(view)
-        setUpFloatingActionButton(view)
+        setUpBotAppBar(view)
 
-        receiveAllReptiles(view)
+        receiveAllReptiles()
         setUpReptileBoxRecyclerView(view)
         setUpSearchView(view)
 
@@ -84,7 +88,8 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
         progressBar.isIndeterminate = true
     }
 
-    private fun setUpRecyclerView(view: View) {
+    private fun setUpSearchLayout(view: View) {
+        searchLayout = view.findViewById(R.id.reptileInfoLayout)
         recyclerSearchView = view.findViewById(R.id.reptileInfoRecyclerView)
         recyclerSearchView.setHasFixedSize(true)
         recyclerSearchView.layoutManager = LinearLayoutManager(requireActivity())
@@ -101,7 +106,7 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
         reptileBoxRecyclerview = view.findViewById(R.id.reptileBoxRecyclerView)
         reptileBoxRecyclerview.apply {
             layoutManager = LinearLayoutManager(requireContext())
-            reptileBoxAdaptor = ReptileBoxAdaptor()
+            reptileBoxAdaptor = ReptileBoxAdaptor(requireActivity())
             adapter = reptileBoxAdaptor
             reptileBoxAdaptor.setOnItemClickListener(object : ReptileBoxAdaptor.OnItemClickListener
             {
@@ -112,12 +117,41 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
         }
     }
 
-    private fun setUpFloatingActionButton(view: View) {
+    private fun setUpBotAppBar(view: View) {
+        botAppBar = view.findViewById(R.id.botAppBar)
         addFab = view.findViewById(R.id.fabAddReptile)
         addFab.setOnClickListener{
-            testViewModel.isSearchOn.value = !testViewModel.isSearchOn.value!!
             val intent = Intent(requireActivity(), AddEditReptileActivity::class.java)
             startActivity(intent)
+        }
+        botAppBar.setOnMenuItemClickListener{
+            when(it.itemId)
+            {
+                R.id.menuBtnSearch -> {
+                    testViewModel.isSearchOn.value = !testViewModel.isSearchOn.value!!
+                    if(!testViewModel.isSearchOn.value!!)
+                    {
+                        it.icon = requireContext().getDrawable(R.drawable.ic_search_off)
+                        searchLayout.visibility = View.VISIBLE
+                        reptileBoxRecyclerview.visibility = View.GONE
+                    }
+                    else
+                    {
+                        it.icon = requireContext().getDrawable(R.drawable.ic_search_white)
+                        searchLayout.visibility = View.GONE
+                        reptileBoxRecyclerview.visibility = View.VISIBLE
+                    }
+                    true
+                }
+                R.id.menuBtnTop -> {
+                    reptileInfoRecyclerView.adapter = null
+                    reptileInfoRecyclerView.adapter = reptileInfoAdapter
+                    true
+                }
+                else -> {
+                    false
+                }
+            }
         }
     }
 
@@ -157,7 +191,7 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
 
 
     // --------------------- Database Operations  ---------------- //
-    private fun receiveAllReptiles(view: View) {
+    private fun receiveAllReptiles() {
         testViewModel.reptileTask.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (!snapshot.exists()) {

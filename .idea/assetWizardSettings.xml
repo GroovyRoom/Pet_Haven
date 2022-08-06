@@ -307,7 +307,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/D:/sdk/icons/material/materialicons/add/baseline_add_24.xml" />
+                                      <entry key="url" value="file:/D:/sdk/icons/material/materialicons/star_border/baseline_star_border_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -317,8 +317,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="ffffff" />
-                            <entry key="outputName" value="ic_add" />
+                            <entry key="color" value="323232" />
+                            <entry key="outputName" value="ic_unfav" />
                             <entry key="sourceFile" value="C:\Users\georg\Downloads\tttt.svg" />
                           </map>
                         </option>

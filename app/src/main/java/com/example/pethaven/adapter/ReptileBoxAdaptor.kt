@@ -1,26 +1,40 @@
 package com.example.pethaven.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pethaven.R
 import com.example.pethaven.domain.Reptile
+import com.example.pethaven.ui.features.home.AddEditReptileActivity
+import com.example.pethaven.ui.features.home.ReptileProfileActivity
 
-class ReptileBoxAdaptor(): RecyclerView.Adapter<RecyclerView.ViewHolder>()
+class ReptileBoxAdaptor(private val activity: Context): RecyclerView.Adapter<RecyclerView.ViewHolder>()
 {
     private var reptileBoxes: ArrayList<ArrayList<Reptile>> = ArrayList()
     private var btnSwitches: ArrayList<Boolean> = ArrayList()
     private lateinit var listener: OnItemClickListener
 
-    class ViewHolder(v: View, listenerIn: OnItemClickListener): RecyclerView.ViewHolder(v)
+    class ViewHolder(private val activity: Context, v: View, listenerIn: OnItemClickListener): RecyclerView.ViewHolder(v)
     {
         private val imgReptileBox: ImageView = v.findViewById(R.id.img_reptile_box)
+        private val controlLeft: LinearLayout = v.findViewById(R.id.controlLeft)
+        private val controlMid: LinearLayout = v.findViewById(R.id.controlMid)
+        private val controlRight: LinearLayout = v.findViewById(R.id.controlRight)
         private val btnLeft: Button = v.findViewById(R.id.btn_left)
         private val btnMid: Button = v.findViewById(R.id.btn_mid)
         private val btnRight: Button = v.findViewById(R.id.btn_right)
+        private val editLeft: ImageButton = v.findViewById(R.id.btnEditLeft)
+        private val editMid: ImageButton = v.findViewById(R.id.btnEditMid)
+        private val editRight: ImageButton = v.findViewById(R.id.btnEditRight)
+        private val favLeft: ImageButton = v.findViewById(R.id.btnFavLeft)
+        private val favMid: ImageButton = v.findViewById(R.id.btnFavMid)
+        private val favRight: ImageButton = v.findViewById(R.id.btnFavRight)
         init {
             v.setOnClickListener{
                 listenerIn.onItemClick(adapterPosition)
@@ -69,53 +83,113 @@ class ReptileBoxAdaptor(): RecyclerView.Adapter<RecyclerView.ViewHolder>()
             {
                 when (reptileBoxes.size) {
                     3 -> {
-                        btnLeft.text = reptileBoxes[0].name
-                        btnMid.text = reptileBoxes[1].name
-                        btnRight.text = reptileBoxes[2].name
-                        btnLeft.visibility = View.VISIBLE
-                        btnMid.visibility = View.VISIBLE
-                        btnRight.visibility = View.VISIBLE
+                        btnLeft.text = reptileBoxes[0].name.subSequence(0,5)
+                        btnMid.text = reptileBoxes[1].name.subSequence(0,5)
+                        btnRight.text = reptileBoxes[2].name.subSequence(0,5)
+                        controlLeft.visibility = View.VISIBLE
+                        controlMid.visibility = View.VISIBLE
+                        controlRight.visibility = View.VISIBLE
                         btnLeft.isEnabled = true
                         btnMid.isEnabled = true
                         btnRight.isEnabled = true
                     }
                     2 -> {
-                        btnLeft.text = reptileBoxes[0].name
-                        btnMid.text = reptileBoxes[1].name
-                        btnLeft.visibility = View.VISIBLE
-                        btnMid.visibility = View.VISIBLE
+                        btnLeft.text = reptileBoxes[0].name.subSequence(0,5)
+                        btnMid.text = reptileBoxes[1].name.subSequence(0,5)
+                        controlLeft.visibility = View.VISIBLE
+                        controlMid.visibility = View.VISIBLE
                         btnLeft.isEnabled = true
                         btnMid.isEnabled = true
                     }
                     1 -> {
-                        btnLeft.text = reptileBoxes[0].name
-                        btnLeft.visibility = View.VISIBLE
+                        btnLeft.text = reptileBoxes[0].name.subSequence(0,5)
+                        controlLeft.visibility = View.VISIBLE
                         btnLeft.isEnabled = true
                     }
                     0 -> {
                     }
                 }
+                setAllBtnListener(reptileBoxes)
             }
             if(!canShowBtn)
             {
                 btnLeft.text = ""
                 btnMid.text = ""
                 btnRight.text = ""
-                btnLeft.visibility = View.INVISIBLE
-                btnMid.visibility = View.INVISIBLE
-                btnRight.visibility = View.INVISIBLE
+                controlLeft.visibility = View.GONE
+                controlMid.visibility = View.GONE
+                controlRight.visibility = View.GONE
                 btnLeft.isEnabled = false
                 btnMid.isEnabled = false
                 btnRight.isEnabled = false
             }
         }
 
+        private fun setAllBtnListener(reptileBoxes: ArrayList<Reptile>)
+        {
+            when (reptileBoxes.size) {
+                3 -> {
+                    setLeftListener(reptileBoxes[0])
+                    setMidListener(reptileBoxes[1])
+                    setRightListener(reptileBoxes[2])
+                }
+                2 -> {
+                    setLeftListener(reptileBoxes[0])
+                    setMidListener(reptileBoxes[1])
+                }
+                1 -> {
+                    setLeftListener(reptileBoxes[0])
+                }
+            }
+        }
+
+        private fun setLeftListener(reptile: Reptile)
+        {
+            btnLeft.setOnClickListener{
+                startDetailIntent(reptile.key!!)
+            }
+            editLeft.setOnClickListener {
+                startEditIntent(reptile.key!!)
+            }
+        }
+
+        private fun setMidListener(reptile: Reptile)
+        {
+            btnMid.setOnClickListener{
+                startDetailIntent(reptile.key!!)
+            }
+            editMid.setOnClickListener {
+                startEditIntent(reptile.key!!)
+            }
+        }
+
+        private fun setRightListener(reptile: Reptile)
+        {
+            btnRight.setOnClickListener{
+                startDetailIntent(reptile.key!!)
+            }
+            editRight.setOnClickListener {
+                startEditIntent(reptile.key!!)
+            }
+        }
+
+        private fun startDetailIntent(reptileKey: String)
+        {
+            val intent = ReptileProfileActivity.makeIntent(activity, reptileKey)
+            activity.startActivity(intent)
+        }
+
+        private fun startEditIntent(reptileKey: String)
+        {
+            val intent = AddEditReptileActivity.makeIntent(activity, true, reptileKey)
+            activity.startActivity(intent)
+        }
 
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.list_reptile_collection, parent, false), listener)
+        return ViewHolder(activity, LayoutInflater.from(parent.context).inflate(R.layout.list_reptile_collection, parent, false), listener)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
