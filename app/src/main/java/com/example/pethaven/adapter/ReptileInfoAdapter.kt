@@ -57,7 +57,6 @@ class ReptileInfoAdapter(private var context: Context,
 
         holder.reptileNameText.text = reptile.name
         holder.reptileSpeciesText.text = reptile.species
-        holder.reptileAgeText.text = reptile.age.toString()
         holder.reptileDescText.text = reptile.description
 
         reptile.imgUri?.let {
@@ -90,7 +89,6 @@ class ReptileInfoAdapter(private var context: Context,
         var reptileImageView: ImageView = itemView.findViewById(R.id.reptileImageAdapter)
         var reptileNameText: TextView = itemView.findViewById(R.id.reptileNameAdapter)
         var reptileSpeciesText: TextView = itemView.findViewById(R.id.reptileSpeciesAdapter)
-        var reptileAgeText: TextView = itemView.findViewById(R.id.reptileAgeAdapter)
         var reptileDescText: TextView = itemView.findViewById(R.id.reptileDescriptionAdapter)
 
         init {
