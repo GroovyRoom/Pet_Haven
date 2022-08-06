@@ -104,9 +104,7 @@ class TradeTestAdapter(var context: Context)
             postDescriptionView.setText(post.description)
             postUidView.setText(post.uid)
 
-            println("debug: trading UId = ${postUidView.text}")
             val currentUid = FirebaseAuth.getInstance().currentUser?.uid.toString()
-            println("debug: Current UId = ${currentUid}")
             if (currentUid == post.uid) {
                 contactSellerButton1.isEnabled = false
                 contactSellerButton2.isEnabled = false
@@ -194,6 +192,66 @@ class TradeTestAdapter(var context: Context)
 
     override fun getFilter(): Filter {
         return tradeFilter
+    }
+
+    fun getUserFilter(uid: String): Filter {
+        return object : Filter() {
+            override fun performFiltering(constraint: CharSequence): FilterResults {
+                val filteredList = ArrayList<Post>()
+                if (constraint.toString().isEmpty()) {
+                    filteredList.addAll(postListAll.filter { it.uid == uid })
+                } else {
+                    filteredList.addAll(
+                        postListAll.filter {
+                            it.description.lowercase().contains(constraint.toString().lowercase())
+                                    && it.uid == uid
+                        }
+                    )
+                }
+                val result = FilterResults().apply {
+                    values = filteredList
+                }
+                return result
+            }
+
+            override fun publishResults(constraint: CharSequence, result: FilterResults) {
+                postList.clear()
+                postList.addAll(result.values as ArrayList<Post>)
+                notifyDataSetChanged()
+            }
+        }
+
+    }
+
+    fun getOtherFilter(uid: String): Filter {
+        return object : Filter() {
+            override fun performFiltering(constraint: CharSequence): FilterResults {
+                val filteredList = ArrayList<Post>()
+                if (constraint.toString().isEmpty()) {
+                    filteredList.addAll(postListAll.filter { it.uid != uid })
+                } else {
+                    filteredList.addAll(
+                        postListAll.filter {
+                            it.description.lowercase().contains(constraint.toString().lowercase())
+                                    && it.uid != uid
+                        }
+                    )
+
+                    println("debug: filtered list size - $filteredList")
+                }
+
+                val result = FilterResults().apply {
+                    values = filteredList
+                }
+                return result
+            }
+
+            override fun publishResults(constraint: CharSequence, result: FilterResults) {
+                postList.clear()
+                postList.addAll(result.values as ArrayList<Post>)
+                notifyDataSetChanged()
+            }
+        }
     }
 }
 

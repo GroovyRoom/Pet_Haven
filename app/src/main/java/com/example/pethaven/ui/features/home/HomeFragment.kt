@@ -69,11 +69,6 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
         return view
     }
 
-    private fun setUpProgressBar(view: View) {
-        progressBar = view.findViewById(R.id.reptileListProgressBar)
-        progressBar.isIndeterminate = true
-    }
-
     private val swipeItemCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT){
         override fun onMove(
             recyclerView: RecyclerView,
@@ -97,7 +92,12 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
     }
 
 
-    // --------------------- Functions for Testing ---------------- //
+    // --------------------- Initializing Views ---------------- //
+    private fun setUpProgressBar(view: View) {
+        progressBar = view.findViewById(R.id.reptileListProgressBar)
+        progressBar.isIndeterminate = true
+    }
+
     private fun setUpRecyclerView(view: View) {
         recyclerSearchView = view.findViewById(R.id.reptileInfoRecyclerView)
         recyclerSearchView.setHasFixedSize(true)
@@ -124,23 +124,6 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
                     refreshList()
                 }
             })
-        }
-    }
-
-    private fun setUpTestViewModel() {
-        val factory = FactoryUtil.generateReptileViewModelFactory(requireActivity())
-        testViewModel = ViewModelProvider(this, factory)[HomeTestViewModel::class.java]
-
-        testViewModel.reptilesBoxes.observe(viewLifecycleOwner)
-        {
-            println("debug: reptile boxes changed")
-            reptileBoxAdaptor.updateList(testViewModel.reptilesBoxes.value!!, testViewModel.btnSwitches.value!!)
-        }
-
-        testViewModel.btnSwitches.observe(viewLifecycleOwner)
-        {
-            println("debug: btn switches changed")
-            reptileBoxAdaptor.updateList(testViewModel.reptilesBoxes.value!!, testViewModel.btnSwitches.value!!)
         }
     }
 
@@ -174,6 +157,65 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
     }
 
 
+    // --------------------- Initializing View Model  ---------------- //
+    private fun setUpTestViewModel() {
+        val factory = FactoryUtil.generateReptileViewModelFactory(requireActivity())
+        testViewModel = ViewModelProvider(this, factory)[HomeTestViewModel::class.java]
+
+        testViewModel.reptilesBoxes.observe(viewLifecycleOwner)
+        {
+            println("debug: reptile boxes changed")
+            reptileBoxAdaptor.updateList(testViewModel.reptilesBoxes.value!!, testViewModel.btnSwitches.value!!)
+        }
+
+        testViewModel.btnSwitches.observe(viewLifecycleOwner)
+        {
+            println("debug: btn switches changed")
+            reptileBoxAdaptor.updateList(testViewModel.reptilesBoxes.value!!, testViewModel.btnSwitches.value!!)
+        }
+    }
+
+    // --------------------- Updating Views  ---------------- //
+    private fun handleFabClicked(isPressed: Boolean) {
+        if (isPressed) {
+            addFab.visibility = View.VISIBLE
+            addFabTextView.visibility = View.VISIBLE
+            fabLayout.visibility = View.VISIBLE
+
+            optionsFab.startAnimation(openFabAnimation)
+            fabLayout.startAnimation(traverseFromBottomFabAnimation)
+
+            addFab.isClickable = true
+        } else {
+            optionsFab.startAnimation(closeFabAnimation)
+            fabLayout.startAnimation(traverseBottomFabAnimation)
+            fabLayout.visibility = View.GONE
+            addFab.isClickable = false
+        }
+    }
+
+    private fun setFabVisibility(isPressed: Boolean) {
+        if (isPressed) {
+            addFab.visibility = View.VISIBLE
+            addFabTextView.visibility = View.VISIBLE
+            addFab.isClickable = true
+        } else {
+            addFab.visibility = View.GONE
+            addFabTextView.visibility = View.GONE
+            addFab.isClickable = false
+        }
+    }
+
+    private fun refreshList()
+    {
+        reptileBoxAdaptor.notifyDataSetChanged()
+        reptileBoxRecyclerview.apply {
+            //adapter = null
+            //adapter = reptileAdaptor
+        }
+    }
+
+    // --------------------- Database Operations  ---------------- //
     private fun receiveAllReptiles(view: View) {
         testViewModel.reptileTask.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -207,36 +249,7 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
     }
 
 
-    private fun handleFabClicked(isPressed: Boolean) {
-        if (isPressed) {
-            addFab.visibility = View.VISIBLE
-            addFabTextView.visibility = View.VISIBLE
-            fabLayout.visibility = View.VISIBLE
-
-            optionsFab.startAnimation(openFabAnimation)
-            fabLayout.startAnimation(traverseFromBottomFabAnimation)
-
-            addFab.isClickable = true
-        } else {
-            optionsFab.startAnimation(closeFabAnimation)
-            fabLayout.startAnimation(traverseBottomFabAnimation)
-            fabLayout.visibility = View.GONE
-            addFab.isClickable = false
-        }
-    }
-
-    private fun setFabVisibility(isPressed: Boolean) {
-        if (isPressed) {
-            addFab.visibility = View.VISIBLE
-            addFabTextView.visibility = View.VISIBLE
-            addFab.isClickable = true
-        } else {
-            addFab.visibility = View.GONE
-            addFabTextView.visibility = View.GONE
-            addFab.isClickable = false
-        }
-    }
-
+    // --------------------- Adapter OnClick Listener  ---------------- //
     override fun onReptileClicked(position: Int) {
         val reptileKey = reptileInfoAdapter.getReptile(position).key
 
@@ -245,15 +258,6 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
             startActivity(intent)
         } else {
             makeToast("Error: Reptile Key not found!")
-        }
-    }
-
-    private fun refreshList()
-    {
-        reptileBoxAdaptor.notifyDataSetChanged()
-        reptileBoxRecyclerview.apply {
-            //adapter = null
-            //adapter = reptileAdaptor
         }
     }
 }

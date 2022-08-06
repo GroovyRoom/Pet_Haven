@@ -34,15 +34,14 @@ import com.google.firebase.storage.UploadTask
 class ProfileEditActivity : AppCompatActivity(), PictureDialog.OnImageResultListener {
     private var mUser: User? = null
     private lateinit var uid: String
-    private lateinit var userReference: DatabaseReference
 
-    private lateinit var iv_head: ImageView
-    private lateinit var ed_name: EditText
-    private lateinit var ed_address: EditText
-    private lateinit var ed_phone: EditText
-    private lateinit var tv_email:TextView
-    private lateinit var sp_privacy: Spinner
-    private lateinit var btn_save: Button
+    private lateinit var editImage: ImageView
+    private lateinit var editName: EditText
+    private lateinit var editAddress: EditText
+    private lateinit var editPhone: EditText
+    private lateinit var emailTextView:TextView
+    private lateinit var privacySpinner: Spinner
+    private lateinit var saveBtn: Button
 
     private lateinit var progressBar: ProgressBar
     private lateinit var profileEditViewModel: ProfileEditViewModel
@@ -60,6 +59,7 @@ class ProfileEditActivity : AppCompatActivity(), PictureDialog.OnImageResultList
 
     companion object {
         private const val PROFILE_PICTURE_DIALOG_TAG = "Profile Picture Dialog Tag"
+        private const val USER_HAS_RECEIVED_TAG = "User Has Received Tag"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,29 +68,29 @@ class ProfileEditActivity : AppCompatActivity(), PictureDialog.OnImageResultList
         setUpView()
         setUpViewModel()
 
-        hasReceived = savedInstanceState?.getBoolean("test") ?: false
+        hasReceived = savedInstanceState?.getBoolean(USER_HAS_RECEIVED_TAG) ?: false
 
         receiverCurrentUserInfo()
     }
 
     private fun setUpView() {
-        iv_head=findViewById(R.id.iv_head)
+        editImage=findViewById(R.id.iv_head)
 
-        ed_name=findViewById(R.id.ed_name)
-        ed_address=findViewById(R.id.ed_address)
-        ed_phone=findViewById(R.id.ed_phone)
+        editName=findViewById(R.id.ed_name)
+        editAddress=findViewById(R.id.ed_address)
+        editPhone=findViewById(R.id.ed_phone)
 
-        tv_email=findViewById(R.id.tv_email)
-        sp_privacy=findViewById(R.id.sp_privacy)
-        sp_privacy=findViewById(R.id.sp_privacy)
+        emailTextView=findViewById(R.id.tv_email)
+        privacySpinner=findViewById(R.id.sp_privacy)
+        privacySpinner=findViewById(R.id.sp_privacy)
 
         progressBar = findViewById(R.id.progressBar)
 
-        btn_save=findViewById(R.id.btn_save)
+        saveBtn=findViewById(R.id.btn_save)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.putBoolean("test", hasReceived)
+        outState.putBoolean(USER_HAS_RECEIVED_TAG, hasReceived)
         super.onSaveInstanceState(outState)
     }
 
@@ -100,24 +100,24 @@ class ProfileEditActivity : AppCompatActivity(), PictureDialog.OnImageResultList
         val factory = FactoryUtil.generateReptileViewModelFactory(this)
         profileEditViewModel = ViewModelProvider(this, factory)[ProfileEditViewModel::class.java]
         profileEditViewModel.profileImg.observe(this) {
-            iv_head.setImageBitmap(it)
+            editImage.setImageBitmap(it)
         }
     }
 
     ///-------------------------- Updating Views ------------------------///
     fun updateView(user: User) {
         if (!hasReceived) {
-            ed_name.setText(user.username)
-            ed_phone.setText(user.phoneNumber)
-            ed_address.setText(user.address)
-            if(user.isOpen) sp_privacy.setSelection(0) else sp_privacy.setSelection(1)
+            editName.setText(user.username)
+            editPhone.setText(user.phoneNumber)
+            editAddress.setText(user.address)
+            if(user.isOpen) privacySpinner.setSelection(0) else privacySpinner.setSelection(1)
         }
 
         if(profileEditViewModel.profileImgUri.value == null) {
             Glide.with(this)
                 .load(user.profileImageUrl)
                 .fitCenter()
-                .into(iv_head)
+                .into(editImage)
         }
 
 
@@ -125,9 +125,9 @@ class ProfileEditActivity : AppCompatActivity(), PictureDialog.OnImageResultList
 
     ///-------------------------- Check Validation ------------------------///
     private fun isFieldInputValid(): Boolean {
-        val editName = ed_name.text.toString()
-        val editPhone = ed_phone.text.toString()
-        val editAddress = ed_address.text.toString()
+        val editName = editName.text.toString()
+        val editPhone = editPhone.text.toString()
+        val editAddress = editAddress.text.toString()
 
         if(TextUtils.isEmpty(editName)){
             makeToast("Please Insert Name")
@@ -172,10 +172,10 @@ class ProfileEditActivity : AppCompatActivity(), PictureDialog.OnImageResultList
 
         if(mUser==null) mUser = User(uid)
         mUser!!.apply {
-            username = ed_name.text.toString()
-            address = ed_phone.text.toString()
-            phoneNumber = ed_address.text.toString()
-            isOpen = sp_privacy.selectedItemPosition == 0
+            username = editName.text.toString()
+            address = editAddress.text.toString()
+            phoneNumber = editPhone.text.toString()
+            isOpen = privacySpinner.selectedItemPosition == 0
         }
 
 
@@ -183,11 +183,15 @@ class ProfileEditActivity : AppCompatActivity(), PictureDialog.OnImageResultList
         updateUserInDatabase(mUser!!)
     }
 
+    fun onProfileCancelClicked(view: View) {
+        finish()
+    }
+
     ///-------------------------- DataBase Operations------------------------///
 
     private fun receiverCurrentUserInfo() {
-        val user = FirebaseAuth.getInstance().currentUser
-        tv_email.text = user?.email ?: ""
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        emailTextView.text = currentUser?.email ?: ""
 
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -234,7 +238,7 @@ class ProfileEditActivity : AppCompatActivity(), PictureDialog.OnImageResultList
                 finish()
             }
             .addOnFailureListener {
-                makeToast(it.message ?: "Unknown Exception Occured")
+                makeToast(it.message ?: "Unknown Exception Occurred")
             }
     }
 
@@ -259,5 +263,6 @@ class ProfileEditActivity : AppCompatActivity(), PictureDialog.OnImageResultList
         profileEditViewModel.profileImg.value = bitmap
         profileEditViewModel.profileImgUri.value = uri
     }
+
 
 }
