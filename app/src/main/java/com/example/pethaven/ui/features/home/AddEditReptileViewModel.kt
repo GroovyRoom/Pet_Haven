@@ -38,9 +38,11 @@ class AddEditReptileViewModel(private val repository: ReptileRepository): ViewMo
     fun getReptileFromCurrentUser(key: String) = repository.getReptileFromCurrentUser(key)
 
     fun deleteReptile(key: String) = repository.deleteReptile(key)
+
     fun deleteImage(imgUri: String) = repository.deleteImage(imgUri)
 
     fun uploadImage(uri: Uri) = repository.uploadImage(uri)
 
+    fun getPostsByReptileID(rid: String) = repository.getPostsByReptileId(rid)
 
 }

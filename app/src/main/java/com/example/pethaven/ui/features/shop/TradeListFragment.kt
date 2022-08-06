@@ -13,8 +13,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pethaven.R
 import com.example.pethaven.domain.PostViewModel
+import com.example.pethaven.domain.Reptile
+import com.example.pethaven.ui.features.home.AddEditReptileViewModel
+import com.example.pethaven.util.AndroidExtensions.makeToast
+import com.example.pethaven.util.FactoryUtil
 import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.fragment_trade_list.*
 
 
@@ -23,6 +30,7 @@ class TradeListFragment : Fragment() {
     private val binding get() = _binding!!*/
 
     private lateinit var tradeListViewModel: PostViewModel
+    private lateinit var addEditReptileViewModel: AddEditReptileViewModel
     private lateinit var recyclerView: RecyclerView
 //    private lateinit var adapter: TradeListRecyclerViewAdapter
 
@@ -189,4 +197,5 @@ class TradeListFragment : Fragment() {
             filterPost(tradeListSearchView.query.toString())
         }
     }
+
 }

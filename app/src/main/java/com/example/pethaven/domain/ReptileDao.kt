@@ -40,6 +40,13 @@ class ReptileDao {
 
     fun getAllPost() = postReference
 
+
+    fun deletePost(key: String) =
+        postReference.child(key).removeValue()
+
+    fun getPostByReptileID(rid: String) =
+        postReference.orderByChild("rid").equalTo(rid)
+
     ///-------------------------- Operations for Reptile Objects-------------------------///
     fun addReptile(reptile: Reptile) =
         userReference.child(Reptile::class.java.simpleName).push().setValue(reptile)

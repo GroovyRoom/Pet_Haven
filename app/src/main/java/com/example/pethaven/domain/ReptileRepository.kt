@@ -26,6 +26,8 @@ class ReptileRepository(private val reptileDao: ReptileDao) {
     ///-------------------------- Operations for Post Objects-------------------------///
     fun addPost(post: Post) = reptileDao.addPost(post)
     fun getAllPost() = reptileDao.getAllPost()
+    fun getPostsByReptileId(rid: String) = reptileDao.getPostByReptileID(rid)
+    fun deletePost(key: String) = reptileDao.deletePost(key)
 
     ///-------------------------- Operations for Reptile Objects-------------------------///
     fun addReptile(reptile: Reptile) = reptileDao.addReptile(reptile)
@@ -61,7 +63,7 @@ class ReptileRepository(private val reptileDao: ReptileDao) {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+
             }
 
         })

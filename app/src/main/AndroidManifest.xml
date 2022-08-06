@@ -17,7 +17,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PetHaven"
         tools:targetApi="31">
-        <activity android:name=".ui.features.chat.ChatLogActivity"></activity>
+        <activity
+            android:name=".EditTradePostActivity"
+            android:exported="false" />
+        <activity android:name=".ui.features.chat.ChatLogActivity" />
         <activity
             android:name=".ui.features.home.ReptileProfileActivity"
             android:exported="false" />
@@ -38,13 +41,13 @@
         </activity>
         <activity
             android:name=".ui.features.profile.ProfileEditActivity"
-            android:label="Edit Profile"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan">
-        </activity>
-        <activity android:name=".ui.LoginActivity"/>
+            android:label="Edit Profile"
+            android:windowSoftInputMode="adjustPan"></activity>
+        <activity android:name=".ui.LoginActivity" />
         <activity android:name=".ui.RegisterActivity" />
         <activity android:name=".ui.features.shop.TradePostActivity" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.example.pethaven"

@@ -12,6 +12,7 @@ import com.example.pethaven.domain.Post
 import com.example.pethaven.domain.Reptile
 import com.example.pethaven.domain.User
 import com.example.pethaven.ui.features.chat.ChatFragment
+import com.example.pethaven.ui.features.home.AddEditReptileViewModel
 import com.example.pethaven.ui.features.home.ReptileProfileViewModel
 import com.example.pethaven.util.AndroidExtensions.makeToast
 import com.example.pethaven.util.FactoryUtil
@@ -24,6 +25,7 @@ class TradePostActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTradePostBinding
 
     private lateinit var tradePostViewModel: TradePostViewModel
+    private lateinit var reptileViewModel: AddEditReptileViewModel
 
     private lateinit var reptileKey: String
     private lateinit var databaseReference: DatabaseReference
@@ -86,8 +88,8 @@ class TradePostActivity : AppCompatActivity() {
             addTradePost(
                 Post(
                         rid = reptileKey,
+                        imgUri = reptile?.imgUri,
                         reptileName = reptile!!.name,
-                        imgUri = reptile!!.imgUri,
                         ownerName = postOwner!!.username,
                         date = createDateString(),
                         title = title,
@@ -179,4 +181,6 @@ class TradePostActivity : AppCompatActivity() {
             }
 
     }
+
+
 }

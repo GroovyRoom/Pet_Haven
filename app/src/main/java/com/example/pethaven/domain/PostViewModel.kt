@@ -15,4 +15,7 @@ class PostViewModel: ViewModel() {
     init {
         repository.loadPosts(_allPosts)
     }
+
+    fun getReptileFromCurrentUser(key: String) = repository.getReptileFromCurrentUser(key)
+
 }

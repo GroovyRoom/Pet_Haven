@@ -3,7 +3,6 @@ package com.example.pethaven.ui.features.home
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -17,10 +16,9 @@ import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.CustomTarget
-import com.bumptech.glide.request.transition.Transition
 import com.example.pethaven.R
 import com.example.pethaven.dialog.PictureDialog
+import com.example.pethaven.domain.Post
 import com.example.pethaven.domain.Reptile
 import com.example.pethaven.ui.MainActivity
 import com.example.pethaven.util.AndroidExtensions.makeToast
@@ -55,7 +53,6 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
     private var isEditMode: Boolean = false
     private var reptileKeyToEdit: String? = null
     private var reptileToEdit: Reptile ?= null
-
     /*
         Check if data has already been received to prevent editText from being updated again during
         orientation change
@@ -242,7 +239,7 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
             reptile.imgUri = reptileToEdit?.imgUri
             updateReptileInDatabaseAux(reptileKeyToEdit!!, reptile)
         }
-
+        updatePostsInDatabase(reptileKeyToEdit!!, reptile)
     }
 
     private fun updateReptileInDatabaseAux(key: String, reptile: Reptile) {
@@ -254,6 +251,22 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
             .addOnFailureListener {
                 makeToast(it.message ?: "Unknown Exception Occurred")
             }
+    }
+
+    private fun updatePostsInDatabase(key: String, reptile: Reptile) {
+        addEditViewModel.getPostsByReptileID(key).addListenerForSingleValueEvent(object: ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (postSnapshot in snapshot.children) {
+                    postSnapshot.ref.child("imgUri").setValue(reptile.imgUri)
+                    postSnapshot.ref.child("reptileName").setValue(reptile.name)
+                    println("Debug: Reptile Name: ${reptile.name}")
+                    }
+                }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
     }
 
     private fun addToDatabaseAndFinish(reptile: Reptile) {
@@ -277,7 +290,7 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
     }
 
     private fun deleteReptileInDatabase(key: String) {
-
+        deletePostInDatabase(key)
         addEditViewModel.deleteImage(reptileToEdit!!.imgUri!!)
             .addOnSuccessListener {
                 addEditViewModel.deleteReptile(key).addOnSuccessListener {
@@ -290,6 +303,21 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
             .addOnFailureListener {
                 makeToast(it.message ?: "Unknown Exception Occurred")
             }
+
+        // Also delete posts associated with the reptile.
+
+    }
+    private fun deletePostInDatabase(key: String) {
+        addEditViewModel.getPostsByReptileID(key).addListenerForSingleValueEvent(object: ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (postSnapShot in snapshot.children) {
+                    postSnapShot.ref.removeValue()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
     }
 
     private fun getReptileFromDatabase() {

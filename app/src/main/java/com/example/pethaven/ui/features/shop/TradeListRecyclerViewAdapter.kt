@@ -93,25 +93,14 @@ class TradeListRecyclerViewAdapter(var postList: ArrayList<Post>)
         fun bind(post: Post) {
             println("debug: OnBind description: ${post.description}")
             println("debug: UID: ${post.uid}")
-            println("debug: reptileName: ${post.reptileName}")
-            binding.tradePostReptileNameEditText.setText(post.reptileName)
             binding.tradePostPriceEditText.setText(post.price.toString())
             binding.tradePostDateEditText.setText(post.date)
-            binding.tradePostOwnerNameEditText.setText(post.ownerName)
             binding.tradePostDescriptionEditText.setText(post.description)
             binding.tradePostUid.setText(post.uid)
             val currentUid = FirebaseAuth.getInstance().currentUser?.uid.toString()
             if (currentUid.compareTo(binding.tradePostUid.text.toString()) == 0) {
                 binding.tradePostContactSellerButton.setEnabled(false)
                 binding.tradePostContactSellerButton2.setEnabled(false)
-            }
-            post.let {
-                if (it.imgUri != null) {
-                    Glide.with(context)
-                        .load(it.imgUri)
-                        .fitCenter()
-                        .into(binding.editReptileImg)
-                }
             }
         }
 

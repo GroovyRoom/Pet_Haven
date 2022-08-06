@@ -12,9 +12,11 @@ import androidx.transition.TransitionManager
 import com.bumptech.glide.Glide
 import com.example.pethaven.R
 import com.example.pethaven.domain.Post
+import com.example.pethaven.domain.Reptile
 import com.example.pethaven.domain.User
 import com.example.pethaven.ui.features.chat.ChatFragment.Companion.USER_KEY
 import com.example.pethaven.ui.features.chat.ChatLogActivity
+import com.example.pethaven.util.AndroidExtensions.makeToast
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -97,7 +99,7 @@ class TradeTestAdapter(var context: Context)
             postDateView.setText(post.date)
             postOwnerView.setText(post.ownerName)
             postDescriptionView.setText(post.description)
-            postUidView.setText(post.uid)
+            postUidView.text = post.uid
 
             val currentUid = FirebaseAuth.getInstance().currentUser?.uid.toString()
             if (currentUid == post.uid) {
@@ -164,7 +166,7 @@ class TradeTestAdapter(var context: Context)
         fun onSuccess(dataSnapshotValue: User?)
     }
 
-    private fun fetchToUser(uid: kotlin.String, listener: OnGetDataListener) {
+    private fun fetchToUser(uid: String, listener: OnGetDataListener) {
         val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
         ref.addListenerForSingleValueEvent(object: ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {
