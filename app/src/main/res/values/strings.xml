@@ -43,4 +43,6 @@
     <string name="privacy_setting">Privacy Setting</string>
     <string name="privacy_hint">Allow sharing of phone number \nand address</string>
     <string name="profile_name_hint">Insert Name here</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
