@@ -64,7 +64,9 @@ class ReptileInfoAdapterFav(private var context: Context,
 
         holder.reptileNameText.text = "Name: " + reptile.name
         holder.reptileSpeciesText.text = "Species: " + reptile.species
+        holder.reptileAgeText.text = "Age: " + reptile.age
         holder.reptileDescText.text = "Description: " + reptile.description
+
         if(reptile.isFav)
         {
             holder.btnFav.setImageResource(R.drawable.ic_fav)
@@ -112,6 +114,7 @@ class ReptileInfoAdapterFav(private var context: Context,
         : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         var reptileImageView: ImageView = itemView.findViewById(R.id.reptileImageAdapter)
         var reptileNameText: TextView = itemView.findViewById(R.id.reptileNameAdapter)
+        var reptileAgeText: TextView = itemView.findViewById(R.id.reptileAgeAdapter)
         var reptileSpeciesText: TextView = itemView.findViewById(R.id.reptileSpeciesAdapter)
         var reptileDescText: TextView = itemView.findViewById(R.id.reptileDescriptionAdapter)
         val btnFav: ImageButton = itemView.findViewById(R.id.btnFav)

@@ -47,6 +47,14 @@
                 tools:text="Species" />
 
             <TextView
+                android:id="@+id/reptileAgeAdapter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:textSize="15sp"
+                tools:text="Age" />
+
+            <TextView
                 android:id="@+id/reptileDescriptionAdapter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
