@@ -18,6 +18,17 @@
         app:layout_constraintStart_toEndOf="@+id/imageView_receiving"
         app:layout_constraintTop_toTopOf="@+id/imageView_receiving" />
 
+    <TextView
+        android:id="@+id/textView_receiving_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="20dp"
+        android:text="HH:MM"
+        app:layout_constraintLeft_toRightOf="@+id/textView_receiving"
+        app:layout_constraintTop_toTopOf="@+id/textView_receiving"/>
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageView_receiving"
         android:layout_width="50dp"
