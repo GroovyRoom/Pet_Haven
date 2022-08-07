@@ -248,7 +248,7 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
             reptile.imgUri = reptileToEdit?.imgUri
             updateReptileInDatabaseAux(reptileKeyToEdit!!, reptile)
         }
-        updatePostsInDatabase(reptileKeyToEdit!!, reptile)
+        //updatePostsInDatabase(reptileKeyToEdit!!, reptile)
     }
 
     private fun updateReptileInDatabaseAux(key: String, reptile: Reptile) {
@@ -260,6 +260,8 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
             .addOnFailureListener {
                 makeToast(it.message ?: "Unknown Exception Occurred")
             }
+        updatePostsInDatabase(reptileKeyToEdit!!, reptile)
+
     }
 
     private fun updatePostsInDatabase(key: String, reptile: Reptile) {
