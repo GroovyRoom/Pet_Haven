@@ -4,11 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import android.widget.*
 import androidx.core.view.get
-import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -49,7 +46,6 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
         val view =  inflater.inflate(R.layout.fragment_home_test, container, false)
 
         setUpTestViewModel()
-        println(testViewModel.isSearchOn.value!!)
         setUpSearchLayout(view)
         setUpProgressBar(view)
         setUpBotAppBar(view)
@@ -104,7 +100,7 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
         recyclerSearchView.setHasFixedSize(true)
         recyclerSearchView.layoutManager = LinearLayoutManager(requireActivity())
 
-        reptileInfoAdapter = ReptileInfoAdapter(requireActivity(), ArrayList(), this)
+        reptileInfoAdapter = ReptileInfoAdapter(requireActivity(), ArrayList(), this, testViewModel)
         recyclerSearchView.adapter = reptileInfoAdapter
 
         val itemTouchHelper = ItemTouchHelper(swipeItemCallback)
@@ -124,7 +120,7 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
         }
         reptileBoxRecyclerview.apply {
             layoutManager = LinearLayoutManager(requireContext())
-            reptileBoxAdaptor = ReptileBoxAdaptor(requireActivity())
+            reptileBoxAdaptor = ReptileBoxAdaptor(requireActivity(), testViewModel)
             adapter = reptileBoxAdaptor
             reptileBoxAdaptor.setOnItemClickListener(object : ReptileBoxAdaptor.OnItemClickListener
             {
@@ -201,6 +197,7 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
     private fun setUpTestViewModel() {
         val factory = FactoryUtil.generateReptileViewModelFactory(requireActivity())
         testViewModel = ViewModelProvider(this, factory)[HomeTestViewModel::class.java]
+        testViewModel.init()
         if(testViewModel.isSearchOn.value == null)
         {
             testViewModel.isSearchOn.value = false
@@ -230,14 +227,18 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
                 }
 
                 val list = ArrayList<Reptile>()
-                testViewModel.reptilesBoxes.value!!.clear()
+                testViewModel.reptilesBoxes.value!![0].clear()
+                testViewModel.reptilesBoxes.value!![1].clear()
+                testViewModel.reptilesBoxes.value!![2].clear()
                 for (postSnapShot in snapshot.children) {
                     val reptile = postSnapShot.getValue(Reptile::class.java)
                     reptile?.let {
-                        //println(it.isFav)
                         it.key = postSnapShot.key
                         list.add(it)
-                        testViewModel.addReptile(it)
+                        if(it.isFav)
+                        {
+                            val _added = testViewModel.addReptileToBox(it)
+                        }
                     }
                 }
                 reptileInfoAdapter.setReptileList(list)

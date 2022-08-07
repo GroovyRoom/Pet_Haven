@@ -9,10 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.pethaven.R
 import com.example.pethaven.domain.Reptile
+import com.example.pethaven.ui.features.home.HomeTestViewModel
 
 class ReptileInfoAdapter(private var context: Context,
                          private var reptileList: ArrayList<Reptile>,
-                         private var clickListener: OnReptileItemCLickedListener)
+                         private var clickListener: OnReptileItemCLickedListener,
+                         private val viewModel: HomeTestViewModel)
     : RecyclerView.Adapter<ReptileInfoAdapter.ViewHolder>(), Filterable{
 
     var reptileListAll = ArrayList<Reptile>(reptileList)
@@ -63,6 +65,23 @@ class ReptileInfoAdapter(private var context: Context,
         holder.reptileNameText.text = reptile.name
         holder.reptileSpeciesText.text = reptile.species
         holder.reptileDescText.text = reptile.description
+        if(reptile.isFav)
+        {
+            holder.btnFav.setImageResource(R.drawable.ic_fav)
+        }
+        else
+        {
+            holder.btnFav.setImageResource(R.drawable.ic_unfav)
+        }
+        if(viewModel.getBoxSize() >= 9)
+        {
+            if(!reptile.isFav)
+            holder.btnFav.isEnabled = false
+        }
+        else
+        {
+            holder.btnFav.isEnabled = true
+        }
 
         reptile.imgUri?.let {
             Glide.with(context).
@@ -95,9 +114,22 @@ class ReptileInfoAdapter(private var context: Context,
         var reptileNameText: TextView = itemView.findViewById(R.id.reptileNameAdapter)
         var reptileSpeciesText: TextView = itemView.findViewById(R.id.reptileSpeciesAdapter)
         var reptileDescText: TextView = itemView.findViewById(R.id.reptileDescriptionAdapter)
-
+        val btnFav: ImageButton = itemView.findViewById(R.id.btnFav)
         init {
             itemView.setOnClickListener(this)
+            btnFav.setOnClickListener {
+                val reptile = reptileList[adapterPosition]
+                if(reptile.isFav)
+                {
+                    viewModel.unFav(reptile)
+                    btnFav.setImageResource(R.drawable.ic_unfav)
+                }
+                else
+                {
+                    viewModel.fav(reptile)
+                    btnFav.setImageResource(R.drawable.ic_fav)
+                }
+            }
         }
 
         override fun onClick(view: View?) {

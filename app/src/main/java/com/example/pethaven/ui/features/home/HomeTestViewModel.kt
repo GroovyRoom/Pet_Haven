@@ -1,5 +1,6 @@
 package com.example.pethaven.ui.features.home
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.pethaven.domain.Reptile
@@ -9,20 +10,29 @@ import com.example.pethaven.util.LiveDataExtensions.notifyObserver
 class HomeTestViewModel(private val repository: ReptileRepository): ViewModel() {
     val isSearchOn = MutableLiveData<Boolean>(false)
     var reptileTask = getAllUserReptile()
-    var favCount = MutableLiveData<Int>(0)
 
-    val reptilesBoxes = MutableLiveData<ArrayList<ArrayList<Reptile>>>(ArrayList()).apply {
-        value = arrayListOf(ArrayList<Reptile>(3), ArrayList<Reptile>(3), ArrayList<Reptile>(3))
-    }
+    val reptilesBoxes = MutableLiveData<ArrayList<ArrayList<Reptile>>>()
 
-    val btnSwitches = MutableLiveData<ArrayList<Boolean>>(ArrayList()).apply {
-        value = arrayListOf(false, false, false)
-    }
+    val btnSwitches = MutableLiveData<ArrayList<Boolean>>()
 
-    fun addReptile(reptile: Reptile)
+    fun init()
     {
-        if(favCount.value!! >= 9)
-            return
+        if(reptilesBoxes.value == null || reptilesBoxes.value!!.isEmpty())
+        {
+            val arr = arrayListOf<ArrayList<Reptile>>(ArrayList<Reptile>(3), ArrayList<Reptile>(3), ArrayList<Reptile>(3))
+            reptilesBoxes.value = arr
+        }
+        if(btnSwitches.value == null || btnSwitches.value!!.isEmpty())
+        {
+            val arr = arrayListOf(false, false, false)
+            btnSwitches.value = arr
+        }
+    }
+
+    fun addReptileToBox(reptile: Reptile): Boolean
+    {
+        if(getBoxSize() >= 9)
+            return false
 
         if(reptilesBoxes.value!!.isEmpty())
         {
@@ -44,8 +54,49 @@ class HomeTestViewModel(private val repository: ReptileRepository): ViewModel() 
                 break
             }
         }
-        favCount.value = favCount.value!! + 1
         reptilesBoxes.notifyObserver()
+        return true
+    }
+
+    private fun removeReptileFromBox(reptile: Reptile)
+    {
+        var arr: Reptile
+        for(i in 0..2)
+        {
+            for(j in 0 until reptilesBoxes.value!![i].size)
+            {
+                if(reptilesBoxes.value!![i][j].key == reptile.key)
+                {
+                    when (reptilesBoxes.value!![i].size) {
+                        1 -> {
+                            reptilesBoxes.value!![i].removeLast()
+                        }
+                        2 -> {
+                            if(j == 0) {
+                                reptilesBoxes.value!![i][0] = reptilesBoxes.value!![i][1]
+                            }
+                            reptilesBoxes.value!![i].removeLast()
+                        }
+                        3 -> {
+                            if(j == 0) {
+                                reptilesBoxes.value!![i][0] = reptilesBoxes.value!![i][2]
+                            } else if(j == 1) {
+                                reptilesBoxes.value!![i][1] = reptilesBoxes.value!![i][2]
+                            }
+                            reptilesBoxes.value!![i].removeLast()
+                        }
+                    }
+                    break
+                }
+            }
+        }
+
+        reptilesBoxes.notifyObserver()
+    }
+
+    fun getBoxSize(): Int
+    {
+        return reptilesBoxes.value!![0].size + reptilesBoxes.value!![1].size + reptilesBoxes.value!![2].size;
     }
 
     fun toggleBtnSwitch(position: Int)
@@ -54,5 +105,21 @@ class HomeTestViewModel(private val repository: ReptileRepository): ViewModel() 
         btnSwitches.notifyObserver()
     }
 
-    fun getAllUserReptile() = repository.getAllUserReptile()
+    private fun getAllUserReptile() = repository.getAllUserReptile()
+
+    private fun updateReptileInDatabase(key:String, reptile: Reptile) = repository.updateReptile(key, reptile)
+
+    fun fav(reptile: Reptile)
+    {
+        reptile.isFav = true
+        updateReptileInDatabase(reptile.key!!, reptile)
+        addReptileToBox(reptile)
+    }
+
+    fun unFav(reptile: Reptile)
+    {
+        reptile.isFav = false
+        updateReptileInDatabase(reptile.key!!, reptile)
+        removeReptileFromBox(reptile)
+    }
 }
