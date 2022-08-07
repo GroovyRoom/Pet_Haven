@@ -7,9 +7,9 @@ import com.example.pethaven.domain.ReptileRepository
 import com.example.pethaven.util.LiveDataExtensions.notifyObserver
 
 class HomeTestViewModel(private val repository: ReptileRepository): ViewModel() {
-    val isSearchOn = MutableLiveData(false)
+    val isSearchOn = MutableLiveData<Boolean>(false)
     var reptileTask = getAllUserReptile()
-    private val reptileList = ArrayList<Reptile>();
+    var favCount = MutableLiveData<Int>(0)
 
     val reptilesBoxes = MutableLiveData<ArrayList<ArrayList<Reptile>>>(ArrayList()).apply {
         value = arrayListOf(ArrayList<Reptile>(3), ArrayList<Reptile>(3), ArrayList<Reptile>(3))
@@ -21,6 +21,9 @@ class HomeTestViewModel(private val repository: ReptileRepository): ViewModel() 
 
     fun addReptile(reptile: Reptile)
     {
+        if(favCount.value!! >= 9)
+            return
+
         if(reptilesBoxes.value!!.isEmpty())
         {
             reptilesBoxes.value!!.add(ArrayList<Reptile>(3))
@@ -41,6 +44,7 @@ class HomeTestViewModel(private val repository: ReptileRepository): ViewModel() 
                 break
             }
         }
+        favCount.value = favCount.value!! + 1
         reptilesBoxes.notifyObserver()
     }
 

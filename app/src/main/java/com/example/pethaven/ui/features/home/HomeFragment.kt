@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.*
+import androidx.core.view.get
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -48,6 +49,7 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
         val view =  inflater.inflate(R.layout.fragment_home_test, container, false)
 
         setUpTestViewModel()
+        println(testViewModel.isSearchOn.value!!)
         setUpSearchLayout(view)
         setUpProgressBar(view)
         setUpBotAppBar(view)
@@ -91,6 +93,14 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
     private fun setUpSearchLayout(view: View) {
         searchLayout = view.findViewById(R.id.reptileInfoLayout)
         recyclerSearchView = view.findViewById(R.id.reptileInfoRecyclerView)
+        if(testViewModel.isSearchOn.value!!)
+        {
+            searchLayout.visibility = View.VISIBLE
+        }
+        else
+        {
+            searchLayout.visibility = View.GONE
+        }
         recyclerSearchView.setHasFixedSize(true)
         recyclerSearchView.layoutManager = LinearLayoutManager(requireActivity())
 
@@ -104,6 +114,14 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
     private fun setUpReptileBoxRecyclerView(view: View)
     {
         reptileBoxRecyclerview = view.findViewById(R.id.reptileBoxRecyclerView)
+        if(testViewModel.isSearchOn.value!!)
+        {
+            reptileBoxRecyclerview.visibility = View.GONE
+        }
+        else
+        {
+            reptileBoxRecyclerview.visibility = View.VISIBLE
+        }
         reptileBoxRecyclerview.apply {
             layoutManager = LinearLayoutManager(requireContext())
             reptileBoxAdaptor = ReptileBoxAdaptor(requireActivity())
@@ -124,11 +142,18 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
             val intent = Intent(requireActivity(), AddEditReptileActivity::class.java)
             startActivity(intent)
         }
+        if(testViewModel.isSearchOn.value!!)
+        {
+            botAppBar.menu[0].icon = requireContext().getDrawable(R.drawable.ic_search_off)
+        }
+        else
+        {
+            botAppBar.menu[0].icon = requireContext().getDrawable(R.drawable.ic_search_white)
+        }
         botAppBar.setOnMenuItemClickListener{
             when(it.itemId)
             {
                 R.id.menuBtnSearch -> {
-                    testViewModel.isSearchOn.value = !testViewModel.isSearchOn.value!!
                     if(!testViewModel.isSearchOn.value!!)
                     {
                         it.icon = requireContext().getDrawable(R.drawable.ic_search_off)
@@ -141,6 +166,7 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
                         searchLayout.visibility = View.GONE
                         reptileBoxRecyclerview.visibility = View.VISIBLE
                     }
+                    testViewModel.isSearchOn.value = !testViewModel.isSearchOn.value!!
                     true
                 }
                 R.id.menuBtnTop -> {
@@ -175,6 +201,10 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
     private fun setUpTestViewModel() {
         val factory = FactoryUtil.generateReptileViewModelFactory(requireActivity())
         testViewModel = ViewModelProvider(this, factory)[HomeTestViewModel::class.java]
+        if(testViewModel.isSearchOn.value == null)
+        {
+            testViewModel.isSearchOn.value = false
+        }
 
         testViewModel.reptilesBoxes.observe(viewLifecycleOwner)
         {
