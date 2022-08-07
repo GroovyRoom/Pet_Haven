@@ -242,8 +242,9 @@ class TradeListFragment : Fragment(), TradeTestAdapter.OnPostClickedListener {
     }
     override fun onPostClicked(key: String?) {
         if (key != null) {
-            val intent = Intent(context, EditTradePostActivity::class.java)
-            intent.putExtra("post key", key)
+/*            val intent = Intent(context, EditTradePostActivity::class.java)
+            intent.putExtra("post key", key)*/
+            val intent = EditTradePostActivity.makeIntent(requireActivity(), key)
             startActivity(intent)
         } else {
             makeToast("Error: Post Key not found!")
