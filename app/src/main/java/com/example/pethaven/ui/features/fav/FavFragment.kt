@@ -80,6 +80,10 @@ class FavFragment : Fragment(), ReptileInfoAdapterFav.OnReptileItemCLickedListen
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+    }
+
 
     // --------------------- Initializing Views ---------------- //
     private fun setUpProgressBar(view: View) {

@@ -76,6 +76,7 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
     }
 
     override fun onDestroy() {
+        super.onDestroy()
         valueEventListener?.let { databaseReference.removeEventListener(it) }
     }
 
