@@ -47,6 +47,7 @@
             android:exported="true"
             android:label="Edit Profile"
             android:windowSoftInputMode="adjustPan"></activity>
+        <activity android:name=".ui.features.fav.FavReptileProfileActivity" />
         <activity android:name=".ui.LoginActivity" />
         <activity android:name=".ui.RegisterActivity" />
         <activity android:name=".ui.features.shop.TradePostActivity" />
