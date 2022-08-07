@@ -43,7 +43,6 @@ class EditTradePostActivity : AppCompatActivity() {
         onSaveClicked()
         onCancelClicked()
         getPostFromDatabase()
-        checkPermission()
     }
 
     override fun onDestroy() {
@@ -143,7 +142,9 @@ class EditTradePostActivity : AppCompatActivity() {
                     return
                 }
                 post = snapshot.getValue(Post::class.java)
+                println("Debug: ${post?.uid}")
                 post?.let {
+                    checkPermission()
                     updateView(it)
                 }
             }
@@ -178,6 +179,7 @@ class EditTradePostActivity : AppCompatActivity() {
 
     private fun checkPermission() {
         FirebaseAuth.getInstance().currentUser?.let {
+            println("Debug: ${it.uid} == ${post?.uid}")
             if (it.uid == post!!.uid) {
                 hasAccess = true
             }
