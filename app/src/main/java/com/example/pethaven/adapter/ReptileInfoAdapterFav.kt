@@ -62,10 +62,10 @@ class ReptileInfoAdapterFav(private var context: Context,
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val reptile = reptileList[position]
 
-        holder.reptileNameText.text = "Name: " + reptile.name
-        holder.reptileSpeciesText.text = "Species: " + reptile.species
-        holder.reptileAgeText.text = "Age: " + reptile.age
-        holder.reptileDescText.text = "Description: " + reptile.description
+        holder.reptileNameText.text = reptile.name
+        holder.reptileSpeciesText.text = reptile.species
+        holder.reptileAgeText.text = reptile.age.toString()
+        holder.reptileDescText.text = reptile.description
 
         if(reptile.isFav)
         {
@@ -117,7 +117,7 @@ class ReptileInfoAdapterFav(private var context: Context,
         var reptileAgeText: TextView = itemView.findViewById(R.id.reptileAgeAdapter)
         var reptileSpeciesText: TextView = itemView.findViewById(R.id.reptileSpeciesAdapter)
         var reptileDescText: TextView = itemView.findViewById(R.id.reptileDescriptionAdapter)
-        val btnFav: ImageButton = itemView.findViewById(R.id.btnFav)
+        val btnFav: ImageView = itemView.findViewById(R.id.btnFav)
         init {
             itemView.setOnClickListener(this)
             btnFav.setOnClickListener {
