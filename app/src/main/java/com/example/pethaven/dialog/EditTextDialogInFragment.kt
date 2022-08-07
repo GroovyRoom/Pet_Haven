@@ -11,9 +11,7 @@ import androidx.fragment.app.DialogFragment
 import com.example.pethaven.R
 
 
-/*
-    From George Andreas MyRuns
- */
+
 /**
  * Dialog Fragment supporting Edit Text
  */

@@ -89,16 +89,9 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
 
         Permissions.checkImagePermissions(this)
 
+        // Check if activity is on Edit Mode
         hasReceived = savedInstanceState?.getBoolean(HAS_RECEIVED_TAG) ?: false
-        isEditMode = intent.getBooleanExtra(IS_EDIT_MODE, false)
-        if (isEditMode) {
-            reptileKeyToEdit = intent.getStringExtra(EDIT_REPTILE_KEY_TAG)
-            if (reptileKeyToEdit == null) {
-                makeToast("Error in receiving reptile Key!")
-                return
-            }
-            getReptileFromDatabase()
-        }
+        checkIsEditMode()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -169,6 +162,18 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
         addEditViewModel = ViewModelProvider(this, factory).get(AddEditReptileViewModel::class.java)
         addEditViewModel.reptileImg.observe(this) {
             reptileImgView.setImageBitmap(it)
+        }
+    }
+
+    private fun checkIsEditMode() {
+        isEditMode = intent.getBooleanExtra(IS_EDIT_MODE, false)
+        if (isEditMode) {
+            reptileKeyToEdit = intent.getStringExtra(EDIT_REPTILE_KEY_TAG)
+            if (reptileKeyToEdit == null) {
+                makeToast("Error in receiving reptile Key!")
+                return
+            }
+            getReptileFromDatabase()
         }
     }
 
