@@ -196,7 +196,6 @@ class TradeListFragment : Fragment(), TradeTestAdapter.OnPostClickedListener {
     override fun onResume() {
         super.onResume()
         tradeListViewModel.getPosts()
-        println("Debug: Resuming!")
     }
     override fun onPostClicked(key: String?) {
         if (key != null) {
