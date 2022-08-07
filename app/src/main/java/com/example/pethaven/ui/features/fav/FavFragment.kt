@@ -15,6 +15,7 @@ import com.example.pethaven.adapter.ReptileBoxAdaptor
 import com.example.pethaven.adapter.ReptileInfoAdapterFav
 import com.example.pethaven.domain.Reptile
 import com.example.pethaven.ui.features.home.AddEditReptileActivity
+import com.example.pethaven.ui.features.home.ReptileProfileActivity
 import com.example.pethaven.ui.features.shop.TradePostActivity
 import com.example.pethaven.util.AndroidExtensions.makeToast
 import com.example.pethaven.util.FactoryUtil
@@ -138,11 +139,6 @@ class FavFragment : Fragment(), ReptileInfoAdapterFav.OnReptileItemCLickedListen
 
     private fun setUpBotAppBar(view: View) {
         botAppBar = view.findViewById(R.id.botAppBar)
-        addFab = view.findViewById(R.id.fabAddReptile)
-        addFab.setOnClickListener{
-            val intent = Intent(requireActivity(), AddEditReptileActivity::class.java)
-            startActivity(intent)
-        }
         if(testViewModel.isSearchOn.value!!)
         {
             botAppBar.menu[0].icon = requireContext().getDrawable(R.drawable.ic_search_off)
@@ -266,7 +262,7 @@ class FavFragment : Fragment(), ReptileInfoAdapterFav.OnReptileItemCLickedListen
         val reptileKey = reptileInfoAdapterFav.getReptile(position).key
 
         if (reptileKey != null) {
-            val intent = FavReptileProfileActivity.makeIntent(requireActivity(), reptileKey)
+            val intent = ReptileProfileActivity.makeIntent(requireActivity(), reptileKey)
             startActivity(intent)
         } else {
             makeToast("Error: Reptile Key not found!")

@@ -14,6 +14,7 @@ import com.example.pethaven.domain.Reptile
 import com.example.pethaven.ui.features.fav.FavTestViewModel
 import com.example.pethaven.ui.features.fav.FavReptileProfileActivity
 import com.example.pethaven.ui.features.home.AddEditReptileActivity
+import com.example.pethaven.ui.features.home.ReptileProfileActivity
 
 class ReptileBoxAdaptor(private val activity: Context,private val viewModel: FavTestViewModel): RecyclerView.Adapter<RecyclerView.ViewHolder>()
 {
@@ -212,7 +213,7 @@ class ReptileBoxAdaptor(private val activity: Context,private val viewModel: Fav
 
         private fun startDetailIntent(reptileKey: String)
         {
-            val intent = FavReptileProfileActivity.makeIntent(activity, reptileKey)
+            val intent = ReptileProfileActivity.makeIntent(activity, reptileKey)
             activity.startActivity(intent)
         }
 
