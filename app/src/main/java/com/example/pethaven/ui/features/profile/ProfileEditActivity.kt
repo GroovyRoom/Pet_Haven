@@ -28,7 +28,7 @@ import com.google.firebase.storage.UploadTask
  *
  * @name:    ProfileEditActivity
  * @date:    2022-08-04 13:23
- * @comment:
+ * @comment: Activity to edit user profile information and settings
  *
  */
 class ProfileEditActivity : AppCompatActivity(), PictureDialog.OnImageResultListener {

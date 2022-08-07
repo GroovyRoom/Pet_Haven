@@ -23,6 +23,9 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
+/**
+ *  Activity for messaging with other user
+ */
 class ChatLogActivity : AppCompatActivity() {
 
     companion object {

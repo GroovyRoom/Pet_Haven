@@ -7,6 +7,9 @@ import androidx.lifecycle.ViewModel
 import com.example.pethaven.domain.ReptileRepository
 import com.example.pethaven.domain.User
 
+/**
+ * ViewModel for ProfileEdit Activity
+ */
 class ProfileEditViewModel(private val repository: ReptileRepository): ViewModel() {
     var profileImg = MutableLiveData<Bitmap>()
     var profileImgUri = MutableLiveData<Uri>()

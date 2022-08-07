@@ -20,6 +20,9 @@ import kotlinx.android.synthetic.main.fragment_chat.*
 import kotlinx.android.synthetic.main.fragment_chat.view.*
 import kotlinx.android.synthetic.main.latest_message_row.view.*
 
+/**
+ *  Fragment showing list of message with other users
+ */
 class ChatFragment : Fragment() {
 
     companion object {

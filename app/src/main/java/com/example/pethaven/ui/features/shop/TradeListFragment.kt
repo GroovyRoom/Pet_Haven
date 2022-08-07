@@ -22,7 +22,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanOptions
 
-
+/**
+ *  Fragment for displaying list of posts in the database
+ */
 class TradeListFragment : Fragment() {
 /*    private var _binding: FragmentTradeListBinding? = null
     private val binding get() = _binding!!*/

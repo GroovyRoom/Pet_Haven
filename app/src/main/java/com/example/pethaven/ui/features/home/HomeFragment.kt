@@ -24,6 +24,9 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 
+/**
+ *  Fragment showing list of user collection of reptiles
+ */
 class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener {
 
     private lateinit var fabLayout: LinearLayout

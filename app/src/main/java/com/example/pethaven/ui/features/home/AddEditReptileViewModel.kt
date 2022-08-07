@@ -7,6 +7,9 @@ import androidx.lifecycle.ViewModel
 import com.example.pethaven.domain.Reptile
 import com.example.pethaven.domain.ReptileRepository
 
+/**
+ *  ViewModel for AddEditReptile Activity
+ */
 class AddEditReptileViewModel(private val repository: ReptileRepository): ViewModel() {
     var reptileImg = MutableLiveData<Bitmap>()
     var reptileImgUri = MutableLiveData<Uri>()

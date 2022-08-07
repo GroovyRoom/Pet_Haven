@@ -11,6 +11,9 @@ import com.google.zxing.BarcodeFormat
 import com.journeyapps.barcodescanner.BarcodeEncoder
 import java.lang.Exception
 
+/**
+ * Activity to display QR code of the value passed as the argument
+ */
 class TradePostQrGenerator : AppCompatActivity() {
     private lateinit var valueToGenerate: String
     private lateinit var qrImageView: ImageView

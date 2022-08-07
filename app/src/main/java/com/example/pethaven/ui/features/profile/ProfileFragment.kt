@@ -19,6 +19,9 @@ import com.example.pethaven.util.AndroidExtensions.makeToast
 import com.example.pethaven.util.FactoryUtil
 import com.google.firebase.database.ktx.getValue
 
+/**
+ * Fragment revealing User settings and Profile Information
+ */
 class ProfileFragment : Fragment() {
     val TAG = "jcy-Profile"
     private var mUser: User? = null

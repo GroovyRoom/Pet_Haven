@@ -23,6 +23,9 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 
+/**
+ * Activity displaying reptile Information
+ */
 class ReptileProfileActivity : AppCompatActivity() {
     companion object {
         private const val REPTILE_INFO_KEY_TAG = "Reptile Info Key Tag"
