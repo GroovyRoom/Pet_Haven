@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.*
-import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -77,6 +76,7 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
     }
 
     override fun onDestroy() {
+        super.onDestroy()
         valueEventListener?.let { databaseReference.removeEventListener(it) }
         super.onDestroy()
     }

@@ -13,9 +13,9 @@
 
     <fragment
         android:id="@+id/navigation_favourite"
-        android:name="com.example.pethaven.ui.features.favourite.FavouriteFragment"
+        android:name="com.example.pethaven.ui.features.fav.FavFragment"
         android:label="Favourite"
-        tools:layout="@layout/fragment_favourite" />
+        tools:layout="@layout/fragment_fav" />
 
     <fragment
         android:id="@+id/navigation_shop"
