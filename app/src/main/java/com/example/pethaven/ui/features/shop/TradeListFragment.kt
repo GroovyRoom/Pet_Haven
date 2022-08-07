@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.SearchView
+import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,7 +17,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pethaven.R
 import com.example.pethaven.databinding.FragmentTradeListBinding
 import com.example.pethaven.domain.PostViewModel
+import com.example.pethaven.util.AndroidExtensions.makeToast
 import com.google.firebase.auth.FirebaseAuth
+import com.journeyapps.barcodescanner.ScanContract
+import com.journeyapps.barcodescanner.ScanOptions
 
 
 class TradeListFragment : Fragment() {
@@ -37,6 +42,8 @@ class TradeListFragment : Fragment() {
     private lateinit var tradeListProgressBar: ProgressBar
     private lateinit var adapter: TradeTestAdapter
     private lateinit var uid: String
+
+    private lateinit var qrLauncher: ActivityResultLauncher<ScanOptions>
 
     companion object {
         private const val FILTER_ALL_BUTTON_ID = 1
@@ -72,7 +79,7 @@ class TradeListFragment : Fragment() {
         setUpFilterButtons(view)
         tradeListProgressBar = view.findViewById(R.id.tradeListProgressBar)
 
-
+        setUpQrLauncher()
         return view
         //return binding.root
     }
@@ -171,5 +178,29 @@ class TradeListFragment : Fragment() {
         tradeListViewModel.currentFilterButtonID.observe(requireActivity()) {
             filterPost(tradeListSearchView.query.toString())
         }
+    }
+
+    ///------------------------ Qr Functionality----------------------///
+    private fun setUpQrLauncher() {
+        qrLauncher = registerForActivityResult(ScanContract()) {
+            if (it.contents == null) {
+                makeToast("Cancelled")
+                return@registerForActivityResult
+            }
+            /*
+                Start Intent here to the post information.
+                value of qr code is 'it.contents'
+             */
+            makeToast("Result is ${it.contents}")
+        }
+    }
+
+    private fun launchQrLauncher() {
+        val scanOptions = ScanOptions().apply {
+            setPrompt("Place barcode inside the rectangle view\n" +
+                    "A white background and adequate barcode size is recommended")
+            setBeepEnabled(false)
+        }
+        qrLauncher.launch(scanOptions)
     }
 }
