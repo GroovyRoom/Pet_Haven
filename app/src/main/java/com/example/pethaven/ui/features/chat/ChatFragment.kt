@@ -121,6 +121,7 @@ class ChatFragment : Fragment() {
 
         override fun bind(viewHolder: ViewHolder, position: Int) {
             viewHolder.itemView.message_textview_latest_message.text = chatMessage.text
+            viewHolder.itemView.message_textview_latest_message_time.text = chatMessage.timeString
 
             val chatPartnerId: String
             if (chatMessage.fromId == FirebaseAuth.getInstance().uid) {
