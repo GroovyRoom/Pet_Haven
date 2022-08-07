@@ -2,6 +2,8 @@ package com.example.pethaven.domain
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.pethaven.ui.features.fav.FavReptileProfileViewModel
+import com.example.pethaven.ui.features.fav.FavTestViewModel
 import com.example.pethaven.ui.features.home.AddEditReptileViewModel
 import com.example.pethaven.ui.features.home.HomeTestViewModel
 import com.example.pethaven.ui.features.home.ReptileProfileViewModel

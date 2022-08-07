@@ -14,6 +14,7 @@ import com.example.pethaven.R
 import com.example.pethaven.adapter.ReptileBoxAdaptor
 import com.example.pethaven.adapter.ReptileInfoAdapterFav
 import com.example.pethaven.domain.Reptile
+import com.example.pethaven.ui.features.home.AddEditReptileActivity
 import com.example.pethaven.ui.features.shop.TradePostActivity
 import com.example.pethaven.util.AndroidExtensions.makeToast
 import com.example.pethaven.util.FactoryUtil
@@ -195,7 +196,7 @@ class FavFragment : Fragment(), ReptileInfoAdapterFav.OnReptileItemCLickedListen
 
     // --------------------- Initializing View Model  ---------------- //
     private fun setUpTestViewModel() {
-        val factory = FactoryUtil.generateReptileViewModelFactory(requireActivity())
+        val factory = FactoryUtil.generateReptileViewModelFactoryFav(requireActivity())
         testViewModel = ViewModelProvider(this, factory)[FavTestViewModel::class.java]
         testViewModel.init()
         if(testViewModel.isSearchOn.value == null)

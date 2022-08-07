@@ -11,9 +11,9 @@ import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pethaven.R
 import com.example.pethaven.domain.Reptile
-import com.example.pethaven.ui.features.fav.AddEditReptileActivity
 import com.example.pethaven.ui.features.fav.FavTestViewModel
 import com.example.pethaven.ui.features.fav.FavReptileProfileActivity
+import com.example.pethaven.ui.features.home.AddEditReptileActivity
 
 class ReptileBoxAdaptor(private val activity: Context,private val viewModel: FavTestViewModel): RecyclerView.Adapter<RecyclerView.ViewHolder>()
 {

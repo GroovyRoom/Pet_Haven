@@ -11,4 +11,10 @@ object FactoryUtil {
         val repository = ReptileRepository(ReptileDao())
         return ReptileViewModelFactory(repository)
     }
+
+    fun generateReptileViewModelFactoryFav(context: Context) : ReptileViewModelFactoryFav {
+        val repository = ReptileRepository(ReptileDao())
+        return ReptileViewModelFactoryFav(repository)
+    }
+
 }
