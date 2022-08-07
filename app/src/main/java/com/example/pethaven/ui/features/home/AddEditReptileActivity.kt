@@ -56,6 +56,8 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
     private var isEditMode: Boolean = false
     private var reptileKeyToEdit: String? = null
     private var reptileToEdit: Reptile ?= null
+
+    private lateinit var reptile : Reptile
     /*
         Check if data has already been received to prevent editText from being updated again during
         orientation change
@@ -209,13 +211,22 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
             return
         }
 
-        val reptile = Reptile(
-            name = editName.text.toString(),
-            species = editSpecies.text.toString(),
-            age = editAge.text.toString().toInt(),
-            description = editDescription.text.toString(),
-            isFav = reptileToEdit!!.isFav
-        )
+        if (isEditMode == true) {
+            reptile = Reptile(
+                name = editName.text.toString(),
+                species = editSpecies.text.toString(),
+                age = editAge.text.toString().toInt(),
+                description = editDescription.text.toString(),
+                isFav = reptileToEdit!!.isFav
+            )
+        } else {
+            reptile = Reptile(
+                name = editName.text.toString(),
+                species = editSpecies.text.toString(),
+                age = editAge.text.toString().toInt(),
+                description = editDescription.text.toString()
+            )
+        }
 
         if (isEditMode) updateReptileInDatabase(reptile) else addToDatabaseAndFinish(reptile)
     }
