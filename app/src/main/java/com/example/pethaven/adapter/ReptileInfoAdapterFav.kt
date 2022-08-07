@@ -62,9 +62,9 @@ class ReptileInfoAdapterFav(private var context: Context,
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val reptile = reptileList[position]
 
-        holder.reptileNameText.text = reptile.name
-        holder.reptileSpeciesText.text = reptile.species
-        holder.reptileDescText.text = reptile.description
+        holder.reptileNameText.text = "Name: " + reptile.name
+        holder.reptileSpeciesText.text = "Species: " + reptile.species
+        holder.reptileDescText.text = "Description: " + reptile.description
         if(reptile.isFav)
         {
             holder.btnFav.setImageResource(R.drawable.ic_fav)
