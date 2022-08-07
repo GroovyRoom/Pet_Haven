@@ -127,7 +127,7 @@ class FavReptileProfileActivity : AppCompatActivity() {
     ///-------------------------- Setting up Activity -------------------------///
 
     private fun setUpViewModel() {
-        val factory = FactoryUtil.generateReptileViewModelFactory(this)
+        val factory = FactoryUtil.generateReptileViewModelFactoryFav(this)
         favReptileProfileViewModel = ViewModelProvider(this, factory)[FavReptileProfileViewModel::class.java]
     }
 
