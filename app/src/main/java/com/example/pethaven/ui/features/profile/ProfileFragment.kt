@@ -40,6 +40,9 @@ class ProfileFragment : Fragment() {
 
     private lateinit var profileViewModel: ProfileViewModel
 
+    private lateinit var userObjectReference: DatabaseReference
+    private var valueEventListener: ValueEventListener? = null
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
@@ -50,6 +53,11 @@ class ProfileFragment : Fragment() {
         setUpViewModel()
 
         return view
+    }
+
+    override fun onDestroy() {
+        valueEventListener?.let { userObjectReference.removeEventListener(it) }
+        super.onDestroy()
     }
 
     private fun setUpUserInfoView(view: View) {
@@ -104,7 +112,9 @@ class ProfileFragment : Fragment() {
                 progressBar.visibility = View.GONE
             }
         }
-        profileViewModel.getCurrentUserObject().addValueEventListener(postListener)
+        userObjectReference = profileViewModel.getCurrentUserObject()
+        valueEventListener = userObjectReference.addValueEventListener(postListener)
+        //profileViewModel.getCurrentUserObject().addValueEventListener(postListener)
     }
 
 
