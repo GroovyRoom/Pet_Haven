@@ -78,6 +78,7 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
 
     override fun onDestroy() {
         valueEventListener?.let { databaseReference.removeEventListener(it) }
+        super.onDestroy()
     }
 
     private val swipeItemCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT){
