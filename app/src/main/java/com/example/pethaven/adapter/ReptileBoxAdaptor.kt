@@ -87,17 +87,17 @@ class ReptileBoxAdaptor(private val activity: Context,private val viewModel: Fav
                         if (reptileBoxes[0].name.length < 5) {
                             btnLeft.text = reptileBoxes[0].name
                         } else {
-                            btnLeft.text = reptileBoxes[0].name.subSequence(0,5)
+                            btnLeft.text = reptileBoxes[0].name.subSequence(0,5).toString() + "..."
                         }
                         if (reptileBoxes[1].name.length < 5) {
                             btnMid.text = reptileBoxes[1].name
                         } else {
-                            btnMid.text = reptileBoxes[1].name.subSequence(0,5)
+                            btnMid.text = reptileBoxes[1].name.subSequence(0,5).toString() + "..."
                         }
                         if (reptileBoxes[2].name.length < 5) {
                             btnRight.text = reptileBoxes[2].name
                         } else {
-                            btnRight.text = reptileBoxes[2].name.subSequence(0,5)
+                            btnRight.text = reptileBoxes[2].name.subSequence(0,5).toString() + "..."
                         }
                         controlLeft.visibility = View.VISIBLE
                         controlMid.visibility = View.VISIBLE
@@ -110,12 +110,12 @@ class ReptileBoxAdaptor(private val activity: Context,private val viewModel: Fav
                         if (reptileBoxes[0].name.length < 5) {
                             btnLeft.text = reptileBoxes[0].name
                         } else {
-                            btnLeft.text = reptileBoxes[0].name.subSequence(0,5)
+                            btnLeft.text = reptileBoxes[0].name.subSequence(0,5).toString() + "..."
                         }
                         if (reptileBoxes[1].name.length < 5) {
                             btnMid.text = reptileBoxes[1].name
                         } else {
-                            btnMid.text = reptileBoxes[1].name.subSequence(0,5)
+                            btnMid.text = reptileBoxes[1].name.subSequence(0,5).toString() + "..."
                         }
                         controlLeft.visibility = View.VISIBLE
                         controlMid.visibility = View.VISIBLE
@@ -126,7 +126,7 @@ class ReptileBoxAdaptor(private val activity: Context,private val viewModel: Fav
                         if (reptileBoxes[0].name.length < 5) {
                             btnLeft.text = reptileBoxes[0].name
                         } else {
-                            btnLeft.text = reptileBoxes[0].name.subSequence(0,5)
+                            btnLeft.text = reptileBoxes[0].name.subSequence(0,5).toString() + "..."
                         }
                         controlLeft.visibility = View.VISIBLE
                         btnLeft.isEnabled = true
