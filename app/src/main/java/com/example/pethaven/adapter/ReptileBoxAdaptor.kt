@@ -14,6 +14,11 @@ import com.example.pethaven.domain.Reptile
 import com.example.pethaven.ui.features.home.AddEditReptileActivity
 import com.example.pethaven.ui.features.home.ReptileProfileActivity
 
+
+/**
+ * Adapter for item of Reptile Objects in favourite collection
+ */
+
 class ReptileBoxAdaptor(private val activity: Context): RecyclerView.Adapter<RecyclerView.ViewHolder>()
 {
     private var reptileBoxes: ArrayList<ArrayList<Reptile>> = ArrayList()

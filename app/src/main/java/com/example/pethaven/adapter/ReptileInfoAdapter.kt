@@ -10,6 +10,9 @@ import com.bumptech.glide.Glide
 import com.example.pethaven.R
 import com.example.pethaven.domain.Reptile
 
+/**
+ * Adapter for item of Reptile Objects
+ */
 class ReptileInfoAdapter(private var context: Context,
                          private var reptileList: ArrayList<Reptile>,
                          private var clickListener: OnReptileItemCLickedListener)
