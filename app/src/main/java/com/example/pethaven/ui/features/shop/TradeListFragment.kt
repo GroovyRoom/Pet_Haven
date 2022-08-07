@@ -17,10 +17,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pethaven.R
 import com.example.pethaven.domain.PostViewModel
 import com.example.pethaven.ui.features.home.AddEditReptileViewModel
-import com.example.pethaven.ui.features.home.ReptileProfileActivity
 import com.example.pethaven.util.AndroidExtensions.makeToast
 import com.google.android.material.button.MaterialButtonToggleGroup
-import com.example.pethaven.util.AndroidExtensions.makeToast
 import com.google.firebase.auth.FirebaseAuth
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanOptions
