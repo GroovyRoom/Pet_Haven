@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.navigation_home,
-                R.id.navigation_favourite,
+                R.id.navigation_alarm,
                 R.id.navigation_shop,
                 R.id.navigation_chat,
                 R.id.navigation_profile

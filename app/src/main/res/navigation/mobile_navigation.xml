@@ -12,10 +12,10 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_favourite"
-        android:name="com.example.pethaven.ui.features.favourite.FavouriteFragment"
-        android:label="Favourite"
-        tools:layout="@layout/fragment_favourite" />
+        android:id="@+id/navigation_alarm"
+        android:name="com.example.pethaven.ui.features.alarm.AlarmFragment"
+        android:label="Alarm"
+        tools:layout="@layout/fragment_alarm" />
 
     <fragment
         android:id="@+id/navigation_shop"
