@@ -31,7 +31,6 @@ class EditTradePostActivity : AppCompatActivity() {
 
     private var post: Post? = Post()
     private var postKeyToEdit: String? = null
-    private var editMode = false
     private var hasAccess = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,7 +41,18 @@ class EditTradePostActivity : AppCompatActivity() {
         onFocusChange()
         onSaveClicked()
         onCancelClicked()
-        getPostFromDatabase()
+
+        if (editTradePostViewModel.databaseAccessed.value!!) {
+            post = editTradePostViewModel.post.value!!
+            checkPermission()
+            updateView(post!!)
+        } else {
+            getPostFromDatabase()
+        }
+
+        if (editTradePostViewModel.isEditModeEnabled.value!!) {
+            enableEditing()
+        }
     }
 
     override fun onDestroy() {
@@ -52,29 +62,37 @@ class EditTradePostActivity : AppCompatActivity() {
 
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        if (editTradePostViewModel.isEditModeEnabled.value!!) {
+            menuInflater.inflate(R.menu.menu_edit_reptile, menu)
+        } else {
             menuInflater.inflate(R.menu.menu_reptile_info, menu)
+        }
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId){
             R.id.editReptileMenuItem -> {
-                if (editMode) {
-                    postKeyToEdit?.let {
+                if (editTradePostViewModel.isEditModeEnabled.value!!) {
+                    post!!.pid?.let {
                         deletePostInDatabase(it)
                     }
                 }
                 else {
-
                     if (hasAccess) {
                         item.setIcon(R.drawable.ic_delete)
                         enableEditing()
-                        editMode = true
-
+                        editTradePostViewModel.isEditModeEnabled.value = true
                     }
                     else {
                         makeToast("You don't have access to edit this post")
                     }
+                }
+                true
+            }
+            R.id.deleteReptileMenuItem -> {
+                post!!.pid?.let {
+                    deletePostInDatabase(it)
                 }
                 true
             }
@@ -89,7 +107,7 @@ class EditTradePostActivity : AppCompatActivity() {
         post!!.title = titleEditText.text.toString()
         post!!.description = descriptionEditText.text.toString()
         post!!.price = priceEditText.text.toString().toDouble()
-        editTradePostViewModel.editTradePost(postKeyToEdit!!, post!!)
+        editTradePostViewModel.editTradePost(post!!.pid!!, post!!)
     }
 
     private fun onSaveClicked() {
@@ -104,15 +122,6 @@ class EditTradePostActivity : AppCompatActivity() {
             finish()
         }
     }
-
-
-    ///-------------------------- Setting Up Activity -------------------------///
-
-
-    ///-------------------------- Database Operations -------------------------///
-
-
-    ///-------------------------- Setting Up Views' properties -------------------------///
 
     private fun onFocusChange() {
         binding.editTradeDescriptionEditText.onFocusChangeListener =
@@ -137,13 +146,14 @@ class EditTradePostActivity : AppCompatActivity() {
         val postReference = editTradePostViewModel.getTradePost(postKeyToEdit!!)
         postReference.addListenerForSingleValueEvent(object: ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                println("debug: ondatachanged called")
                 if(!snapshot.exists()) {
                     return
                 }
                 post = snapshot.getValue(Post::class.java)
-                println("Debug: ${post?.uid}")
                 post?.let {
+                    editTradePostViewModel.databaseAccessed.value = true
+                    editTradePostViewModel.post.value = it
+                    editTradePostViewModel.post.value!!.pid = postKeyToEdit!!
                     checkPermission()
                     updateView(it)
                 }
@@ -158,6 +168,7 @@ class EditTradePostActivity : AppCompatActivity() {
         editTradePostViewModel.deletePost(key).addOnSuccessListener {
             makeToast("Delete Successful")
         }
+        finish()
     }
 
     private fun enableEditing() {
@@ -179,7 +190,6 @@ class EditTradePostActivity : AppCompatActivity() {
 
     private fun checkPermission() {
         FirebaseAuth.getInstance().currentUser?.let {
-            println("Debug: ${it.uid} == ${post?.uid}")
             if (it.uid == post!!.uid) {
                 hasAccess = true
             }
