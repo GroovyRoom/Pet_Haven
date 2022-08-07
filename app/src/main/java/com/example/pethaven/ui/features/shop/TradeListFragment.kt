@@ -2,10 +2,8 @@ package com.example.pethaven.ui.features.shop
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.SearchView
@@ -85,10 +83,25 @@ class TradeListFragment : Fragment(), TradeTestAdapter.OnPostClickedListener {
         tradeListProgressBar = view.findViewById(R.id.tradeListProgressBar)
 
         setUpQrLauncher()
+        setHasOptionsMenu(true)
         return view
         //return binding.root
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_trade_list, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.postQrScanner -> {
+                launchQrLauncher()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -208,18 +221,16 @@ class TradeListFragment : Fragment(), TradeTestAdapter.OnPostClickedListener {
                 makeToast("Cancelled")
                 return@registerForActivityResult
             }
-            /*
-                Start Intent here to the post information.
-                value of qr code is 'it.contents'
-             */
-            makeToast("Result is ${it.contents}")
+
+            val intent = EditTradePostActivity.makeIntent(requireActivity(), it.contents)
+            startActivity(intent)
         }
     }
 
     private fun launchQrLauncher() {
         val scanOptions = ScanOptions().apply {
             setPrompt("Place barcode inside the rectangle view\n" +
-                    "A white background and adequate barcode size is recommended")
+                    "A clear background and adequate barcode size is recommended")
             setBeepEnabled(false)
         }
         qrLauncher.launch(scanOptions)

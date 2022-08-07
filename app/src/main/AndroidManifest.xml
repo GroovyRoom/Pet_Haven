@@ -18,13 +18,12 @@
         android:theme="@style/Theme.PetHaven"
         tools:targetApi="31">
         <activity
-            android:name=".TradePostQrGenerator"
+            android:name=".ui.features.shop.TradePostQrGenerator"
             android:exported="false" />
         <activity android:name=".ui.features.chat.ChatLogActivity" />
         <activity
             android:name=".ui.features.shop.EditTradePostActivity"
             android:exported="false" />
-        <activity android:name=".ui.features.chat.ChatLogActivity" />
         <activity
             android:name=".ui.features.home.ReptileProfileActivity"
             android:exported="false" />
@@ -50,13 +49,12 @@
             android:windowSoftInputMode="adjustPan"></activity>
         <activity android:name=".ui.LoginActivity" />
         <activity android:name=".ui.RegisterActivity" />
-        <activity android:name=".ui.features.shop.TradePostActivity" /> <!-- Allow Qr Scanner to handle both portrait and landscape mode -->
+        <activity android:name=".ui.features.shop.TradePostActivity" />
+        <!-- Allow Qr Scanner to handle both portrait and landscape mode -->
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="fullSensor"
             tools:replace="screenOrientation" />
-
-        <activity android:name=".ui.features.shop.TradePostActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

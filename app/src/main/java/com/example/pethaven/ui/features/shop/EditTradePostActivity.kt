@@ -1,5 +1,6 @@
 package com.example.pethaven.ui.features.shop
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -32,6 +33,15 @@ class EditTradePostActivity : AppCompatActivity() {
     private var post: Post? = Post()
     private var postKeyToEdit: String? = null
     private var hasAccess = false
+
+    companion object {
+        private const val POST_KEY_TAG = "post key"
+        fun makeIntent(context: Context, postKey: String): Intent {
+            val intent = Intent(context,EditTradePostActivity::class.java)
+            intent.putExtra(POST_KEY_TAG, postKey)
+            return intent
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -146,11 +156,13 @@ class EditTradePostActivity : AppCompatActivity() {
     }
 
     private fun getPostFromDatabase() {
-        postKeyToEdit = intent.getStringExtra("post key")
+        postKeyToEdit = intent.getStringExtra(POST_KEY_TAG)
         val postReference = editTradePostViewModel.getTradePost(postKeyToEdit!!)
         postReference.addListenerForSingleValueEvent(object: ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if(!snapshot.exists()) {
+                    makeToast("Data Does not exit")
+                    finish()
                     return
                 }
                 post = snapshot.getValue(Post::class.java)
