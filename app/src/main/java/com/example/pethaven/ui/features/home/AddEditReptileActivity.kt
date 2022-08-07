@@ -214,6 +214,7 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
             species = editSpecies.text.toString(),
             age = editAge.text.toString().toInt(),
             description = editDescription.text.toString(),
+            isFav = reptileToEdit!!.isFav
         )
 
         if (isEditMode) updateReptileInDatabase(reptile) else addToDatabaseAndFinish(reptile)
