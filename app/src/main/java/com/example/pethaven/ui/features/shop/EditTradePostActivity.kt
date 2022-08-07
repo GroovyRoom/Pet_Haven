@@ -62,17 +62,13 @@ class EditTradePostActivity : AppCompatActivity() {
 
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        if (editTradePostViewModel.isEditModeEnabled.value!!) {
-            menuInflater.inflate(R.menu.menu_edit_trade_post, menu)
-        } else {
-            menuInflater.inflate(R.menu.menu_reptile_info, menu)
-        }
+        menuInflater.inflate(R.menu.menu_edit_trade_post, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId){
-            R.id.editReptileMenuItem -> {
+            R.id.editPostMenuItem -> {
                 if (editTradePostViewModel.isEditModeEnabled.value!!) {
                     post!!.pid?.let {
                         deletePostInDatabase(it)
@@ -90,18 +86,22 @@ class EditTradePostActivity : AppCompatActivity() {
                 }
                 true
             }
-            R.id.deletePostMenuItem -> {
-                post!!.pid?.let {
-                    deletePostInDatabase(it)
-                }
-                true
-            }
             R.id.postQrGenerate -> {
                 launchQrGenerator()
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu): Boolean {
+        if (editTradePostViewModel.isEditModeEnabled.value!!) {
+            menu.findItem(R.id.editPostMenuItem).setIcon(R.drawable.ic_delete)
+        }
+        else {
+            menu.findItem(R.id.editPostMenuItem).setIcon(R.drawable.ic_edit)
+        }
+        return super.onPrepareOptionsMenu(menu)
     }
 
     private fun editPostInDatabase() {
