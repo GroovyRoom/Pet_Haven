@@ -1,12 +1,9 @@
-package com.example.pethaven.ui.features.home
+package com.example.pethaven.ui.features.fav
 
 import androidx.lifecycle.ViewModel
 import com.example.pethaven.domain.ReptileRepository
 
-/**
- * ViewModel for ReptileProfile Activity
- */
-class ReptileProfileViewModel(private val repository: ReptileRepository): ViewModel() {
+class ReptileProfileViewModelFav(private val repository: ReptileRepository): ViewModel() {
 
     fun getReptileFromCurrentUser(key: String) = repository.getReptileFromCurrentUser(key)
 

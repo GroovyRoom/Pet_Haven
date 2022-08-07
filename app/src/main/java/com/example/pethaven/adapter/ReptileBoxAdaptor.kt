@@ -11,17 +11,17 @@ import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pethaven.R
 import com.example.pethaven.domain.Reptile
-import com.example.pethaven.ui.features.home.AddEditReptileActivity
-import com.example.pethaven.ui.features.home.HomeTestViewModel
-import com.example.pethaven.ui.features.home.ReptileProfileActivity
+import com.example.pethaven.ui.features.fav.AddEditReptileActivityFav
+import com.example.pethaven.ui.features.fav.FavTestViewModel
+import com.example.pethaven.ui.features.fav.ReptileProfileActivityFav
 
-class ReptileBoxAdaptor(private val activity: Context,private val viewModel: HomeTestViewModel): RecyclerView.Adapter<RecyclerView.ViewHolder>()
+class ReptileBoxAdaptor(private val activity: Context,private val viewModel: FavTestViewModel): RecyclerView.Adapter<RecyclerView.ViewHolder>()
 {
     private var reptileBoxes: ArrayList<ArrayList<Reptile>> = ArrayList()
     private var btnSwitches: ArrayList<Boolean> = ArrayList()
     private lateinit var listener: OnItemClickListener
 
-    class ViewHolder(private val activity: Context, v: View, listenerIn: OnItemClickListener, private val viewModel: HomeTestViewModel): RecyclerView.ViewHolder(v)
+    class ViewHolder(private val activity: Context, v: View, listenerIn: OnItemClickListener, private val viewModel: FavTestViewModel): RecyclerView.ViewHolder(v)
     {
         private val imgReptileBox: ImageView = v.findViewById(R.id.img_reptile_box)
         private val controlLeft: LinearLayout = v.findViewById(R.id.controlLeft)
@@ -212,13 +212,13 @@ class ReptileBoxAdaptor(private val activity: Context,private val viewModel: Hom
 
         private fun startDetailIntent(reptileKey: String)
         {
-            val intent = ReptileProfileActivity.makeIntent(activity, reptileKey)
+            val intent = ReptileProfileActivityFav.makeIntent(activity, reptileKey)
             activity.startActivity(intent)
         }
 
         private fun startEditIntent(reptileKey: String)
         {
-            val intent = AddEditReptileActivity.makeIntent(activity, true, reptileKey)
+            val intent = AddEditReptileActivityFav.makeIntent(activity, true, reptileKey)
             activity.startActivity(intent)
         }
 

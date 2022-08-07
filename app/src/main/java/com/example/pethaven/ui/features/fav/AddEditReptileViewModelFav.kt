@@ -1,4 +1,4 @@
-package com.example.pethaven.ui.features.home
+package com.example.pethaven.ui.features.fav
 
 import android.graphics.Bitmap
 import android.net.Uri
@@ -7,10 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.example.pethaven.domain.Reptile
 import com.example.pethaven.domain.ReptileRepository
 
-/**
- *  ViewModel for AddEditReptile Activity
- */
-class AddEditReptileViewModel(private val repository: ReptileRepository): ViewModel() {
+class AddEditReptileViewModelFav(private val repository: ReptileRepository): ViewModel() {
     var reptileImg = MutableLiveData<Bitmap>()
     var reptileImgUri = MutableLiveData<Uri>()
 

@@ -1,9 +1,8 @@
-package com.example.pethaven.ui.features.home
+package com.example.pethaven.ui.features.fav
 
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -17,8 +16,6 @@ import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.CustomTarget
-import com.bumptech.glide.request.transition.Transition
 import com.example.pethaven.R
 import com.example.pethaven.dialog.PictureDialog
 import com.example.pethaven.domain.Reptile
@@ -35,11 +32,8 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.StorageTask
 import com.google.firebase.storage.UploadTask
 
-/**
- *  Activity to add or edit Reptile to the database
- */
-class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultListener {
-    private lateinit var addEditViewModel: AddEditReptileViewModel
+class AddEditReptileActivityFav : AppCompatActivity(), PictureDialog.OnImageResultListener {
+    private lateinit var addEditViewModel: AddEditReptileViewModelFav
 
     private lateinit var editName: TextInputEditText
     private lateinit var editSpecies: TextInputEditText
@@ -68,11 +62,10 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
     companion object {
         private const val PICTURE_OPTION_DIALOG_TAG = "Picture Option Dialog Tag"
         private const val IS_EDIT_MODE = "Edit Reptile Mode"
-        private const val EDIT_REPTILE_KEY_TAG = "Key of Reptile to edit"
-        private const val HAS_RECEIVED_TAG = "Has Received Tag"
+        private const val EDIT_REPTILE_KEY_TAG = "Ley of Reptile to edit"
 
         fun makeIntent(context: Context, isEditMode: Boolean = false, key: String): Intent {
-            val intent = Intent(context, AddEditReptileActivity::class.java).apply {
+            val intent = Intent(context, AddEditReptileActivityFav::class.java).apply {
                 putExtra(IS_EDIT_MODE, isEditMode)
                 putExtra(EDIT_REPTILE_KEY_TAG, key)
             }
@@ -89,7 +82,7 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
 
         Permissions.checkImagePermissions(this)
 
-        hasReceived = savedInstanceState?.getBoolean(HAS_RECEIVED_TAG) ?: false
+        hasReceived = savedInstanceState?.getBoolean("test") ?: false
         isEditMode = intent.getBooleanExtra(IS_EDIT_MODE, false)
         if (isEditMode) {
             reptileKeyToEdit = intent.getStringExtra(EDIT_REPTILE_KEY_TAG)
@@ -102,7 +95,7 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.putBoolean(HAS_RECEIVED_TAG, hasReceived)
+        outState.putBoolean("test", hasReceived)
         super.onSaveInstanceState(outState)
     }
 
@@ -166,7 +159,7 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
 
     private fun setUpViewModel() {
         val factory = FactoryUtil.generateReptileViewModelFactory(this)
-        addEditViewModel = ViewModelProvider(this, factory).get(AddEditReptileViewModel::class.java)
+        addEditViewModel = ViewModelProvider(this, factory).get(AddEditReptileViewModelFav::class.java)
         addEditViewModel.reptileImg.observe(this) {
             reptileImgView.setImageBitmap(it)
         }

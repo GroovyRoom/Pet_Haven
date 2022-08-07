@@ -1,4 +1,4 @@
-package com.example.pethaven.ui.features.home
+package com.example.pethaven.ui.features.fav
 
 import android.content.Context
 import android.content.Intent
@@ -23,22 +23,19 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 
-/**
- * Activity displaying reptile Information
- */
-class ReptileProfileActivity : AppCompatActivity() {
+class ReptileProfileActivityFav : AppCompatActivity() {
     companion object {
         private const val REPTILE_INFO_KEY_TAG = "Reptile Info Key Tag"
 
         fun makeIntent(context: Context, reptileKey: String): Intent {
-            val intent = Intent(context, ReptileProfileActivity::class.java)
+            val intent = Intent(context, ReptileProfileActivityFav::class.java)
             intent.putExtra(REPTILE_INFO_KEY_TAG, reptileKey)
             return intent
         }
     }
 
     private lateinit var reptileKey: String
-    private lateinit var reptileProfileViewModel: ReptileProfileViewModel
+    private lateinit var reptileProfileViewModelFav: ReptileProfileViewModelFav
 
     private lateinit var nameTextView: TextView
     private lateinit var speciesTextView: TextView
@@ -61,7 +58,7 @@ class ReptileProfileActivity : AppCompatActivity() {
         setUpFloatingActionButton()
 
         reptileKey = intent.getStringExtra(REPTILE_INFO_KEY_TAG) ?: ""
-        databaseReference = reptileProfileViewModel.getReptileFromCurrentUser(reptileKey)
+        databaseReference = reptileProfileViewModelFav.getReptileFromCurrentUser(reptileKey)
         valueEventListener = databaseReference.addValueEventListener(object: ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (!snapshot.exists()) {
@@ -76,7 +73,7 @@ class ReptileProfileActivity : AppCompatActivity() {
                     descTextView.text = it.description
 
                     if(it.imgUri != null){
-                        Glide.with(this@ReptileProfileActivity)
+                        Glide.with(this@ReptileProfileActivityFav)
                             .load(it.imgUri)
                             .fitCenter()
                             .into(reptileImgView)
@@ -113,7 +110,7 @@ class ReptileProfileActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId) {
             R.id.editReptileMenuItem -> {
-                val intent = AddEditReptileActivity.makeIntent(this, true, reptileKey)
+                val intent = AddEditReptileActivityFav.makeIntent(this, true, reptileKey)
                 startActivity(intent)
                 true
             }
@@ -130,7 +127,7 @@ class ReptileProfileActivity : AppCompatActivity() {
 
     private fun setUpViewModel() {
         val factory = FactoryUtil.generateReptileViewModelFactory(this)
-        reptileProfileViewModel = ViewModelProvider(this, factory)[ReptileProfileViewModel::class.java]
+        reptileProfileViewModelFav = ViewModelProvider(this, factory)[ReptileProfileViewModelFav::class.java]
     }
 
     private fun setUpTextView() {

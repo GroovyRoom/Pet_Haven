@@ -19,10 +19,10 @@
         tools:targetApi="31">
         <activity android:name=".ui.features.chat.ChatLogActivity"></activity>
         <activity
-            android:name=".ui.features.home.ReptileProfileActivity"
+            android:name=".ui.features.fav.ReptileProfileActivityFav"
             android:exported="false" />
         <activity
-            android:name=".ui.features.home.AddEditReptileActivity"
+            android:name=".ui.features.fav.AddEditReptileActivityFav"
             android:exported="false"
             android:label="Reptile Profile"
             android:windowSoftInputMode="adjustPan" />

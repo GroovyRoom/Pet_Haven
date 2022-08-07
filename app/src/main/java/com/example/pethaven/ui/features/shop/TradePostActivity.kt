@@ -11,8 +11,7 @@ import com.example.pethaven.databinding.ActivityTradePostBinding
 import com.example.pethaven.domain.Post
 import com.example.pethaven.domain.Reptile
 import com.example.pethaven.domain.User
-import com.example.pethaven.ui.features.chat.ChatFragment
-import com.example.pethaven.ui.features.home.ReptileProfileViewModel
+import com.example.pethaven.ui.features.fav.ReptileProfileViewModelFav
 import com.example.pethaven.util.AndroidExtensions.makeToast
 import com.example.pethaven.util.FactoryUtil
 import com.google.firebase.auth.FirebaseAuth
@@ -28,7 +27,7 @@ class TradePostActivity : AppCompatActivity() {
     private lateinit var reptileKey: String
     private lateinit var databaseReference: DatabaseReference
     private var valueEventListener: ValueEventListener? = null
-    private lateinit var reptileProfileViewModel: ReptileProfileViewModel
+    private lateinit var reptileProfileViewModelFav: ReptileProfileViewModelFav
     private var reptile: Reptile? = Reptile()
     var postOwner: User? = null
 
@@ -55,7 +54,7 @@ class TradePostActivity : AppCompatActivity() {
         cancelTradePostClickListener()
         onFocusChange()
         reptileKey = intent.getStringExtra(TRADE_REPTILE_KEY_TAG) ?: ""
-        databaseReference = reptileProfileViewModel.getReptileFromCurrentUser(reptileKey)
+        databaseReference = reptileProfileViewModelFav.getReptileFromCurrentUser(reptileKey)
         setupImage()
     }
 
@@ -112,7 +111,7 @@ class TradePostActivity : AppCompatActivity() {
 
     private fun setUpReptileViewModel() {
         val factory = FactoryUtil.generateReptileViewModelFactory(this)
-        reptileProfileViewModel = ViewModelProvider(this, factory)[ReptileProfileViewModel::class.java]
+        reptileProfileViewModelFav = ViewModelProvider(this, factory)[ReptileProfileViewModelFav::class.java]
     }
 
 
