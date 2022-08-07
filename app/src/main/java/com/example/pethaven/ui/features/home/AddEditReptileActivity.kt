@@ -312,10 +312,8 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
             .addOnFailureListener {
                 makeToast(it.message ?: "Unknown Exception Occurred")
             }
-
-        // Also delete posts associated with the reptile.
-
     }
+
     private fun deletePostInDatabase(key: String) {
         addEditViewModel.getPostsByReptileID(key).addListenerForSingleValueEvent(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {

@@ -46,6 +46,8 @@ class ReptileDao {
 
     fun getPostByReptileID(rid: String) = postReference.orderByChild("rid").equalTo(rid)
 
+    fun getPostByUserID(uid: String) = postReference.orderByChild("uid").equalTo(uid)
+
     fun editTradePost(key:String, post:Post) = postReference.child(key).setValue(post)
 
     ///-------------------------- Operations for Reptile Objects-------------------------///

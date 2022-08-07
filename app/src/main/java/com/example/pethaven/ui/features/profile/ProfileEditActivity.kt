@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.pethaven.R
 import com.example.pethaven.dialog.PictureDialog
+import com.example.pethaven.domain.Reptile
 import com.example.pethaven.domain.User
 import com.example.pethaven.util.AndroidExtensions.makeToast
 import com.example.pethaven.util.FactoryUtil
@@ -188,7 +189,6 @@ class ProfileEditActivity : AppCompatActivity(), PictureDialog.OnImageResultList
     }
 
     ///-------------------------- DataBase Operations------------------------///
-
     private fun receiverCurrentUserInfo() {
         val currentUser = FirebaseAuth.getInstance().currentUser
         emailTextView.text = currentUser?.email ?: ""
@@ -217,6 +217,7 @@ class ProfileEditActivity : AppCompatActivity(), PictureDialog.OnImageResultList
 
         profileEditViewModel.getCurrentUserObject().addListenerForSingleValueEvent(postListener)
     }
+
     private fun updateUserInDatabase(user: User) {
         progressBar.isIndeterminate = true
         if (profileEditViewModel.profileImgUri.value != null) {
@@ -228,6 +229,22 @@ class ProfileEditActivity : AppCompatActivity(), PictureDialog.OnImageResultList
             user.profileImageUrl = mUser!!.profileImageUrl
             updateReptileInDatabaseAux(user)
         }
+        updatePostsInDatabase(user.uid, user)
+    }
+
+    private fun updatePostsInDatabase(key: String, user: User) {
+        profileEditViewModel.getPostsByUserID(key).addListenerForSingleValueEvent(object: ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (postSnapshot in snapshot.children) {
+                    postSnapshot.ref.child("ownerName").setValue(user.username)
+                    println("Debug: Reptile Name: ${user.username}")
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
     }
 
     private fun updateReptileInDatabaseAux(user: User) {

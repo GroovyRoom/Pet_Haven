@@ -29,6 +29,7 @@ class ReptileRepository(private val reptileDao: ReptileDao) {
     fun getPost(key: String) = reptileDao.getPost(key)
     fun editTradePost(key: String, post: Post) = reptileDao.editTradePost(key, post)
     fun getPostsByReptileId(rid: String) = reptileDao.getPostByReptileID(rid)
+    fun getPostsByUserId(uid: String) = reptileDao.getPostByUserID(uid)
     fun deletePost(key: String) = reptileDao.deletePost(key)
 
     ///-------------------------- Operations for Reptile Objects-------------------------///

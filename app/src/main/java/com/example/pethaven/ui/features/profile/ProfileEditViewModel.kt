@@ -17,4 +17,6 @@ class ProfileEditViewModel(private val repository: ReptileRepository): ViewModel
     fun getCurrentUserObject() = repository.getCurrentUserObject()
     fun updateUser(user: User) = repository.updateUser(user)
     fun uploadImage(uri: Uri) = repository.uploadImage(uri)
+
+    fun getPostsByUserID(uid: String) = repository.getPostsByUserId(uid)
 }
