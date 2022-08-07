@@ -80,4 +80,7 @@ dependencies {
 
     implementation 'com.xwray:groupie:2.1.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
+
+    //Qr Code Scanner and Generator
+    implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
 }

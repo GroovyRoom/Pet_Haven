@@ -33,6 +33,9 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.StorageTask
 import com.google.firebase.storage.UploadTask
 
+/**
+ *  Activity to add or edit Reptile to the database
+ */
 class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultListener {
     private lateinit var addEditViewModel: AddEditReptileViewModel
 

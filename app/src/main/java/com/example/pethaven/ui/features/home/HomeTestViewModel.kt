@@ -5,6 +5,9 @@ import androidx.lifecycle.ViewModel
 import com.example.pethaven.domain.Reptile
 import com.example.pethaven.domain.ReptileRepository
 
+/**
+ *  ViewModel for Home Fragment
+ */
 class HomeTestViewModel(private val repository: ReptileRepository): ViewModel() {
     var isFabChecked = MutableLiveData(false)
     var reptileTask = getAllUserReptile()

@@ -20,6 +20,9 @@ import kotlinx.android.synthetic.main.fragment_chat.*
 import kotlinx.android.synthetic.main.fragment_chat.view.*
 import kotlinx.android.synthetic.main.latest_message_row.view.*
 
+/**
+ *  Fragment showing list of message with other users
+ */
 class ChatFragment : Fragment() {
 
     companion object {
@@ -121,6 +124,7 @@ class ChatFragment : Fragment() {
 
         override fun bind(viewHolder: ViewHolder, position: Int) {
             viewHolder.itemView.message_textview_latest_message.text = chatMessage.text
+            viewHolder.itemView.message_textview_latest_message_time.text = chatMessage.timeString
 
             val chatPartnerId: String
             if (chatMessage.fromId == FirebaseAuth.getInstance().uid) {

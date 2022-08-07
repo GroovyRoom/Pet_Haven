@@ -1,12 +1,12 @@
 package com.example.pethaven.ui.features.chat
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.speech.RecognizerIntent
 import android.util.Log
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import com.example.pethaven.R
 import com.example.pethaven.domain.ChatMessage
 import com.example.pethaven.domain.User
@@ -19,7 +19,13 @@ import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_chat_log.*
 import kotlinx.android.synthetic.main.chat_receiving.view.*
 import kotlinx.android.synthetic.main.chat_sending.view.*
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
+/**
+ *  Activity for messaging with other user
+ */
 class ChatLogActivity : AppCompatActivity() {
 
     companion object {
@@ -102,7 +108,10 @@ class ChatLogActivity : AppCompatActivity() {
         val reference = FirebaseDatabase.getInstance().getReference("/user-messages/$fromId/$toId").push()
         val toReference = FirebaseDatabase.getInstance().getReference("/user-messages/$toId/$fromId").push()
 
-        val chatMessage = ChatMessage(reference.key!!, text, fromId, toId.toString(), System.currentTimeMillis() / 1000)
+        val df: DateFormat = SimpleDateFormat("HH:mm")
+        val theTime: String = df.format(Calendar.getInstance().getTime())
+        val chatMessage = ChatMessage(reference.key!!, text, fromId, toId.toString(),
+            System.currentTimeMillis() / 1000, theTime)
         reference.setValue(chatMessage)
             .addOnSuccessListener {
                 Log.d(TAG, "Saved our chat message: ${reference.key}")
@@ -134,9 +143,9 @@ class ChatLogActivity : AppCompatActivity() {
 
                     if (chatMessage.fromId.compareTo(FirebaseAuth.getInstance().uid.toString()) == 0) {
                         val currentUser = currentUser
-                        adapter.add(ChatToItem(chatMessage.text, currentUser!!))
+                        adapter.add(ChatToItem(chatMessage.text, chatMessage.timeString, currentUser!!))
                     } else {
-                        adapter.add(ChatFromItem(chatMessage.text, toUser!!))
+                        adapter.add(ChatFromItem(chatMessage.text, chatMessage.timeString, toUser!!))
                         recyclerview_chat_log.scrollToPosition(adapter.itemCount-1)
                     }
                 }
@@ -164,9 +173,10 @@ class ChatLogActivity : AppCompatActivity() {
     }
 }
 
-class ChatToItem(val text: String, val user: User): Item<ViewHolder>() {
+class ChatToItem(val text: String, val timeString: String, val user: User): Item<ViewHolder>() {
     override fun bind(viewHolder: ViewHolder, position: Int) {
         viewHolder.itemView.textView_sending.text = text
+        viewHolder.itemView.textView_sending_time.text = timeString
         viewHolder.itemView.textView_sender.text = user.username
 
         val uri = user.profileImageUrl
@@ -180,9 +190,10 @@ class ChatToItem(val text: String, val user: User): Item<ViewHolder>() {
     }
 }
 
-class ChatFromItem(val text: String, val user: User): Item<ViewHolder>() {
+class ChatFromItem(val text: String, val timeString: String, val user: User): Item<ViewHolder>() {
     override fun bind(viewHolder: ViewHolder, position: Int) {
         viewHolder.itemView.textView_receiving.text = text
+        viewHolder.itemView.textView_receiving_time.text = timeString
         viewHolder.itemView.textView_receiver.text = user.username
 
         val uri = user.profileImageUrl

@@ -18,6 +18,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import java.util.*
 
+/**
+ *  Activity to add a post for  the corresponding reptile that is passed as argument
+ */
 class TradePostActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityTradePostBinding

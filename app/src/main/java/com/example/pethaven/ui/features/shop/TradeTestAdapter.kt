@@ -22,7 +22,9 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-
+/**
+ *  Adapter for displaying item of Post objects for the Trade List
+ */
 class TradeTestAdapter(var context: Context, listener: OnPostClickedListener)
     : RecyclerView.Adapter<TradeTestAdapter.ViewHolder>()
     , Filterable {

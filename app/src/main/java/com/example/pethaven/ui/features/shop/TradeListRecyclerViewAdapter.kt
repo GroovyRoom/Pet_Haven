@@ -21,7 +21,9 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-
+/**
+ *  Adapter for displaying item of Post Objects for the Trade List
+ */
 class TradeListRecyclerViewAdapter(var postList: ArrayList<Post>)
     : RecyclerView.Adapter<TradeListRecyclerViewAdapter.ViewHolder>()
     , Filterable {

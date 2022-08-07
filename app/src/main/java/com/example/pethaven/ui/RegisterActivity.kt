@@ -20,6 +20,9 @@ import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_register.*
 import java.util.*
 
+/**
+ *  Activity to register a new account for the user
+ */
 class RegisterActivity : AppCompatActivity() {
 
     companion object {

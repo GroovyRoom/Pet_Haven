@@ -13,6 +13,9 @@ import com.example.pethaven.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 
+/**
+ * Main Activity supporting fragments in a BottomNavigationView
+ */
 class MainActivity : AppCompatActivity() {
     private lateinit var navView: BottomNavigationView
     private lateinit var appBarConfiguration: AppBarConfiguration
