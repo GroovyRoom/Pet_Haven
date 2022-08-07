@@ -11,7 +11,6 @@ import com.example.pethaven.databinding.ActivityTradePostBinding
 import com.example.pethaven.domain.Post
 import com.example.pethaven.domain.Reptile
 import com.example.pethaven.domain.User
-import com.example.pethaven.ui.features.chat.ChatFragment
 import com.example.pethaven.ui.features.home.AddEditReptileViewModel
 import com.example.pethaven.ui.features.home.ReptileProfileViewModel
 import com.example.pethaven.util.AndroidExtensions.makeToast
@@ -81,7 +80,7 @@ class TradePostActivity : AppCompatActivity() {
 
     ///-------------------------- Setting Up Activity -------------------------///
     private fun addTradePostClickListener() {
-        binding.addTradePostButton.setOnClickListener {
+        binding.addTradeSaveButton.setOnClickListener {
             val title = binding.addTradeTitleEditText.text.toString()
             val price = binding.addTradePriceEditText.text.toString().toDoubleOrNull() ?: 0.0
             val description = binding.addTradeDescriptionEditText.text.toString()
@@ -89,9 +88,9 @@ class TradePostActivity : AppCompatActivity() {
                 Post(
                         rid = reptileKey,
                         imgUri = reptile?.imgUri,
+                        date = createDateString(),
                         reptileName = reptile!!.name,
                         ownerName = postOwner!!.username,
-                        date = createDateString(),
                         title = title,
                         price = price,
                         description = description
@@ -120,12 +119,12 @@ class TradePostActivity : AppCompatActivity() {
 
     ///-------------------------- Database Operations -------------------------///
     private fun addTradePost(post: Post){
-        binding.tradePostProgressBar.isIndeterminate = true
+        binding.addTradePostProgressBar.isIndeterminate = true
 
         tradePostViewModel.addPost(post)
             .addOnSuccessListener {
                 makeToast("Trade Post added Successfully!")
-                binding.tradePostProgressBar.isIndeterminate = false
+                binding.addTradePostProgressBar.isIndeterminate = false
             }
             .addOnFailureListener {
                 makeToast(it.message ?: "")

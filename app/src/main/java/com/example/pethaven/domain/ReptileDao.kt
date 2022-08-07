@@ -38,14 +38,15 @@ class ReptileDao {
         }
     )
 
+    fun getPost(key: String) = postReference.child(key)
+
     fun getAllPost() = postReference
 
+    fun deletePost(key: String) = postReference.child(key).removeValue()
 
-    fun deletePost(key: String) =
-        postReference.child(key).removeValue()
+    fun getPostByReptileID(rid: String) = postReference.orderByChild("rid").equalTo(rid)
 
-    fun getPostByReptileID(rid: String) =
-        postReference.orderByChild("rid").equalTo(rid)
+    fun editTradePost(key:String, post:Post) = postReference.child(key).setValue(post)
 
     ///-------------------------- Operations for Reptile Objects-------------------------///
     fun addReptile(reptile: Reptile) =

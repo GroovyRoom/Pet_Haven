@@ -12,11 +12,9 @@ import androidx.transition.TransitionManager
 import com.bumptech.glide.Glide
 import com.example.pethaven.R
 import com.example.pethaven.domain.Post
-import com.example.pethaven.domain.Reptile
 import com.example.pethaven.domain.User
 import com.example.pethaven.ui.features.chat.ChatFragment.Companion.USER_KEY
 import com.example.pethaven.ui.features.chat.ChatLogActivity
-import com.example.pethaven.util.AndroidExtensions.makeToast
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -25,12 +23,17 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
 
-class TradeTestAdapter(var context: Context)
+class TradeTestAdapter(var context: Context, listener: OnPostClickedListener)
     : RecyclerView.Adapter<TradeTestAdapter.ViewHolder>()
     , Filterable {
 
     private var postList: ArrayList<Post> = ArrayList()
     private var postListAll = ArrayList<Post>(postList)
+    private val postListener = listener
+
+    interface OnPostClickedListener {
+        fun onPostClicked(key: String?)
+    }
 
     private var tradeFilter = object : Filter() {
         // Run in Background Thread
@@ -74,7 +77,7 @@ class TradeTestAdapter(var context: Context)
     }
 
     inner class ViewHolder(private val itemView: View, private val parent: ViewGroup)
-        : RecyclerView.ViewHolder(itemView) {
+        : RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
         var postNameView: TextInputEditText = itemView.findViewById(R.id.trade_post_reptile_name_edit_text)
         var postPriceView: TextInputEditText = itemView.findViewById(R.id.trade_post_price_edit_text)
@@ -158,6 +161,12 @@ class TradeTestAdapter(var context: Context)
                         }
                     })
             }
+
+            itemView.setOnClickListener(this)
+        }
+
+        override fun onClick(view: View?) {
+            postListener.onPostClicked(postList[adapterPosition].pid)
         }
     }
 

@@ -1,5 +1,6 @@
 package com.example.pethaven.ui.features.shop
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,25 +8,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ProgressBar
-import android.widget.ToggleButton
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pethaven.R
 import com.example.pethaven.domain.PostViewModel
-import com.example.pethaven.domain.Reptile
 import com.example.pethaven.ui.features.home.AddEditReptileViewModel
+import com.example.pethaven.ui.features.home.ReptileProfileActivity
 import com.example.pethaven.util.AndroidExtensions.makeToast
-import com.example.pethaven.util.FactoryUtil
 import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
-import kotlinx.android.synthetic.main.fragment_trade_list.*
 
 
-class TradeListFragment : Fragment() {
+class TradeListFragment : Fragment(), TradeTestAdapter.OnPostClickedListener {
 /*    private var _binding: FragmentTradeListBinding? = null
     private val binding get() = _binding!!*/
 
@@ -176,7 +171,7 @@ class TradeListFragment : Fragment() {
             Dense: Switch the adapter here
          */
         //adapter = TradeListRecyclerViewAdapter(ArrayList())
-        adapter = TradeTestAdapter(requireActivity())
+        adapter = TradeTestAdapter(requireActivity(), this)
         //recyclerView = binding.tradeListRecyclerView
         recyclerView = view.findViewById(R.id.trade_list_recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(context)
@@ -195,6 +190,21 @@ class TradeListFragment : Fragment() {
 
         tradeListViewModel.currentFilterButtonID.observe(requireActivity()) {
             filterPost(tradeListSearchView.query.toString())
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        tradeListViewModel.getPosts()
+        println("Debug: Resuming!")
+    }
+    override fun onPostClicked(key: String?) {
+        if (key != null) {
+            val intent = Intent(context, EditTradePostActivity::class.java)
+            intent.putExtra("post key", key)
+            startActivity(intent)
+        } else {
+            makeToast("Error: Post Key not found!")
         }
     }
 

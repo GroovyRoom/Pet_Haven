@@ -26,6 +26,8 @@ class ReptileRepository(private val reptileDao: ReptileDao) {
     ///-------------------------- Operations for Post Objects-------------------------///
     fun addPost(post: Post) = reptileDao.addPost(post)
     fun getAllPost() = reptileDao.getAllPost()
+    fun getPost(key: String) = reptileDao.getPost(key)
+    fun editTradePost(key: String, post: Post) = reptileDao.editTradePost(key, post)
     fun getPostsByReptileId(rid: String) = reptileDao.getPostByReptileID(rid)
     fun deletePost(key: String) = reptileDao.deletePost(key)
 
@@ -48,24 +50,27 @@ class ReptileRepository(private val reptileDao: ReptileDao) {
 
     fun loadPosts(postList: MutableLiveData<List<Post>>) {
         val postReference = reptileDao.getAllPost()
-
+        val _postList = ArrayList<Post>()
         postReference.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 try {
-                    val _postList: List<Post> = snapshot.children.map { dataSnapshot ->
-                        dataSnapshot.getValue(Post::class.java)!!
+                    for (postSnapshot in snapshot.children) {
+                        val post = postSnapshot.getValue(Post::class.java)
+                        post?.let {
+                            it.pid = postSnapshot.key
+                            _postList.add(it)
+                        }
                     }
 
                     postList.postValue(_postList)
-                } catch (e: Exception) {
+                    } catch (e: Exception) {
 
+                    }
                 }
-            }
 
             override fun onCancelled(error: DatabaseError) {
 
             }
-
         })
     }
 
