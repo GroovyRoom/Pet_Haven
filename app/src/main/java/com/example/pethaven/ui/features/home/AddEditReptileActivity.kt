@@ -68,7 +68,8 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
     companion object {
         private const val PICTURE_OPTION_DIALOG_TAG = "Picture Option Dialog Tag"
         private const val IS_EDIT_MODE = "Edit Reptile Mode"
-        private const val EDIT_REPTILE_KEY_TAG = "Ley of Reptile to edit"
+        private const val EDIT_REPTILE_KEY_TAG = "Key of Reptile to edit"
+        private const val HAS_RECEIVED_TAG = "Has Received Tag"
 
         fun makeIntent(context: Context, isEditMode: Boolean = false, key: String): Intent {
             val intent = Intent(context, AddEditReptileActivity::class.java).apply {
@@ -88,7 +89,7 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
 
         Permissions.checkImagePermissions(this)
 
-        hasReceived = savedInstanceState?.getBoolean("test") ?: false
+        hasReceived = savedInstanceState?.getBoolean(HAS_RECEIVED_TAG) ?: false
         isEditMode = intent.getBooleanExtra(IS_EDIT_MODE, false)
         if (isEditMode) {
             reptileKeyToEdit = intent.getStringExtra(EDIT_REPTILE_KEY_TAG)
@@ -101,7 +102,7 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.putBoolean("test", hasReceived)
+        outState.putBoolean(HAS_RECEIVED_TAG, hasReceived)
         super.onSaveInstanceState(outState)
     }
 

@@ -22,6 +22,7 @@ import com.example.pethaven.util.FactoryUtil
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 
 /**
@@ -51,6 +52,9 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
     private lateinit var traverseFromBottomFabAnimation: Animation
     private lateinit var traverseBottomFabAnimation: Animation
 
+    private var valueEventListener: ValueEventListener? = null
+    private lateinit var databaseReference: DatabaseReference
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view =  inflater.inflate(R.layout.fragment_home_test, container, false)
         openFabAnimation = AnimationUtils.loadAnimation(requireActivity(), R.anim.anim_fab_open)
@@ -70,6 +74,10 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
         setFabVisibility(testViewModel.isFabChecked.value!!)
 
         return view
+    }
+
+    override fun onDestroy() {
+        valueEventListener?.let { databaseReference.removeEventListener(it) }
     }
 
     private val swipeItemCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT){
@@ -222,7 +230,8 @@ class HomeFragment : Fragment(), ReptileInfoAdapter.OnReptileItemCLickedListener
 
     // --------------------- Database Operations  ---------------- //
     private fun receiveAllReptiles(view: View) {
-        testViewModel.reptileTask.addValueEventListener(object : ValueEventListener {
+        databaseReference = testViewModel.reptileTask
+        valueEventListener = databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (!snapshot.exists()) {
                     progressBar.visibility = View.GONE
