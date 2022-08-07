@@ -63,7 +63,7 @@ class EditTradePostActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         if (editTradePostViewModel.isEditModeEnabled.value!!) {
-            menuInflater.inflate(R.menu.menu_edit_reptile, menu)
+            menuInflater.inflate(R.menu.menu_edit_trade_post, menu)
         } else {
             menuInflater.inflate(R.menu.menu_reptile_info, menu)
         }
@@ -90,10 +90,14 @@ class EditTradePostActivity : AppCompatActivity() {
                 }
                 true
             }
-            R.id.deleteReptileMenuItem -> {
+            R.id.deletePostMenuItem -> {
                 post!!.pid?.let {
                     deletePostInDatabase(it)
                 }
+                true
+            }
+            R.id.postQrGenerate -> {
+                launchQrGenerator()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -198,5 +202,14 @@ class EditTradePostActivity : AppCompatActivity() {
                 return
             }
         }
+    }
+
+    private fun launchQrGenerator() {
+        if (postKeyToEdit == null) {
+            makeToast("Post Id is null")
+            return
+        }
+        val intent = TradePostQrGenerator.makeIntent(this, postKeyToEdit!!)
+        startActivity(intent)
     }
 }

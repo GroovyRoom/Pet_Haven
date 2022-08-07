@@ -72,6 +72,7 @@
         <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/drawable/ic_tttt.xml" value="0.149" />
         <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/activity_add_edit_reptile.xml" value="0.11614583333333334" />
         <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/activity_edit_profile.xml" value="0.14194100042753313" />
+        <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/activity_edit_trade_post.xml" value="0.13125267208208635" />
         <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/activity_login.xml" value="0.17229585292860197" />
         <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/activity_main.xml" value="0.184375" />
         <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/layout/activity_register.xml" value="0.1628901239846088" />
@@ -97,6 +98,7 @@
         <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/menu/home_bot_app_menu.xml" value="0.13125267208208635" />
         <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/menu/home_menu.xml" value="0.146875" />
         <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/menu/menu_edit_reptile.xml" value="0.17229585292860197" />
+        <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/menu/menu_edit_trade_post.xml" value="0.268" />
         <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/menu/menu_reptile_info.xml" value="0.1628901239846088" />
         <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/menu/menu_trade_post.xml" value="0.13039760581445062" />
         <entry key="..\:/Users/georg/AndroidStudioProjects/Reptile_Haven/app/src/main/res/menu/nav_menu.xml" value="0.1" />
