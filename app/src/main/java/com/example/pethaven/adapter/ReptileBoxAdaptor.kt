@@ -11,21 +11,17 @@ import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pethaven.R
 import com.example.pethaven.domain.Reptile
-import com.example.pethaven.ui.features.home.AddEditReptileActivity
-import com.example.pethaven.ui.features.home.ReptileProfileActivity
+import com.example.pethaven.ui.features.fav.AddEditReptileActivity
+import com.example.pethaven.ui.features.fav.FavTestViewModel
+import com.example.pethaven.ui.features.fav.FavReptileProfileActivity
 
-
-/**
- * Adapter for item of Reptile Objects in favourite collection
- */
-
-class ReptileBoxAdaptor(private val activity: Context): RecyclerView.Adapter<RecyclerView.ViewHolder>()
+class ReptileBoxAdaptor(private val activity: Context,private val viewModel: FavTestViewModel): RecyclerView.Adapter<RecyclerView.ViewHolder>()
 {
     private var reptileBoxes: ArrayList<ArrayList<Reptile>> = ArrayList()
     private var btnSwitches: ArrayList<Boolean> = ArrayList()
     private lateinit var listener: OnItemClickListener
 
-    class ViewHolder(private val activity: Context, v: View, listenerIn: OnItemClickListener): RecyclerView.ViewHolder(v)
+    class ViewHolder(private val activity: Context, v: View, listenerIn: OnItemClickListener, private val viewModel: FavTestViewModel): RecyclerView.ViewHolder(v)
     {
         private val imgReptileBox: ImageView = v.findViewById(R.id.img_reptile_box)
         private val controlLeft: LinearLayout = v.findViewById(R.id.controlLeft)
@@ -88,9 +84,21 @@ class ReptileBoxAdaptor(private val activity: Context): RecyclerView.Adapter<Rec
             {
                 when (reptileBoxes.size) {
                     3 -> {
-                        btnLeft.text = reptileBoxes[0].name.subSequence(0,5)
-                        btnMid.text = reptileBoxes[1].name.subSequence(0,5)
-                        btnRight.text = reptileBoxes[2].name.subSequence(0,5)
+                        if (reptileBoxes[0].name.length < 5) {
+                            btnLeft.text = reptileBoxes[0].name
+                        } else {
+                            btnLeft.text = reptileBoxes[0].name.subSequence(0,5)
+                        }
+                        if (reptileBoxes[1].name.length < 5) {
+                            btnMid.text = reptileBoxes[1].name
+                        } else {
+                            btnMid.text = reptileBoxes[1].name.subSequence(0,5)
+                        }
+                        if (reptileBoxes[2].name.length < 5) {
+                            btnRight.text = reptileBoxes[2].name
+                        } else {
+                            btnRight.text = reptileBoxes[2].name.subSequence(0,5)
+                        }
                         controlLeft.visibility = View.VISIBLE
                         controlMid.visibility = View.VISIBLE
                         controlRight.visibility = View.VISIBLE
@@ -99,22 +107,34 @@ class ReptileBoxAdaptor(private val activity: Context): RecyclerView.Adapter<Rec
                         btnRight.isEnabled = true
                     }
                     2 -> {
-                        btnLeft.text = reptileBoxes[0].name.subSequence(0,5)
-                        btnMid.text = reptileBoxes[1].name.subSequence(0,5)
+                        if (reptileBoxes[0].name.length < 5) {
+                            btnLeft.text = reptileBoxes[0].name
+                        } else {
+                            btnLeft.text = reptileBoxes[0].name.subSequence(0,5)
+                        }
+                        if (reptileBoxes[1].name.length < 5) {
+                            btnMid.text = reptileBoxes[1].name
+                        } else {
+                            btnMid.text = reptileBoxes[1].name.subSequence(0,5)
+                        }
                         controlLeft.visibility = View.VISIBLE
                         controlMid.visibility = View.VISIBLE
                         btnLeft.isEnabled = true
                         btnMid.isEnabled = true
                     }
                     1 -> {
-                        btnLeft.text = reptileBoxes[0].name.subSequence(0,5)
+                        if (reptileBoxes[0].name.length < 5) {
+                            btnLeft.text = reptileBoxes[0].name
+                        } else {
+                            btnLeft.text = reptileBoxes[0].name.subSequence(0,5)
+                        }
                         controlLeft.visibility = View.VISIBLE
                         btnLeft.isEnabled = true
                     }
                     0 -> {
                     }
                 }
-                setAllBtnListener(reptileBoxes)
+                setAllBtnListener(reptileBoxes, position)
             }
             if(!canShowBtn)
             {
@@ -130,25 +150,25 @@ class ReptileBoxAdaptor(private val activity: Context): RecyclerView.Adapter<Rec
             }
         }
 
-        private fun setAllBtnListener(reptileBoxes: ArrayList<Reptile>)
+        private fun setAllBtnListener(reptileBoxes: ArrayList<Reptile>, position: Int)
         {
             when (reptileBoxes.size) {
                 3 -> {
-                    setLeftListener(reptileBoxes[0])
-                    setMidListener(reptileBoxes[1])
-                    setRightListener(reptileBoxes[2])
+                    setLeftListener(reptileBoxes[0], position)
+                    setMidListener(reptileBoxes[1], position)
+                    setRightListener(reptileBoxes[2], position)
                 }
                 2 -> {
-                    setLeftListener(reptileBoxes[0])
-                    setMidListener(reptileBoxes[1])
+                    setLeftListener(reptileBoxes[0], position)
+                    setMidListener(reptileBoxes[1], position)
                 }
                 1 -> {
-                    setLeftListener(reptileBoxes[0])
+                    setLeftListener(reptileBoxes[0], position)
                 }
             }
         }
 
-        private fun setLeftListener(reptile: Reptile)
+        private fun setLeftListener(reptile: Reptile, position: Int)
         {
             btnLeft.setOnClickListener{
                 startDetailIntent(reptile.key!!)
@@ -156,9 +176,13 @@ class ReptileBoxAdaptor(private val activity: Context): RecyclerView.Adapter<Rec
             editLeft.setOnClickListener {
                 startEditIntent(reptile.key!!)
             }
+            favLeft.setOnClickListener {
+                viewModel.unFav(reptile)
+                viewModel.toggleBtnSwitch(position)
+            }
         }
 
-        private fun setMidListener(reptile: Reptile)
+        private fun setMidListener(reptile: Reptile, position: Int)
         {
             btnMid.setOnClickListener{
                 startDetailIntent(reptile.key!!)
@@ -166,9 +190,13 @@ class ReptileBoxAdaptor(private val activity: Context): RecyclerView.Adapter<Rec
             editMid.setOnClickListener {
                 startEditIntent(reptile.key!!)
             }
+            favMid.setOnClickListener {
+                viewModel.unFav(reptile)
+                viewModel.toggleBtnSwitch(position)
+            }
         }
 
-        private fun setRightListener(reptile: Reptile)
+        private fun setRightListener(reptile: Reptile, position: Int)
         {
             btnRight.setOnClickListener{
                 startDetailIntent(reptile.key!!)
@@ -176,11 +204,15 @@ class ReptileBoxAdaptor(private val activity: Context): RecyclerView.Adapter<Rec
             editRight.setOnClickListener {
                 startEditIntent(reptile.key!!)
             }
+            favRight.setOnClickListener {
+                viewModel.unFav(reptile)
+                viewModel.toggleBtnSwitch(position)
+            }
         }
 
         private fun startDetailIntent(reptileKey: String)
         {
-            val intent = ReptileProfileActivity.makeIntent(activity, reptileKey)
+            val intent = FavReptileProfileActivity.makeIntent(activity, reptileKey)
             activity.startActivity(intent)
         }
 
@@ -194,7 +226,7 @@ class ReptileBoxAdaptor(private val activity: Context): RecyclerView.Adapter<Rec
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return ViewHolder(activity, LayoutInflater.from(parent.context).inflate(R.layout.list_reptile_collection, parent, false), listener)
+        return ViewHolder(activity, LayoutInflater.from(parent.context).inflate(R.layout.list_reptile_collection, parent, false), listener, viewModel)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
