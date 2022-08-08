@@ -11,6 +11,9 @@ import com.example.pethaven.R
 import com.example.pethaven.domain.Reptile
 import com.example.pethaven.ui.features.fav.FavTestViewModel
 
+/*
+    Adapter for to show a list of reptile with a favourite icon option
+ */
 class ReptileInfoAdapterFav(private var context: Context,
                             private var reptileList: ArrayList<Reptile>,
                             private var clickListener: OnReptileItemCLickedListener,

@@ -29,13 +29,8 @@ class TradeListFragment : Fragment(), TradeTestAdapter.OnPostClickedListener {
     private val binding get() = _binding!!*/
 
     private lateinit var tradeListViewModel: PostViewModel
-    private lateinit var addEditReptileViewModel: AddEditReptileViewModel
     private lateinit var recyclerView: RecyclerView
-//    private lateinit var adapter: TradeListRecyclerViewAdapter
 
-    /*
-        Dense: For normal way of inflating layout
-     */
     private lateinit var tradeListSearchView: androidx.appcompat.widget.SearchView
     private lateinit var filterAllButton: Button
     private lateinit var filterUserButton: Button
