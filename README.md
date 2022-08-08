@@ -112,7 +112,7 @@
 
 ## Show and Tell 1
 
-[<img src="https://i.imgur.com/Z0yApEs.png" width="100%">](https://www.youtube.com/watch?v=iXaYsT0vxoo)
+[<img src="https://i.imgur.com/Z0yApEs.png" width="100%">](https://www.youtube.com/watch?v=1KPYmbtO4n4)
 
 > **Note**
 > Click the Above Image to Watch our Show and Tell 1 Video!
