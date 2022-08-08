@@ -11,13 +11,16 @@
 <p align="center">
   <a href="#idea-pitch">Idea Pitch</a> •
   <a href="#team-effort-breakdown">Team Effort Breakdown</a> •
-  <a href="#MVVM-Diagram">MVVM Diagram</a> •
-  <a href="#Thread-Design-Diagram">Thread Design Diagram</a> •
-  <a href="#Show-and-Tell-1">Show and Tell 1</a> •
-  <a href="#Show-and-Tell-2-Expectation">Show and Tell 2 Expectation</a> •
-  <a href="#Show-and-Tell-2">Show and Tell 2</a> •
-  <a href="#Final-Submission-Expectation">Final Submission Expectation</a> •
-  <a href="#APK-Download">APK Download</a> •
+  <a href="#mvvm-diagram">MVVM Diagram</a> •
+  <a href="#thread-design-diagram">Thread Design Diagram</a> •
+  <a href="#show-and-tell-1">Show and Tell 1</a> •
+  <a href="#show-and-tell-2-expectation">Show and Tell 2 Expectation</a> •
+  <a href="#show-and-tell-2">Show and Tell 2</a> •
+  <a href="#final-submission-expectation">Final Submission Expectation</a> •
+  <a href="#final-presentation">Final Presentation</a> •
+  <a href="#final-presentation-slide">Final Presentation Slide</a> •
+  <a href="#apk-download">APK Download</a> •
+  <a href="#project-zip-download">Project ZIP Download</a> •
   <a href="#license">License</a> •
 </p>
 
@@ -45,22 +48,59 @@
 
 ## Team Effort Breakdown
 
-> **Chang Suk Lee**
-> Worked on developing webpage for the project and implementing user authenticiation feature.
-> Implemented Chat feature.
+> **Chang Suk Lee (Jason Lee) Implemented...**
 
-> **Larry Yao**
-> Worked on dynamic MainActivity UI which visualize the user's laptile using drawables.
+* Creating and managing project website
+* Login Activity
+* Register Activity
+* Implementing User Firebase data structure
+* Chat Fragment
+* Merging team member’s branch to the master
+* Fixing numerous bugs within the application
+* Implementing displaying name on the basket within the Favorite Fragment
 
-> **George Andreas**
-> Worked on Mainactivity which enable user to organize and manage their reptiles by adding, editing and deleting Reptile object.
+> **Larry Yao Implemented...**
 
-> **Surat Perkash**
-> Worked on implementing TradeListFragment which enable user to create, edit, and delete trade post.
-> Also implemented CardView to diplay trade post. 
+* Fav fragment
+* The reptile box interactive UI
+* Implement view model for Fav data
+* allow user to select their favourite reptiles from home and show in fav fragment
+* Modifying Reptile data structure to save Favorite info
+* Integrate Home Fragment's search bar feature to Favorite Fragment
 
-> **Xingjian Li**
-> Worked on MVVM diagram, implemented profile setting fragment and implemented firebase database related to the user.
+> **George Andreas Implemented...**
+
+* Home Fragment 
+* Search Bar with Filterable
+* Fiter by type 
+* Qr Scanner and Generator 
+* Animation for the floating action button 
+* Swipe functionality using ItemTouch Helper
+* Speech to Text
+* Help fix bugs, especially edge case from the application
+* Implementing Firebase Reptile Structure
+* Added progress bar on numerous activities
+* Managing reptile by adding/editing/deleting
+
+> **Surat Perkash Implemented...**
+
+* Shop Fragment
+* Layout of trade post list items using the card view
+* Implemented trade post list using recycler view
+* Save and retrieve post from Firebase Realtime Database
+* Dynamically update the trade post list when a reptile or the owner associated with post is edited
+* Allow owner to edit or delete post
+* Transition to expand card view to show extra post information
+* Added material toggle buttons in the shop to filter the posts by user and others
+
+> **Xingjian Li (Lester Li) Implemented...**
+
+* User proflie fragment
+* User profile activity
+* User profile edit activity
+* User profile edit fragment
+* Drew MVVM Diagram
+* Drew Thread Design Diagram
 
 ## MVVM Diagram
 
@@ -75,7 +115,7 @@
 [<img src="https://i.imgur.com/Z0yApEs.png" width="100%">](https://www.youtube.com/watch?v=iXaYsT0vxoo)
 
 > **Note**
-> Click the Above Image to Watch our Show and Tell 1 video!
+> Click the Above Image to Watch our Show and Tell 1 Video!
 
 ## Show and Tell 2 Expectation
 
@@ -91,7 +131,7 @@
 [<img src="https://i.imgur.com/Ix98fsc.jpg" width="100%">](https://www.youtube.com/watch?v=WC0RDkU6vxI)
 
 > **Note**
-> Click the Above Image to Watch our Show and Tell 2 video!
+> Click the Above Image to Watch our Show and Tell 2 Video!
 
 ## Final Submission Expectation
 
@@ -101,9 +141,23 @@
 * Xinjiang will work on implementing privacy setting for the user.
 * Surat will implement the reptile growth graph feature.
 
+## Final Presentation
+
+[<img src="https://i.imgur.com/EKyc1Rf.jpg" width="100%">](https://www.youtube.com/watch?v=Q5QIuoQz4Vg)
+> **Note**
+> Click the Above Image to Watch our Final Presentation Video!
+
+## Final Presentation Slide
+
+ You can view the Powerpoint slide [here](https://docs.google.com/presentation/d/1atKP92GMYxs455KFT9C70XMCrDXMEy33HJ3K-NoMWwk/edit?usp=sharing).
+
 ## APK Download
 
-You can downlaod the latest APK for Android [here](https://www.dropbox.com/s/c1ma7xj0ykbz3mz/Reptile_Haven.apk?dl=0).
+You can downlaod the latest APK for Android [here](https://www.dropbox.com/s/3eq83np00kisoie/reptile_haven.apk?dl=0).
+
+## Project ZIP Download
+
+You can downlaod the project ZIP [here](https://www.dropbox.com/s/ofc8j6s2994qz9g/Reptile%20Haven.zip?dl=0).
 
 ## License
 
