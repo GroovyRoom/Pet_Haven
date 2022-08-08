@@ -13,12 +13,9 @@ import com.bumptech.glide.Glide
 import com.example.pethaven.R
 import com.example.pethaven.databinding.ActivityEditTradePostBinding
 import com.example.pethaven.domain.Post
-import com.example.pethaven.domain.Reptile
 import com.example.pethaven.util.AndroidExtensions.makeToast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import java.util.*
-
 class EditTradePostActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditTradePostBinding
 

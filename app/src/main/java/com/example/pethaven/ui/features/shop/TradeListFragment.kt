@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pethaven.R
 import com.example.pethaven.domain.PostViewModel
-import com.example.pethaven.ui.features.home.AddEditReptileViewModel
 import com.example.pethaven.util.AndroidExtensions.makeToast
 import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.firebase.auth.FirebaseAuth
@@ -24,29 +23,21 @@ import com.journeyapps.barcodescanner.ScanOptions
 /**
  *  Fragment for displaying list of posts in the database
  */
-class TradeListFragment : Fragment(), TradeTestAdapter.OnPostClickedListener {
-/*    private var _binding: FragmentTradeListBinding? = null
-    private val binding get() = _binding!!*/
+class TradeListFragment : Fragment(), TradeListRecyclerViewAdapter.OnPostClickedListener {
 
     private lateinit var tradeListViewModel: PostViewModel
-    private lateinit var addEditReptileViewModel: AddEditReptileViewModel
     private lateinit var recyclerView: RecyclerView
-//    private lateinit var adapter: TradeListRecyclerViewAdapter
 
-    /*
-        Dense: For normal way of inflating layout
-     */
     private lateinit var tradeListSearchView: androidx.appcompat.widget.SearchView
     private lateinit var filterAllButton: Button
     private lateinit var filterUserButton: Button
     private lateinit var filterOtherButton: Button
     private lateinit var filterToggleButtonGroup: MaterialButtonToggleGroup
-
     private lateinit var tradeListProgressBar: ProgressBar
-    private lateinit var adapter: TradeTestAdapter
-    private lateinit var uid: String
 
     private lateinit var qrLauncher: ActivityResultLauncher<ScanOptions>
+    private lateinit var adapter: TradeListRecyclerViewAdapter
+    private lateinit var uid: String
 
     companion object {
         private const val FILTER_ALL_BUTTON_ID = 1
@@ -54,35 +45,13 @@ class TradeListFragment : Fragment(), TradeTestAdapter.OnPostClickedListener {
         private const val FILTER_OTHER_BUTTON_ID = 3
     }
 
-
-    /*
-        Dense:
-            Using normal way of inflating layout.
-            It seems that using view binding with two livedata or dynamic feature in fragments
-            causes null pointer exception errors.
-
-        Testing:
-            1. Go to Shop Fragment
-            2. Click on any or each of the three filter buttons
-            3. Go to another fragment, in which I case I move to profile fragment
-            4. Go back to Shop Fragment
-            5. Press Any of the three filter buttons
-            5. Null Pointer Exception on get Binding
-
-        Note:
-            It is already inside onViewCreated
-     */
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        //_binding = FragmentTradeListBinding.inflate(inflater, container, false)
-        uid = FirebaseAuth.getInstance().currentUser!!.uid
-
         val view =  inflater.inflate(R.layout.fragment_trade_list, container, false)
+        val menuHost: MenuHost = requireActivity()
+        uid = FirebaseAuth.getInstance().currentUser!!.uid
+        tradeListProgressBar = view.findViewById(R.id.tradeListProgressBar)
         setUpSearchView(view)
         setUpFilterButtons(view)
-        tradeListProgressBar = view.findViewById(R.id.tradeListProgressBar)
-
-        val menuHost: MenuHost = requireActivity()
 
         // Add menu items without using the Fragment Menu APIs
         // Note how we can tie the MenuProvider to the viewLifecycleOwner
@@ -105,20 +74,9 @@ class TradeListFragment : Fragment(), TradeTestAdapter.OnPostClickedListener {
 
         setUpQrLauncher()
         return view
-        //return binding.root
     }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        //_binding = null
-    }
-
     ///------------------------ Initializing Views-----------------------///
     private fun setUpFilterButtons(view: View) {
-/*        binding.filterAllButton.setOnClickListener { switchFilterType(FILTER_ALL_BUTTON_ID) }
-        binding.filterUserButton.setOnClickListener { switchFilterType(FILTER_USER_BUTTON_ID) }
-        binding.filterOtherButton.setOnClickListener { switchFilterType(FILTER_OTHER_BUTTON_ID) }*/
-
         filterToggleButtonGroup = view.findViewById(R.id.filterToggleButtonGroup)
         filterAllButton = view.findViewById(R.id.filterAllButton)
         filterUserButton = view.findViewById(R.id.filterUserButton)
@@ -150,15 +108,6 @@ class TradeListFragment : Fragment(), TradeTestAdapter.OnPostClickedListener {
     }
 
     private fun setUpSearchView(view: View) {
-/*        binding.tradeListSearchView.setOnQueryTextListener(object: androidx.appcompat.widget.SearchView.OnQueryTextListener{
-            override fun onQueryTextSubmit(query: String?): Boolean { return false }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                filterPost(newText)
-                return true
-            }
-        })*/
-
         tradeListSearchView = view.findViewById(R.id.tradeListSearchView)
         tradeListSearchView.setOnQueryTextListener(object: androidx.appcompat.widget.SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String): Boolean { return false }
@@ -168,7 +117,6 @@ class TradeListFragment : Fragment(), TradeTestAdapter.OnPostClickedListener {
                 return true
             }
         })
-
     }
 
     private fun filterPost(text: String) {
@@ -179,10 +127,6 @@ class TradeListFragment : Fragment(), TradeTestAdapter.OnPostClickedListener {
             else -> adapter.filter.filter(text)
         }
 
-        /*
-           Dense: Remove This line if you don't want the recycler view to scroll to the top position
-           whenever a new Text is pressed
-        */
         recyclerView.smoothScrollToPosition(0)
     }
 
@@ -190,25 +134,13 @@ class TradeListFragment : Fragment(), TradeTestAdapter.OnPostClickedListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        setUpSearchView(view)
-//        setUpFilterButtons()
-
-        /*
-            Dense: Switch the adapter here
-         */
-        //adapter = TradeListRecyclerViewAdapter(ArrayList())
-        adapter = TradeTestAdapter(requireActivity(), this)
-        //recyclerView = binding.tradeListRecyclerView
+        adapter = TradeListRecyclerViewAdapter(requireActivity(), this)
         recyclerView = view.findViewById(R.id.trade_list_recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = adapter
 
         tradeListViewModel = ViewModelProvider(this)[PostViewModel::class.java]
-        // Check if there is a new post added to the list and notify the adapter.
         tradeListViewModel.allPosts.observe(viewLifecycleOwner) {
-/*            binding.tradeListProgressBar.visibility = View.GONE
-            adapter.updatePostList(it)
-            filterPost(tradeListSearchView.query.toString())*/
             tradeListProgressBar.visibility = View.GONE
             adapter.updatePostList(it)
             filterPost(tradeListSearchView.query.toString())
@@ -247,13 +179,10 @@ class TradeListFragment : Fragment(), TradeTestAdapter.OnPostClickedListener {
     }
     override fun onPostClicked(key: String?) {
         if (key != null) {
-/*            val intent = Intent(context, EditTradePostActivity::class.java)
-            intent.putExtra("post key", key)*/
             val intent = EditTradePostActivity.makeIntent(requireActivity(), key)
             startActivity(intent)
         } else {
             makeToast("Error: Post Key not found!")
         }
     }
-
 }
