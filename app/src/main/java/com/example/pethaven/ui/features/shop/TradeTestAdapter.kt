@@ -244,8 +244,6 @@ class TradeTestAdapter(var context: Context, listener: OnPostClickedListener)
                                     && it.uid != uid
                         }
                     )
-
-                    println("debug: filtered list size - $filteredList")
                 }
 
                 val result = FilterResults().apply {

@@ -59,16 +59,5 @@
         app:menu="@menu/home_bot_app_menu"
         />
 
-<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--        android:id="@+id/fabAddReptile"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:clickable="true"-->
-<!--        android:focusable="true"-->
-<!--        android:backgroundTint="@color/white"-->
-<!--        android:src="@drawable/ic_add"-->
-<!--        app:layout_anchor="@+id/botAppBar"-->
-<!--        tools:visibility="visible" />-->
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

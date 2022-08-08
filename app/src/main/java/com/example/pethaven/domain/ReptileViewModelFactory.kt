@@ -2,7 +2,6 @@ package com.example.pethaven.domain
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.pethaven.ui.features.fav.FavReptileProfileViewModel
 import com.example.pethaven.ui.features.fav.FavTestViewModel
 import com.example.pethaven.ui.features.home.AddEditReptileViewModel
 import com.example.pethaven.ui.features.home.HomeTestViewModel
@@ -37,9 +36,6 @@ class ReptileViewModelFactory(private val repository: ReptileRepository)
             }
             modelClass.isAssignableFrom(FavTestViewModel::class.java) -> {
                 FavTestViewModel(repository) as T
-            }
-            modelClass.isAssignableFrom(FavReptileProfileViewModel::class.java) -> {
-                FavReptileProfileViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unsupported View Model")
         }
