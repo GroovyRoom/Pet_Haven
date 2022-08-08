@@ -10,7 +10,7 @@
 
 <p align="center">
   <a href="#idea-pitch">Idea Pitch</a> •
-  <a href="#team-effort-breakdown)">Team Effort Breakdown</a> •
+  <a href="#Team-Effort-Breakdown)">Team Effort Breakdown</a> •
   <a href="#MVVM-Diagram">MVVM Diagram</a> •
   <a href="#Thread-Design-Diagram">Thread Design Diagram</a> •
   <a href="#Show-and-Tell-1">Show and Tell 1</a> •
