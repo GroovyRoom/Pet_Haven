@@ -48,50 +48,59 @@
 
 ## Team Effort Breakdown
 
-> **Chang Suk Lee (Jason Lee)**
+> **Chang Suk Lee (Jason Lee) Implemented...**
 
-* All major UI will be implemented.
-* User will be able to send friend request to other user.
-* User will be able to create a group and join a group.
-* User will be able to see the close by users' activity though Google Map.
-* User will be able to post text and images.
-* User will be able to find local Vet through Google Map.
+* Creating and managing project website
+* Login Activity
+* Register Activity
+* Implementing User Firebase data structure
+* Chat Fragment
+* Merging team member’s branch to the master
+* Fixing numerous bugs within the application
+* Implementing displaying name on the basket within the Favorite Fragment
 
-> **Larry Yao**
+> **Larry Yao Implemented...**
 
-* All major UI will be implemented.
-* User will be able to send friend request to other user.
-* User will be able to create a group and join a group.
-* User will be able to see the close by users' activity though Google Map.
-* User will be able to post text and images.
-* User will be able to find local Vet through Google Map.
+* Fav fragment
+* The reptile box interactive UI
+* Implement view model for Fav data
+* allow user to select their favourite reptiles from home and show in fav fragment
+* Modifying Reptile data structure to save Favorite info
+* Integrate Home Fragment's search bar feature to Favorite Fragment
 
-> **George Andreas**
+> **George Andreas Implemented...**
 
-* All major UI will be implemented.
-* User will be able to send friend request to other user.
-* User will be able to create a group and join a group.
-* User will be able to see the close by users' activity though Google Map.
-* User will be able to post text and images.
-* User will be able to find local Vet through Google Map.
+* Home Fragment 
+* Search Bar with Filterable
+* Fiter by type 
+* Qr Scanner and Generator 
+* Animation for the floating action button 
+* Swipe functionality using ItemTouch Helper
+* Speech to Text
+* Help fix bugs, especially edge case from the application
+* Implementing Firebase Reptile Structure
+* Added progress bar on numerous activities
+* Managing reptile by adding/editing/deleting
 
-> **Surat Perkash**
+> **Surat Perkash Implemented...**
 
-* All major UI will be implemented.
-* User will be able to send friend request to other user.
-* User will be able to create a group and join a group.
-* User will be able to see the close by users' activity though Google Map.
-* User will be able to post text and images.
-* User will be able to find local Vet through Google Map.
+* Shop Fragment
+* Layout of trade post list items using the card view
+* Implemented trade post list using recycler view
+* Save and retrieve post from Firebase Realtime Database
+* Dynamically update the trade post list when a reptile or the owner associated with post is edited
+* Allow owner to edit or delete post
+* Transition to expand card view to show extra post information
+* Added material toggle buttons in the shop to filter the posts by user and others
 
-> **Xingjian Li (Lester Li)**
+> **Xingjian Li (Lester Li) Implemented...**
 
-* All major UI will be implemented.
-* User will be able to send friend request to other user.
-* User will be able to create a group and join a group.
-* User will be able to see the close by users' activity though Google Map.
-* User will be able to post text and images.
-* User will be able to find local Vet through Google Map.
+* User proflie fragment
+* User profile activity
+* User profile edit activity
+* User profile edit fragment
+* Drawed MVVM Diagram
+* Drawed Thread Design Diagram
 
 ## MVVM Diagram
 
