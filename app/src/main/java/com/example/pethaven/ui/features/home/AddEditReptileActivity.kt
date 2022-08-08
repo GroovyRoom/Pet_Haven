@@ -55,6 +55,7 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
     private var isEditMode: Boolean = false
     private var reptileKeyToEdit: String? = null
     private var reptileToEdit: Reptile ?= null
+    private var isFav: Boolean = false
 
     /*
         Check if data has already been received to prevent editText from being updated again during
@@ -208,6 +209,7 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
             species = editSpecies.text.toString(),
             age = editAge.text.toString().toInt(),
             description = editDescription.text.toString(),
+            isFav = this.isFav
         )
 
         if (isEditMode) updateReptileInDatabase(reptile) else addToDatabaseAndFinish(reptile)
@@ -304,6 +306,7 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
                 reptileToEdit = snapshot.getValue(Reptile::class.java)
                 reptileToEdit?.let {
                     updateView(it)
+                    isFav = it.isFav
                 }
             }
             override fun onCancelled(error: DatabaseError) {
