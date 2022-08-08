@@ -111,7 +111,6 @@
 > You can view the Powerpoint slide [here](https://docs.google.com/presentation/d/1atKP92GMYxs455KFT9C70XMCrDXMEy33HJ3K-NoMWwk/edit?usp=sharing).
 
 
-
 ## APK Download
 
 You can downlaod the latest APK for Android [here](https://www.dropbox.com/s/3eq83np00kisoie/reptile_haven.apk?dl=0).
