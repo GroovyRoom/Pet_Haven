@@ -10,7 +10,7 @@
 
 <p align="center">
   <a href="#idea-pitch">Idea Pitch</a> •
-  <a href="#Team-Effort-Breakdown-(Who-did-what?)">Team Effort Breakdown (Who did what?)n</a> •
+  <a href="#Team-Effort-Breakdown">Team Effort Breakdown</a> •
   <a href="#MVVM-Diagram">MVVM Diagram</a> •
   <a href="#Thread-Design-Diagram">Thread Design Diagram</a> •
   <a href="#Show-and-Tell-1">Show and Tell 1</a> •
@@ -45,7 +45,7 @@
 * Feeding time scheduler
 * Reptile’s weight growth graph
 
-## Team Effort Breakdown (Who did what?)
+## Team Effort Breakdown
 
 > **Chang Suk Lee**
 > Worked on developing webpage for the project and implementing user authenticiation feature.
