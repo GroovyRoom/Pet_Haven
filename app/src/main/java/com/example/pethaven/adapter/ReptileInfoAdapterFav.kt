@@ -11,8 +11,8 @@ import com.example.pethaven.R
 import com.example.pethaven.domain.Reptile
 import com.example.pethaven.ui.features.fav.FavTestViewModel
 
-/*
-    Adapter for to show a list of reptile with a favourite icon option
+/**
+ * Adapter for to show a list of reptile with a favourite icon option
  */
 class ReptileInfoAdapterFav(private var context: Context,
                             private var reptileList: ArrayList<Reptile>,
@@ -28,11 +28,6 @@ class ReptileInfoAdapterFav(private var context: Context,
             if (constraint.toString().isEmpty()) {
                 filteredList.addAll(reptileListAll)
             } else {
-/*                for (reptile in reptileListAll) {
-                    if (reptile.name.lowercase().contains(constraint.toString().lowercase())) {
-                        filteredList.add(reptile)
-                    }
-                }*/
                 filteredList.addAll(
                     reptileListAll.filter {
                         it.name.lowercase().contains(constraint.toString().lowercase())

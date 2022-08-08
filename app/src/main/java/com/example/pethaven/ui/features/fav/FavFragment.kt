@@ -52,11 +52,6 @@ class FavFragment : Fragment(), ReptileInfoAdapterFav.OnReptileItemCLickedListen
         return view
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
-
-
     // --------------------- Initializing Views ---------------- //
     private fun setUpProgressBar(view: View) {
         progressBar = view.findViewById(R.id.reptileListProgressBar)
@@ -79,9 +74,6 @@ class FavFragment : Fragment(), ReptileInfoAdapterFav.OnReptileItemCLickedListen
 
         reptileInfoAdapterFav = ReptileInfoAdapterFav(requireActivity(), ArrayList(), this, testViewModel)
         recyclerSearchView.adapter = reptileInfoAdapterFav
-
-/*        val itemTouchHelper = ItemTouchHelper(swipeItemCallback)
-        itemTouchHelper.attachToRecyclerView(recyclerSearchView)*/
     }
 
     private fun setUpReptileBoxRecyclerView(view: View)
@@ -167,7 +159,7 @@ class FavFragment : Fragment(), ReptileInfoAdapterFav.OnReptileItemCLickedListen
 
     // --------------------- Initializing View Model  ---------------- //
     private fun setUpTestViewModel() {
-        val factory = FactoryUtil.generateReptileViewModelFactoryFav(requireActivity())
+        val factory = FactoryUtil.generateReptileViewModelFactory(requireActivity())
         testViewModel = ViewModelProvider(this, factory)[FavTestViewModel::class.java]
         testViewModel.init()
         if(testViewModel.isSearchOn.value == null)
@@ -215,7 +207,6 @@ class FavFragment : Fragment(), ReptileInfoAdapterFav.OnReptileItemCLickedListen
                 }
                 reptileInfoAdapterFav.setReptileList(list)
                 reptileInfoAdapterFav.filter.filter(searchView.query)
-                // searchView.setQuery(searchView.query, true)
 
                 progressBar.visibility = View.GONE
             }

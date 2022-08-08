@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pethaven.R
 import com.example.pethaven.domain.Reptile
 import com.example.pethaven.ui.features.fav.FavTestViewModel
-import com.example.pethaven.ui.features.fav.FavReptileProfileActivity
 import com.example.pethaven.ui.features.home.AddEditReptileActivity
 import com.example.pethaven.ui.features.home.ReptileProfileActivity
 

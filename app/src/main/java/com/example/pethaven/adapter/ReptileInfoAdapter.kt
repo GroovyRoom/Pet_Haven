@@ -26,11 +26,6 @@ class ReptileInfoAdapter(private var context: Context,
             if (constraint.toString().isEmpty()) {
                 filteredList.addAll(reptileListAll)
             } else {
-/*                for (reptile in reptileListAll) {
-                    if (reptile.name.lowercase().contains(constraint.toString().lowercase())) {
-                        filteredList.add(reptile)
-                    }
-                }*/
                 filteredList.addAll(
                     reptileListAll.filter {
                         it.name.lowercase().contains(constraint.toString().lowercase())
