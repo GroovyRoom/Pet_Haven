@@ -1,26 +1,20 @@
 package com.example.pethaven.ui.features.fav
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.*
 import androidx.core.view.get
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pethaven.R
 import com.example.pethaven.adapter.ReptileBoxAdaptor
 import com.example.pethaven.adapter.ReptileInfoAdapterFav
 import com.example.pethaven.domain.Reptile
-import com.example.pethaven.ui.features.home.AddEditReptileActivity
-import com.example.pethaven.ui.features.home.ReptileProfileActivity
-import com.example.pethaven.ui.features.shop.TradePostActivity
 import com.example.pethaven.util.AndroidExtensions.makeToast
 import com.example.pethaven.util.FactoryUtil
 import com.google.android.material.bottomappbar.BottomAppBar
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -41,7 +35,6 @@ class FavFragment : Fragment(), ReptileInfoAdapterFav.OnReptileItemCLickedListen
     private lateinit var testViewModel: FavTestViewModel
 
     private lateinit var botAppBar: BottomAppBar
-    private lateinit var addFab: FloatingActionButton
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -57,28 +50,6 @@ class FavFragment : Fragment(), ReptileInfoAdapterFav.OnReptileItemCLickedListen
         setUpSearchView(view)
 
         return view
-    }
-
-    private val swipeItemCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT){
-        override fun onMove(
-            recyclerView: RecyclerView,
-            viewHolder: RecyclerView.ViewHolder,
-            target: RecyclerView.ViewHolder
-        ): Boolean {
-            return false
-        }
-
-        // Start Trade Post Activity when swiped
-        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-            val reptileKey = reptileInfoAdapterFav.getReptile(viewHolder.adapterPosition).key
-            if (reptileKey != null) {
-                val intent = TradePostActivity.makeIntent(requireActivity(),reptileKey)
-                startActivity(intent)
-            } else {
-                makeToast("Error: Reptile Key not found!")
-            }
-            reptileInfoAdapterFav.notifyItemChanged(viewHolder.adapterPosition)
-        }
     }
 
     override fun onDestroy() {
@@ -109,8 +80,8 @@ class FavFragment : Fragment(), ReptileInfoAdapterFav.OnReptileItemCLickedListen
         reptileInfoAdapterFav = ReptileInfoAdapterFav(requireActivity(), ArrayList(), this, testViewModel)
         recyclerSearchView.adapter = reptileInfoAdapterFav
 
-        val itemTouchHelper = ItemTouchHelper(swipeItemCallback)
-        itemTouchHelper.attachToRecyclerView(recyclerSearchView)
+/*        val itemTouchHelper = ItemTouchHelper(swipeItemCallback)
+        itemTouchHelper.attachToRecyclerView(recyclerSearchView)*/
     }
 
     private fun setUpReptileBoxRecyclerView(view: View)
@@ -258,14 +229,5 @@ class FavFragment : Fragment(), ReptileInfoAdapterFav.OnReptileItemCLickedListen
 
 
     // --------------------- Adapter OnClick Listener  ---------------- //
-    override fun onReptileClicked(position: Int) {
-        val reptileKey = reptileInfoAdapterFav.getReptile(position).key
-
-        if (reptileKey != null) {
-            val intent = ReptileProfileActivity.makeIntent(requireActivity(), reptileKey)
-            startActivity(intent)
-        } else {
-            makeToast("Error: Reptile Key not found!")
-        }
-    }
+    override fun onReptileClicked(position: Int) {}
 }

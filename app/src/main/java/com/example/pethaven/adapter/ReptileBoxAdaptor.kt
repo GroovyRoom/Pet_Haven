@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pethaven.R
 import com.example.pethaven.domain.Reptile
 import com.example.pethaven.ui.features.fav.FavTestViewModel
-import com.example.pethaven.ui.features.fav.FavReptileProfileActivity
 import com.example.pethaven.ui.features.home.AddEditReptileActivity
 import com.example.pethaven.ui.features.home.ReptileProfileActivity
 
@@ -25,15 +24,19 @@ class ReptileBoxAdaptor(private val activity: Context,private val viewModel: Fav
     class ViewHolder(private val activity: Context, v: View, listenerIn: OnItemClickListener, private val viewModel: FavTestViewModel): RecyclerView.ViewHolder(v)
     {
         private val imgReptileBox: ImageView = v.findViewById(R.id.img_reptile_box)
+
         private val controlLeft: LinearLayout = v.findViewById(R.id.controlLeft)
         private val controlMid: LinearLayout = v.findViewById(R.id.controlMid)
         private val controlRight: LinearLayout = v.findViewById(R.id.controlRight)
+
         private val btnLeft: Button = v.findViewById(R.id.btn_left)
         private val btnMid: Button = v.findViewById(R.id.btn_mid)
         private val btnRight: Button = v.findViewById(R.id.btn_right)
+
         private val editLeft: ImageButton = v.findViewById(R.id.btnEditLeft)
         private val editMid: ImageButton = v.findViewById(R.id.btnEditMid)
         private val editRight: ImageButton = v.findViewById(R.id.btnEditRight)
+
         private val favLeft: ImageButton = v.findViewById(R.id.btnFavLeft)
         private val favMid: ImageButton = v.findViewById(R.id.btnFavMid)
         private val favRight: ImageButton = v.findViewById(R.id.btnFavRight)
