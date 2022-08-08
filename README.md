@@ -18,6 +18,7 @@
   <a href="#Show-and-Tell-2">Show and Tell 2</a> •
   <a href="#Final-Submission-Expectation">Final Submission Expectation</a> •
   <a href="#Final-Presentation">Final Presentation</a> •
+  <a href="#Final-Presentation-Slide">Final Presentation Slide</a> •
   <a href="#APK-Download">APK Download</a> •
   <a href="#Project-ZIP-Download">Project ZIP Download</a> •
   <a href="#license">License</a> •
@@ -107,7 +108,11 @@
 
 [<img src="https://i.imgur.com/EKyc1Rf.jpg" width="100%">](https://www.youtube.com/watch?v=Q5QIuoQz4Vg)
 > **Note**
-> Click the Above Image to Watch our Final Presentation Video!<br />    You can view the Powerpoint slide [here](https://docs.google.com/presentation/d/1atKP92GMYxs455KFT9C70XMCrDXMEy33HJ3K-NoMWwk/edit?usp=sharing). <br />
+> Click the Above Image to Watch our Final Presentation Video!
+
+## Final Prsentation Slide
+
+ You can view the Powerpoint slide [here](https://docs.google.com/presentation/d/1atKP92GMYxs455KFT9C70XMCrDXMEy33HJ3K-NoMWwk/edit?usp=sharing).
 
 ## APK Download
 
