@@ -99,8 +99,8 @@
 * User profile activity
 * User profile edit activity
 * User profile edit fragment
-* Drawed MVVM Diagram
-* Drawed Thread Design Diagram
+* Drew MVVM Diagram
+* Drew Thread Design Diagram
 
 ## MVVM Diagram
 
