@@ -13,6 +13,42 @@
         android:scaleType="centerInside"
         android:src="@drawable/empty_box" />
 
+    <TextView
+        android:id="@+id/left_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:enabled="true"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_marginLeft="60dp"
+        android:layout_marginBottom="17dp"
+        android:layout_alignBottom="@+id/controlLeft"/>
+
+    <TextView
+        android:id="@+id/mid_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:enabled="true"
+        android:layout_marginLeft="192dp"
+        android:layout_marginBottom="17dp"
+        android:layout_alignBottom="@+id/controlMid"/>
+
+    <TextView
+        android:id="@+id/right_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:enabled="true"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_marginLeft="318dp"
+        android:layout_marginBottom="17dp"
+        android:layout_alignBottom="@+id/controlRight"/>
+
     <LinearLayout
         android:id="@+id/controlLeft"
         android:orientation="vertical"

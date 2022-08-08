@@ -4,10 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.LinearLayout
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pethaven.R
 import com.example.pethaven.domain.Reptile
@@ -31,6 +28,9 @@ class ReptileBoxAdaptor(private val activity: Context,private val viewModel: Fav
         private val btnLeft: Button = v.findViewById(R.id.btn_left)
         private val btnMid: Button = v.findViewById(R.id.btn_mid)
         private val btnRight: Button = v.findViewById(R.id.btn_right)
+        private val nameLeft: TextView = v.findViewById(R.id.left_name)
+        private val nameMid: TextView = v.findViewById(R.id.mid_name)
+        private val nameRight: TextView = v.findViewById(R.id.right_name)
         private val editLeft: ImageButton = v.findViewById(R.id.btnEditLeft)
         private val editMid: ImageButton = v.findViewById(R.id.btnEditMid)
         private val editRight: ImageButton = v.findViewById(R.id.btnEditRight)
@@ -52,15 +52,51 @@ class ReptileBoxAdaptor(private val activity: Context,private val viewModel: Fav
                 when (reptileBoxes.size) {
                     3 -> {
                         imgReptileBox.setImageResource(R.drawable.three_in_box)
+                        if (reptileBoxes[0].name.length < 5) {
+                            nameLeft.text = reptileBoxes[0].name
+                        } else {
+                            nameLeft.text = reptileBoxes[0].name.subSequence(0,5).toString() + "..."
+                        }
+                        if (reptileBoxes[1].name.length < 5) {
+                            nameMid.text = reptileBoxes[1].name
+                        } else {
+                            nameMid.text = reptileBoxes[1].name.subSequence(0,5).toString() + "..."
+                        }
+                        if (reptileBoxes[2].name.length < 5) {
+                            nameRight.text = reptileBoxes[2].name
+                        } else {
+                            nameRight.text = reptileBoxes[2].name.subSequence(0,5).toString() + "..."
+                        }
                     }
                     2 -> {
                         imgReptileBox.setImageResource(R.drawable.two_in_box)
+                        if (reptileBoxes[0].name.length < 5) {
+                            nameLeft.text = reptileBoxes[0].name
+                        } else {
+                            nameLeft.text = reptileBoxes[0].name.subSequence(0,5).toString() + "..."
+                        }
+                        if (reptileBoxes[1].name.length < 5) {
+                            nameMid.text = reptileBoxes[1].name
+                        } else {
+                            nameMid.text = reptileBoxes[1].name.subSequence(0,5).toString() + "..."
+                        }
+                        nameRight.text = ""
                     }
                     1 -> {
                         imgReptileBox.setImageResource(R.drawable.one_in_box)
+                        if (reptileBoxes[0].name.length < 5) {
+                            nameLeft.text = reptileBoxes[0].name
+                        } else {
+                            nameLeft.text = reptileBoxes[0].name.subSequence(0,5).toString() + "..."
+                        }
+                        nameMid.text = ""
+                        nameRight.text = ""
                     }
                     0 -> {
                         imgReptileBox.setImageResource(R.drawable.empty_box)
+                        nameLeft.text = ""
+                        nameMid.text = ""
+                        nameRight.text = ""
                     }
                 }
             }
@@ -69,15 +105,51 @@ class ReptileBoxAdaptor(private val activity: Context,private val viewModel: Fav
                 when (reptileBoxes.size) {
                     3 -> {
                         imgReptileBox.setImageResource(R.drawable.three_in_box_small)
+                        if (reptileBoxes[0].name.length < 5) {
+                            nameLeft.text = reptileBoxes[0].name
+                        } else {
+                            nameLeft.text = reptileBoxes[0].name.subSequence(0,5).toString() + "..."
+                        }
+                        if (reptileBoxes[1].name.length < 5) {
+                            nameMid.text = reptileBoxes[1].name
+                        } else {
+                            nameMid.text = reptileBoxes[1].name.subSequence(0,5).toString() + "..."
+                        }
+                        if (reptileBoxes[2].name.length < 5) {
+                            nameRight.text = reptileBoxes[2].name
+                        } else {
+                            nameRight.text = reptileBoxes[2].name.subSequence(0,5).toString() + "..."
+                        }
                     }
                     2 -> {
                         imgReptileBox.setImageResource(R.drawable.two_in_box_small)
+                        if (reptileBoxes[0].name.length < 5) {
+                            nameLeft.text = reptileBoxes[0].name
+                        } else {
+                            nameLeft.text = reptileBoxes[0].name.subSequence(0,5).toString() + "..."
+                        }
+                        if (reptileBoxes[1].name.length < 5) {
+                            nameMid.text = reptileBoxes[1].name
+                        } else {
+                            nameMid.text = reptileBoxes[1].name.subSequence(0,5).toString() + "..."
+                        }
+                        nameRight.text = ""
                     }
                     1 -> {
                         imgReptileBox.setImageResource(R.drawable.one_in_box_small)
+                        if (reptileBoxes[0].name.length < 5) {
+                            nameLeft.text = reptileBoxes[0].name
+                        } else {
+                            nameLeft.text = reptileBoxes[0].name.subSequence(0,5).toString() + "..."
+                        }
+                        nameMid.text = ""
+                        nameRight.text = ""
                     }
                     0 -> {
                         imgReptileBox.setImageResource(R.drawable.empty_box_small)
+                        nameLeft.text = ""
+                        nameMid.text = ""
+                        nameRight.text = ""
                     }
                 }
             }
