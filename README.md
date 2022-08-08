@@ -16,7 +16,7 @@
   <a href="#show-and-tell-1">Show and Tell 1</a> •
   <a href="#show-and-tell-2-expectation">Show and Tell 2 Expectation</a> •
   <a href="#show-and-tell-2">Show and Tell 2</a> •
-  <a href="#final-submission-Expectation">Final Submission Expectation</a> •
+  <a href="#final-submission-expectation">Final Submission Expectation</a> •
   <a href="#final-presentation">Final Presentation</a> •
   <a href="#final-presentation-slide">Final Presentation Slide</a> •
   <a href="#apk-download">APK Download</a> •
