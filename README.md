@@ -107,8 +107,7 @@
 
 [<img src="https://i.imgur.com/EKyc1Rf.jpg" width="100%">](https://www.youtube.com/watch?v=Q5QIuoQz4Vg)
 > **Note**
-> Click the Above Image to Watch our Final Presentation Video!/
-> You can view the Powerpoint slide [here](https://docs.google.com/presentation/d/1atKP92GMYxs455KFT9C70XMCrDXMEy33HJ3K-NoMWwk/edit?usp=sharing).
+> Click the Above Image to Watch our Final Presentation Video! <br /> You can view the Powerpoint slide [here](https://docs.google.com/presentation/d/1atKP92GMYxs455KFT9C70XMCrDXMEy33HJ3K-NoMWwk/edit?usp=sharing). <br />
 
 
 ## APK Download
