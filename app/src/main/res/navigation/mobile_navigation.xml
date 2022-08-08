@@ -12,6 +12,12 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
+        android:id="@+id/navigation_favourite"
+        android:name="com.example.pethaven.ui.features.fav.FavFragment"
+        android:label="Favourite"
+        tools:layout="@layout/fragment_fav" />
+
+    <fragment
         android:id="@+id/navigation_shop"
         android:name="com.example.pethaven.ui.features.shop.TradeListFragment"
         android:label="Shop"
@@ -38,4 +44,6 @@
         android:name="com.example.pethaven.ui.features.shop.TradePostActivity"
         android:label="fragment_trade_post"
         tools:layout="@layout/activity_trade_post" />
+
+
 </navigation>

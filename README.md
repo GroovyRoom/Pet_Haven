@@ -1,66 +1,78 @@
 <h1 align="center">
   <br>
-  <a href="http://www.amitmerchant.com/electron-markdownify"><img src="https://i.imgur.com/bNBwXTR.png" alt="Markdownify" width="400"></a>
+  <a href="http://www.amitmerchant.com/electron-markdownify"><img src="https://i.imgur.com/5ozNvxD.png" alt="Markdownify" width="400"></a>
   <br>
-  Pet Haven
+  Reptile Haven
   <br>
 </h1>
 
-<h4 align="center">The Best Way to Connect with Your Local Pet Owners and Animal Friends!</h4>
+<h4 align="center">Manage your reptiles, trade your reptiles, and connect with others!</h4>
 
 <p align="center">
   <a href="#idea-pitch">Idea Pitch</a> •
   <a href="#team-effort-breakdown">Team Effort Breakdown</a> •
   <a href="#MVVM-Diagram">MVVM Diagram</a> •
+  <a href="#Thread-Design-Diagram">Thread Design Diagram</a> •
   <a href="#Show-and-Tell-1">Show and Tell 1</a> •
   <a href="#Show-and-Tell-2-Expectation">Show and Tell 2 Expectation</a> •
+  <a href="#Show-and-Tell-2">Show and Tell 2</a> •
+  <a href="#Final-Submission-Expectation">Final Submission Expectation</a> •
   <a href="#APK-Download">APK Download</a> •
   <a href="#license">License</a> •
 </p>
 
-![screenshot](https://i.imgur.com/lEpWqoX.jpg)
+![screenshot](https://i.imgur.com/bO52MZp.png)
+![screenshot](https://i.imgur.com/CfFlnnk.png)
+
+<h4 align="center">"Reptile Haven help you to manage your reptiles using smartphone and also help you to connect with fellow reptile lovers!"</h4>
 
 ## Idea Pitch
 
-[<img src="https://i.imgur.com/Qm1szsd.png" width="100%">](https://www.youtube.com/watch?v=0giwWqG9lPE)
+[<img src="https://i.imgur.com/w2b386l.jpg" width="100%">](https://www.youtube.com/watch?v=iXaYsT0vxoo)
 
 > **Note**
 > Click the Above Image to Watch our Idea Pitch!
 
 **Features**
-* Google Single-Sign-On for login and registering
-* Show your local pet onwers and pet and let user to send friend request
-* Help User to find the group of pet owners who share same animal
-* Getting user's current location and load the weather information when the user is going for dog walk.
-* Dark/Light mode
-* Posting text and images
-* Organizing meeting with other users
-* Searching local vets
+* Login and Registering using Firebase Database
+* Adding reptiles to the user’s reptile storage
+* Editing reptile profile such as, profile image, name, age, description
+* Create a trade post from reptile which other users can see
+* Editing trade post such as editing image, name, price, and description
+* Contacting other user by opening a chat session
+* Feeding time scheduler
+* Reptile’s weight growth graph
 
 ## Team Effort Breakdown
 
 > **Chang Suk Lee**
 > Worked on developing webpage for the project and implementing user authenticiation feature.
+> Implemented Chat feature.
 
 > **Larry Yao**
-> Worked on MVVM diagram, designing Firebase database structure and implementing local database for the application.
+> Worked on dynamic MainActivity UI which visualize the user's laptile using drawables.
 
 > **George Andreas**
-> Worked on Google Map tracking feature.
+> Worked on Mainactivity which enable user to organize and manage their reptiles by adding, editing and deleting Reptile object.
 
 > **Surat Perkash**
-> Worked on implementing Firebase into the project.
+> Worked on implementing TradeListFragment which enable user to create, edit, and delete trade post.
+> Also implemented CardView to diplay trade post. 
 
 > **Xingjian Li**
-> Worked on UI of Pet Haven
+> Worked on MVVM diagram, implemented profile setting fragment and implemented firebase database related to the user.
 
 ## MVVM Diagram
 
 ![screenshot](https://i.imgur.com/XhjIcda.png)
 
+## Thread Design Diagram
+
+![screenshot](https://i.imgur.com/9yWdyVj.png)
+
 ## Show and Tell 1
 
-[<img src="https://i.imgur.com/Z0yApEs.png" width="100%">](https://www.youtube.com/watch?v=1KPYmbtO4n4)
+[<img src="https://i.imgur.com/Z0yApEs.png" width="100%">](https://www.youtube.com/watch?v=iXaYsT0vxoo)
 
 > **Note**
 > Click the Above Image to Watch our Show and Tell 1 video!
@@ -74,9 +86,24 @@
 * User will be able to post text and images.
 * User will be able to find local Vet through Google Map.
 
+## Show and Tell 2
+
+[<img src="https://i.imgur.com/Ix98fsc.jpg" width="100%">](https://www.youtube.com/watch?v=WC0RDkU6vxI)
+
+> **Note**
+> Click the Above Image to Watch our Show and Tell 2 video!
+
+## Final Submission Expectation
+
+* George will implement feeding time scheduler feature and search bar for trade list.
+* Jason will implement displaying time stamp for the chat messages and chat notification feature.
+* Larry will work on dynamic UI of MainActivity and improve the overall UI.
+* Xinjiang will work on implementing privacy setting for the user.
+* Surat will implement the reptile growth graph feature.
+
 ## APK Download
 
-You can downlaod the latest APK for Android [here](https://www.dropbox.com/s/7cuh1o6ug18vihm/Pet_Haven.apk?dl=0).
+You can downlaod the latest APK for Android [here](https://www.dropbox.com/s/c1ma7xj0ykbz3mz/Reptile_Haven.apk?dl=0).
 
 ## License
 

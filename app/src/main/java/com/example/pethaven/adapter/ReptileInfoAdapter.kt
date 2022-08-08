@@ -10,6 +10,9 @@ import com.bumptech.glide.Glide
 import com.example.pethaven.R
 import com.example.pethaven.domain.Reptile
 
+/**
+ * Adapter for item of Reptile Objects
+ */
 class ReptileInfoAdapter(private var context: Context,
                          private var reptileList: ArrayList<Reptile>,
                          private var clickListener: OnReptileItemCLickedListener)
@@ -21,14 +24,18 @@ class ReptileInfoAdapter(private var context: Context,
         override fun performFiltering(constraint: CharSequence): FilterResults {
             var filteredList = ArrayList<Reptile>()
             if (constraint.toString().isEmpty()) {
-                println("debug: adding all reptileListAll with size = ${reptileListAll.size}")
                 filteredList.addAll(reptileListAll)
             } else {
-                for (reptile in reptileListAll) {
+/*                for (reptile in reptileListAll) {
                     if (reptile.name.lowercase().contains(constraint.toString().lowercase())) {
                         filteredList.add(reptile)
                     }
-                }
+                }*/
+                filteredList.addAll(
+                    reptileListAll.filter {
+                        it.name.lowercase().contains(constraint.toString().lowercase())
+                    }
+                )
             }
             val result = FilterResults().apply {
                 values = filteredList
@@ -59,6 +66,7 @@ class ReptileInfoAdapter(private var context: Context,
         holder.reptileNameText.text = reptile.name
         holder.reptileSpeciesText.text = reptile.species
         holder.reptileAgeText.text = reptile.age.toString()
+        holder.reptileSpeciesText.text = reptile.species
         holder.reptileDescText.text = reptile.description
 
         reptile.imgUri?.let {
@@ -90,8 +98,8 @@ class ReptileInfoAdapter(private var context: Context,
         : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         var reptileImageView: ImageView = itemView.findViewById(R.id.reptileImageAdapter)
         var reptileNameText: TextView = itemView.findViewById(R.id.reptileNameAdapter)
-        var reptileSpeciesText: TextView = itemView.findViewById(R.id.reptileSpeciesAdapter)
         var reptileAgeText: TextView = itemView.findViewById(R.id.reptileAgeAdapter)
+        var reptileSpeciesText: TextView = itemView.findViewById(R.id.reptileSpeciesAdapter)
         var reptileDescText: TextView = itemView.findViewById(R.id.reptileDescriptionAdapter)
 
         init {

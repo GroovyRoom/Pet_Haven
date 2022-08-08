@@ -11,4 +11,5 @@ class Reptile (
     var age: Int = -1,
     var description: String = "",
     var imgUri: String? = null,
+    var isFav: Boolean = false
     )

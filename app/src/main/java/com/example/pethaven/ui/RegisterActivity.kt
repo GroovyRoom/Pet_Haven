@@ -10,7 +10,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.pethaven.R
-import com.example.pethaven.ui.features.chat.User
+import com.example.pethaven.domain.User
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
@@ -20,10 +20,14 @@ import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_register.*
 import java.util.*
 
+/**
+ *  Activity to register a new account for the user
+ */
 class RegisterActivity : AppCompatActivity() {
 
     companion object {
         val TAG = "Debug Register: "
+        val default_image = "https://firebasestorage.googleapis.com/v0/b/pet-haven-79c1d.appspot.com/o/images%2Fdefault_user.jpg?alt=media&token=7f2a9eff-2547-445c-81f6-8c631bb03b94"
     }
 
     var selectedPhotoUri: Uri? = null
@@ -71,7 +75,11 @@ class RegisterActivity : AppCompatActivity() {
                                 if (task.isSuccessful) {
 
                                     val firebaseUser: FirebaseUser = task.result!!.user!!
-                                    uploadImageToFirebaseStorage()
+                                    if (selectedPhotoUri == null) {
+                                        saveUserToFirebaseDatabase(default_image)
+                                    }else {
+                                        uploadImageToFirebaseStorage()
+                                    }
 
                                     Toast.makeText(
                                         this@RegisterActivity,

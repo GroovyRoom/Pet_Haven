@@ -16,11 +16,39 @@ class ReptileDao {
         .getReference(Post::class.java.simpleName)
     private var firebaseStorage = FirebaseStorage.getInstance()
 
+    ///-------------------------- Operations for User Objects -------------------------///
+    fun getCurrentUserObject() = FirebaseDatabase.getInstance()
+        .reference
+        .child("users")
+        .child(firebaseAuth.currentUser!!.uid)
+
+
+    fun updateUser(user: User) =
+        FirebaseDatabase
+            .getInstance()
+            .reference
+            .child("users")
+            .child(firebaseAuth.currentUser!!.uid)
+            .setValue(user)
 
     ///-------------------------- Operations for Post Objects -------------------------///
-    fun addPost(post: Post)= postReference.push().setValue(post)
+    fun addPost(post: Post) = postReference.push().setValue (
+        post.apply {
+            post.uid = firebaseAuth.currentUser!!.uid
+        }
+    )
+
+    fun getPost(key: String) = postReference.child(key)
 
     fun getAllPost() = postReference
+
+    fun deletePost(key: String) = postReference.child(key).removeValue()
+
+    fun getPostByReptileID(rid: String) = postReference.orderByChild("rid").equalTo(rid)
+
+    fun getPostByUserID(uid: String) = postReference.orderByChild("uid").equalTo(uid)
+
+    fun editTradePost(key:String, post:Post) = postReference.child(key).setValue(post)
 
     ///-------------------------- Operations for Reptile Objects-------------------------///
     fun addReptile(reptile: Reptile) =
@@ -34,6 +62,11 @@ class ReptileDao {
 
     fun deleteImageFromStorage(imgUri: String) =
         firebaseStorage.getReferenceFromUrl(imgUri).delete()
+
+    fun getReptile(uid: String, rid: String) = FirebaseDatabase.getInstance()
+        .getReference(uid)
+        .child(Reptile::class.java.simpleName)
+        .child(rid)
 
     fun getReptileFromCurrentUser(key: String) =
         userReference.child(Reptile::class.java.simpleName).child(key)

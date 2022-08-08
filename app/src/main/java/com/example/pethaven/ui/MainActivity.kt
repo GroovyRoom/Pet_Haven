@@ -13,6 +13,9 @@ import com.example.pethaven.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 
+/**
+ * Main Activity supporting fragments in a BottomNavigationView
+ */
 class MainActivity : AppCompatActivity() {
     private lateinit var navView: BottomNavigationView
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -20,8 +23,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         checkUserLoggedIn()
-        setContentView(R.layout.activity_main)
-        setUpNavView()
+        //setContentView(R.layout.activity_main)
+        //setUpNavView()
     }
 
     private fun checkUserLoggedIn() {
@@ -31,6 +34,9 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
+        } else {
+            setContentView(R.layout.activity_main)
+            setUpNavView()
         }
     }
 
@@ -41,6 +47,7 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.navigation_home,
+                R.id.navigation_favourite,
                 R.id.navigation_shop,
                 R.id.navigation_chat,
                 R.id.navigation_profile

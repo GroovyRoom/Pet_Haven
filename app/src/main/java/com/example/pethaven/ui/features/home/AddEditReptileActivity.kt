@@ -10,13 +10,15 @@ import android.text.TextUtils
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.pethaven.R
-import com.example.pethaven.databinding.ActivityAddEditReptileBinding
 import com.example.pethaven.dialog.PictureDialog
+import com.example.pethaven.domain.Post
 import com.example.pethaven.domain.Reptile
 import com.example.pethaven.ui.MainActivity
 import com.example.pethaven.util.AndroidExtensions.makeToast
@@ -31,18 +33,31 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.StorageTask
 import com.google.firebase.storage.UploadTask
 
+/**
+ *  Activity to add or edit Reptile to the database
+ */
 class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultListener {
-
     private lateinit var addEditViewModel: AddEditReptileViewModel
 
-    private lateinit var binding: ActivityAddEditReptileBinding
+    private lateinit var editName: TextInputEditText
+    private lateinit var editSpecies: TextInputEditText
+    private lateinit var editAge: TextInputEditText
+    private lateinit var editDescription: TextInputEditText
 
+    private lateinit var editNameLayout: TextInputLayout
+    private lateinit var editSpeciesLayout: TextInputLayout
+    private lateinit var editAgeLayout: TextInputLayout
+    private lateinit var editDescriptionLayout: TextInputLayout
+
+    private lateinit var progressBar: ProgressBar
     private var storageTask: StorageTask<UploadTask.TaskSnapshot>? = null
 
+    private lateinit var reptileImgView: ImageView
     private var isEditMode: Boolean = false
     private var reptileKeyToEdit: String? = null
     private var reptileToEdit: Reptile ?= null
 
+    private lateinit var reptile : Reptile
     /*
         Check if data has already been received to prevent editText from being updated again during
         orientation change
@@ -52,7 +67,8 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
     companion object {
         private const val PICTURE_OPTION_DIALOG_TAG = "Picture Option Dialog Tag"
         private const val IS_EDIT_MODE = "Edit Reptile Mode"
-        private const val EDIT_REPTILE_KEY_TAG = "Ley of Reptile to edit"
+        private const val EDIT_REPTILE_KEY_TAG = "Key of Reptile to edit"
+        private const val HAS_RECEIVED_TAG = "Has Received Tag"
 
         fun makeIntent(context: Context, isEditMode: Boolean = false, key: String): Intent {
             val intent = Intent(context, AddEditReptileActivity::class.java).apply {
@@ -63,35 +79,29 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
         }
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityAddEditReptileBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        setContentView(R.layout.activity_add_edit_reptile)
         setUpViews()
         setUpViewModel()
 
         Permissions.checkImagePermissions(this)
 
-        hasReceived = savedInstanceState?.getBoolean("test") ?: false
-        isEditMode = intent.getBooleanExtra(IS_EDIT_MODE, false)
-        if (isEditMode) {
-            reptileKeyToEdit = intent.getStringExtra(EDIT_REPTILE_KEY_TAG)
-            if (reptileKeyToEdit == null) {
-                makeToast("Error in receiving reptile Key!")
-                return
-            }
-            getReptileFromDatabase()
-        }
+        // Check if activity is on Edit Mode
+        hasReceived = savedInstanceState?.getBoolean(HAS_RECEIVED_TAG) ?: false
+        checkIsEditMode()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.putBoolean("test", hasReceived)
+        outState.putBoolean(HAS_RECEIVED_TAG, hasReceived)
         super.onSaveInstanceState(outState)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_edit_reptile, menu)
+        if (isEditMode) {
+            menuInflater.inflate(R.menu.menu_edit_reptile, menu)
+        }
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -105,73 +115,87 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
         }
     }
 
-
     ///-------------------------- Setting up Activity -------------------------///
+
     private fun setUpViews() {
+        progressBar = findViewById(R.id.progressBar)
+        reptileImgView = findViewById(R.id.editReptileImg)
 
-        onTextChangedHelper(binding.editReptileName, binding.editReptileNameLayout)
-        onTextChangedHelper(binding.editReptileSpecies, binding.editReptileSpeciesLayout)
-        onTextChangedHelper(binding.editReptileAge, binding.editReptileAgeLayout)
-        onTextChangedHelper(binding.editReptileDescription, binding.editReptileDescriptionLayout)
-    }
+        editNameLayout = findViewById(R.id.editReptileNameLayout)
+        editName = findViewById(R.id.editReptileName)
+        editName.doOnTextChanged { text, start, before, count ->
+            editNameLayout.helperText = if (TextUtils.isEmpty(text)) "*Required" else ""
+        }
 
-    private fun onTextChangedHelper(editText: TextInputEditText, inputLayout: TextInputLayout) {
-        editText.doOnTextChanged { text, _, _, _ ->
-            inputLayout.helperText = if (TextUtils.isEmpty(text)) "*Required" else ""
+        editSpeciesLayout = findViewById(R.id.editReptileSpeciesLayout)
+        editSpecies = findViewById(R.id.editReptileSpecies)
+        editSpecies.doOnTextChanged { text, start, before, count ->
+            editSpeciesLayout.helperText = if (TextUtils.isEmpty(text)) "*Required" else ""
+        }
 
-            if (editText == binding.editReptileAge) {
-                inputLayout.error = if (!TextUtils.isDigitsOnly(text)) {
-                    "Only digits allowed"
-                } else if (!TextUtils.isEmpty(text) && text.toString().toInt() !in 1000 downTo -1) {
-                    "Please enter a valid age"
-                } else {
-                    null
-                }
+        editAgeLayout = findViewById(R.id.editReptileAgeLayout)
+        editAge = findViewById(R.id.editReptileAge)
+        editAge.doOnTextChanged { text, start, before, count ->
+            editAgeLayout.helperText =  if (TextUtils.isEmpty(text)) "*Required" else ""
+            editAgeLayout.error = if (!TextUtils.isDigitsOnly(text)) {
+                "Only digits allowed"
+            } else if (!TextUtils.isEmpty(text) && text.toString().toInt() !in 1000 downTo -1) {
+                "Please enter a valid age"
+            } else {
+                null
             }
+        }
 
-            if (editText == binding.editReptileDescription) {
-                text?.let {
-                    inputLayout.error =
-                        if (it.length > inputLayout.counterMaxLength) {
-                            "Max Character Count Reached!"
-                        } else {
-                            null
-                        }
-                }
+        editDescriptionLayout = findViewById(R.id.editReptileDescriptionLayout)
+        editDescription = findViewById(R.id.editReptileDescription)
+        editDescription.doOnTextChanged { text, start, before, count ->
+            text?.let {
+                editDescriptionLayout.error =
+                    if (it.length > editDescriptionLayout.counterMaxLength) "Max Character Count Reached!" else null
             }
         }
     }
 
     private fun setUpViewModel() {
         val factory = FactoryUtil.generateReptileViewModelFactory(this)
-        addEditViewModel = ViewModelProvider(this, factory)[AddEditReptileViewModel::class.java]
+        addEditViewModel = ViewModelProvider(this, factory).get(AddEditReptileViewModel::class.java)
         addEditViewModel.reptileImg.observe(this) {
-            binding.editReptileImg.setImageBitmap(it)
+            reptileImgView.setImageBitmap(it)
         }
     }
 
+    private fun checkIsEditMode() {
+        isEditMode = intent.getBooleanExtra(IS_EDIT_MODE, false)
+        if (isEditMode) {
+            reptileKeyToEdit = intent.getStringExtra(EDIT_REPTILE_KEY_TAG)
+            if (reptileKeyToEdit == null) {
+                makeToast("Error in receiving reptile Key!")
+                return
+            }
+            getReptileFromDatabase()
+        }
+    }
 
     ///-------------------------- Updating Views  -------------------------///
     fun updateView(reptile: Reptile) {
         if (!hasReceived) {
-            binding.editReptileName.setText(reptile.name)
-            binding.editReptileSpecies.setText(reptile.species)
-            binding.editReptileAge.setText(reptile.age.toString())
-            binding.editReptileDescription.setText(reptile.description)
+            editName.setText(reptile.name)
+            editSpecies.setText(reptile.species)
+            editAge.setText(reptile.age.toString())
+            editDescription.setText(reptile.description)
         }
 
         if(addEditViewModel.reptileImg.value == null) {
             Glide.with(this)
                 .load(reptile.imgUri)
                 .fitCenter()
-                .into(binding.editReptileImg)
+                .into(reptileImgView)
         }
 
         hasReceived = true
     }
-
-
     ///-------------------------- On Click Listeners ------------------------///
+
     fun onSaveClicked(view: View) {
         if (!isEditFormValid()) {
             makeToast("Please make sure all inputs are written properly")
@@ -187,12 +211,22 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
             return
         }
 
-        val reptile = Reptile(
-            name = binding.editReptileName.text.toString(),
-            species = binding.editReptileSpecies.text.toString(),
-            age = binding.editReptileAge.text.toString().toInt(),
-            description = binding.editReptileDescription.text.toString(),
-        )
+        if (isEditMode == true) {
+            reptile = Reptile(
+                name = editName.text.toString(),
+                species = editSpecies.text.toString(),
+                age = editAge.text.toString().toInt(),
+                description = editDescription.text.toString(),
+                isFav = reptileToEdit!!.isFav
+            )
+        } else {
+            reptile = Reptile(
+                name = editName.text.toString(),
+                species = editSpecies.text.toString(),
+                age = editAge.text.toString().toInt(),
+                description = editDescription.text.toString()
+            )
+        }
 
         if (isEditMode) updateReptileInDatabase(reptile) else addToDatabaseAndFinish(reptile)
     }
@@ -210,15 +244,13 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
         val pictureDialog = PictureDialog()
         pictureDialog.show(supportFragmentManager, PICTURE_OPTION_DIALOG_TAG)
     }
-
-
     ///-------------------------- Database  -------------------------///
     private fun updateReptileInDatabase(reptile: Reptile) {
         if (reptileKeyToEdit == null) {
             return
         }
 
-        binding.progressBar.isIndeterminate = true
+        progressBar.isIndeterminate = true
         if (addEditViewModel.reptileImgUri.value != null) {
                 uploadImageToDatabase(addEditViewModel.reptileImgUri.value!!){
                     reptile.imgUri = it.toString()
@@ -228,7 +260,7 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
             reptile.imgUri = reptileToEdit?.imgUri
             updateReptileInDatabaseAux(reptileKeyToEdit!!, reptile)
         }
-
+        //updatePostsInDatabase(reptileKeyToEdit!!, reptile)
     }
 
     private fun updateReptileInDatabaseAux(key: String, reptile: Reptile) {
@@ -240,12 +272,30 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
             .addOnFailureListener {
                 makeToast(it.message ?: "Unknown Exception Occurred")
             }
+        updatePostsInDatabase(reptileKeyToEdit!!, reptile)
+
+    }
+
+    private fun updatePostsInDatabase(key: String, reptile: Reptile) {
+        addEditViewModel.getPostsByReptileID(key).addListenerForSingleValueEvent(object: ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (postSnapshot in snapshot.children) {
+                    postSnapshot.ref.child("imgUri").setValue(reptile.imgUri)
+                    postSnapshot.ref.child("reptileName").setValue(reptile.name)
+                    println("Debug: Reptile Name: ${reptile.name}")
+                    }
+                }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
     }
 
     private fun addToDatabaseAndFinish(reptile: Reptile) {
         //addEditViewModel.insertToDatabase(reptile)
         addEditViewModel.reptileImgUri.value?.let {
-            binding.progressBar.isIndeterminate = true
+            progressBar.isIndeterminate = true
             uploadImageToDatabase(it) { downloadedUri ->
                 reptile.imgUri = downloadedUri.toString()
                 addToDatabaseAndFinishAux(reptile)
@@ -263,7 +313,7 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
     }
 
     private fun deleteReptileInDatabase(key: String) {
-
+        deletePostInDatabase(key)
         addEditViewModel.deleteImage(reptileToEdit!!.imgUri!!)
             .addOnSuccessListener {
                 addEditViewModel.deleteReptile(key).addOnSuccessListener {
@@ -278,11 +328,24 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
             }
     }
 
+    private fun deletePostInDatabase(key: String) {
+        addEditViewModel.getPostsByReptileID(key).addListenerForSingleValueEvent(object: ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (postSnapShot in snapshot.children) {
+                    postSnapShot.ref.removeValue()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+    }
+
     private fun getReptileFromDatabase() {
         val reptileReference = addEditViewModel.getReptileFromCurrentUser(reptileKeyToEdit!!)
         reptileReference.addListenerForSingleValueEvent(object: ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                println("debug: onDataChanged called")
+                println("debug: ondatachanged called")
                 if(!snapshot.exists()) {
                     return
                 }
@@ -306,10 +369,11 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
                     result.addOnSuccessListener(uriSuccessListener)
                 }
             }.addOnFailureListener {
+                progressBar.progress = 0
                 makeToast(it.message ?: "Unknown Exception Occurred")
             }.addOnProgressListener {
                 val progress = (100.0 * it.bytesTransferred / it.totalByteCount)
-                binding.progressBar.progress = progress.toInt()
+                progressBar.progress = progress.toInt()
             }
     }
 
@@ -323,8 +387,8 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
     ///-------------------------- Reptile Information Validation -------------------------///
     private fun isEditFormValid(): Boolean {
         return ! (
-                TextUtils.isEmpty(binding.editReptileName.text.toString()) ||
-                        TextUtils.isEmpty(binding.editReptileSpecies.text.toString()) ||
+                TextUtils.isEmpty(editName.text.toString()) ||
+                        TextUtils.isEmpty(editSpecies.text.toString()) ||
                         !isAgeValid() ||
                         !isDescriptionValid() ||
                         !isImageValid()
@@ -340,14 +404,13 @@ class AddEditReptileActivity : AppCompatActivity(), PictureDialog.OnImageResultL
     }
 
     private fun isAgeValid(): Boolean {
-        return !TextUtils.isEmpty(binding.editReptileAge.text.toString())&&
-                TextUtils.isDigitsOnly(binding.editReptileAge.text.toString()) &&
-                binding.editReptileAge.text.toString().toInt() in 1000 downTo -1
+        return !TextUtils.isEmpty(editAge.text.toString())&&
+                TextUtils.isDigitsOnly(editAge.text.toString()) &&
+                editAge.text.toString().toInt() in 1000 downTo -1
 
     }
 
     private fun isDescriptionValid(): Boolean {
-        return (binding.editReptileDescription.text.toString().length <=
-                                            binding.editReptileDescriptionLayout.counterMaxLength)
+        return (editDescription.text.toString().length <= editDescriptionLayout.counterMaxLength)
     }
 }
