@@ -153,11 +153,11 @@
 
 ## APK Download
 
-You can downlaod the latest APK for Android [here](https://www.dropbox.com/s/3eq83np00kisoie/reptile_haven.apk?dl=0).
+You can downlaod the latest APK for Android [here](https://www.dropbox.com/s/jfhwu5g24m9cmdq/reptile_haven.apk?dl=0).
 
 ## Project ZIP Download
 
-You can downlaod the project ZIP [here](https://www.dropbox.com/s/ofc8j6s2994qz9g/Reptile%20Haven.zip?dl=0).
+You can downlaod the project ZIP [here](https://www.dropbox.com/s/zerbq76b13112mj/Reptile%20Haven.zip?dl=0).
 
 ## License
 
