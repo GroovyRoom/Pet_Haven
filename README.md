@@ -49,8 +49,6 @@
 ## Team Effort Breakdown
 
 > **Chang Suk Lee**
-> Worked on developing webpage for the project and implementing user authenticiation feature.
-> Implemented Chat feature.
 
 * All major UI will be implemented.
 * User will be able to send friend request to other user.
@@ -60,7 +58,6 @@
 * User will be able to find local Vet through Google Map.
 
 > **Larry Yao**
-> Worked on dynamic MainActivity UI which visualize the user's laptile using drawables.
 
 * All major UI will be implemented.
 * User will be able to send friend request to other user.
@@ -70,7 +67,6 @@
 * User will be able to find local Vet through Google Map.
 
 > **George Andreas**
-> Worked on Mainactivity which enable user to organize and manage their reptiles by adding, editing and deleting Reptile object.
 
 * All major UI will be implemented.
 * User will be able to send friend request to other user.
@@ -80,8 +76,6 @@
 * User will be able to find local Vet through Google Map.
 
 > **Surat Perkash**
-> Worked on implementing TradeListFragment which enable user to create, edit, and delete trade post.
-> Also implemented CardView to diplay trade post. 
 
 * All major UI will be implemented.
 * User will be able to send friend request to other user.
@@ -91,7 +85,6 @@
 * User will be able to find local Vet through Google Map.
 
 > **Xingjian Li**
-> Worked on MVVM diagram, implemented profile setting fragment and implemented firebase database related to the user.
 
 * All major UI will be implemented.
 * User will be able to send friend request to other user.
