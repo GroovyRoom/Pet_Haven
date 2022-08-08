@@ -77,7 +77,7 @@
 [<img src="https://i.imgur.com/Z0yApEs.png" width="100%">](https://www.youtube.com/watch?v=iXaYsT0vxoo)
 
 > **Note**
-> Click the Above Image to Watch our Show and Tell 1 video!
+> Click the Above Image to Watch our Show and Tell 1 Video!
 
 ## Show and Tell 2 Expectation
 
@@ -93,7 +93,7 @@
 [<img src="https://i.imgur.com/Ix98fsc.jpg" width="100%">](https://www.youtube.com/watch?v=WC0RDkU6vxI)
 
 > **Note**
-> Click the Above Image to Watch our Show and Tell 2 video!
+> Click the Above Image to Watch our Show and Tell 2 Video!
 
 ## Final Submission Expectation
 
@@ -106,6 +106,11 @@
 ## Final Presentation
 
 [<img src="https://i.imgur.com/EKyc1Rf.jpg" width="100%">](https://www.youtube.com/watch?v=Q5QIuoQz4Vg)
+> **Note**
+> Click the Above Image to Watch our Final Presentation Video!
+> You can view the Powerpoint slide [here](https://docs.google.com/presentation/d/1atKP92GMYxs455KFT9C70XMCrDXMEy33HJ3K-NoMWwk/edit?usp=sharing).
+
+
 
 ## APK Download
 
