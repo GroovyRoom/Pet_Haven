@@ -10,17 +10,17 @@
 
 <p align="center">
   <a href="#idea-pitch">Idea Pitch</a> •
-  <a href="#Team-Effort-Breakdown">Team Effort Breakdown</a> •
-  <a href="#MVVM-Diagram">MVVM Diagram</a> •
-  <a href="#Thread-Design-Diagram">Thread Design Diagram</a> •
-  <a href="#Show-and-Tell-1">Show and Tell 1</a> •
-  <a href="#Show-and-Tell-2-Expectation">Show and Tell 2 Expectation</a> •
-  <a href="#Show-and-Tell-2">Show and Tell 2</a> •
-  <a href="#Final-Submission-Expectation">Final Submission Expectation</a> •
-  <a href="#Final-Presentation">Final Presentation</a> •
-  <a href="#Final-Presentation-Slide">Final Presentation Slide</a> •
-  <a href="#APK-Download">APK Download</a> •
-  <a href="#Project-ZIP-Download">Project ZIP Download</a> •
+  <a href="#team-effort-breakdown">Team Effort Breakdown</a> •
+  <a href="#mvvm-diagram">MVVM Diagram</a> •
+  <a href="#thread-design-diagram">Thread Design Diagram</a> •
+  <a href="#show-and-tell-1">Show and Tell 1</a> •
+  <a href="#show-and-tell-2-expectation">Show and Tell 2 Expectation</a> •
+  <a href="#show-and-tell-2">Show and Tell 2</a> •
+  <a href="#final-submission-Expectation">Final Submission Expectation</a> •
+  <a href="#final-presentation">Final Presentation</a> •
+  <a href="#final-presentation-slide">Final Presentation Slide</a> •
+  <a href="#apk-download">APK Download</a> •
+  <a href="#project-zip-download">Project ZIP Download</a> •
   <a href="#license">License</a> •
 </p>
 
