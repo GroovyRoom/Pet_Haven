@@ -113,6 +113,12 @@ class FavTestViewModel(private val repository: ReptileRepository): ViewModel() {
         reptile.isFav = true
         updateReptileInDatabase(reptile.key!!, reptile)
         addReptileToBox(reptile)
+
+/*        updateReptileInDatabase(reptile.key!!, reptile).addOnSuccessListener {
+            reptile.isFav = true
+            addReptileToBox(reptile)
+        }*/
+
     }
 
     fun unFav(reptile: Reptile)
@@ -120,5 +126,10 @@ class FavTestViewModel(private val repository: ReptileRepository): ViewModel() {
         reptile.isFav = false
         updateReptileInDatabase(reptile.key!!, reptile)
         removeReptileFromBox(reptile)
+
+/*        updateReptileInDatabase(reptile.key!!, reptile).addOnSuccessListener {
+            reptile.isFav = false
+            removeReptileFromBox(reptile)
+        }*/
     }
 }

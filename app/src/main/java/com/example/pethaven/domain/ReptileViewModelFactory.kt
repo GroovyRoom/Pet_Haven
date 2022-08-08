@@ -35,6 +35,9 @@ class ReptileViewModelFactory(private val repository: ReptileRepository)
             modelClass.isAssignableFrom(ProfileEditViewModel::class.java) -> {
                 ProfileEditViewModel(repository) as T
             }
+            modelClass.isAssignableFrom(FavTestViewModel::class.java) -> {
+                FavTestViewModel(repository) as T
+            }
             else -> throw IllegalArgumentException("Unsupported View Model")
         }
     }
