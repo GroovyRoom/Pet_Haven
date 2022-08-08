@@ -48,7 +48,7 @@
 
 ## Team Effort Breakdown
 
-> **Chang Suk Lee**
+> **Chang Suk Lee (Jason Lee)**
 
 * All major UI will be implemented.
 * User will be able to send friend request to other user.
@@ -84,7 +84,7 @@
 * User will be able to post text and images.
 * User will be able to find local Vet through Google Map.
 
-> **Xingjian Li**
+> **Xingjian Li (Lester Li)**
 
 * All major UI will be implemented.
 * User will be able to send friend request to other user.
