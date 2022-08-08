@@ -55,24 +55,6 @@ class TradeListFragment : Fragment(), TradeTestAdapter.OnPostClickedListener {
     }
 
 
-    /*
-        Dense:
-            Using normal way of inflating layout.
-            It seems that using view binding with two livedata or dynamic feature in fragments
-            causes null pointer exception errors.
-
-        Testing:
-            1. Go to Shop Fragment
-            2. Click on any or each of the three filter buttons
-            3. Go to another fragment, in which I case I move to profile fragment
-            4. Go back to Shop Fragment
-            5. Press Any of the three filter buttons
-            5. Null Pointer Exception on get Binding
-
-        Note:
-            It is already inside onViewCreated
-     */
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         //_binding = FragmentTradeListBinding.inflate(inflater, container, false)
         uid = FirebaseAuth.getInstance().currentUser!!.uid
@@ -105,7 +87,6 @@ class TradeListFragment : Fragment(), TradeTestAdapter.OnPostClickedListener {
 
         setUpQrLauncher()
         return view
-        //return binding.root
     }
 
     override fun onDestroyView() {
@@ -115,10 +96,6 @@ class TradeListFragment : Fragment(), TradeTestAdapter.OnPostClickedListener {
 
     ///------------------------ Initializing Views-----------------------///
     private fun setUpFilterButtons(view: View) {
-/*        binding.filterAllButton.setOnClickListener { switchFilterType(FILTER_ALL_BUTTON_ID) }
-        binding.filterUserButton.setOnClickListener { switchFilterType(FILTER_USER_BUTTON_ID) }
-        binding.filterOtherButton.setOnClickListener { switchFilterType(FILTER_OTHER_BUTTON_ID) }*/
-
         filterToggleButtonGroup = view.findViewById(R.id.filterToggleButtonGroup)
         filterAllButton = view.findViewById(R.id.filterAllButton)
         filterUserButton = view.findViewById(R.id.filterUserButton)
@@ -150,15 +127,6 @@ class TradeListFragment : Fragment(), TradeTestAdapter.OnPostClickedListener {
     }
 
     private fun setUpSearchView(view: View) {
-/*        binding.tradeListSearchView.setOnQueryTextListener(object: androidx.appcompat.widget.SearchView.OnQueryTextListener{
-            override fun onQueryTextSubmit(query: String?): Boolean { return false }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                filterPost(newText)
-                return true
-            }
-        })*/
-
         tradeListSearchView = view.findViewById(R.id.tradeListSearchView)
         tradeListSearchView.setOnQueryTextListener(object: androidx.appcompat.widget.SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String): Boolean { return false }
@@ -181,7 +149,7 @@ class TradeListFragment : Fragment(), TradeTestAdapter.OnPostClickedListener {
 
         /*
            Dense: Remove This line if you don't want the recycler view to scroll to the top position
-           whenever a new Text is pressed
+           whenever a new Text/post is pressed/inserted
         */
         recyclerView.smoothScrollToPosition(0)
     }
@@ -189,13 +157,6 @@ class TradeListFragment : Fragment(), TradeTestAdapter.OnPostClickedListener {
     ///------------------------ Initializing Recycler View and ViewModel -----------------------///
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-//        setUpSearchView(view)
-//        setUpFilterButtons()
-
-        /*
-            Dense: Switch the adapter here
-         */
         //adapter = TradeListRecyclerViewAdapter(ArrayList())
         adapter = TradeTestAdapter(requireActivity(), this)
         //recyclerView = binding.tradeListRecyclerView
@@ -206,9 +167,6 @@ class TradeListFragment : Fragment(), TradeTestAdapter.OnPostClickedListener {
         tradeListViewModel = ViewModelProvider(this)[PostViewModel::class.java]
         // Check if there is a new post added to the list and notify the adapter.
         tradeListViewModel.allPosts.observe(viewLifecycleOwner) {
-/*            binding.tradeListProgressBar.visibility = View.GONE
-            adapter.updatePostList(it)
-            filterPost(tradeListSearchView.query.toString())*/
             tradeListProgressBar.visibility = View.GONE
             adapter.updatePostList(it)
             filterPost(tradeListSearchView.query.toString())
@@ -247,8 +205,6 @@ class TradeListFragment : Fragment(), TradeTestAdapter.OnPostClickedListener {
     }
     override fun onPostClicked(key: String?) {
         if (key != null) {
-/*            val intent = Intent(context, EditTradePostActivity::class.java)
-            intent.putExtra("post key", key)*/
             val intent = EditTradePostActivity.makeIntent(requireActivity(), key)
             startActivity(intent)
         } else {
