@@ -17,7 +17,9 @@
   <a href="#Show-and-Tell-2-Expectation">Show and Tell 2 Expectation</a> •
   <a href="#Show-and-Tell-2">Show and Tell 2</a> •
   <a href="#Final-Submission-Expectation">Final Submission Expectation</a> •
+  <a href="#Final-Presentation">Final Presentation</a> •
   <a href="#APK-Download">APK Download</a> •
+  <a href="#Project-ZIP-Download">Project ZIP Download</a> •
   <a href="#license">License</a> •
 </p>
 
@@ -101,9 +103,17 @@
 * Xinjiang will work on implementing privacy setting for the user.
 * Surat will implement the reptile growth graph feature.
 
+## Final Presentation
+
+[<img src="https://i.imgur.com/EKyc1Rf.jpg" width="100%">](https://www.youtube.com/watch?v=Q5QIuoQz4Vg)
+
 ## APK Download
 
-You can downlaod the latest APK for Android [here](https://www.dropbox.com/s/c1ma7xj0ykbz3mz/Reptile_Haven.apk?dl=0).
+You can downlaod the latest APK for Android [here](https://www.dropbox.com/s/3eq83np00kisoie/reptile_haven.apk?dl=0).
+
+## Project ZIP Download
+
+You can downlaod the project ZIP [here](https://www.dropbox.com/s/ofc8j6s2994qz9g/Reptile%20Haven.zip?dl=0).
 
 ## License
 
